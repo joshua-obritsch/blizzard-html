@@ -1,7 +1,9 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
 module Text.Blizzard.Html5
-    ( module Text.Blizzard.Html
+    ( module Text.Blaze.Html
+    , docType
+    , docTypeHtml
     , a
     , abbr
     , address
@@ -113,10 +115,17 @@ module Text.Blizzard.Html5
     ) where
 
 
+import Text.Blaze.Html
 import Text.Blizzard.Html
 
 import qualified Text.Blaze.Html5 as H
 
+
+docType :: Html
+docType = H.docType
+
+docTypeHtml :: [Html] -> Html
+docTypeHtml = documentTag H.docTypeHtml
 
 a :: [Attribute] -> [Html] -> Html
 a = normalTag H.a

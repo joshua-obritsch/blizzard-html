@@ -12,7 +12,7 @@ build-type:         Simple
 
 library
     exposed-modules:
-        Text.Blizzard.Html
+          Text.Blizzard.Css3
         , Text.Blizzard.Html5
         , Text.Blizzard.Html5.Attributes
 
@@ -21,6 +21,6 @@ library
 
     -- LANGUAGE extensions used by modules in this package.
     -- other-extensions:
-    build-depends:    base, blaze-html, text
+    build-depends:    base, blaze-html, clay, text
     hs-source-dirs:   src
     default-language: Haskell2010

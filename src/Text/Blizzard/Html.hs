@@ -1,21 +1,17 @@
 module Text.Blizzard.Html
-    ( Attribute
-    , Html
+    ( module Text.Blaze.Html
+    , documentTag
     , normalTag
-    , preEscapedToHtml
-    , toHtml
     , voidTag
     ) where
 
 
-import Text.Blaze.Html5
-    ( (!)
-    , Attribute
-    , Html
-    , preEscapedToHtml
-    , toHtml
-    )
+import Text.Blaze.Html
 
+
+documentTag :: (Html -> Html) -> [Html] -> Html
+documentTag element []       = element $ toHtml ("" :: String)
+documentTag element children = element $ foldl1 (>>) children
 
 normalTag :: (Html -> Html) -> [Attribute] -> [Html] -> Html
 normalTag element attributes []       = foldl (!) element attributes $ toHtml ("" :: String)
