@@ -22,6 +22,7 @@ module Text.Blizzard.Css3
     , module Clay.Animation
     , module Clay.Mask
     , module Clay.Filter
+    , module Text.Blizzard.Css
     ) where
 
 
@@ -46,3 +47,4 @@ import Clay.Transition
 import Clay.Animation
 import Clay.Mask hiding (clear)
 import Clay.Filter hiding (url, opacity)
+import Text.Blizzard.Css
