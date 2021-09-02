@@ -8,18 +8,12 @@ author:             Joshua Obritsch
 maintainer:         Joshua Obritsch <joshua@obritsch.com>
 extra-source-files: CHANGELOG.md
 build-type:         Simple
+copyright:          2021 Joshua Obritsch
 
 library
-    exposed-modules:
-          Text.Blizzard.Css3
-        , Text.Blizzard.Html5
-        , Text.Blizzard.Html5.Attributes
-
-    -- Modules included in this library but not exported.
-    -- other-modules:
-
-    -- LANGUAGE extensions used by modules in this package.
-    -- other-extensions:
-    build-depends:    base, blaze-html, clay, text
-    hs-source-dirs:   src
-    default-language: Haskell2010
+    build-depends:      base, blaze-html, clay, text
+    default-language:   Haskell2010
+    exposed-modules:    Text.Blizzard.Css3
+                      , Text.Blizzard.Html5
+                      , Text.Blizzard.Html5.Attributes
+    hs-source-dirs:     src
