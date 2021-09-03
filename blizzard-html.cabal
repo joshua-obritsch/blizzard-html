@@ -1,6 +1,6 @@
 cabal-version:      3.0
 name:               blizzard-html
-version:            0.1.0
+version:            0.1.0.0
 synopsis:           Blizzard
 license:            MIT
 license-file:       LICENSE
