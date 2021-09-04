@@ -1,4 +1,4 @@
-# Revision history for Blizzard
+# Revision history for blizzard-html
 
 ## 0.1.0.0 -- YYYY-mm-dd
 
