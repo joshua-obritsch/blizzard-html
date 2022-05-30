@@ -11,10 +11,10 @@ module Blizzard.Internal
     ) where
 
 
-import Prelude hiding (unwords)
+import Prelude hiding (null, unwords)
 
 import Data.Maybe (catMaybes)
-import Data.Text (Text, unwords)
+import Data.Text (Text, null, unwords)
 import Data.Text.Lazy (toStrict)
 import Data.Text.Lazy.Builder (toLazyText)
 import Data.Text.Lazy.Builder.Int (decimal)
@@ -49,7 +49,12 @@ normalTag element attributes children = foldl (!) element (toBlaze attributes) $
 
 
 toBlaze :: [Attribute] -> [H.Attribute]
-toBlaze attrs = styles attrs : attributes attrs
+toBlaze attrs = case styles of
+    Just styles -> styles : attributes
+    Nothing     -> attributes
+  where
+    attributes = splitAttributes attrs
+    styles = splitStyles attrs
 
 
 voidTag :: Html -> [Attribute] -> Html
@@ -59,17 +64,23 @@ voidTag element attributes = foldl (!) element (toBlaze attributes)
 -- HELPER FUNCTIONS
 
 
-attributes :: [Attribute] -> [H.Attribute]
-attributes = catMaybes . mapCase
+splitAttributes :: [Attribute] -> [H.Attribute]
+splitAttributes = catMaybes . mapCase
   where
     mapCase = map $ \case
         Attr tag value -> Just $ customAttribute (textTag tag) (textValue value)
         _              -> Nothing
 
 
-styles :: [Attribute] -> H.Attribute
-styles = customAttribute "styles" . textValue . unwords . catMaybes . mapCase
+splitStyles :: [Attribute] -> Maybe H.Attribute
+splitStyles attrs =
+    if null result then
+        Nothing
+    else
+        Just $ customAttribute "styles" . textValue $ result
   where
     mapCase = map $ \case
         Style value -> Just value
         _           -> Nothing
+
+    result = unwords . catMaybes . mapCase $ attrs

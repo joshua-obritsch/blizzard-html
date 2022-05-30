@@ -1,1 +1,6 @@
+:set -v0
 :set -isrc
+:set -XOverloadedStrings
+
+import Prelude
+import Text.Blaze.Html.Renderer.Text
