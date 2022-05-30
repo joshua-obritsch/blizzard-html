@@ -1,6 +1,6 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
-module Text.Blizzard.Html5
+module Blizzard.Html
     ( module Text.Blaze.Html
     , docType
     , docTypeHtml
@@ -115,8 +115,8 @@ module Text.Blizzard.Html5
     ) where
 
 
-import Text.Blaze.Html
-import Text.Blizzard.Html
+import Text.Blaze.Html (Html)
+import Blizzard.Internal (Attribute, documentTag, normalTag, voidTag)
 
 import qualified Text.Blaze.Html5 as H
 
