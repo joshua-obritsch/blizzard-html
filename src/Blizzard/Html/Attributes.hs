@@ -180,676 +180,676 @@ import Blizzard.Internal (Attribute(..))
 
 
 accept :: Text -> Attribute
-accept = Attr "accept"
+accept = AttrRaw "accept"
 
 
 acceptCharset :: Text -> Attribute
-acceptCharset = Attr "accept-charset"
+acceptCharset = AttrRaw "accept-charset"
 
 
 accesskey :: Text -> Attribute
-accesskey = Attr "accesskey"
+accesskey = AttrRaw "accesskey"
 
 
 action :: Text -> Attribute
-action = Attr "action"
+action = AttrRaw "action"
 
 
 alt :: Text -> Attribute
-alt = Attr "alt"
+alt = AttrRaw "alt"
 
 
 async :: Text -> Attribute
-async = Attr "async"
+async = AttrRaw "async"
 
 
 autocomplete :: Text -> Attribute
-autocomplete = Attr "autocomplete"
+autocomplete = AttrRaw "autocomplete"
 
 
 autofocus :: Text -> Attribute
-autofocus = Attr "autofocus"
+autofocus = AttrRaw "autofocus"
 
 
 autoplay :: Text -> Attribute
-autoplay = Attr "autoplay"
+autoplay = AttrRaw "autoplay"
 
 
 challenge :: Text -> Attribute
-challenge = Attr "challenge"
+challenge = AttrRaw "challenge"
 
 
 charset :: Text -> Attribute
-charset = Attr "charset"
+charset = AttrRaw "charset"
 
 
 checked :: Text -> Attribute
-checked = Attr "checked"
+checked = AttrRaw "checked"
 
 
 cite :: Text -> Attribute
-cite = Attr "cite"
+cite = AttrRaw "cite"
 
 
 class_ :: Text -> Attribute
-class_ = Attr "class"
+class_ = AttrRaw "class"
 
 
 cols :: Text -> Attribute
-cols = Attr "cols"
+cols = AttrRaw "cols"
 
 
 colspan :: Text -> Attribute
-colspan = Attr "colspan"
+colspan = AttrRaw "colspan"
 
 
 content :: Text -> Attribute
-content = Attr "content"
+content = AttrRaw "content"
 
 
 contenteditable :: Text -> Attribute
-contenteditable = Attr "contenteditable"
+contenteditable = AttrRaw "contenteditable"
 
 
 contextmenu :: Text -> Attribute
-contextmenu = Attr "contextmenu"
+contextmenu = AttrRaw "contextmenu"
 
 
 controls :: Text -> Attribute
-controls = Attr "controls"
+controls = AttrRaw "controls"
 
 
 coords :: Text -> Attribute
-coords = Attr "coords"
+coords = AttrRaw "coords"
 
 
 data_ :: Text -> Attribute
-data_ = Attr "data"
+data_ = AttrRaw "data"
 
 
 datetime :: Text -> Attribute
-datetime = Attr "datetime"
+datetime = AttrRaw "datetime"
 
 
 defer :: Text -> Attribute
-defer = Attr "defer"
+defer = AttrRaw "defer"
 
 
 dir :: Text -> Attribute
-dir = Attr "dir"
+dir = AttrRaw "dir"
 
 
 disabled :: Text -> Attribute
-disabled = Attr "disabled"
+disabled = AttrRaw "disabled"
 
 
 draggable :: Text -> Attribute
-draggable = Attr "draggable"
+draggable = AttrRaw "draggable"
 
 
 enctype :: Text -> Attribute
-enctype = Attr "enctype"
+enctype = AttrRaw "enctype"
 
 
 for :: Text -> Attribute
-for = Attr "for"
+for = AttrRaw "for"
 
 
 form :: Text -> Attribute
-form = Attr "form"
+form = AttrRaw "form"
 
 
 formaction :: Text -> Attribute
-formaction = Attr "formaction"
+formaction = AttrRaw "formaction"
 
 
 formenctype :: Text -> Attribute
-formenctype = Attr "formenctype"
+formenctype = AttrRaw "formenctype"
 
 
 formmethod :: Text -> Attribute
-formmethod = Attr "formmethod"
+formmethod = AttrRaw "formmethod"
 
 
 formnovalidate :: Text -> Attribute
-formnovalidate = Attr "formnovalidate"
+formnovalidate = AttrRaw "formnovalidate"
 
 
 formtarget :: Text -> Attribute
-formtarget = Attr "formtarget"
+formtarget = AttrRaw "formtarget"
 
 
 headers :: Text -> Attribute
-headers = Attr "headers"
+headers = AttrRaw "headers"
 
 
 height :: Text -> Attribute
-height = Attr "height"
+height = AttrRaw "height"
 
 
 hidden :: Text -> Attribute
-hidden = Attr "hidden"
+hidden = AttrRaw "hidden"
 
 
 high :: Text -> Attribute
-high = Attr "high"
+high = AttrRaw "high"
 
 
 href :: Text -> Attribute
-href = Attr "href"
+href = AttrRaw "href"
 
 
 hreflang :: Text -> Attribute
-hreflang = Attr "hreflang"
+hreflang = AttrRaw "hreflang"
 
 
 httpEquiv :: Text -> Attribute
-httpEquiv = Attr "http-equiv"
+httpEquiv = AttrRaw "http-equiv"
 
 
 icon :: Text -> Attribute
-icon = Attr "icon"
+icon = AttrRaw "icon"
 
 
 id :: Text -> Attribute
-id = Attr "id"
+id = AttrRaw "id"
 
 
 ismap :: Text -> Attribute
-ismap = Attr "ismap"
+ismap = AttrRaw "ismap"
 
 
 item :: Text -> Attribute
-item = Attr "item"
+item = AttrRaw "item"
 
 
 itemprop :: Text -> Attribute
-itemprop = Attr "itemprop"
+itemprop = AttrRaw "itemprop"
 
 
 itemscope :: Text -> Attribute
-itemscope = Attr "itemscope"
+itemscope = AttrRaw "itemscope"
 
 
 itemtype :: Text -> Attribute
-itemtype = Attr "itemtype"
+itemtype = AttrRaw "itemtype"
 
 
 keytype :: Text -> Attribute
-keytype = Attr "keytype"
+keytype = AttrRaw "keytype"
 
 
 label :: Text -> Attribute
-label = Attr "label"
+label = AttrRaw "label"
 
 
 lang :: Text -> Attribute
-lang = Attr "lang"
+lang = AttrRaw "lang"
 
 
 list :: Text -> Attribute
-list = Attr "list"
+list = AttrRaw "list"
 
 
 loop :: Text -> Attribute
-loop = Attr "loop"
+loop = AttrRaw "loop"
 
 
 low :: Text -> Attribute
-low = Attr "low"
+low = AttrRaw "low"
 
 
 manifest :: Text -> Attribute
-manifest = Attr "manifest"
+manifest = AttrRaw "manifest"
 
 
 max :: Text -> Attribute
-max = Attr "max"
+max = AttrRaw "max"
 
 
 maxlength :: Text -> Attribute
-maxlength = Attr "maxlength"
+maxlength = AttrRaw "maxlength"
 
 
 media :: Text -> Attribute
-media = Attr "media"
+media = AttrRaw "media"
 
 
 method :: Text -> Attribute
-method = Attr "method"
+method = AttrRaw "method"
 
 
 min :: Text -> Attribute
-min = Attr "min"
+min = AttrRaw "min"
 
 
 multiple :: Text -> Attribute
-multiple = Attr "multiple"
+multiple = AttrRaw "multiple"
 
 
 name :: Text -> Attribute
-name = Attr "name"
+name = AttrRaw "name"
 
 
 novalidate :: Text -> Attribute
-novalidate = Attr "novalidate"
+novalidate = AttrRaw "novalidate"
 
 
 onbeforeonload :: Text -> Attribute
-onbeforeonload = Attr "onbeforeonload"
+onbeforeonload = AttrRaw "onbeforeonload"
 
 
 onbeforeprint :: Text -> Attribute
-onbeforeprint = Attr "onbeforeprint"
+onbeforeprint = AttrRaw "onbeforeprint"
 
 
 onblur :: Text -> Attribute
-onblur = Attr "onblur"
+onblur = AttrRaw "onblur"
 
 
 oncanplay :: Text -> Attribute
-oncanplay = Attr "oncanplay"
+oncanplay = AttrRaw "oncanplay"
 
 
 oncanplaythrough :: Text -> Attribute
-oncanplaythrough = Attr "oncanplaythrough"
+oncanplaythrough = AttrRaw "oncanplaythrough"
 
 
 onchange :: Text -> Attribute
-onchange = Attr "onchange"
+onchange = AttrRaw "onchange"
 
 
 onclick :: Text -> Attribute
-onclick = Attr "onclick"
+onclick = AttrRaw "onclick"
 
 
 oncontextmenu :: Text -> Attribute
-oncontextmenu = Attr "oncontextmenu"
+oncontextmenu = AttrRaw "oncontextmenu"
 
 
 ondblclick :: Text -> Attribute
-ondblclick = Attr "ondblclick"
+ondblclick = AttrRaw "ondblclick"
 
 
 ondrag :: Text -> Attribute
-ondrag = Attr "ondrag"
+ondrag = AttrRaw "ondrag"
 
 
 ondragend :: Text -> Attribute
-ondragend = Attr "ondragend"
+ondragend = AttrRaw "ondragend"
 
 
 ondragenter :: Text -> Attribute
-ondragenter = Attr "ondragenter"
+ondragenter = AttrRaw "ondragenter"
 
 
 ondragleave :: Text -> Attribute
-ondragleave = Attr "ondragleave"
+ondragleave = AttrRaw "ondragleave"
 
 
 ondragover :: Text -> Attribute
-ondragover = Attr "ondragover"
+ondragover = AttrRaw "ondragover"
 
 
 ondragstart :: Text -> Attribute
-ondragstart = Attr "ondragstart"
+ondragstart = AttrRaw "ondragstart"
 
 
 ondrop :: Text -> Attribute
-ondrop = Attr "ondrop"
+ondrop = AttrRaw "ondrop"
 
 
 ondurationchange :: Text -> Attribute
-ondurationchange = Attr "ondurationchange"
+ondurationchange = AttrRaw "ondurationchange"
 
 
 onemptied :: Text -> Attribute
-onemptied = Attr "onemptied"
+onemptied = AttrRaw "onemptied"
 
 
 onended :: Text -> Attribute
-onended = Attr "onended"
+onended = AttrRaw "onended"
 
 
 onerror :: Text -> Attribute
-onerror = Attr "onerror"
+onerror = AttrRaw "onerror"
 
 
 onfocus :: Text -> Attribute
-onfocus = Attr "onfocus"
+onfocus = AttrRaw "onfocus"
 
 
 onformchange :: Text -> Attribute
-onformchange = Attr "onformchange"
+onformchange = AttrRaw "onformchange"
 
 
 onforminput :: Text -> Attribute
-onforminput = Attr "onforminput"
+onforminput = AttrRaw "onforminput"
 
 
 onhaschange :: Text -> Attribute
-onhaschange = Attr "onhaschange"
+onhaschange = AttrRaw "onhaschange"
 
 
 oninput :: Text -> Attribute
-oninput = Attr "oninput"
+oninput = AttrRaw "oninput"
 
 
 oninvalid :: Text -> Attribute
-oninvalid = Attr "oninvalid"
+oninvalid = AttrRaw "oninvalid"
 
 
 onkeydown :: Text -> Attribute
-onkeydown = Attr "onkeydown"
+onkeydown = AttrRaw "onkeydown"
 
 
 onkeyup :: Text -> Attribute
-onkeyup = Attr "onkeyup"
+onkeyup = AttrRaw "onkeyup"
 
 
 onload :: Text -> Attribute
-onload = Attr "onload"
+onload = AttrRaw "onload"
 
 
 onloadeddata :: Text -> Attribute
-onloadeddata = Attr "onloadeddata"
+onloadeddata = AttrRaw "onloadeddata"
 
 
 onloadedmetadata :: Text -> Attribute
-onloadedmetadata = Attr "onloadedmetadata"
+onloadedmetadata = AttrRaw "onloadedmetadata"
 
 
 onloadstart :: Text -> Attribute
-onloadstart = Attr "onloadstart"
+onloadstart = AttrRaw "onloadstart"
 
 
 onmessage :: Text -> Attribute
-onmessage = Attr "onmessage"
+onmessage = AttrRaw "onmessage"
 
 
 onmousedown :: Text -> Attribute
-onmousedown = Attr "onmousedown"
+onmousedown = AttrRaw "onmousedown"
 
 
 onmousemove :: Text -> Attribute
-onmousemove = Attr "onmousemove"
+onmousemove = AttrRaw "onmousemove"
 
 
 onmouseout :: Text -> Attribute
-onmouseout = Attr "onmouseout"
+onmouseout = AttrRaw "onmouseout"
 
 
 onmouseover :: Text -> Attribute
-onmouseover = Attr "onmouseover"
+onmouseover = AttrRaw "onmouseover"
 
 
 onmouseup :: Text -> Attribute
-onmouseup = Attr "onmouseup"
+onmouseup = AttrRaw "onmouseup"
 
 
 onmousewheel :: Text -> Attribute
-onmousewheel = Attr "onmousewheel"
+onmousewheel = AttrRaw "onmousewheel"
 
 
 ononline :: Text -> Attribute
-ononline = Attr "ononline"
+ononline = AttrRaw "ononline"
 
 
 onpagehide :: Text -> Attribute
-onpagehide = Attr "onpagehide"
+onpagehide = AttrRaw "onpagehide"
 
 
 onpageshow :: Text -> Attribute
-onpageshow = Attr "onpageshow"
+onpageshow = AttrRaw "onpageshow"
 
 
 onpause :: Text -> Attribute
-onpause = Attr "onpause"
+onpause = AttrRaw "onpause"
 
 
 onplay :: Text -> Attribute
-onplay = Attr "onplay"
+onplay = AttrRaw "onplay"
 
 
 onplaying :: Text -> Attribute
-onplaying = Attr "onplaying"
+onplaying = AttrRaw "onplaying"
 
 
 onprogress :: Text -> Attribute
-onprogress = Attr "onprogress"
+onprogress = AttrRaw "onprogress"
 
 
 onpropstate :: Text -> Attribute
-onpropstate = Attr "onpropstate"
+onpropstate = AttrRaw "onpropstate"
 
 
 onratechange :: Text -> Attribute
-onratechange = Attr "onratechange"
+onratechange = AttrRaw "onratechange"
 
 
 onreadystatechange :: Text -> Attribute
-onreadystatechange = Attr "onreadystatechange"
+onreadystatechange = AttrRaw "onreadystatechange"
 
 
 onredo :: Text -> Attribute
-onredo = Attr "onredo"
+onredo = AttrRaw "onredo"
 
 
 onresize :: Text -> Attribute
-onresize = Attr "onresize"
+onresize = AttrRaw "onresize"
 
 
 onscroll :: Text -> Attribute
-onscroll = Attr "onscroll"
+onscroll = AttrRaw "onscroll"
 
 
 onseeked :: Text -> Attribute
-onseeked = Attr "onseeked"
+onseeked = AttrRaw "onseeked"
 
 
 onseeking :: Text -> Attribute
-onseeking = Attr "onseeking"
+onseeking = AttrRaw "onseeking"
 
 
 onselect :: Text -> Attribute
-onselect = Attr "onselect"
+onselect = AttrRaw "onselect"
 
 
 onstalled :: Text -> Attribute
-onstalled = Attr "onstalled"
+onstalled = AttrRaw "onstalled"
 
 
 onstorage :: Text -> Attribute
-onstorage = Attr "onstorage"
+onstorage = AttrRaw "onstorage"
 
 
 onsubmit :: Text -> Attribute
-onsubmit = Attr "onsubmit"
+onsubmit = AttrRaw "onsubmit"
 
 
 onsuspend :: Text -> Attribute
-onsuspend = Attr "onsuspend"
+onsuspend = AttrRaw "onsuspend"
 
 
 ontimeupdate :: Text -> Attribute
-ontimeupdate = Attr "ontimeupdate"
+ontimeupdate = AttrRaw "ontimeupdate"
 
 
 onundo :: Text -> Attribute
-onundo = Attr "onundo"
+onundo = AttrRaw "onundo"
 
 
 onunload :: Text -> Attribute
-onunload = Attr "onunload"
+onunload = AttrRaw "onunload"
 
 
 onvolumechange :: Text -> Attribute
-onvolumechange = Attr "onvolumechange"
+onvolumechange = AttrRaw "onvolumechange"
 
 
 onwaiting :: Text -> Attribute
-onwaiting = Attr "onwaiting"
+onwaiting = AttrRaw "onwaiting"
 
 
 open :: Text -> Attribute
-open = Attr "open"
+open = AttrRaw "open"
 
 
 optimum :: Text -> Attribute
-optimum = Attr "optimum"
+optimum = AttrRaw "optimum"
 
 
 pattern :: Text -> Attribute
-pattern = Attr "pattern"
+pattern = AttrRaw "pattern"
 
 
 ping :: Text -> Attribute
-ping = Attr "ping"
+ping = AttrRaw "ping"
 
 
 placeholder :: Text -> Attribute
-placeholder = Attr "placeholder"
+placeholder = AttrRaw "placeholder"
 
 
 preload :: Text -> Attribute
-preload = Attr "preload"
+preload = AttrRaw "preload"
 
 
 pubdate :: Text -> Attribute
-pubdate = Attr "pubdate"
+pubdate = AttrRaw "pubdate"
 
 
 radiogroup :: Text -> Attribute
-radiogroup = Attr "radiogroup"
+radiogroup = AttrRaw "radiogroup"
 
 
 readonly :: Text -> Attribute
-readonly = Attr "readonly"
+readonly = AttrRaw "readonly"
 
 
 rel :: Text -> Attribute
-rel = Attr "rel"
+rel = AttrRaw "rel"
 
 
 required :: Text -> Attribute
-required = Attr "required"
+required = AttrRaw "required"
 
 
 reversed :: Text -> Attribute
-reversed = Attr "reversed"
+reversed = AttrRaw "reversed"
 
 
 role :: Text -> Attribute
-role = Attr "role"
+role = AttrRaw "role"
 
 
 rows :: Text -> Attribute
-rows = Attr "rows"
+rows = AttrRaw "rows"
 
 
 rowspan :: Text -> Attribute
-rowspan = Attr "rowspan"
+rowspan = AttrRaw "rowspan"
 
 
 sandbox :: Text -> Attribute
-sandbox = Attr "sandbox"
+sandbox = AttrRaw "sandbox"
 
 
 scope :: Text -> Attribute
-scope = Attr "scope"
+scope = AttrRaw "scope"
 
 
 scoped :: Text -> Attribute
-scoped = Attr "scoped"
+scoped = AttrRaw "scoped"
 
 
 seamless :: Text -> Attribute
-seamless = Attr "seamless"
+seamless = AttrRaw "seamless"
 
 
 selected :: Text -> Attribute
-selected = Attr "selected"
+selected = AttrRaw "selected"
 
 
 shape :: Text -> Attribute
-shape = Attr "shape"
+shape = AttrRaw "shape"
 
 
 size :: Text -> Attribute
-size = Attr "size"
+size = AttrRaw "size"
 
 
 sizes :: Text -> Attribute
-sizes = Attr "sizes"
+sizes = AttrRaw "sizes"
 
 
 span :: Text -> Attribute
-span = Attr "span"
+span = AttrRaw "span"
 
 
 spellcheck :: Text -> Attribute
-spellcheck = Attr "spellcheck"
+spellcheck = AttrRaw "spellcheck"
 
 
 src :: Text -> Attribute
-src = Attr "src"
+src = AttrRaw "src"
 
 
 srcdoc :: Text -> Attribute
-srcdoc = Attr "srcdoc"
+srcdoc = AttrRaw "srcdoc"
 
 
 start :: Text -> Attribute
-start = Attr "start"
+start = AttrRaw "start"
 
 
 step :: Text -> Attribute
-step = Attr "step"
+step = AttrRaw "step"
 
 
 style :: Text -> Attribute
-style = Attr "style"
+style = AttrRaw "style"
 
 
 subject :: Text -> Attribute
-subject = Attr "subject"
+subject = AttrRaw "subject"
 
 
 summary :: Text -> Attribute
-summary = Attr "summary"
+summary = AttrRaw "summary"
 
 
 tabindex :: Text -> Attribute
-tabindex = Attr "tabindex"
+tabindex = AttrRaw "tabindex"
 
 
 target :: Text -> Attribute
-target = Attr "target"
+target = AttrRaw "target"
 
 
 title :: Text -> Attribute
-title = Attr "title"
+title = AttrRaw "title"
 
 
 type_ :: Text -> Attribute
-type_ = Attr "type"
+type_ = AttrRaw "type"
 
 
 usemap :: Text -> Attribute
-usemap = Attr "usemap"
+usemap = AttrRaw "usemap"
 
 
 value :: Text -> Attribute
-value = Attr "value"
+value = AttrRaw "value"
 
 
 width :: Text -> Attribute
-width = Attr "width"
+width = AttrRaw "width"
 
 
 wrap :: Text -> Attribute
-wrap = Attr "wrap"
+wrap = AttrRaw "wrap"
 
 
 xmlns :: Text -> Attribute
-xmlns = Attr "xmlns"
+xmlns = AttrRaw "xmlns"

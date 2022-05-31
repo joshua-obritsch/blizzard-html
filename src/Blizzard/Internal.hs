@@ -3,6 +3,7 @@
 
 module Blizzard.Internal
     ( Attribute(..)
+    , Css(..)
     , documentTag
     , intToText
     , normalTag
@@ -27,7 +28,13 @@ import qualified Text.Blaze.Html as H
 
 
 data Attribute
-    = Attr Text Text
+    = AttrCss Css
+    | AttrMul [Css]
+    | AttrRaw Text Text
+
+
+data Css
+    = Class Text
     | Style Text
 
 
@@ -49,12 +56,17 @@ normalTag element attributes children = foldl (!) element (toBlaze attributes) $
 
 
 toBlaze :: [Attribute] -> [H.Attribute]
-toBlaze attrs = case styles of
-    Just styles -> styles : attributes
-    Nothing     -> attributes
+toBlaze attrs = case class_ of
+    Just class_ -> case style of
+        Just style -> class_ : style : attributes
+        Nothing    -> class_ : attributes
+    Nothing     -> case style of
+        Just style -> style : attributes
+        Nothing    -> attributes
   where
     attributes = splitAttributes attrs
-    styles = splitStyles attrs
+    style = splitStyle attrs
+    class_ = splitClass attrs
 
 
 voidTag :: Html -> [Attribute] -> Html
@@ -68,19 +80,51 @@ splitAttributes :: [Attribute] -> [H.Attribute]
 splitAttributes = catMaybes . mapCase
   where
     mapCase = map $ \case
-        Attr tag value -> Just $ customAttribute (textTag tag) (textValue value)
-        _              -> Nothing
+        AttrRaw tag value -> Just $ customAttribute (textTag tag) (textValue value)
+        _                 -> Nothing
 
 
-splitStyles :: [Attribute] -> Maybe H.Attribute
-splitStyles attrs =
+unbatchClasses :: [Css] -> Text
+unbatchClasses = unwords . catMaybes . mapCase
+  where
+    mapCase = map $ \case
+        Class value -> Just value
+        Style _     -> Nothing
+
+
+unbatchStyles :: [Css] -> Text
+unbatchStyles = unwords . catMaybes . mapCase
+  where
+    mapCase = map $ \case
+        Class _     -> Nothing
+        Style value -> Just value
+
+
+splitClass :: [Attribute] -> Maybe H.Attribute
+splitClass attrs =
     if null result then
         Nothing
     else
         Just $ customAttribute "class" . textValue $ result
   where
     mapCase = map $ \case
-        Style value -> Just value
-        _           -> Nothing
+        AttrCss (Class value) -> Just value
+        AttrMul values        -> Just $ unbatchClasses values
+        _                     -> Nothing
+
+    result = unwords . catMaybes . mapCase $ attrs
+
+
+splitStyle :: [Attribute] -> Maybe H.Attribute
+splitStyle attrs =
+    if null result then
+        Nothing
+    else
+        Just $ customAttribute "style" . textValue $ result
+  where
+    mapCase = map $ \case
+        AttrCss (Style value) -> Just value
+        AttrMul values        -> Just $ unbatchStyles values
+        _                     -> Nothing
 
     result = unwords . catMaybes . mapCase $ attrs

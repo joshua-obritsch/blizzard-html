@@ -1,14 +1,6 @@
-{-# LANGUAGE OverloadedStrings #-}
-
 module Blizzard.Css
-    ( width
+    ( module Blizzard.Css.Border
     ) where
 
 
-import Data.Text (Text)
-
-import Blizzard.Internal (Attribute(..), intToText)
-
-
-width :: Int -> Attribute
-width w = Style $ "w-[" <> intToText w <> "]"
+import Blizzard.Css.Border
