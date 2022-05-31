@@ -1,6 +1,9 @@
-:set -v0
+:set -w
 :set -isrc
 :set -XOverloadedStrings
+:load Blizzard.Html.Attributes Blizzard.Html.Styles
 
 import Prelude
 import Text.Blaze.Html.Renderer.Text
+import Blizzard.Html.Attributes hiding (height, width)
+import Blizzard.Html.Styles

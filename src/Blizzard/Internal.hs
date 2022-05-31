@@ -77,7 +77,7 @@ splitStyles attrs =
     if null result then
         Nothing
     else
-        Just $ customAttribute "styles" . textValue $ result
+        Just $ customAttribute "class" . textValue $ result
   where
     mapCase = map $ \case
         Style value -> Just value
