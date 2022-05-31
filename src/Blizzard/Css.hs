@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Blizzard.Html.Styles
+module Blizzard.Css
     ( width
     ) where
 
