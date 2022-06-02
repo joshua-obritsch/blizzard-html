@@ -11,11 +11,13 @@ module Blizzard.Internal
 
 import Clay.Render (compact, renderWith)
 import Clay.Stylesheet (Css)
+import Data.ByteString.Lazy (toStrict)
+import Data.Hash.Murmur (murmur3)
 import Data.Maybe (catMaybes)
 import Data.String (fromString)
-import Data.Text (Text, unpack)
-import Data.Text.Lazy (toStrict)
-import Text.Blaze.Html ((!), Html, customAttribute, textTag, textValue, toHtml)
+import Data.Text (Text)
+import Data.Text.Lazy.Encoding (encodeUtf8)
+import Text.Blaze.Html ((!), Html, customAttribute, stringValue, textTag, textValue, toHtml)
 
 import qualified Text.Blaze.Html as H
 
@@ -67,7 +69,7 @@ splitAttributes = catMaybes . mapCase
 splitClass :: [Attribute] -> Maybe H.Attribute
 splitClass attrs = case result of
     Just value ->
-        Just $ customAttribute "class" (textValue value)
+        Just $ customAttribute "class" (stringValue $ '_' : value)
     Nothing ->
         Nothing
   where
@@ -78,11 +80,6 @@ splitClass attrs = case result of
     result = css . catMaybes . mapCase $ attrs
 
 
-css :: [Css] -> Maybe Text
+css :: [Css] -> Maybe String
 css []     = Nothing
-css styles = Just $ fromString . firstLast . unpack . toStrict . renderWith compact [] . foldl1 (>>) $ styles
-
-firstLast :: [a] -> [a]
-firstLast []  = []
-firstLast [x] = []
-firstLast xs  = tail (init xs)
+css styles = Just $ show . murmur3 15739 . toStrict . encodeUtf8 . renderWith compact [] . mconcat $ styles
