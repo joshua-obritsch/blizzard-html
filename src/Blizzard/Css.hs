@@ -1,6 +1,6 @@
 module Blizzard.Css
     ( module Clay.Background
-    , module Clay.Border
+    , module Blizzard.Css.Border
     , module Clay.Box
     , module Clay.Color
     , module Clay.Common
@@ -24,7 +24,7 @@ module Blizzard.Css
 
 
 import Clay.Background
-import Clay.Border
+import Blizzard.Css.Border
 import Clay.Box
 import Clay.Color
 import Clay.Common
