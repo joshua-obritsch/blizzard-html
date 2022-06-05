@@ -1,5 +1,5 @@
 module Blizzard.Css
-    ( module Clay.Background
+    ( module Blizzard.Css.Background
     , module Blizzard.Css.Border
     , module Clay.Box
     , module Clay.Color
@@ -23,7 +23,7 @@ module Blizzard.Css
     ) where
 
 
-import Clay.Background
+import Blizzard.Css.Background
 import Blizzard.Css.Border
 import Clay.Box
 import Clay.Color

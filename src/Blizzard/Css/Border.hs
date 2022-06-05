@@ -1,5 +1,6 @@
 module Blizzard.Css.Border
-    ( solid, dotted, dashed, double, wavy, groove, ridge, inset, outset
+    ( Stroke
+    , solid, dotted, dashed, double, wavy, groove, ridge, inset, outset
     , border, borderTop, borderLeft, borderBottom, borderRight
     , borderColor4, borderColor, borderLeftColor, borderRightColor, borderTopColor, borderBottomColor
     , borderStyle4, borderStyle, borderLeftStyle, borderRightStyle, borderTopStyle, borderBottomStyle
@@ -10,33 +11,24 @@ module Blizzard.Css.Border
     , outlineWidth4, outlineWidth, outlineLeftWidth, outlineRightWidth, outlineTopWidth, outlineBottomWidth
     , outlineOffset
     , borderRadius
-    , borderTopLeftRadius, borderTopRightRadius, borderBottomLeftRadius, borderBottomRightRadius
+    , borderTopLeftRadius, borderTopRightRadius
+    , borderBottomLeftRadius, borderBottomRightRadius
     , borderCollapse
     , borderSpacing, borderSpacing2
     ) where
 
 
 import Blizzard.Internal (Attribute(..))
-import Clay.Border (Stroke)
+import Clay.Border
+    ( Stroke
+    , solid, dotted, dashed, double, wavy, groove, ridge, inset, outset
+    )
 import Clay.Color (Color)
 import Clay.Display (Visibility)
 import Clay.Size (LengthUnit, Size)
 import Clay.Stylesheet (Css)
 
 import qualified Clay.Border as B
-
-
-solid, dotted, dashed, double, wavy, groove, ridge, inset, outset :: Stroke
-
-solid  = B.solid
-dotted = B.dotted
-dashed = B.dashed
-double = B.double
-wavy   = B.wavy
-groove = B.groove
-ridge  = B.ridge
-inset  = B.inset
-outset = B.outset
 
 
 border, borderTop, borderLeft, borderBottom, borderRight :: Size LengthUnit -> Stroke -> Color -> Attribute

@@ -30,6 +30,7 @@ library
     exposed-modules:    Blizzard.Css
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
-    other-modules:      Blizzard.Css.Border
+    other-modules:      Blizzard.Css.Background
+                      , Blizzard.Css.Border
                       , Blizzard.Internal
     hs-source-dirs:     src
