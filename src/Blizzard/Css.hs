@@ -10,11 +10,11 @@ module Blizzard.Css
     , module Blizzard.Css.Font
     , module Blizzard.Css.FontFace
     , module Blizzard.Css.Geometry
+    , module Blizzard.Css.List
     , module Clay.Color
     , module Clay.Common
-
     , module Clay.Gradient
-    , module Clay.List
+
     , module Clay.Size
     , module Clay.Text
     , module Clay.Time
@@ -35,11 +35,11 @@ import Blizzard.Css.Flexbox hiding (flex, nowrap, wrap)
 import Blizzard.Css.Font hiding (menu, caption, small, icon)
 import Blizzard.Css.FontFace
 import Blizzard.Css.Geometry
+import Blizzard.Css.List
 import Clay.Color
 import Clay.Common
-
 import Clay.Gradient
-import Clay.List
+
 import Clay.Size
 import Clay.Text hiding (pre)
 import Clay.Time
