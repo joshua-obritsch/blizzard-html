@@ -9,10 +9,10 @@ module Blizzard.Css
     , module Blizzard.Css.Flexbox
     , module Blizzard.Css.Font
     , module Blizzard.Css.FontFace
+    , module Blizzard.Css.Geometry
     , module Clay.Color
     , module Clay.Common
 
-    , module Clay.Geometry
     , module Clay.Gradient
     , module Clay.List
     , module Clay.Size
@@ -34,10 +34,10 @@ import Blizzard.Css.Filter hiding (url, opacity)
 import Blizzard.Css.Flexbox hiding (flex, nowrap, wrap)
 import Blizzard.Css.Font hiding (menu, caption, small, icon)
 import Blizzard.Css.FontFace
+import Blizzard.Css.Geometry
 import Clay.Color
 import Clay.Common
 
-import Clay.Geometry
 import Clay.Gradient
 import Clay.List
 import Clay.Size
