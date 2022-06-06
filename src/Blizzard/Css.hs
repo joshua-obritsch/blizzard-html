@@ -5,10 +5,10 @@ module Blizzard.Css
     , module Blizzard.Css.Box
     , module Blizzard.Css.Display
     , module Blizzard.Css.Dynamic
+    , module Blizzard.Css.Filter
     , module Clay.Color
     , module Clay.Common
 
-    , module Clay.Filter
     , module Clay.Flexbox
     , module Clay.Font
     , module Clay.FontFace
@@ -30,10 +30,10 @@ import Blizzard.Css.Border
 import Blizzard.Css.Box
 import Blizzard.Css.Display hiding (table)
 import Blizzard.Css.Dynamic
+import Blizzard.Css.Filter hiding (url, opacity)
 import Clay.Color
 import Clay.Common
 
-import Clay.Filter hiding (url, opacity)
 import Clay.Flexbox hiding (flex, nowrap, wrap)
 import Clay.Font hiding (menu, caption, small, icon)
 import Clay.FontFace

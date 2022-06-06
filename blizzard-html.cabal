@@ -34,6 +34,7 @@ library
                       , Blizzard.Css.Box
                       , Blizzard.Css.Display
                       , Blizzard.Css.Dynamic
+                      , Blizzard.Css.Filter
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
     other-modules:      Blizzard.Internal
