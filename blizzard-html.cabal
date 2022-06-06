@@ -40,6 +40,7 @@ library
                       , Blizzard.Css.FontFace
                       , Blizzard.Css.Geometry
                       , Blizzard.Css.List
+                      , Blizzard.Css.Mask
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
     other-modules:      Blizzard.Internal
