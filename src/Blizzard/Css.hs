@@ -4,10 +4,11 @@ module Blizzard.Css
     , module Blizzard.Css.Border
     , module Blizzard.Css.Box
     , module Blizzard.Css.Display
+    , module Blizzard.Css.Dynamic
     , module Clay.Color
     , module Clay.Common
 
-    , module Clay.Dynamic
+    , module Clay.Filter
     , module Clay.Flexbox
     , module Clay.Font
     , module Clay.FontFace
@@ -20,7 +21,6 @@ module Blizzard.Css
     , module Clay.Transform
     , module Clay.Transition
     , module Clay.Mask
-    , module Clay.Filter
     ) where
 
 
@@ -29,10 +29,11 @@ import Blizzard.Css.Background
 import Blizzard.Css.Border
 import Blizzard.Css.Box
 import Blizzard.Css.Display hiding (table)
+import Blizzard.Css.Dynamic
 import Clay.Color
 import Clay.Common
 
-import Clay.Dynamic
+import Clay.Filter hiding (url, opacity)
 import Clay.Flexbox hiding (flex, nowrap, wrap)
 import Clay.Font hiding (menu, caption, small, icon)
 import Clay.FontFace
@@ -45,4 +46,3 @@ import Clay.Time
 import Clay.Transform
 import Clay.Transition
 import Clay.Mask hiding (clear)
-import Clay.Filter hiding (url, opacity)

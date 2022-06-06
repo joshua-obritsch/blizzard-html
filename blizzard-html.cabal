@@ -28,8 +28,12 @@ library
                       , text       >= 1.0  && <= 3.0
     default-language:   Haskell2010
     exposed-modules:    Blizzard.Css
+                      , Blizzard.Css.Animation
                       , Blizzard.Css.Background
                       , Blizzard.Css.Border
+                      , Blizzard.Css.Box
+                      , Blizzard.Css.Display
+                      , Blizzard.Css.Dynamic
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
     other-modules:      Blizzard.Internal
