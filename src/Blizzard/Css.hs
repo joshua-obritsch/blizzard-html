@@ -3,9 +3,10 @@ module Blizzard.Css
     , module Blizzard.Css.Background
     , module Blizzard.Css.Border
     , module Blizzard.Css.Box
+    , module Blizzard.Css.Display
     , module Clay.Color
     , module Clay.Common
-    , module Clay.Display
+
     , module Clay.Dynamic
     , module Clay.Flexbox
     , module Clay.Font
@@ -27,9 +28,10 @@ import Blizzard.Css.Animation
 import Blizzard.Css.Background
 import Blizzard.Css.Border
 import Blizzard.Css.Box
+import Blizzard.Css.Display hiding (table)
 import Clay.Color
 import Clay.Common
-import Clay.Display hiding (table)
+
 import Clay.Dynamic
 import Clay.Flexbox hiding (flex, nowrap, wrap)
 import Clay.Font hiding (menu, caption, small, icon)
