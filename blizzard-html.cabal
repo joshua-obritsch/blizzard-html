@@ -37,6 +37,7 @@ library
                       , Blizzard.Css.Filter
                       , Blizzard.Css.Flexbox
                       , Blizzard.Css.Font
+                      , Blizzard.Css.FontFace
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
     other-modules:      Blizzard.Internal
