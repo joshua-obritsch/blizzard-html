@@ -41,6 +41,7 @@ library
                       , Blizzard.Css.Geometry
                       , Blizzard.Css.List
                       , Blizzard.Css.Mask
+                      , Blizzard.Css.Transition
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
     other-modules:      Blizzard.Internal

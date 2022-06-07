@@ -12,6 +12,7 @@ module Blizzard.Css
     , module Blizzard.Css.Geometry
     , module Blizzard.Css.List
     , module Blizzard.Css.Mask
+    , module Blizzard.Css.Transition
     , module Clay.Color
     , module Clay.Common
     , module Clay.Gradient
@@ -20,7 +21,6 @@ module Blizzard.Css
     , module Clay.Text
     , module Clay.Time
     , module Clay.Transform
-    , module Clay.Transition
     ) where
 
 
@@ -37,6 +37,7 @@ import Blizzard.Css.FontFace
 import Blizzard.Css.Geometry
 import Blizzard.Css.List
 import Blizzard.Css.Mask hiding (clear)
+import Blizzard.Css.Transition
 import Clay.Color
 import Clay.Common
 import Clay.Gradient
@@ -45,4 +46,3 @@ import Clay.Size
 import Clay.Text hiding (pre)
 import Clay.Time
 import Clay.Transform
-import Clay.Transition
