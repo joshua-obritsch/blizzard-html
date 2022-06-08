@@ -27,6 +27,7 @@ class Inherit  a where inherit  :: a
 class Initial  a where initial  :: a
 class None     a where none     :: a
 class Normal   a where normal   :: a
+class Other    a where other    :: Value -> a
 class Unset    a where unset    :: a
 class Visible  a where visible  :: a
 
@@ -40,5 +41,6 @@ instance Inherit  Value where inherit  = "inherit"
 instance Initial  Value where initial  = "initial"
 instance None     Value where none     = "none"
 instance Normal   Value where normal   = "normal"
+instance Other    Value where other    = id
 instance Unset    Value where unset    = "unset"
 instance Visible  Value where visible  = "visible"

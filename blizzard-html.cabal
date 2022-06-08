@@ -32,6 +32,7 @@ library
                       , Blizzard.Css.Background
                       , Blizzard.Css.Border
                       , Blizzard.Css.Box
+                      , Blizzard.Css.Color
                       , Blizzard.Css.Common
                       , Blizzard.Css.Display
                       , Blizzard.Css.Dynamic

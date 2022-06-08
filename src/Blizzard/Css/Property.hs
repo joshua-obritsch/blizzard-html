@@ -1,14 +1,17 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Blizzard.Css.Property where
+module Blizzard.Css.Property
+    ( Val(..)
+    , Value
+    ) where
 
 
 import Control.Arrow (second)
 import Data.List (partition, sort)
 import Data.Maybe (fromMaybe)
 import Data.String (IsString, fromString)
-import Data.Text (Text, replace)
+import Data.Text (Text, intercalate, replace)
 
 
 quote :: Text -> Text
