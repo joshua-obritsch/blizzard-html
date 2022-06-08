@@ -77,7 +77,7 @@ animations
          , FillMode
          )
        ] -> Attribute
-animations a= AttrCss $ A.animations a
+animations a = AttrCss $ A.animations a
 
 
 animationDelay :: Time -> Attribute
