@@ -8,14 +8,15 @@ module Blizzard.Css.Time
     ) where
 
 
-import Clay.Common (Auto, Inherit, None, Normal, Other)
-import Clay.Property (Val, Value, value)
 import Control.Arrow ((>>>))
 import Data.Text (pack)
 
+import Blizzard.Css.Common (Auto, Inherit, None, Normal)
+import Blizzard.Css.Property (Val, Value, value)
+
 
 newtype Time = Time Value
-    deriving (Auto, Inherit, None, Normal, Other, Val)
+    deriving (Auto, Inherit, None, Normal, Val)
 
 
 instance Num Time where

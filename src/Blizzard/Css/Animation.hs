@@ -1,31 +1,49 @@
 module Blizzard.Css.Animation
-    ( animation
+    (
+    -- animation
+      animation
     , animations
+
+    -- animation-delay
     , animationDelay
     , animationDelays
+
+    -- animation-direction
     , AnimationDirection
     , animationDirection
     , animationDirections
     , alternate
     , reverse
     , alternateReverse
+
+    -- animation-duration
     , animationDuration
     , animationDurations
+
+    -- animation-fill-mode
+    , FillMode
+    , animationFillMode
+    , forwards
+    , backwards
+
+    -- animation-iteration-count
     , IterationCount
     , animationIterationCount
     , animationIterationCounts
     , infinite
     , iterationCount
+
+    -- animation-name
     , AnimationName
     , animationName
+
+    -- animation-play-state
     , PlayState
     , animationPlayState
     , running
     , paused
-    , FillMode
-    , animationFillMode
-    , forwards
-    , backwards
+
+    -- animation-timing-function
     , animationTimingFunction
     ) where
 

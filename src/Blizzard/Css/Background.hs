@@ -1,40 +1,59 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Background
-    ( Background(background)
+    (
+    -- background
+      Background(..)
+
+    -- background-attachment
+    , BackgroundAttachment
+    , backgroundAttachment
+    , backgroundAttachments
+    , attachFixed, attachScroll
+
+    -- background-color
     , backgroundColor
+
+    -- background-position
     , BackgroundPosition
     , backgroundPosition
     , backgroundPositions
     , placed
     , positioned
+
+    -- background-size
     , BackgroundSize
     , backgroundSize
     , backgroundSizes
     , contain, cover
     , by
+
+    -- background-repeat
     , BackgroundRepeat
     , backgroundRepeat
     , backgroundRepeats
     , repeat, space, round, noRepeat
     , xyRepeat
     , repeatX, repeatY
+
+    -- background-origin
     , BackgroundOrigin
     , backgroundOrigin
     , backgroundOrigins
     , origin
+
+    -- background-clip
     , BackgroundClip
     , backgroundClip
     , backgroundClips
     , boxClip
-    , BackgroundAttachment
-    , backgroundAttachment
-    , backgroundAttachments
-    , attachFixed, attachScroll
+
+    -- background-image
     , BackgroundImage
     , backgroundImage
     , backgroundImages
     , url
+
     , Side
     , sideTop
     , sideLeft

@@ -32,6 +32,7 @@ library
                       , Blizzard.Css.Background
                       , Blizzard.Css.Border
                       , Blizzard.Css.Box
+                      , Blizzard.Css.Common
                       , Blizzard.Css.Display
                       , Blizzard.Css.Dynamic
                       , Blizzard.Css.Filter
@@ -41,6 +42,7 @@ library
                       , Blizzard.Css.Geometry
                       , Blizzard.Css.List
                       , Blizzard.Css.Mask
+                      , Blizzard.Css.Property
                       , Blizzard.Css.Time
                       , Blizzard.Css.Transition
                       , Blizzard.Html
