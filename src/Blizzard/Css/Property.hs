@@ -3,7 +3,7 @@
 
 module Blizzard.Css.Property
     ( Val(..)
-    , Value
+    , Value(..)
     ) where
 
 
@@ -11,14 +11,14 @@ import Control.Arrow (second)
 import Data.List (partition, sort)
 import Data.Maybe (fromMaybe)
 import Data.String (IsString, fromString)
-import Data.Text (Text, intercalate, replace)
+import Data.Text (Text, replace)
 
 
 quote :: Text -> Text
 quote t = "\"" <> replace "\"" "\\\"" t <> "\""
 
 
-newtype Value = Value Text
+newtype Value = Value { unvalue :: Text }
     deriving (Eq, IsString, Monoid, Semigroup, Show)
 
 
@@ -44,3 +44,16 @@ instance Val Literal where
 
 instance Val Integer where
     value = fromString . show
+
+
+instance Val Int where
+    value = fromString . show
+
+
+instance Val a => Val [a] where
+    value = intercalate "," . map value
+
+
+intercalate :: Monoid a => a -> [a] -> a
+intercalate _ []     = mempty
+intercalate s (x:xs) = foldl (\a b -> a `mappend` s `mappend` b) x xs

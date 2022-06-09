@@ -9,14 +9,11 @@ module Blizzard.Internal
     ) where
 
 
-import Clay.Render (compact, renderWith)
-import Clay.Stylesheet (Css)
-import Data.ByteString.Lazy (toStrict)
 import Data.Hash.Murmur (murmur3)
 import Data.Maybe (catMaybes)
 import Data.String (fromString)
 import Data.Text (Text)
-import Data.Text.Lazy.Encoding (encodeUtf8)
+import Data.Text.Encoding (encodeUtf8)
 import Text.Blaze.Html ((!), Html, customAttribute, stringValue, textTag, textValue, toHtml)
 
 import qualified Text.Blaze.Html as H
@@ -26,7 +23,7 @@ import qualified Text.Blaze.Html as H
 
 
 data Attribute
-    = AttrCss Css
+    = Css Text
     | AttrRaw Text Text
 
 
@@ -74,12 +71,12 @@ splitClass attrs = case result of
         Nothing
   where
     mapCase = map $ \case
-        AttrCss value -> Just value
-        _             -> Nothing
+        Css value -> Just value
+        _         -> Nothing
 
     result = css . catMaybes . mapCase $ attrs
 
 
-css :: [Css] -> Maybe String
+css :: [Text] -> Maybe String
 css []     = Nothing
-css styles = Just $ show . murmur3 15739 . toStrict . encodeUtf8 . renderWith compact [] . mconcat $ styles
+css styles = Just $ show . murmur3 15739 . encodeUtf8 . mconcat $ styles

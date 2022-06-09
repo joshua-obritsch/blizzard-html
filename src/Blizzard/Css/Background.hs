@@ -1,3 +1,4 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Background
@@ -73,12 +74,12 @@ module Blizzard.Css.Background
 
 import Prelude hiding (repeat, round)
 
+import Data.Text (Text)
+
 import Blizzard.Internal (Attribute(..))
 import Clay.Background
-    ( BackgroundPosition
-    , placed
+    ( placed
     , positioned
-    , BackgroundSize
     , contain, cover
     , by
     , BackgroundRepeat
@@ -105,18 +106,19 @@ import Clay.Background
     , angular
     , Location
     , Loc
-    , Val
     , location
     )
-import Clay.Color (Color)
-import Clay.Stylesheet (key)
+import Blizzard.Css.Color (Color)
+import Blizzard.Css.Common (Inherit)
+import Blizzard.Css.Property (Val, Value, value)
+import Blizzard.Css.Stylesheet (key)
 
 import qualified Clay.Background as B
 
 
 class Val a => Background a where
     background :: a -> Attribute
-    background a = AttrCss $ key "background" a
+    background = key "background"
 
 
 instance Background a => Background [a]
@@ -133,15 +135,23 @@ instance Background BackgroundImage
 
 
 backgroundColor :: Color -> Attribute
-backgroundColor a = AttrCss $ B.backgroundColor a
+backgroundColor = key "background-color"
+
+
+newtype BackgroundPosition = BackgroundPosition Value
+    deriving (Inherit, Val)
 
 
 backgroundPosition :: BackgroundPosition -> Attribute
-backgroundPosition a = AttrCss $ B.backgroundPosition a
+backgroundPosition = key "background-position"
 
 
 backgroundPositions :: [BackgroundPosition] -> Attribute
-backgroundPositions a = AttrCss $ B.backgroundPositions a
+backgroundPositions = key "background-position"
+
+
+newtype BackgroundSize = BackgroundSize Value
+    deriving (Inherit, Val)
 
 
 backgroundSize :: BackgroundSize -> Attribute

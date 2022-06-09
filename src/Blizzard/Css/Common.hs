@@ -1,17 +1,18 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Common
-    ( All
-    , Auto
-    , Baseline
-    , Center
-    , Hidden
-    , Inherit
-    , Initial
-    , None
-    , Normal
-    , Unset
-    , Visible
+    ( All(..)
+    , Auto(..)
+    , Baseline(..)
+    , Center(..)
+    , Hidden(..)
+    , Inherit(..)
+    , Initial(..)
+    , None(..)
+    , Normal(..)
+    , Other(..)
+    , Unset(..)
+    , Visible(..)
     ) where
 
 

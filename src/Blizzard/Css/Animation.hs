@@ -67,7 +67,7 @@ import Clay.Animation
     , forwards
     , backwards
     )
-import Clay.Time (Time)
+import Blizzard.Css.Time (Time)
 import Clay.Transition (TimingFunction)
 
 import qualified Clay.Animation as A
