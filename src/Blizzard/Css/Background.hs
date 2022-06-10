@@ -84,8 +84,6 @@ import Blizzard.Css.Property (Val, Value, value)
 import Blizzard.Css.Size (Angle, Size)
 import Blizzard.Css.Stylesheet (prop)
 
-import qualified Clay.Background as B
-
 
 class Val a => Background a where
     background :: a -> Attribute

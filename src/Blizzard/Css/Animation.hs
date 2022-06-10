@@ -1,3 +1,6 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
+
 module Blizzard.Css.Animation
     (
     -- animation
@@ -50,27 +53,14 @@ module Blizzard.Css.Animation
 
 import Prelude hiding (reverse)
 
-import Blizzard.Internal (Attribute(..))
-import Clay.Animation
-    ( AnimationDirection
-    , alternate
-    , reverse
-    , alternateReverse
-    , IterationCount
-    , infinite
-    , iterationCount
-    , AnimationName
-    , PlayState
-    , running
-    , paused
-    , FillMode
-    , forwards
-    , backwards
-    )
-import Blizzard.Css.Time (Time)
-import Clay.Transition (TimingFunction)
+import Data.String (IsString)
 
-import qualified Clay.Animation as A
+import Blizzard.Internal (Attribute(..))
+import Blizzard.Css.Common (Inherit, Initial, None, Normal, Other, Unset)
+import Blizzard.Css.Property ((!), Val, Value, value)
+import Blizzard.Css.Stylesheet (prop)
+import Blizzard.Css.Time (Time)
+import Blizzard.Css.Transition (TimingFunction)
 
 
 animation
@@ -82,7 +72,7 @@ animation
     -> AnimationDirection
     -> FillMode
     -> Attribute
-animation a b c d e f g = AttrCss $ A.animation a b c d e f g
+animation a b c d e f g = prop "animation" (a ! b ! c ! d ! e ! f ! g)
 
 
 animations
@@ -95,52 +85,99 @@ animations
          , FillMode
          )
        ] -> Attribute
-animations a = AttrCss $ A.animations a
+animations = prop "animation" . map (\(a, b, c, d, e, f, g) -> value (a ! b ! c ! d ! e ! f ! g))
 
 
 animationDelay :: Time -> Attribute
-animationDelay a = AttrCss $ A.animationDelay a
+animationDelay = prop "animation-delay"
 
 
 animationDelays :: [Time] -> Attribute
-animationDelays a = AttrCss $ A.animationDelays a
+animationDelays = prop "animation-delay"
+
+
+newtype AnimationDirection = AnimationDirection Value
+    deriving (Normal, Other, Val)
 
 
 animationDirection :: AnimationDirection -> Attribute
-animationDirection a = AttrCss $ A.animationDirection a
+animationDirection = prop "animation-direction"
 
 
 animationDirections :: [AnimationDirection] -> Attribute
-animationDirections a = AttrCss $ A.animationDirections a
+animationDirections = prop "animation-direction"
+
+
+alternate, alternateReverse, reverse :: AnimationDirection
+
+alternate        = AnimationDirection "alternate"
+alternateReverse = AnimationDirection "alternate-reverse"
+reverse          = AnimationDirection "reverse"
 
 
 animationDuration :: Time -> Attribute
-animationDuration a = AttrCss $ A.animationDuration a
+animationDuration = prop "animation-duration"
 
 
 animationDurations :: [Time] -> Attribute
-animationDurations a = AttrCss $ A.animationDurations a
+animationDurations = prop "animation-duration"
+
+
+newtype IterationCount = IterationCount Value
+    deriving (Normal, Other, Val)
 
 
 animationIterationCount :: IterationCount -> Attribute
-animationIterationCount a = AttrCss $ A.animationIterationCount a
+animationIterationCount = prop "animation-iteration-count"
 
 
 animationIterationCounts :: [IterationCount] -> Attribute
-animationIterationCounts a = AttrCss $ A.animationIterationCounts a
+animationIterationCounts = prop "animation-iteration-count"
+
+
+infinite :: IterationCount
+infinite = IterationCount "infinite"
+
+
+iterationCount :: Double -> IterationCount
+iterationCount = IterationCount . value
+
+
+newtype AnimationName = AnimationName Value
+    deriving (Inherit, Initial, IsString, Other, Unset, Val)
 
 
 animationName :: AnimationName -> Attribute
-animationName a = AttrCss $ A.animationName a
+animationName = prop "animation-name"
+
+
+newtype PlayState = PlayState Value
+    deriving (Other, Val)
 
 
 animationPlayState :: PlayState -> Attribute
-animationPlayState a = AttrCss $ A.animationPlayState a
+animationPlayState = prop "animation-play-state"
+
+
+paused, running :: PlayState
+
+paused  = PlayState "paused"
+running = PlayState "running"
+
+
+newtype FillMode = FillMode Value
+    deriving (None, Other, Val)
 
 
 animationFillMode :: FillMode -> Attribute
-animationFillMode a = AttrCss $ A.animationFillMode a
+animationFillMode = prop "animation-fill-mode"
+
+
+backwards, forwards :: FillMode
+
+backwards = FillMode "backwards"
+forwards  = FillMode "forwards"
 
 
 animationTimingFunction :: TimingFunction -> Attribute
-animationTimingFunction a = AttrCss $ A.animationTimingFunction a
+animationTimingFunction = prop "animation-timing-function"

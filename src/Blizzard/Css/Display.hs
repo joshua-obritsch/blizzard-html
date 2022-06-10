@@ -16,7 +16,7 @@ module Blizzard.Css.Display
     , static, absolute, fixed, relative, sticky
     , Display
     , display
-    , inline, block, listItem, runIn, inlineBlock, table, displayTable, inlineTable, tableRowGroup
+    , inline, block, listItem, runIn, inlineBlock, displayTable, inlineTable, tableRowGroup
     , tableHeaderGroup, tableFooterGroup, tableRow, tableColumnGroup, tableColumn
     , tableCell, tableCaption, displayNone, displayInherit, flex
     , inlineFlex, grid, inlineGrid
@@ -49,107 +49,206 @@ module Blizzard.Css.Display
     ) where
 
 
-import Blizzard.Internal (Attribute(..))
-import Clay.Common (Auto, Baseline, Inherit, None, baseline)
-import Clay.Display
-    ( FloatStyle
-    , floatLeft
-    , floatRight
-    , Clear
-    , both
-    , clearLeft
-    , clearRight
-    , Position
-    , static, absolute, fixed, relative, sticky
-    , Display
-    , inline, block, listItem, runIn, inlineBlock, table, displayTable, inlineTable, tableRowGroup
-    , tableHeaderGroup, tableFooterGroup, tableRow, tableColumnGroup, tableColumn
-    , tableCell, tableCaption, displayNone, displayInherit, flex
-    , inlineFlex, grid, inlineGrid
-    , Overflow
-    , scroll
-    , Visibility
-    , collapse, separate
-    , Clip
-    , rect
-    , PointerEvents
-    , visiblePainted, visibleFill, visibleStroke, painted
-    , fillEvents, strokeEvents, allEvents
-    )
-import Clay.Property (Val, Value, value)
-import Clay.Stylesheet (key)
+import Data.String (fromString)
 import Data.Text (Text)
 
-import qualified Clay.Display as D
+import Blizzard.Internal (Attribute(..))
+import Blizzard.Css.Common
+    ( Auto
+    , Baseline
+    , Hidden
+    , Inherit
+    , None
+    , Other
+    , Unset
+    , Visible
+    , baseline
+    )
+import Blizzard.Css.Property (Val, Value, value)
+import Blizzard.Css.Size (Size)
+import Blizzard.Css.Stylesheet (prop)
+
+
+newtype FloatStyle = FloatStyle Value
+    deriving (Inherit, None, Val)
 
 
 float :: FloatStyle -> Attribute
-float a = AttrCss $ D.float a
+float = prop "float"
+
+
+floatLeft, floatRight :: FloatStyle
+
+floatLeft  = FloatStyle "left"
+floatRight = FloatStyle "right"
+
+
+newtype Clear = Clear Value
+    deriving (Inherit, None, Other, Val)
 
 
 clear :: Clear -> Attribute
-clear a = AttrCss $ D.clear a
+clear = prop "clear"
+
+
+both, clearLeft, clearRight :: Clear
+
+both       = Clear "both"
+clearLeft  = Clear "left"
+clearRight = Clear "right"
+
+
+newtype Position = Position Value
+    deriving (Inherit, Other, Val)
 
 
 position :: Position -> Attribute
-position a = AttrCss $ D.position a
+position = prop "position"
+
+
+absolute, fixed, relative, static, sticky :: Position
+
+absolute = Position "absolute"
+fixed    = Position "fixed"
+relative = Position "relative"
+static   = Position "static"
+sticky   = Position "sticky"
+
+
+newtype Display = Display Value
+    deriving (Inherit, None, Other, Val)
 
 
 display :: Display -> Attribute
-display a = AttrCss $ D.display a
+display = prop "display"
+
+
+block, displayInherit, displayNone, displayTable, flex, grid
+    , inline, inlineBlock, inlineFlex, inlineGrid, inlineTable
+    , listItem, runIn
+    , tableCaption, tableCell, tableColumn, tableColumnGroup, tableFooterGroup, tableHeaderGroup, tableRow, tableRowGroup :: Display
+
+block            = Display "block"
+displayInherit   = Display "inherit"
+displayNone      = Display "none"
+displayTable     = Display "table"
+flex             = Display "flex"
+grid             = Display "grid"
+inline           = Display "inline"
+inlineBlock      = Display "inline-block"
+inlineFlex       = Display "inline-flex"
+inlineGrid       = Display "inline-grid"
+inlineTable      = Display "inline-table"
+listItem         = Display "list-item"
+runIn            = Display "run-in"
+tableCaption     = Display "table-caption"
+tableCell        = Display "table-cell"
+tableColumn      = Display "table-column"
+tableColumnGroup = Display "table-column-group"
+tableFooterGroup = Display "table-footer-group"
+tableHeaderGroup = Display "table-header-group"
+tableRow         = Display "table-row"
+tableRowGroup    = Display "table-row-group"
+
+
+newtype Overflow = Overflow Value
+    deriving (Auto, Hidden, Inherit, Other, Val, Visible)
 
 
 overflow, overflowX, overflowY :: Overflow -> Attribute
 
-overflow  a = AttrCss $ D.overflow  a
-overflowX a = AttrCss $ D.overflowX a
-overflowY a = AttrCss $ D.overflowY a
+overflow  = prop "overflow"
+overflowX = prop "overflow-x"
+overflowY = prop "overflow-y"
+
+
+scroll :: Overflow
+scroll = Overflow "scroll"
+
+
+newtype Visibility = Visibility Value
+    deriving (Hidden, Inherit, Other, Unset, Val, Visible)
 
 
 visibility :: Visibility -> Attribute
-visibility a = AttrCss $ D.visibility a
+visibility = prop "visibility"
+
+
+collapse, separate :: Visibility
+
+collapse = Visibility "collapse"
+separate = Visibility "separate"
+
+
+newtype Clip = Clip Value
+    deriving (Auto, Inherit, Other, Val)
 
 
 clip :: Clip -> Attribute
-clip a = AttrCss $ D.clip a
+clip = prop "clip"
+
+
+rect :: Size a -> Size a -> Size a -> Size a -> Clip
+rect a b c d = Clip $ mconcat ["rect(", value a, ",", value b, ",", value c, ",", value d, ")"]
 
 
 opacity :: Double -> Attribute
-opacity a = AttrCss $ D.opacity a
+opacity = prop "opacity"
 
 
 zIndex :: Integer -> Attribute
-zIndex a = AttrCss $ D.zIndex a
+zIndex = prop "z-index" . fromString' . show
+  where
+    fromString' :: String -> Value
+    fromString' = fromString
+
+newtype PointerEvents = PointerEvents Value
+    deriving (Auto, Inherit, None, Other, Val, Visible)
 
 
 pointerEvents :: PointerEvents -> Attribute
-pointerEvents a = AttrCss $ D.pointerEvents a
+pointerEvents = prop "pointer-events"
+
+
+allEvents, fillEvents, painted, strokeEvents, visibleFill, visiblePainted, visibleStroke :: PointerEvents
+
+allEvents      = PointerEvents "all"
+fillEvents     = PointerEvents "fill"
+painted        = PointerEvents "painted"
+strokeEvents   = PointerEvents "stroke"
+visibleFill    = PointerEvents "visibleFill"
+visiblePainted = PointerEvents "visiblePainted"
+visibleStroke  = PointerEvents "visibleStroke"
 
 
 class (Val a) => VerticalAlign a where
     verticalAlign :: a -> Attribute
-    verticalAlign a = AttrCss $ key "vertical-align" a
+    verticalAlign = prop "vertical-align"
+
+
+instance VerticalAlign VerticalAlignValue
+instance VerticalAlign (Size a)
 
 
 newtype VerticalAlignValue = VerticalAlignValue Value
-    deriving (Val, Baseline)
+    deriving (Baseline, Val)
 
 
-middle, vAlignSub, vAlignSuper, textTop, textBottom, vAlignTop, vAlignBottom, vAlignBaseline :: VerticalAlignValue
+middle, textBottom, textTop, vAlignBaseline, vAlignBottom, vAlignSub, vAlignSuper, vAlignTop :: VerticalAlignValue
 
 middle = VerticalAlignValue "middle"
-vAlignSub = VerticalAlignValue "sub"
-vAlignBaseline = baseline
-vAlignSuper = VerticalAlignValue "super"
-textTop = VerticalAlignValue "text-top"
 textBottom = VerticalAlignValue "text-bottom"
-vAlignTop = VerticalAlignValue "top"
+textTop = VerticalAlignValue "text-top"
+vAlignBaseline = baseline
 vAlignBottom = VerticalAlignValue "bottom"
+vAlignSub = VerticalAlignValue "sub"
+vAlignSuper = VerticalAlignValue "super"
+vAlignTop = VerticalAlignValue "top"
 
 
 class (Val a) => Cursor a where
     cursor :: a -> Attribute
-    cursor a = AttrCss $ key "cursor" a
+    cursor = prop "cursor"
 
 
 newtype CursorValue a = CursorValue Value

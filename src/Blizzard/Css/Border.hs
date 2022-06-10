@@ -1,3 +1,6 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE OverloadedStrings #-}
+
 module Blizzard.Css.Border
     ( Stroke
     , solid, dotted, dashed, double, wavy, groove, ridge, inset, outset
@@ -19,137 +22,150 @@ module Blizzard.Css.Border
 
 
 import Blizzard.Internal (Attribute(..))
-import Clay.Border
-    ( Stroke
-    , solid, dotted, dashed, double, wavy, groove, ridge, inset, outset
-    )
-import Clay.Color (Color)
-import Clay.Display (Visibility)
-import Clay.Size (LengthUnit, Size)
-import Clay.Stylesheet (Css)
-
-import qualified Clay.Border as B
+import Blizzard.Css.Color (Color)
+import Blizzard.Css.Common (Auto, Inherit, None, Other)
+import Blizzard.Css.Display (Visibility)
+import Blizzard.Css.Size (Length, Size)
+import Blizzard.Css.Property ((!), Val, Value)
+import Blizzard.Css.Stylesheet (prop)
 
 
-border, borderTop, borderLeft, borderBottom, borderRight :: Size LengthUnit -> Stroke -> Color -> Attribute
+newtype Stroke = Stroke Value
+    deriving (Auto, Inherit, None, Other, Val)
 
-border       a b c = AttrCss $ B.border       a b c
-borderTop    a b c = AttrCss $ B.borderTop    a b c
-borderLeft   a b c = AttrCss $ B.borderLeft   a b c
-borderBottom a b c = AttrCss $ B.borderBottom a b c
-borderRight  a b c = AttrCss $ B.borderRight  a b c
+
+dashed, dotted, double, groove, inset, outset, ridge, solid, wavy :: Stroke
+
+dashed = Stroke "dashed"
+dotted = Stroke "dotted"
+double = Stroke "double"
+groove = Stroke "groove"
+inset  = Stroke "inset"
+outset = Stroke "outset"
+ridge  = Stroke "ridge"
+solid  = Stroke "solid"
+wavy   = Stroke "wavy"
+
+
+border, borderBottom, borderLeft, borderRight, borderTop :: Size Length -> Stroke -> Color -> Attribute
+
+border       a b c = prop "border"        (a ! b ! c)
+borderBottom a b c = prop "border-bottom" (a ! b ! c)
+borderLeft   a b c = prop "border-left"   (a ! b ! c)
+borderRight  a b c = prop "border-right"  (a ! b ! c)
+borderTop    a b c = prop "border-top"    (a ! b ! c)
 
 
 borderColor4 :: Color -> Color -> Color -> Color -> Attribute
-borderColor4 a b c d = AttrCss $ B.borderColor4 a b c d
+borderColor4 a b c d = prop "border-color" (a ! b ! c ! d)
 
 
-borderColor, borderLeftColor, borderRightColor, borderTopColor, borderBottomColor :: Color -> Attribute
+borderColor, borderBottomColor, borderLeftColor, borderRightColor, borderTopColor :: Color -> Attribute
 
-borderColor       a = AttrCss $ B.borderColor       a
-borderLeftColor   a = AttrCss $ B.borderLeftColor   a
-borderRightColor  a = AttrCss $ B.borderRightColor  a
-borderTopColor    a = AttrCss $ B.borderTopColor    a
-borderBottomColor a = AttrCss $ B.borderBottomColor a
+borderColor       = prop "border-color"
+borderBottomColor = prop "border-bottom-color"
+borderLeftColor   = prop "border-left-color"
+borderRightColor  = prop "border-right-color"
+borderTopColor    = prop "border-top-color"
 
 
 borderStyle4 :: Stroke -> Stroke -> Stroke -> Stroke -> Attribute
-borderStyle4 a b c d = AttrCss $ B.borderStyle4 a b c d
+borderStyle4 a b c d = prop "border-style" (a ! b ! c ! d)
 
 
-borderStyle, borderLeftStyle, borderRightStyle, borderTopStyle, borderBottomStyle :: Stroke -> Attribute
+borderStyle, borderBottomStyle, borderLeftStyle, borderRightStyle, borderTopStyle :: Stroke -> Attribute
 
-borderStyle       a = AttrCss $ B.borderStyle       a
-borderLeftStyle   a = AttrCss $ B.borderLeftStyle   a
-borderRightStyle  a = AttrCss $ B.borderRightStyle  a
-borderTopStyle    a = AttrCss $ B.borderTopStyle    a
-borderBottomStyle a = AttrCss $ B.borderBottomStyle a
-
-
-borderWidth4 :: Size LengthUnit -> Size LengthUnit -> Size LengthUnit -> Size LengthUnit -> Attribute
-borderWidth4 a b c d = AttrCss $ B.borderWidth4 a b c d
+borderStyle       = prop "border-style"
+borderBottomStyle = prop "border-bottom-style"
+borderLeftStyle   = prop "border-right-style"
+borderRightStyle  = prop "border-right-style"
+borderTopStyle    = prop "border-top-style"
 
 
-borderWidth, borderLeftWidth, borderRightWidth, borderTopWidth, borderBottomWidth :: Size LengthUnit -> Attribute
-
-borderWidth       a = AttrCss $ B.borderWidth       a
-borderLeftWidth   a = AttrCss $ B.borderLeftWidth   a
-borderRightWidth  a = AttrCss $ B.borderRightWidth  a
-borderTopWidth    a = AttrCss $ B.borderTopWidth    a
-borderBottomWidth a = AttrCss $ B.borderBottomWidth a
+borderWidth4 :: Size Length -> Size Length -> Size Length -> Size Length -> Attribute
+borderWidth4 a b c d = prop "border-width" (a ! b ! c ! d)
 
 
-outline, outlineTop, outlineLeft, outlineBottom, outlineRight :: Stroke -> Size LengthUnit -> Color -> Attribute
+borderWidth, borderBottomWidth, borderLeftWidth, borderRightWidth, borderTopWidth :: Size Length -> Attribute
 
-outline        a b c = AttrCss $ B.outline       a b c
-outlineTop     a b c = AttrCss $ B.outlineTop    a b c
-outlineLeft    a b c = AttrCss $ B.outlineLeft   a b c
-outlineBottom  a b c = AttrCss $ B.outlineBottom a b c
-outlineRight   a b c = AttrCss $ B.outlineRight  a b c
+borderWidth       = prop "border-width"
+borderBottomWidth = prop "border-bottom-width"
+borderLeftWidth   = prop "border-left-width"
+borderRightWidth  = prop "border-right-width"
+borderTopWidth    = prop "border-top-width"
+
+
+outline, outlineBottom, outlineLeft, outlineRight, outlineTop :: Stroke -> Size Length -> Color -> Attribute
+
+outline       a b c = prop "outline"        (a ! b ! c)
+outlineBottom a b c = prop "outline-bottom" (a ! b ! c)
+outlineLeft   a b c = prop "outline-left"   (a ! b ! c)
+outlineRight  a b c = prop "outline-right"  (a ! b ! c)
+outlineTop    a b c = prop "outline-top"    (a ! b ! c)
 
 
 outlineColor4 :: Color -> Color -> Color -> Color -> Attribute
-outlineColor4 a b c d = AttrCss $ B.outlineColor4 a b c d
+outlineColor4 a b c d = prop "outline-color" (a ! b ! c ! d)
 
 
-outlineColor, outlineLeftColor, outlineRightColor, outlineTopColor, outlineBottomColor :: Color -> Attribute
+outlineColor, outlineBottomColor, outlineLeftColor, outlineRightColor, outlineTopColor :: Color -> Attribute
 
-outlineColor       a = AttrCss $ B.outlineColor       a
-outlineLeftColor   a = AttrCss $ B.outlineLeftColor   a
-outlineRightColor  a = AttrCss $ B.outlineRightColor  a
-outlineTopColor    a = AttrCss $ B.outlineTopColor    a
-outlineBottomColor a = AttrCss $ B.outlineBottomColor a
+outlineColor       = prop "outline-color"
+outlineBottomColor = prop "outline-bottom-color"
+outlineLeftColor   = prop "outline-left-color"
+outlineRightColor  = prop "outline-right-color"
+outlineTopColor    = prop "outline-top-color"
 
 
 outlineStyle4 :: Stroke -> Stroke -> Stroke -> Stroke -> Attribute
-outlineStyle4 a b c d = AttrCss $ B.outlineStyle4 a b c d
+outlineStyle4 a b c d = prop "outline-style" (a ! b ! c ! d)
 
 
-outlineStyle, outlineLeftStyle, outlineRightStyle, outlineTopStyle, outlineBottomStyle :: Stroke -> Attribute
+outlineStyle, outlineBottomStyle, outlineLeftStyle, outlineRightStyle, outlineTopStyle :: Stroke -> Attribute
 
-outlineStyle       a = AttrCss $ B.outlineStyle       a
-outlineLeftStyle   a = AttrCss $ B.outlineLeftStyle   a
-outlineRightStyle  a = AttrCss $ B.outlineRightStyle  a
-outlineTopStyle    a = AttrCss $ B.outlineTopStyle    a
-outlineBottomStyle a = AttrCss $ B.outlineBottomStyle a
-
-
-outlineWidth4 :: Size LengthUnit -> Size LengthUnit -> Size LengthUnit -> Size LengthUnit -> Attribute
-outlineWidth4 a b c d = AttrCss $ B.outlineWidth4 a b c d
+outlineStyle       = prop "outline-style"
+outlineBottomStyle = prop "outline-bottom-style"
+outlineLeftStyle   = prop "outline-left-style"
+outlineRightStyle  = prop "outline-right-style"
+outlineTopStyle    = prop "outline-top-style"
 
 
-outlineWidth, outlineLeftWidth, outlineRightWidth, outlineTopWidth, outlineBottomWidth :: Size LengthUnit -> Attribute
-
-outlineWidth       a = AttrCss $ B.outlineWidth       a
-outlineLeftWidth   a = AttrCss $ B.outlineLeftWidth   a
-outlineRightWidth  a = AttrCss $ B.outlineRightWidth  a
-outlineTopWidth    a = AttrCss $ B.outlineTopWidth    a
-outlineBottomWidth a = AttrCss $ B.outlineBottomWidth a
+outlineWidth4 :: Size Length -> Size Length -> Size Length -> Size Length -> Attribute
+outlineWidth4 a b c d = prop "outline-width" (a ! b ! c ! d)
 
 
-outlineOffset :: Size LengthUnit -> Attribute
-outlineOffset a = AttrCss $ B.outlineOffset a
+outlineWidth, outlineBottomWidth, outlineLeftWidth, outlineRightWidth, outlineTopWidth :: Size Length -> Attribute
+
+outlineWidth       = prop "outline-width"
+outlineBottomWidth = prop "outline-bottom-width"
+outlineLeftWidth   = prop "outline-left-width"
+outlineRightWidth  = prop "outline-right-width"
+outlineTopWidth    = prop "outline-top-width"
+
+
+outlineOffset :: Size Length -> Attribute
+outlineOffset = prop "outline-offset"
 
 
 borderRadius :: Size a -> Size a -> Size a -> Size a -> Attribute
-borderRadius a b c d = AttrCss $ B.borderRadius a b c d
+borderRadius a b c d = prop "border-radius" (a ! b ! c ! d)
 
 
-borderTopLeftRadius, borderTopRightRadius, borderBottomLeftRadius, borderBottomRightRadius :: Size a -> Size a -> Attribute
+borderBottomLeftRadius, borderBottomRightRadius, borderTopLeftRadius, borderTopRightRadius :: Size a -> Size a -> Attribute
 
-borderTopLeftRadius     a b = AttrCss $ B.borderTopLeftRadius     a b
-borderTopRightRadius    a b = AttrCss $ B.borderTopRightRadius    a b
-borderBottomLeftRadius  a b = AttrCss $ B.borderBottomLeftRadius  a b
-borderBottomRightRadius a b = AttrCss $ B.borderBottomRightRadius a b
+borderBottomLeftRadius  a b = prop "border-bottom-left-radius"  (a ! b)
+borderBottomRightRadius a b = prop "border-bottom-right-radius" (a ! b)
+borderTopLeftRadius     a b = prop "border-top-left-radius"     (a ! b)
+borderTopRightRadius    a b = prop "border-top-right-radius"    (a ! b)
 
 
 borderCollapse :: Visibility -> Attribute
-borderCollapse a = AttrCss $ B.borderCollapse a
+borderCollapse = prop "border-collapse"
 
 
 borderSpacing :: Size a -> Attribute
-borderSpacing a = AttrCss $ B.borderSpacing a
+borderSpacing = prop "border-spacing"
 
 
 borderSpacing2 :: Size a -> Size a -> Attribute
-borderSpacing2 a b = AttrCss $ B.borderSpacing2 a b
+borderSpacing2 a b = prop "border-spacing" (a ! b)
