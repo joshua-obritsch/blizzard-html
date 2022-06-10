@@ -44,6 +44,7 @@ library
                       , Blizzard.Css.List
                       , Blizzard.Css.Mask
                       , Blizzard.Css.Property
+                      , Blizzard.Css.Size
                       , Blizzard.Css.Stylesheet
                       , Blizzard.Css.Time
                       , Blizzard.Css.Transition

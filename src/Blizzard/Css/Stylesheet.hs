@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Stylesheet
-    ( key
+    ( prop
     ) where
 
 
@@ -11,5 +11,5 @@ import Blizzard.Css.Property (Val, Value(..), value)
 import Blizzard.Internal (Attribute(..))
 
 
-key :: Val a => Text -> a -> Attribute
-key k v = Css $ k <> ":" <> unvalue (value v)
+prop :: Val a => Text -> a -> Attribute
+prop k v = Css $ k <> ":" <> unvalue (value v)

@@ -8,7 +8,6 @@ module Blizzard.Css.Time
     ) where
 
 
-import Control.Arrow ((>>>))
 import Data.Text (pack)
 
 import Blizzard.Css.Common (Auto, Inherit, None, Normal)
@@ -35,17 +34,17 @@ instance Fractional Time where
 
 ms :: Double -> Time
 ms
-     =  show
-    >>> pack
-    >>> (<> "ms")
-    >>> value
-    >>> Time
+    = Time
+    . value
+    . (<> "ms")
+    . pack
+    . show
 
 
 s :: Double -> Time
 s
-     =  show
-    >>> pack
-    >>> (<> "s")
-    >>> value
-    >>> Time
+    = Time
+    . value
+    . (<> "s")
+    . pack
+    . show

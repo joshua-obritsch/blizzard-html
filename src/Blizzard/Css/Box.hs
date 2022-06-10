@@ -15,22 +15,29 @@ module Blizzard.Css.Box
 
 
 import Blizzard.Internal (Attribute(..))
-import Clay.Box
-    ( BoxType
-    , paddingBox, borderBox, contentBox
-    )
-import Clay.Color (Color)
-import Clay.Common (Inherit, Initial, None, Other, Unset, browsers)
-import Clay.Property ((!), Val, Value, value)
-import Clay.Size (Size)
-import Clay.Stylesheet (prefixed)
+import Blizzard.Css.Color (Color)
+import Blizzard.Css.Common (Inherit, Initial, None, Other, Unset)
+import Blizzard.Css.Property ((!), Val, Value, value)
+import Blizzard.Css.Size (Size)
+import Blizzard.Css.Stylesheet (prop)
 import Data.List.NonEmpty (NonEmpty)
 
 import qualified Clay.Box as B
 
 
+newtype BoxType = BoxType Value
+    deriving (Inherit, Val)
+
+
+borderBox, contentBox, paddingBox :: BoxType
+
+borderBox  = BoxType "border-box"
+contentBox = BoxType "content-box"
+paddingBox = BoxType "padding-box"
+
+
 boxSizing :: BoxType -> Attribute
-boxSizing a = AttrCss $ B.boxSizing a
+boxSizing = prop "box-sizing"
 
 
 newtype BoxShadow = BoxShadow Value
@@ -38,7 +45,7 @@ newtype BoxShadow = BoxShadow Value
 
 
 boxShadow :: NonEmpty BoxShadow -> Attribute
-boxShadow a = AttrCss $ prefixed (browsers <> "box-shadow") . value $ a
+boxShadow = prop "box-shadow" . value
 
 
 shadow :: Size a -> Size a -> BoxShadow

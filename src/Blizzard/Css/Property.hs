@@ -2,24 +2,31 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Property
-    ( Val(..)
+    ( (!)
+    , Val(..)
     , Value(..)
+    , fromDouble
     ) where
 
 
-import Control.Arrow (second)
-import Data.List (partition, sort)
-import Data.Maybe (fromMaybe)
+import Data.Fixed (Fixed, HasResolution(..), showFixed)
+import Data.List.NonEmpty (NonEmpty, toList)
 import Data.String (IsString, fromString)
 import Data.Text (Text, replace)
 
 
-quote :: Text -> Text
-quote t = "\"" <> replace "\"" "\\\"" t <> "\""
+data E5 = E5
+
+
+instance HasResolution E5 where resolution _ = 100000
 
 
 newtype Value = Value { unvalue :: Text }
     deriving (Eq, IsString, Monoid, Semigroup, Show)
+
+
+newtype Literal = Literal Text
+    deriving (IsString, Monoid, Semigroup, Show)
 
 
 class Val a where
@@ -34,16 +41,8 @@ instance Val Value where
     value = id
 
 
-newtype Literal = Literal Text
-    deriving (IsString, Monoid, Semigroup, Show)
-
-
 instance Val Literal where
-    value (Literal t) = Value . quote $ t
-
-
-instance Val Integer where
-    value = fromString . show
+    value (Literal a) = Value . quote $ a
 
 
 instance Val Int where
@@ -54,6 +53,39 @@ instance Val a => Val [a] where
     value = intercalate "," . map value
 
 
+instance Val Double where
+    value = Value . fromDouble
+
+
+instance Val a => Val (Maybe a) where
+    value Nothing  = ""
+    value (Just a) = value a
+
+
+instance (Val a, Val b) => Val (a, b) where
+    value (a, b) = value a <> " " <> value b
+
+
+instance Val a => Val (NonEmpty a) where
+    value = value . toList
+
+
+infixr !
+(!) :: a -> b -> (a, b)
+(!) = (,)
+
+
+fromDouble :: Double -> Text
+fromDouble = fromString . showFixed' . realToFrac
+  where
+    showFixed' :: Fixed E5 -> String
+    showFixed' = showFixed True
+
+
 intercalate :: Monoid a => a -> [a] -> a
 intercalate _ []     = mempty
 intercalate s (x:xs) = foldl (\a b -> a `mappend` s `mappend` b) x xs
+
+
+quote :: Text -> Text
+quote t = "\"" <> replace "\"" "\\\"" t <> "\""
