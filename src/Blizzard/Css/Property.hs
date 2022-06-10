@@ -6,6 +6,7 @@ module Blizzard.Css.Property
     , Val(..)
     , Value(..)
     , fromDouble
+    , noCommas
     ) where
 
 
@@ -85,6 +86,10 @@ fromDouble = fromString . showFixed' . realToFrac
 intercalate :: Monoid a => a -> [a] -> a
 intercalate _ []     = mempty
 intercalate s (x:xs) = foldl (\a b -> a `mappend` s `mappend` b) x xs
+
+
+noCommas :: Val a => [a] -> Value
+noCommas = intercalate " " . map value
 
 
 quote :: Text -> Text
