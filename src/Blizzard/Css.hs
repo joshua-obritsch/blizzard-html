@@ -14,7 +14,9 @@ module Blizzard.Css
     , module Blizzard.Css.Geometry
     , module Blizzard.Css.List
     , module Blizzard.Css.Mask
+    , module Blizzard.Css.Property
     , module Blizzard.Css.Size
+    , module Blizzard.Css.Stylesheet
     , module Blizzard.Css.Time
     , module Blizzard.Css.Transition
     ) where
@@ -35,6 +37,8 @@ import Blizzard.Css.FontFace
 import Blizzard.Css.Geometry
 import Blizzard.Css.List
 import Blizzard.Css.Mask hiding (clear)
+import Blizzard.Css.Property
 import Blizzard.Css.Size hiding (double)
+import Blizzard.Css.Stylesheet
 import Blizzard.Css.Time
 import Blizzard.Css.Transition

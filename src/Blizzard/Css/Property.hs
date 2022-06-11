@@ -57,7 +57,7 @@ instance Val a => Val [a] where
 
 
 instance Val Double where
-    value = Value . fromDouble
+    value = Value . fromString . show
 
 
 instance Val a => Val (Maybe a) where

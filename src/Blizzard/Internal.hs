@@ -27,6 +27,11 @@ data Attribute
     | AttrRaw Text Text
 
 
+instance Show Attribute where
+    show (Css css) = show css
+    show (AttrRaw a b) = ""
+
+
 -- PUBLIC FUNCTIONS
 
 
