@@ -1,3 +1,4 @@
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Mask
@@ -27,7 +28,7 @@ module Blizzard.Css.Mask
 
 
 import Blizzard.Internal (Attribute(..))
-import Clay.Background
+import Blizzard.Css.Background
     ( BackgroundPosition
     , BackgroundSize
     , BackgroundRepeat
@@ -36,25 +37,14 @@ import Clay.Background
     , BackgroundAttachment
     , BackgroundImage
     )
-import Clay.Common (browsers)
-import Clay.Mask
-    ( MaskComposite
-    , clear, copy
-    , sourceOver, sourceIn, sourceOut, sourceAtop
-    , destinationOver, destinationIn, destinationOut, destinationAtop
-    , xor
-    )
-import Clay.Property (Prefixed, Val)
-import Clay.Stylesheet (prefixed)
-
-
-pkey :: Val a => Prefixed -> a -> Attribute
-pkey k a = AttrCss $ prefixed (browsers <> k) a
+import Blizzard.Css.Common (Inherit, None, Other(..))
+import Blizzard.Css.Property (Val, Value)
+import Blizzard.Css.Stylesheet (prop)
 
 
 class Val a => Mask a where
     mask :: a -> Attribute
-    mask = pkey "mask"
+    mask = prop "mask"
 
 
 instance Mask a => Mask [a]
@@ -70,65 +60,87 @@ instance Mask BackgroundAttachment
 instance Mask BackgroundImage
 
 
+newtype MaskComposite = MaskComposite Value
+    deriving (Inherit, None, Other, Val)
+
+
 maskComposite :: MaskComposite -> Attribute
-maskComposite = pkey "mask-composite"
+maskComposite = prop "mask-composite"
 
 
 maskComposites :: [MaskComposite] -> Attribute
-maskComposites = pkey "mask-composite"
+maskComposites = prop "mask-composite"
+
+
+clear, copy
+    , sourceOver, sourceIn, sourceOut, sourceAtop
+    , destinationOver, destinationIn, destinationOut, destinationAtop
+    , xor :: MaskComposite
+
+clear           = other "clear"
+copy            = other "copy"
+sourceOver      = other "source-over"
+sourceIn        = other "source-in"
+sourceOut       = other "source-out"
+sourceAtop      = other "source-atop"
+destinationOver = other "destination-over"
+destinationIn   = other "destination-in"
+destinationOut  = other "destination-out"
+destinationAtop = other "destination-atop"
+xor             = other "xor"
 
 
 maskPosition :: BackgroundPosition -> Attribute
-maskPosition = pkey "mask-position"
+maskPosition = prop "mask-position"
 
 
 maskPositions :: [BackgroundPosition] -> Attribute
-maskPositions = pkey "mask-position"
+maskPositions = prop "mask-position"
 
 
 maskSize :: BackgroundSize -> Attribute
-maskSize = pkey "mask-size"
+maskSize = prop "mask-size"
 
 
 maskSizes :: [BackgroundSize] -> Attribute
-maskSizes = pkey "mask-size"
+maskSizes = prop "mask-size"
 
 
 maskRepeat :: BackgroundRepeat -> Attribute
-maskRepeat = pkey "mask-repeat"
+maskRepeat = prop "mask-repeat"
 
 
 maskRepeats :: [BackgroundRepeat] -> Attribute
-maskRepeats = pkey "mask-repeat"
+maskRepeats = prop "mask-repeat"
 
 
 maskImage :: BackgroundImage -> Attribute
-maskImage = pkey "mask-image"
+maskImage = prop "mask-image"
 
 
 maskImages :: [BackgroundImage] -> Attribute
-maskImages = pkey "mask-image"
+maskImages = prop "mask-image"
 
 
 maskOrigin :: BackgroundOrigin -> Attribute
-maskOrigin = pkey "mask-origin"
+maskOrigin = prop "mask-origin"
 
 
 maskOrigins :: [BackgroundOrigin] -> Attribute
-maskOrigins = pkey "mask-origin"
+maskOrigins = prop "mask-origin"
 
 
 maskClip :: BackgroundClip -> Attribute
-maskClip = pkey "mask-clip"
+maskClip = prop "mask-clip"
 
 
 maskClips :: [BackgroundClip] -> Attribute
-maskClips = pkey "mask-clip"
+maskClips = prop "mask-clip"
 
 
 maskAttachment :: BackgroundAttachment -> Attribute
-maskAttachment = pkey "mask-attachment"
+maskAttachment = prop "mask-attachment"
 
 
 maskAttachments :: [BackgroundAttachment] -> Attribute
-maskAttachments = pkey "mask-attachment"
+maskAttachments = prop "mask-attachment"
