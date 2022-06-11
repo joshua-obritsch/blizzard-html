@@ -1,3 +1,5 @@
+{-# LANGUAGE OverloadedStrings #-}
+
 module Blizzard.Css.Geometry
     ( size, top, left, bottom, right
     , width, height, minWidth, minHeight, maxWidth, maxHeight
@@ -9,49 +11,49 @@ module Blizzard.Css.Geometry
 
 
 import Blizzard.Internal (Attribute(..))
-import Clay.Size (Size)
+import Blizzard.Css.Property ((!))
+import Blizzard.Css.Size (Size)
+import Blizzard.Css.Stylesheet (prop)
 
-import qualified Clay.Geometry as G
 
+size, bottom, left, right, top :: Size a -> Attribute
 
-size, top, left, bottom, right :: Size a -> Attribute
-
-size   a = AttrCss $ G.size   a
-top    a = AttrCss $ G.top    a
-left   a = AttrCss $ G.left   a
-bottom a = AttrCss $ G.bottom a
-right  a = AttrCss $ G.right  a
+size   = prop "size"
+bottom = prop "bottom"
+left   = prop "left"
+right  = prop "right"
+top    = prop "top"
 
 
 width, height, minWidth, minHeight, maxWidth, maxHeight :: Size a -> Attribute
 
-width     a = AttrCss $ G.width     a
-height    a = AttrCss $ G.height    a
-minWidth  a = AttrCss $ G.minWidth  a
-minHeight a = AttrCss $ G.minHeight a
-maxWidth  a = AttrCss $ G.maxWidth  a
-maxHeight a = AttrCss $ G.maxHeight a
+width     = prop "width"
+height    = prop "height"
+minWidth  = prop "min-width"
+minHeight = prop "min-height"
+maxWidth  = prop "max-width"
+maxHeight = prop "max-height"
 
 
 padding :: Size a -> Size a -> Size a -> Size a -> Attribute
-padding a b c d = AttrCss $ G.padding a b c d
+padding a b c d = prop "padding" (a ! b ! c ! d)
 
 
-paddingTop, paddingLeft, paddingRight, paddingBottom :: Size a -> Attribute
+paddingBottom, paddingLeft, paddingRight, paddingTop :: Size a -> Attribute
 
-paddingTop    a = AttrCss $ G.paddingTop    a
-paddingLeft   a = AttrCss $ G.paddingLeft   a
-paddingRight  a = AttrCss $ G.paddingRight  a
-paddingBottom a = AttrCss $ G.paddingBottom a
+paddingBottom = prop "padding-bottom"
+paddingLeft   = prop "padding-left"
+paddingRight  = prop "padding-right"
+paddingTop    = prop "padding-top"
 
 
 margin :: Size a -> Size a -> Size a -> Size a -> Attribute
-margin a b c d = AttrCss $ G.margin a b c d
+margin a b c d = prop "margin" (a ! b ! c ! d)
 
 
-marginTop, marginLeft, marginRight, marginBottom :: Size a -> Attribute
+marginBottom, marginLeft, marginRight, marginTop :: Size a -> Attribute
 
-marginTop    a = AttrCss $ G.marginTop    a
-marginLeft   a = AttrCss $ G.marginLeft   a
-marginRight  a = AttrCss $ G.marginRight  a
-marginBottom a = AttrCss $ G.marginBottom a
+marginBottom = prop "margin-bottom"
+marginLeft   = prop "margin-left"
+marginRight  = prop "margin-right"
+marginTop    = prop "margin-top"

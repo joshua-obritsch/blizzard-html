@@ -13,8 +13,11 @@ module Blizzard.Css.Common
     , Other(..)
     , Unset(..)
     , Visible(..)
+    , call
     ) where
 
+
+import Data.String (IsString)
 
 import Blizzard.Css.Property (Value)
 
@@ -45,3 +48,7 @@ instance Normal   Value where normal   = "normal"
 instance Other    Value where other    = id
 instance Unset    Value where unset    = "unset"
 instance Visible  Value where visible  = "visible"
+
+
+call :: (IsString a, Monoid a) => a -> a -> a
+call a b = a <> "(" <> b <> ")"

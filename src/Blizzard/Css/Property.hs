@@ -3,10 +3,12 @@
 
 module Blizzard.Css.Property
     ( (!)
+    , Literal(..)
     , Val(..)
     , Value(..)
     , fromDouble
     , noCommas
+    , quote
     ) where
 
 
