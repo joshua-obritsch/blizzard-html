@@ -8,7 +8,6 @@ module Blizzard.Css.Display
     , floatRight
     , Clear
     , clear
-    , both
     , clearLeft
     , clearRight
     , Position
@@ -56,6 +55,7 @@ import Blizzard.Internal (Attribute(..))
 import Blizzard.Css.Common
     ( Auto
     , Baseline
+    , Both
     , Hidden
     , Inherit
     , None
@@ -84,16 +84,15 @@ floatRight = FloatStyle "right"
 
 
 newtype Clear = Clear Value
-    deriving (Inherit, None, Other, Val)
+    deriving (Both, Inherit, None, Other, Val)
 
 
 clear :: Clear -> Attribute
 clear = prop "clear"
 
 
-both, clearLeft, clearRight :: Clear
+clearLeft, clearRight :: Clear
 
-both       = Clear "both"
 clearLeft  = Clear "left"
 clearRight = Clear "right"
 

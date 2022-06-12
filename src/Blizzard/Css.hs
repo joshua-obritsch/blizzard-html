@@ -17,8 +17,9 @@ module Blizzard.Css
     , module Blizzard.Css.Property
     , module Blizzard.Css.Size
     , module Blizzard.Css.Stylesheet
-    , module Blizzard.Css.Time
     , module Blizzard.Css.Transition
+    , module Blizzard.Internal.Css.Time
+    , module Blizzard.Internal.Css.TimingFunction
     ) where
 
 
@@ -40,5 +41,6 @@ import Blizzard.Css.Mask hiding (clear)
 import Blizzard.Css.Property
 import Blizzard.Css.Size hiding (double)
 import Blizzard.Css.Stylesheet
-import Blizzard.Css.Time
 import Blizzard.Css.Transition
+import Blizzard.Internal.Css.Time
+import Blizzard.Internal.Css.TimingFunction

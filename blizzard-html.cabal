@@ -46,9 +46,11 @@ library
                       , Blizzard.Css.Property
                       , Blizzard.Css.Size
                       , Blizzard.Css.Stylesheet
-                      , Blizzard.Css.Time
                       , Blizzard.Css.Transition
                       , Blizzard.Html
                       , Blizzard.Html.Attributes
+                      , Blizzard.Internal.Css.Time
+                      , Blizzard.Internal.Css.TimingFunction
     other-modules:      Blizzard.Internal
+                      , Blizzard.Internal.Warning
     hs-source-dirs:     src

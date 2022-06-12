@@ -1,7 +1,7 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
 
-module Blizzard.Css.Time
+module Blizzard.Internal.Css.Time
     ( Time
     , ms
     , sec
@@ -11,11 +11,10 @@ module Blizzard.Css.Time
 import Data.Text (pack)
 
 import Blizzard.Css.Common
-    ( Auto
-    , Inherit
+    ( Inherit
     , Initial
-    , None
-    , Normal
+    , Revert
+    , RevertLayer
     , Unset
     )
 import Blizzard.Css.Property (Val(..), Value)
@@ -23,11 +22,10 @@ import Blizzard.Css.Property (Val(..), Value)
 
 newtype Time = Time Value
     deriving
-        ( Auto
-        , Inherit
+        ( Inherit
         , Initial
-        , None
-        , Normal
+        , Revert
+        , RevertLayer
         , Unset
         , Val
         )
@@ -47,7 +45,7 @@ instance Fractional Time where
     recip        = error "recip not implemented for Time"
 
 
-ms :: Double -> Time
+ms :: (Num a, Show a) => a -> Time
 ms
     = Time
     . value
@@ -56,7 +54,7 @@ ms
     . show
 
 
-sec :: Double -> Time
+sec :: (Num a, Show a) => a -> Time
 sec
     = Time
     . value
