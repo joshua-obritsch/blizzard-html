@@ -12,7 +12,7 @@ module Blizzard.Css.Display
     , clearRight
     , Position
     , position
-    , static, absolute, fixed, relative, sticky
+    , static, absolute, relative, sticky
     , Display
     , display
     , inline, block, listItem, runIn, inlineBlock, displayTable, inlineTable, tableRowGroup
@@ -21,7 +21,6 @@ module Blizzard.Css.Display
     , inlineFlex, grid, inlineGrid
     , Overflow
     , overflow, overflowX, overflowY
-    , scroll
     , Visibility
     , visibility
     , collapse, separate
@@ -56,10 +55,12 @@ import Blizzard.Css.Common
     ( Auto
     , Baseline
     , Both
+    , Fixed
     , Hidden
     , Inherit
     , None
     , Other
+    , Scroll
     , Unset
     , Visible
     , baseline
@@ -98,17 +99,21 @@ clearRight = Clear "right"
 
 
 newtype Position = Position Value
-    deriving (Inherit, Other, Val)
+    deriving
+        ( Fixed
+        , Inherit
+        , Other
+        , Val
+        )
 
 
 position :: Position -> Attribute
 position = prop "position"
 
 
-absolute, fixed, relative, static, sticky :: Position
+absolute, relative, static, sticky :: Position
 
 absolute = Position "absolute"
-fixed    = Position "fixed"
 relative = Position "relative"
 static   = Position "static"
 sticky   = Position "sticky"
@@ -151,7 +156,15 @@ tableRowGroup    = Display "table-row-group"
 
 
 newtype Overflow = Overflow Value
-    deriving (Auto, Hidden, Inherit, Other, Val, Visible)
+    deriving
+        ( Auto
+        , Hidden
+        , Inherit
+        , Other
+        , Scroll
+        , Val
+        , Visible
+        )
 
 
 overflow, overflowX, overflowY :: Overflow -> Attribute
@@ -159,10 +172,6 @@ overflow, overflowX, overflowY :: Overflow -> Attribute
 overflow  = prop "overflow"
 overflowX = prop "overflow-x"
 overflowY = prop "overflow-y"
-
-
-scroll :: Overflow
-scroll = Overflow "scroll"
 
 
 newtype Visibility = Visibility Value

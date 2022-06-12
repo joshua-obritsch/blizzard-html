@@ -31,10 +31,10 @@ data Color
 
 instance Val Color where
     value = \case
-        Rgba  r g b 1.0 -> value $ mconcat ["#",     h r,      h g,      h b                ]
-        Rgba  r g b a   -> value $ mconcat ["rgba(", t r, ",", t g, ",", t b, ",", o a, ")" ]
-        Hsla  h s l 1.0 -> value $ mconcat ["hsl(",  t h, ",", p s, ",", p l,            ")"]
-        Hsla  h s l a   -> value $ mconcat ["hsla(", t h, ",", p s, ",", p l, ",", o a, ")" ]
+        Rgba  r g b 1.0 -> value $ mconcat ["#",     h r,      h g,      h b               ]
+        Rgba  r g b a   -> value $ mconcat ["rgba(", t r, ",", t g, ",", t b, ",", o a, ")"]
+        Hsla  h s l 1.0 -> value $ mconcat ["hsl(",  t h, ",", p s, ",", p l,           ")"]
+        Hsla  h s l a   -> value $ mconcat ["hsla(", t h, ",", p s, ",", p l, ",", o a, ")"]
         Other other     -> other
       where
         h = pack . printf "%02x"   -- hexadecimal

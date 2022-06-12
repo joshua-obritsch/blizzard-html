@@ -6,6 +6,12 @@ module Blizzard.Css.Animation
 
       -- | __Functions__
       animation
+    , animation2
+    , animation3
+    , animation4
+    , animation5
+    , animation6
+    , animation7
     , animations
 
       -- * animation-delay
@@ -104,13 +110,89 @@ import Blizzard.Internal.Warning (warning)
 
 -- | Corresponds to the CSS property __animation__.
 --
--- Specifies all properties on an animation except __animation-play-state__.
+-- __Examples:__
+--
+-- >>> animation "fade-in"
+-- "animation:fade-in
+animation :: AnimationName -> Attribute
+animation = prop "animation"
+
+
+-- | Corresponds to the CSS property __animation__.
 --
 -- __Examples:__
 --
--- >>> animation "fade-in" (ms 500) ease (ms 250) 2 alternate forwards
--- "animation:fade-in 500ms ease 250ms 2 alternate forwards"
-animation
+-- >>> animation2 "fade-in" (ms 500)
+-- "animation:fade-in 500ms
+animation2 :: AnimationName -> Time -> Attribute
+animation2 a b = prop "animation" (a ! b)
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animation3 "fade-in" (ms 500) ease
+-- "animation:fade-in 500ms ease
+animation3 :: AnimationName -> Time -> TimingFunction -> Attribute
+animation3 a b c = prop "animation" (a ! b ! c)
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animation4 "fade-in" (ms 500) ease (ms 250)
+-- "animation:fade-in 500ms ease 250ms
+animation4
+    :: AnimationName
+    -> Time
+    -> TimingFunction
+    -> Time
+    -> Attribute
+animation4 a b c d = prop "animation" (a ! b ! c ! d)
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animation5 "fade-in" (ms 500) ease (ms 250) 2
+-- "animation:fade-in 500ms ease 250ms 2
+animation5
+    :: AnimationName
+    -> Time
+    -> TimingFunction
+    -> Time
+    -> AnimationIterationCount
+    -> Attribute
+animation5 a b c d e = prop "animation" (a ! b ! c ! d ! e)
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animation6 "fade-in" (ms 500) ease (ms 250) 2 alternate
+-- "animation:fade-in 500ms ease 250ms 2 alternate
+animation6
+    :: AnimationName
+    -> Time
+    -> TimingFunction
+    -> Time
+    -> AnimationIterationCount
+    -> AnimationDirection
+    -> Attribute
+animation6 a b c d e f = prop "animation" (a ! b ! c ! d ! e ! f)
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animation7 "fade-in" (ms 500) ease (ms 250) 2 alternate forwards
+-- "animation:fade-in 500ms ease 250ms 2 alternate forwards
+animation7
     :: AnimationName
     -> Time
     -> TimingFunction
@@ -119,16 +201,19 @@ animation
     -> AnimationDirection
     -> AnimationFillMode
     -> Attribute
-animation a b c d e f g = prop "animation" (a ! b ! c ! d ! e ! f ! g)
+animation7 a b c d e f g = prop "animation" (a ! b ! c ! d ! e ! f ! g)
 
 
 -- | Corresponds to the CSS property __animation__.
 --
--- Specifies all properties on a list of animations except __animation-play-state__.
---
 -- __Examples:__
 --
--- >>> animations [ ("fade-in", ms 500, ease, ms 250, 3, normal, forwards), ("fade-out", ms 350, linear, ms 750, 1, alternate, backwards) ]
+-- >>> :{
+--     animations
+--         [ ("fade-in", ms 500, ease, ms 250, 3, normal, forwards)
+--         , ("fade-out", ms 350, linear, ms 750, 1, alternate, backwards)
+--         ]
+-- :}
 -- "animation:fade-in 500ms ease 250ms 3 normal forwards,fade-out 350ms linear 750ms 1 alternate backwards"
 animations
     :: [ ( AnimationName
@@ -145,8 +230,6 @@ animations = prop "animation" . map (\(a, b, c, d, e, f, g) -> value (a ! b ! c 
 
 -- | Corresponds to the CSS property __animation-delay__.
 --
--- Specifies a delay after which the animation will start.
---
 -- __Examples:__
 --
 -- >>> animationDelay (ms 500)
@@ -156,8 +239,6 @@ animationDelay = prop "animation-delay"
 
 
 -- | Corresponds to the CSS property __animation-delay__.
---
--- Specifies a list of delays after which the animations will start.
 --
 -- __Examples:__
 --
@@ -176,7 +257,7 @@ animationDelaysWarning = warning [sec 0]
 
 -- | Encompasses any value accepted by the CSS property __animation-direction__.
 --
--- Accepted values are:
+-- Accepted values:
 --
 -- +------------------+-------------------+
 -- | Input            | Output            |
@@ -210,8 +291,6 @@ reverse          = AnimationDirection "reverse"
 
 -- | Corresponds to the CSS property __animation-direction__.
 --
--- Specifies a direction through which the animation will cycle.
---
 -- __Examples:__
 --
 -- >>> animationDirection reverse
@@ -221,8 +300,6 @@ animationDirection = prop "animation-direction"
 
 
 -- | Corresponds to the CSS property __animation-direction__.
---
--- Specifies a list of directions through which the animations will cycle.
 --
 -- __Examples:__
 --
@@ -241,8 +318,6 @@ animationDirectionsWarning = warning [normal]
 
 -- | Corresponds to the CSS property __animation-duration__.
 --
--- Specifies a duration to complete one cycle for the animation.
---
 -- __Examples:__
 --
 -- >>> animationDuration (sec 3)
@@ -252,8 +327,6 @@ animationDuration = prop "animation-duration"
 
 
 -- | Corresponds to the CSS property __animation-duration__.
---
--- Specifies a list of durations to complete one cycle for the animations.
 --
 -- __Examples:__
 --
@@ -272,7 +345,7 @@ animationDurationsWarning = warning [sec 0]
 
 -- | Encompasses any value accepted by the CSS property __animation-fill-mode__.
 --
--- Accepted values are:
+-- Accepted values:
 --
 -- +-----------+-----------+
 -- | Input     | Output    |
@@ -306,8 +379,6 @@ forwards  = AnimationFillMode "forwards"
 
 -- | Corresponds to the CSS property __animation-fill-mode__.
 --
--- Specifies the way in which styles are applied to the animation.
---
 -- __Examples:__
 --
 -- >>> animationFillMode backwards
@@ -317,8 +388,6 @@ animationFillMode = prop "animation-fill-mode"
 
 
 -- | Corresponds to the CSS property __animation-fill-mode__.
---
--- Specifies a list of ways in which styles are applied to the animations.
 --
 -- __Examples:__
 --
@@ -337,7 +406,7 @@ animationFillModesWarning = warning [none]
 
 -- | Encompasses any value accepted by the CSS property __animation-iteration-count__.
 --
--- Accepted values are:
+-- Accepted values:
 --
 -- +------------+------------+
 -- | Input      | Output     |
@@ -385,8 +454,6 @@ infinite = AnimationIterationCount "infinite"
 
 -- | Corresponds to the CSS property __animation-iteration-count__.
 --
--- Specifies the number of times the animation will play.
---
 -- __Examples:__
 --
 -- >>> animationIterationCount 5
@@ -396,8 +463,6 @@ animationIterationCount = prop "animation-iteration-count"
 
 
 -- | Corresponds to the CSS property __animation-iteration-count__.
---
--- Specifies a list of the number of times the animations will play.
 --
 -- __Examples:__
 --
@@ -416,7 +481,7 @@ animationIterationCountsWarning = warning [1]
 
 -- | Encompasses any value accepted by the CSS property __animation-name__.
 --
--- Accepted values are:
+-- Accepted values:
 --
 -- +----------------+----------------+
 -- | Input          | Output         |
@@ -440,8 +505,6 @@ newtype AnimationName = AnimationName Value
 
 -- | Corresponds to the CSS property __animation-name__.
 --
--- Specifies the name of the animation.
---
 -- __Examples:__
 --
 -- >>> animationName "fade-in"
@@ -451,8 +514,6 @@ animationName = prop "animation-name"
 
 
 -- | Corresponds to the CSS property __animation-name__.
---
--- Specifies a list of names of the animations.
 --
 -- __Examples:__
 --
@@ -471,7 +532,7 @@ animationNamesWarning = warning [none]
 
 -- | Encompasses any value accepted by the CSS property __animation-play-state__.
 --
--- Accepted values are:
+-- Accepted values:
 --
 -- +---------+---------+
 -- | Input   | Output  |
@@ -499,8 +560,6 @@ running = AnimationPlayState "running"
 
 -- | Corresponds to the CSS property __animation-play-state__.
 --
--- Specifies the play state of the animation.
---
 -- __Examples:__
 --
 -- >>> animationPlayState running
@@ -510,8 +569,6 @@ animationPlayState = prop "animation-play-state"
 
 
 -- | Corresponds to the CSS property __animation-play-state__.
---
--- Specifies a list of play states of the animations.
 --
 -- __Examples:__
 --
@@ -530,8 +587,6 @@ animationPlayStatesWarning = warning [running]
 
 -- | Corresponds to the CSS property __animation-timing-function__.
 --
--- Specifies the timing function of the animation.
---
 -- __Examples:__
 --
 -- >>> animationTimingFunction easeIn
@@ -541,8 +596,6 @@ animationTimingFunction = prop "animation-timing-function"
 
 
 -- | Corresponds to the CSS property __animation-timing-function__.
---
--- Specifies a list of timing functions of the animations.
 --
 -- __Examples:__
 --

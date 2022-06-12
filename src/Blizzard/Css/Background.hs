@@ -2,34 +2,43 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Background
-    (
-    -- background
+    ( -- * background
       Background(..)
 
-    -- background-attachment
+      -- * background-attachment
     , BackgroundAttachment
+
+      -- __Constants__
+    , local
+
+      -- __Functions__
     , backgroundAttachment
     , backgroundAttachments
-    , attachFixed, attachScroll
 
-    -- background-color
+      -- * background-color
+
+      -- __Functions__
     , backgroundColor
 
-    -- background-position
+      -- * background-position
     , BackgroundPosition
-    , backgroundPosition
-    , backgroundPositions
+
+      -- __Constants__
     , placed
     , positioned
 
-    -- background-size
+      -- __Functions__
+    , backgroundPosition
+    , backgroundPositions
+
+      -- * background-size
     , BackgroundSize
     , backgroundSize
     , backgroundSizes
     , contain, cover
     , by
 
-    -- background-repeat
+      -- * background-repeat
     , BackgroundRepeat
     , backgroundRepeat
     , backgroundRepeats
@@ -37,19 +46,19 @@ module Blizzard.Css.Background
     , repeatX, repeatY
     , repeatXy
 
-    -- background-origin
+      -- * background-origin
     , BackgroundOrigin
     , backgroundOrigin
     , backgroundOrigins
     , origin
 
-    -- background-clip
+      -- * background-clip
     , BackgroundClip
     , backgroundClip
     , backgroundClips
     , boxClip
 
-    -- background-image
+      -- * background-image
     , BackgroundImage
     , backgroundImage
     , backgroundImages
@@ -79,7 +88,17 @@ import Data.Text (Text)
 import Blizzard.Internal (Attribute(..))
 import Blizzard.Css.Box (BoxType)
 import Blizzard.Css.Color (Color)
-import Blizzard.Css.Common (Inherit, None, Other)
+import Blizzard.Css.Common
+    ( Fixed
+    , Inherit
+    , Initial
+    , None
+    , Other
+    , Revert
+    , RevertLayer
+    , Scroll
+    , Unset
+    )
 import Blizzard.Css.Property (Val, Value, value)
 import Blizzard.Css.Size (Angle, Size)
 import Blizzard.Css.Stylesheet (prop)
@@ -103,12 +122,84 @@ instance Background BackgroundAttachment
 instance Background BackgroundImage
 
 
+-- | Encompasses any value accepted by the CSS property __background-attachment__.
+--
+-- Accepted values:
+--
+-- +--------+--------+
+-- | Input  | Output |
+-- +========+========+
+-- | fixed  | fixed  |
+-- +--------+--------+
+-- | local  | local  |
+-- +--------+--------+
+-- | scroll | scroll |
+-- +--------+--------+
+newtype BackgroundAttachment = BackgroundAttachment Value
+    deriving
+        ( Fixed
+        , Inherit
+        , Initial
+        , Revert
+        , RevertLayer
+        , Scroll
+        , Unset
+        , Val
+        )
+
+
+local :: BackgroundAttachment
+local = BackgroundAttachment "local"
+
+
+-- | Corresponds to the CSS property __background-attachment__.
+--
+-- __Examples:__
+--
+-- >>> backgroundAttachment fixed
+-- "background-attachment:fixed"
+backgroundAttachment :: BackgroundAttachment -> Attribute
+backgroundAttachment = prop "background-attachment"
+
+
+-- | Corresponds to the CSS property __background-attachment__.
+--
+-- __Examples:__
+--
+-- >>> backgroundAttachments [scroll, fixed]
+-- "background-attachment:scroll,fixed"
+backgroundAttachments :: [BackgroundAttachment] -> Attribute
+backgroundAttachments = prop "background-attachment"
+
+
+-- | Corresponds to the CSS property __background-color__.
+--
+-- __Examples:__
+--
+-- >>> backgroundColor (rgb 120 75 182)
+-- "background-color:#784bb6"
 backgroundColor :: Color -> Attribute
 backgroundColor = prop "background-color"
 
 
+-- | Encompasses any value accepted by the CSS property __background-position__.
+--
+-- Accepted values:
+--
+-- +--------------+--------------+
+-- | Input        | Output       |
+-- +==============+==============+
+-- | \<position\> | \<position\> |
+-- +--------------+--------------+
 newtype BackgroundPosition = BackgroundPosition Value
-    deriving (Inherit, Val)
+    deriving
+        ( Inherit
+        , Initial
+        , Revert
+        , RevertLayer
+        , Unset
+        , Val
+        )
 
 
 backgroundPosition :: BackgroundPosition -> Attribute
@@ -209,24 +300,6 @@ backgroundClips = prop "background-clip"
 
 boxClip :: BoxType -> BackgroundClip
 boxClip = BackgroundClip . value
-
-
-newtype BackgroundAttachment = BackgroundAttachment Value
-    deriving (Inherit, Other, Val)
-
-
-backgroundAttachment :: BackgroundAttachment -> Attribute
-backgroundAttachment = prop "background-attachment"
-
-
-backgroundAttachments :: [BackgroundAttachment] -> Attribute
-backgroundAttachments = prop "background-attachment"
-
-
-attachFixed, attachScroll :: BackgroundAttachment
-
-attachFixed  = BackgroundAttachment "fixed"
-attachScroll = BackgroundAttachment "scroll"
 
 
 newtype BackgroundImage = BackgroundImage Value
