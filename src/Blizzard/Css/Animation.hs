@@ -13,6 +13,12 @@ module Blizzard.Css.Animation
     , animation6
     , animation7
     , animations
+    , animations2
+    , animations3
+    , animations4
+    , animations5
+    , animations6
+    , animations7
 
       -- * animation-delay
 
@@ -98,12 +104,18 @@ import Blizzard.Css.Common
     , Revert
     , RevertLayer
     , Unset
+    , map2
+    , map3
+    , map4
+    , map5
+    , map6
+    , map7
     )
-import Blizzard.Css.Property ((!), Val, Value, value)
+import Blizzard.Css.Property ((!), Val(..), Value)
 import Blizzard.Css.Stylesheet (prop)
 
 import Blizzard.Internal (Attribute(..))
-import Blizzard.Internal.Css.Time (Time, sec)
+import Blizzard.Internal.Css.Time (Time(..), sec)
 import Blizzard.Internal.Css.TimingFunction (TimingFunction, ease)
 import Blizzard.Internal.Warning (warning)
 
@@ -208,14 +220,105 @@ animation7 a b c d e f g = prop "animation" (a ! b ! c ! d ! e ! f ! g)
 --
 -- __Examples:__
 --
+-- >>> animations [ "fade-in", "fade-out" ]
+-- "animation:fade-in,fade-out"
+animations :: [AnimationName] -> Attribute
+animations [] = prop "animation" . map7 $ animationsWarning "animations"
+animations xs = prop "animation" . map value $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animations2 [ ("fade-in", ms 500), ("fade-out", ms 350) ]
+-- "animation:fade-in 500ms,fade-out 350ms"
+animations2 :: [(AnimationName, Time)] -> Attribute
+animations2 [] = prop "animation" . map7 $ animationsWarning "animations2"
+animations2 xs = prop "animation" . map2 $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animations3 [ ("fade-in", ms 500, ease), ("fade-out", ms 350, linear) ]
+-- "animation:fade-in 500ms ease,fade-out 350ms linear"
+animations3 :: [(AnimationName, Time, TimingFunction)] -> Attribute
+animations3 [] = prop "animation" . map7 $ animationsWarning "animations3"
+animations3 xs = prop "animation" . map3 $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> animations4 [ ("fade-in", ms 500, ease, ms 250), ("fade-out", ms 350, linear, ms 750) ]
+-- "animation:fade-in 500ms ease 250ms 3 normal forwards,fade-out 350ms linear 750ms 1 alternate backwards"
+animations4 :: [(AnimationName, Time, TimingFunction, Time)] -> Attribute
+animations4 [] = prop "animation" . map7 $ animationsWarning "animations4"
+animations4 xs = prop "animation" . map4 $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
 -- >>> :{
---     animations
+--     animations5
+--         [ ("fade-in", ms 500, ease, ms 250, 3)
+--         , ("fade-out", ms 350, linear, ms 750, 1)
+--         ]
+-- :}
+-- "animation:fade-in 500ms ease 250ms 3,fade-out 350ms linear 750ms 1"
+animations5
+    :: [ ( AnimationName
+         , Time
+         , TimingFunction
+         , Time
+         , AnimationIterationCount
+         )
+       ] -> Attribute
+animations5 [] = prop "animation" . map7 $ animationsWarning "animations5"
+animations5 xs = prop "animation" . map5 $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> :{
+--     animations6
+--         [ ("fade-in", ms 500, ease, ms 250, 3, normal)
+--         , ("fade-out", ms 350, linear, ms 750, 1, alternate)
+--         ]
+-- :}
+-- "animation:fade-in 500ms ease 250ms 3 normal,fade-out 350ms linear 750ms 1 alternate"
+animations6
+    :: [ ( AnimationName
+         , Time
+         , TimingFunction
+         , Time
+         , AnimationIterationCount
+         , AnimationDirection
+         )
+       ] -> Attribute
+animations6 [] = prop "animation" . map7 $ animationsWarning "animations6"
+animations6 xs = prop "animation" . map6 $ xs
+
+
+-- | Corresponds to the CSS property __animation__.
+--
+-- __Examples:__
+--
+-- >>> :{
+--     animations7
 --         [ ("fade-in", ms 500, ease, ms 250, 3, normal, forwards)
 --         , ("fade-out", ms 350, linear, ms 750, 1, alternate, backwards)
 --         ]
 -- :}
 -- "animation:fade-in 500ms ease 250ms 3 normal forwards,fade-out 350ms linear 750ms 1 alternate backwards"
-animations
+animations7
     :: [ ( AnimationName
          , Time
          , TimingFunction
@@ -225,7 +328,24 @@ animations
          , AnimationFillMode
          )
        ] -> Attribute
-animations = prop "animation" . map (\(a, b, c, d, e, f, g) -> value (a ! b ! c ! d ! e ! f ! g))
+animations7 [] = prop "animation" . map7 $ animationsWarning "animations7"
+animations7 xs = prop "animation" . map7 $ xs
+
+
+-- Prints a warning message and defaults when 'animationDelays' is called with an empty list.
+animationsWarning
+    :: String
+    -> [ ( AnimationName
+         , Time
+         , TimingFunction
+         , Time
+         , AnimationIterationCount
+         , AnimationDirection
+         , AnimationFillMode
+         )
+       ]
+animationsWarning a = warning [ ( none, sec 0, ease, sec 0, 1, normal, none ) ] $
+    "Warning: '" <> a <> "' called with empty list. Defaulting to 'none 0s ease 0s 1 normal none'."
 
 
 -- | Corresponds to the CSS property __animation-delay__.

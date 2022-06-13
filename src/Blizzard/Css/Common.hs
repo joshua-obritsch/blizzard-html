@@ -19,12 +19,18 @@ module Blizzard.Css.Common
     , Unset(..)
     , Visible(..)
     , call
+    , map2
+    , map3
+    , map4
+    , map5
+    , map6
+    , map7
     ) where
 
 
 import Data.String (IsString)
 
-import Blizzard.Css.Property (Value)
+import Blizzard.Css.Property ((!), Val(..), Value)
 
 
 class All         a where all         :: a
@@ -67,3 +73,27 @@ instance Visible     Value where visible     = "visible"
 
 call :: (IsString a, Monoid a) => a -> a -> a
 call a b = a <> "(" <> b <> ")"
+
+
+map2 :: (Val a, Val b) => [ ( a, b ) ] -> [Value]
+map2 = map (\(a, b) -> value (a ! b))
+
+
+map3 :: (Val a, Val b, Val c) => [ ( a, b, c ) ] -> [Value]
+map3 = map (\(a, b, c) -> value (a ! b ! c))
+
+
+map4 :: (Val a, Val b, Val c, Val d) => [ ( a, b, c, d ) ] -> [Value]
+map4 = map (\(a, b, c, d) -> value (a ! b ! c ! d))
+
+
+map5 :: (Val a, Val b, Val c, Val d, Val e) => [ ( a, b, c, d, e ) ] -> [Value]
+map5 = map (\(a, b, c, d, e) -> value (a ! b ! c ! d ! e))
+
+
+map6 :: (Val a, Val b, Val c, Val d, Val e, Val f) => [ ( a, b, c, d, e, f ) ] -> [Value]
+map6 = map (\(a, b, c, d, e, f) -> value (a ! b ! c ! d ! e ! f))
+
+
+map7 :: (Val a, Val b, Val c, Val d, Val e, Val f, Val g) => [ ( a, b, c, d, e, f, g ) ] -> [Value]
+map7 = map (\(a, b, c, d, e, f, g) -> value (a ! b ! c ! d ! e ! f ! g))
