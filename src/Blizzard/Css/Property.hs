@@ -15,7 +15,7 @@ module Blizzard.Css.Property
 import Data.Fixed (Fixed, HasResolution(..), showFixed)
 import Data.List.NonEmpty (NonEmpty, toList)
 import Data.String (IsString, fromString)
-import Data.Text (Text, replace)
+import Data.Text (Text, pack, replace)
 
 
 data E5 = E5
@@ -49,7 +49,7 @@ instance Val Literal where
 
 
 instance Val Int where
-    value = fromString . show
+    value = Value . pack . show
 
 
 instance Val a => Val [a] where
@@ -57,7 +57,7 @@ instance Val a => Val [a] where
 
 
 instance Val Double where
-    value = Value . fromString . show
+    value = Value . pack . show
 
 
 instance Val a => Val (Maybe a) where
