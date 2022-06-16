@@ -10,8 +10,8 @@ module Blizzard.Css.Mask
     , xor
     , maskComposite
     , maskComposites
-    , maskPosition
-    , maskPositions
+    --, maskPosition
+    --, maskPositions
     , maskSize
     , maskSizes
     , maskRepeat
@@ -37,7 +37,7 @@ import Blizzard.Css.Background
     , BackgroundAttachment
     , BackgroundImage
     )
-import Blizzard.Css.Common (Inherit, None, Other(..))
+import Blizzard.Css.Common (Inherit(..), None, Other(..))
 import Blizzard.Css.Property (Val, Value)
 import Blizzard.Css.Stylesheet (prop)
 
@@ -51,7 +51,7 @@ instance Mask a => Mask [a]
 instance (Mask a, Mask b) => Mask (a, b)
 
 instance Mask MaskComposite
-instance Mask BackgroundPosition
+--instance Mask BackgroundPosition
 instance Mask BackgroundSize
 instance Mask BackgroundRepeat
 instance Mask BackgroundOrigin
@@ -90,12 +90,12 @@ destinationAtop = other "destination-atop"
 xor             = other "xor"
 
 
-maskPosition :: BackgroundPosition -> Attribute
-maskPosition = prop "mask-position"
+--maskPosition :: BackgroundPosition -> Attribute
+--maskPosition = prop "mask-position"
 
 
-maskPositions :: [BackgroundPosition] -> Attribute
-maskPositions = prop "mask-position"
+--maskPositions :: [BackgroundPosition] -> Attribute
+--maskPositions = prop "mask-position"
 
 
 maskSize :: BackgroundSize -> Attribute

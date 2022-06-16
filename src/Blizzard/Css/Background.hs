@@ -1,9 +1,12 @@
+{-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Css.Background
     ( -- * background
       Background(..)
+    , All2(..)
+    , BackgroundPosition'(..)
 
       -- * background-attachment
     , BackgroundAttachment
@@ -21,15 +24,15 @@ module Blizzard.Css.Background
     , backgroundColor
 
       -- * background-position
-    , BackgroundPosition
+    , BackgroundPosition(..)
 
       -- __Constants__
-    , placed
-    , positioned
+    --, placed
+    --, positioned
 
       -- __Functions__
-    , backgroundPosition
-    , backgroundPositions
+    --, backgroundPosition
+    --, backgroundPositions
 
       -- * background-size
     , BackgroundSize
@@ -85,23 +88,24 @@ import Prelude hiding (repeat, round)
 
 import Data.Text (Text)
 
-import Blizzard.Internal (Attribute(..))
 import Blizzard.Css.Box (BoxType)
 import Blizzard.Css.Color (Color)
 import Blizzard.Css.Common
     ( Fixed
-    , Inherit
+    , Inherit(..)
     , Initial
     , None
     , Other
     , Revert
     , RevertLayer
-    , Scroll
+    , Scroll(..)
     , Unset
     )
 import Blizzard.Css.Property (Val, Value, value)
 import Blizzard.Css.Size (Angle, Size)
 import Blizzard.Css.Stylesheet (prop)
+import Blizzard.Internal (Attribute(..))
+import Blizzard.Internal.Warning (warning)
 
 
 class Val a => Background a where
@@ -113,7 +117,7 @@ instance Background a => Background [a]
 instance (Background a, Background b) => Background (a, b)
 
 instance Background Color
-instance Background BackgroundPosition
+--instance Background BackgroundPosition
 instance Background BackgroundSize
 instance Background BackgroundRepeat
 instance Background BackgroundOrigin
@@ -169,7 +173,14 @@ backgroundAttachment = prop "background-attachment"
 -- >>> backgroundAttachments [scroll, fixed]
 -- "background-attachment:scroll,fixed"
 backgroundAttachments :: [BackgroundAttachment] -> Attribute
-backgroundAttachments = prop "background-attachment"
+backgroundAttachments [] = prop "background-attachment" backgroundAttachmentsWarning
+backgroundAttachments xs = prop "background-attachment" xs
+
+
+-- Prints a warning message and defaults when 'backgroundAttachments' is called with an empty list.
+backgroundAttachmentsWarning :: [BackgroundAttachment]
+backgroundAttachmentsWarning = warning [scroll]
+    "Warning: 'backgroundAttachments' called with empty list. Defaulting to 'scroll'."
 
 
 -- | Corresponds to the CSS property __background-color__.
@@ -191,31 +202,53 @@ backgroundColor = prop "background-color"
 -- +==============+==============+
 -- | \<position\> | \<position\> |
 -- +--------------+--------------+
-newtype BackgroundPosition = BackgroundPosition Value
+newtype BackgroundPosition' = BackgroundPosition' Value
     deriving
         ( Inherit
         , Initial
         , Revert
         , RevertLayer
         , Unset
+        , All2
         , Val
         )
 
 
-backgroundPosition :: BackgroundPosition -> Attribute
-backgroundPosition = prop "background-position"
+class Val a => BackgroundPosition a where
+    backgroundPosition :: a -> Attribute
+    backgroundPosition = prop "background-position"
+
+    --backgroundPositions :: [a] -> Attribute
+    --backgroundPositions = prop "background-position"
 
 
-backgroundPositions :: [BackgroundPosition] -> Attribute
-backgroundPositions = prop "background-position"
+instance BackgroundPosition BackgroundPosition'
+--instance BackgroundPosition (Size a)
 
 
-placed :: Side -> Side -> BackgroundPosition
-placed a b = BackgroundPosition $ value (a, b)
+class    Val a => All2 a     where all2 :: a
+instance All2 Value where all2 = "all2"
+
+-- | Corresponds to the CSS property __background-position__.
+--
+-- __Examples:__
+--
+-- >>> backgroundPosition (pct 25)
+-- "background-color:#784bb6"
+--backgroundPosition :: BackgroundPosition -> Attribute
+--backgroundPosition = prop "background-position"
 
 
-positioned :: Size a -> Size a -> BackgroundPosition
-positioned a b = BackgroundPosition $ value (a, b)
+--backgroundPositions :: [BackgroundPosition] -> Attribute
+--backgroundPositions = prop "background-position"
+
+
+--placed :: Side -> Side -> BackgroundPosition
+--placed a b = BackgroundPosition $ value (a, b)
+
+
+--positioned :: Size a -> Size a -> BackgroundPosition
+--positioned a b = BackgroundPosition $ value (a, b)
 
 
 newtype BackgroundSize = BackgroundSize Value

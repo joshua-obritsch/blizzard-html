@@ -220,7 +220,7 @@ animation7 a b c d e f g = prop "animation" (a ! b ! c ! d ! e ! f ! g)
 --
 -- __Examples:__
 --
--- >>> animations [ "fade-in", "fade-out" ]
+-- >>> animations ["fade-in", "fade-out"]
 -- "animation:fade-in,fade-out"
 animations :: [AnimationName] -> Attribute
 animations [] = prop "animation" . map7 $ animationsWarning "animations"
@@ -231,7 +231,7 @@ animations xs = prop "animation" . map value $ xs
 --
 -- __Examples:__
 --
--- >>> animations2 [ ("fade-in", ms 500), ("fade-out", ms 350) ]
+-- >>> animations2 [("fade-in", ms 500), ("fade-out", ms 350)]
 -- "animation:fade-in 500ms,fade-out 350ms"
 animations2 :: [(AnimationName, Time)] -> Attribute
 animations2 [] = prop "animation" . map7 $ animationsWarning "animations2"
@@ -242,7 +242,7 @@ animations2 xs = prop "animation" . map2 $ xs
 --
 -- __Examples:__
 --
--- >>> animations3 [ ("fade-in", ms 500, ease), ("fade-out", ms 350, linear) ]
+-- >>> animations3 [("fade-in", ms 500, ease), ("fade-out", ms 350, linear)]
 -- "animation:fade-in 500ms ease,fade-out 350ms linear"
 animations3 :: [(AnimationName, Time, TimingFunction)] -> Attribute
 animations3 [] = prop "animation" . map7 $ animationsWarning "animations3"
@@ -253,7 +253,7 @@ animations3 xs = prop "animation" . map3 $ xs
 --
 -- __Examples:__
 --
--- >>> animations4 [ ("fade-in", ms 500, ease, ms 250), ("fade-out", ms 350, linear, ms 750) ]
+-- >>> animations4 [("fade-in", ms 500, ease, ms 250), ("fade-out", ms 350, linear, ms 750)]
 -- "animation:fade-in 500ms ease 250ms 3 normal forwards,fade-out 350ms linear 750ms 1 alternate backwards"
 animations4 :: [(AnimationName, Time, TimingFunction, Time)] -> Attribute
 animations4 [] = prop "animation" . map7 $ animationsWarning "animations4"
@@ -332,7 +332,7 @@ animations7 [] = prop "animation" . map7 $ animationsWarning "animations7"
 animations7 xs = prop "animation" . map7 $ xs
 
 
--- Prints a warning message and defaults when 'animationDelays' is called with an empty list.
+-- Prints a warning message and defaults when 'animations[2-7]?' is called with an empty list.
 animationsWarning
     :: String
     -> [ ( AnimationName

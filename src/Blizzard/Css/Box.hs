@@ -22,8 +22,6 @@ import Blizzard.Css.Size (Size)
 import Blizzard.Css.Stylesheet (prop)
 import Data.List.NonEmpty (NonEmpty)
 
-import qualified Clay.Box as B
-
 
 newtype BoxType = BoxType Value
     deriving (Inherit, Val)
