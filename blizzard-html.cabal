@@ -19,7 +19,7 @@ maintainer:         Joshua Obritsch <joshua@obritsch.com>
 name:               blizzard-html
 stability:          Experimental
 synopsis:           An HTML renderer for Haskell
-version:            0.4.0.0
+version:            0.4.0.1
 
 
 library

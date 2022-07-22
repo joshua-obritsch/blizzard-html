@@ -1,5 +1,9 @@
 # Revision history for blizzard-html
 
+## 0.4.0.1 -- 2022-07-22
+
+* Exported Text and added text function.
+
 ## 0.4.0.0 -- 2022-07-22
 
 * Added additional attributes.

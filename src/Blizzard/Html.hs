@@ -3,6 +3,7 @@
 module Blizzard.Html
     ( Attribute
     , Html
+    , Text
     , docType
     , docTypeHtml
     , a
@@ -100,6 +101,7 @@ module Blizzard.Html
     , table
     , tbody
     , td
+    , text
     , textarea
     , tfoot
     , th
@@ -116,6 +118,7 @@ module Blizzard.Html
     ) where
 
 
+import Data.Text (Text)
 import Prelude (Maybe)
 import Text.Blaze.Html (Attribute, Html)
 
@@ -510,6 +513,10 @@ tbody = normalTag Html.tbody
 
 td :: [Maybe Attribute] -> [Html] -> Html
 td = normalTag Html.td
+
+
+text :: Text -> Html
+text = Html.toHtml
 
 
 textarea :: [Maybe Attribute] -> [Html] -> Html
