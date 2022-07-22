@@ -1,7 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 
 module Blizzard.Html
-    ( Attribute(..)
+    ( Attribute
     , Html
     , docType
     , docTypeHtml
@@ -116,10 +116,11 @@ module Blizzard.Html
     ) where
 
 
-import Text.Blaze.Html (Html)
-import Blizzard.Internal (Attribute(..), documentTag, normalTag, voidTag)
+import Text.Blaze.Html (Attribute, Html)
 
 import qualified Text.Blaze.Html5 as H
+
+import Blizzard.Internal.Html (documentTag, normalTag, voidTag)
 
 
 docType :: Html
