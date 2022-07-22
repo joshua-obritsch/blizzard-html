@@ -1,10 +1,12 @@
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Html.Attributes
     ( accept
     , acceptCharset
     , accesskey
     , action
+    , allowfullscreen
     , alt
     , async
     , autocomplete
@@ -24,6 +26,7 @@ module Blizzard.Html.Attributes
     , coords
     , data_
     , datetime
+    , default_
     , defer
     , dir
     , disabled
@@ -45,6 +48,7 @@ module Blizzard.Html.Attributes
     , httpEquiv
     , icon
     , id
+    , inert
     , ismap
     , item
     , itemprop
@@ -63,7 +67,9 @@ module Blizzard.Html.Attributes
     , method
     , min
     , multiple
+    , muted
     , name
+    , nomodule
     , novalidate
     , onbeforeonload
     , onbeforeprint
@@ -134,6 +140,7 @@ module Blizzard.Html.Attributes
     , pattern
     , ping
     , placeholder
+    , playsinline
     , preload
     , pubdate
     , radiogroup
@@ -164,7 +171,9 @@ module Blizzard.Html.Attributes
     , tabindex
     , target
     , title
+    , truespeed
     , type_
+    , typemustmatch
     , usemap
     , value
     , width
@@ -174,683 +183,745 @@ module Blizzard.Html.Attributes
 
 
 import Data.Text (Text, unwords)
-import Prelude ((.))
-import Text.Blaze.Html5 (Attribute, textValue)
+import Prelude hiding (id, max, min, span, unwords)
+import Text.Blaze.Html (Attribute, customAttribute, textValue)
 
 import qualified Text.Blaze.Html5.Attributes as Attr
 
 
-accept :: Text -> Attribute
-accept = Attr.accept . textValue
+accept :: Bool -> Maybe Attribute
+accept True  = Just $ Attr.accept "accept"
+accept False = Nothing
 
 
-acceptCharset :: Text -> Attribute
-acceptCharset = Attr.acceptCharset . textValue
+acceptCharset :: Text -> Maybe Attribute
+acceptCharset = Just . Attr.acceptCharset . textValue
 
 
-accesskey :: Text -> Attribute
-accesskey = Attr.accesskey . textValue
+accesskey :: Text -> Maybe Attribute
+accesskey = Just . Attr.accesskey . textValue
 
 
-action :: Text -> Attribute
-action = Attr.action . textValue
+action :: Text -> Maybe Attribute
+action = Just . Attr.action . textValue
 
 
-alt :: Text -> Attribute
-alt = Attr.alt . textValue
+allowfullscreen :: Bool -> Maybe Attribute
+allowfullscreen True  = Just $ customAttribute "allowfullscreen" "allowfullscreen"
+allowfullscreen False = Nothing
 
 
-async :: Text -> Attribute
-async = Attr.async . textValue
+alt :: Text -> Maybe Attribute
+alt = Just . Attr.alt . textValue
 
 
-autocomplete :: Text -> Attribute
-autocomplete = Attr.autocomplete . textValue
+async :: Bool -> Maybe Attribute
+async True  = Just $ Attr.async "async"
+async False = Nothing
 
 
-autofocus :: Text -> Attribute
-autofocus = Attr.autofocus . textValue
+autocomplete :: Text -> Maybe Attribute
+autocomplete = Just . Attr.autocomplete . textValue
 
 
-autoplay :: Text -> Attribute
-autoplay = Attr.autoplay . textValue
+autofocus :: Bool -> Maybe Attribute
+autofocus True  = Just $ Attr.autofocus "autofocus"
+autofocus False = Nothing
 
 
-challenge :: Text -> Attribute
-challenge = Attr.challenge . textValue
+autoplay :: Bool -> Maybe Attribute
+autoplay True  = Just $ Attr.autoplay "autoplay"
+autoplay False = Nothing
 
 
-charset :: Text -> Attribute
-charset = Attr.charset . textValue
+challenge :: Text -> Maybe Attribute
+challenge = Just . Attr.challenge . textValue
 
 
-checked :: Text -> Attribute
-checked = Attr.checked . textValue
+charset :: Text -> Maybe Attribute
+charset = Just . Attr.charset . textValue
 
 
-cite :: Text -> Attribute
-cite = Attr.cite . textValue
+checked :: Bool -> Maybe Attribute
+checked True  = Just $ Attr.checked "checked"
+checked False = Nothing
 
 
-css :: [Text] -> Attribute
-css = Attr.class_ . textValue . unwords
+cite :: Text -> Maybe Attribute
+cite = Just . Attr.cite . textValue
 
 
-cols :: Text -> Attribute
-cols = Attr.cols . textValue
+css :: [Text] -> Maybe Attribute
+css = Just . Attr.class_ . textValue . unwords
 
 
-colspan :: Text -> Attribute
-colspan = Attr.colspan . textValue
+cols :: Text -> Maybe Attribute
+cols = Just . Attr.cols . textValue
 
 
-content :: Text -> Attribute
-content = Attr.content . textValue
+colspan :: Text -> Maybe Attribute
+colspan = Just . Attr.colspan . textValue
 
 
-contenteditable :: Text -> Attribute
-contenteditable = Attr.contenteditable . textValue
+content :: Text -> Maybe Attribute
+content = Just . Attr.content . textValue
 
 
-contextmenu :: Text -> Attribute
-contextmenu = Attr.contextmenu . textValue
+contenteditable :: Text -> Maybe Attribute
+contenteditable = Just . Attr.contenteditable . textValue
 
 
-controls :: Text -> Attribute
-controls = Attr.controls . textValue
+contextmenu :: Text -> Maybe Attribute
+contextmenu = Just . Attr.contextmenu . textValue
 
 
-coords :: Text -> Attribute
-coords = Attr.coords . textValue
+controls :: Bool -> Maybe Attribute
+controls True  = Just $ Attr.controls "controls"
+controls False = Nothing
 
 
-data_ :: Text -> Attribute
-data_ = Attr.data_ . textValue
+coords :: Text -> Maybe Attribute
+coords = Just . Attr.coords . textValue
 
 
-datetime :: Text -> Attribute
-datetime = Attr.datetime . textValue
+data_ :: Text -> Maybe Attribute
+data_ = Just . Attr.data_ . textValue
 
 
-defer :: Text -> Attribute
-defer = Attr.defer . textValue
+datetime :: Text -> Maybe Attribute
+datetime = Just . Attr.datetime . textValue
 
 
-dir :: Text -> Attribute
-dir = Attr.dir . textValue
+default_ :: Bool -> Maybe Attribute
+default_ True  = Just $ customAttribute "default" "default"
+default_ False = Nothing
 
 
-disabled :: Text -> Attribute
-disabled = Attr.disabled . textValue
+defer :: Bool -> Maybe Attribute
+defer True  = Just $ Attr.defer "defer"
+defer False = Nothing
 
 
-draggable :: Text -> Attribute
-draggable = Attr.draggable . textValue
+dir :: Text -> Maybe Attribute
+dir = Just . Attr.dir . textValue
 
 
-enctype :: Text -> Attribute
-enctype = Attr.enctype . textValue
+disabled :: Bool -> Maybe Attribute
+disabled True  = Just $ Attr.disabled "disabled"
+disabled False = Nothing
 
 
-for :: Text -> Attribute
-for = Attr.for . textValue
+draggable :: Text -> Maybe Attribute
+draggable = Just . Attr.draggable . textValue
 
 
-form :: Text -> Attribute
-form = Attr.form . textValue
+enctype :: Text -> Maybe Attribute
+enctype = Just . Attr.enctype . textValue
 
 
-formaction :: Text -> Attribute
-formaction = Attr.formaction . textValue
+for :: Text -> Maybe Attribute
+for = Just . Attr.for . textValue
 
 
-formenctype :: Text -> Attribute
-formenctype = Attr.formenctype . textValue
+form :: Text -> Maybe Attribute
+form = Just . Attr.form . textValue
 
 
-formmethod :: Text -> Attribute
-formmethod = Attr.formmethod . textValue
+formaction :: Text -> Maybe Attribute
+formaction = Just . Attr.formaction . textValue
 
 
-formnovalidate :: Text -> Attribute
-formnovalidate = Attr.formnovalidate . textValue
+formenctype :: Text -> Maybe Attribute
+formenctype = Just . Attr.formenctype . textValue
 
 
-formtarget :: Text -> Attribute
-formtarget = Attr.formtarget . textValue
+formmethod :: Text -> Maybe Attribute
+formmethod = Just . Attr.formmethod . textValue
 
 
-headers :: Text -> Attribute
-headers = Attr.headers . textValue
+formnovalidate :: Bool -> Maybe Attribute
+formnovalidate True  = Just $ Attr.formnovalidate "formnovalidate"
+formnovalidate False = Nothing
 
 
-height :: Text -> Attribute
-height = Attr.height . textValue
+formtarget :: Text -> Maybe Attribute
+formtarget = Just . Attr.formtarget . textValue
 
 
-hidden :: Text -> Attribute
-hidden = Attr.hidden . textValue
+headers :: Text -> Maybe Attribute
+headers = Just . Attr.headers . textValue
 
 
-high :: Text -> Attribute
-high = Attr.high . textValue
+height :: Text -> Maybe Attribute
+height = Just . Attr.height . textValue
 
 
-href :: Text -> Attribute
-href = Attr.href . textValue
+hidden :: Bool -> Maybe Attribute
+hidden True  = Just $ Attr.hidden "hidden"
+hidden False = Nothing
 
 
-hreflang :: Text -> Attribute
-hreflang = Attr.hreflang . textValue
+high :: Text -> Maybe Attribute
+high = Just . Attr.high . textValue
 
 
-httpEquiv :: Text -> Attribute
-httpEquiv = Attr.httpEquiv . textValue
+href :: Text -> Maybe Attribute
+href = Just . Attr.href . textValue
 
 
-icon :: Text -> Attribute
-icon = Attr.icon . textValue
+hreflang :: Text -> Maybe Attribute
+hreflang = Just . Attr.hreflang . textValue
 
 
-id :: Text -> Attribute
-id = Attr.id . textValue
+httpEquiv :: Text -> Maybe Attribute
+httpEquiv = Just . Attr.httpEquiv . textValue
 
 
-ismap :: Text -> Attribute
-ismap = Attr.ismap . textValue
+icon :: Text -> Maybe Attribute
+icon = Just . Attr.icon . textValue
 
 
-item :: Text -> Attribute
-item = Attr.item . textValue
+id :: Text -> Maybe Attribute
+id = Just . Attr.id . textValue
 
 
-itemprop :: Text -> Attribute
-itemprop = Attr.itemprop . textValue
+inert :: Bool -> Maybe Attribute
+inert True  = Just $ customAttribute "inert" "inert"
+inert False = Nothing
 
 
-itemscope :: Text -> Attribute
-itemscope = Attr.itemscope . textValue
+ismap :: Bool -> Maybe Attribute
+ismap True  = Just $ Attr.ismap "ismap"
+ismap False = Nothing
 
 
-itemtype :: Text -> Attribute
-itemtype = Attr.itemtype . textValue
+item :: Text -> Maybe Attribute
+item = Just . Attr.item . textValue
 
 
-keytype :: Text -> Attribute
-keytype = Attr.keytype . textValue
+itemprop :: Text -> Maybe Attribute
+itemprop = Just . Attr.itemprop . textValue
 
 
-label :: Text -> Attribute
-label = Attr.label . textValue
+itemscope :: Bool -> Maybe Attribute
+itemscope True  = Just $ Attr.itemscope "itemscope"
+itemscope False = Nothing
 
 
-lang :: Text -> Attribute
-lang = Attr.lang . textValue
+itemtype :: Text -> Maybe Attribute
+itemtype = Just . Attr.itemtype . textValue
 
 
-list :: Text -> Attribute
-list = Attr.list . textValue
+keytype :: Text -> Maybe Attribute
+keytype = Just . Attr.keytype . textValue
 
 
-loop :: Text -> Attribute
-loop = Attr.loop . textValue
+label :: Text -> Maybe Attribute
+label = Just . Attr.label . textValue
 
 
-low :: Text -> Attribute
-low = Attr.low . textValue
+lang :: Text -> Maybe Attribute
+lang = Just . Attr.lang . textValue
 
 
-manifest :: Text -> Attribute
-manifest = Attr.manifest . textValue
+list :: Text -> Maybe Attribute
+list = Just . Attr.list . textValue
 
 
-max :: Text -> Attribute
-max = Attr.max . textValue
+loop :: Bool -> Maybe Attribute
+loop True  = Just $ Attr.loop "loop"
+loop False = Nothing
 
 
-maxlength :: Text -> Attribute
-maxlength = Attr.maxlength . textValue
+low :: Text -> Maybe Attribute
+low = Just . Attr.low . textValue
 
 
-media :: Text -> Attribute
-media = Attr.media . textValue
+manifest :: Text -> Maybe Attribute
+manifest = Just . Attr.manifest . textValue
 
 
-method :: Text -> Attribute
-method = Attr.method . textValue
+max :: Text -> Maybe Attribute
+max = Just . Attr.max . textValue
 
 
-min :: Text -> Attribute
-min = Attr.min . textValue
+maxlength :: Text -> Maybe Attribute
+maxlength = Just . Attr.maxlength . textValue
 
 
-multiple :: Text -> Attribute
-multiple = Attr.multiple . textValue
+media :: Text -> Maybe Attribute
+media = Just . Attr.media . textValue
 
 
-name :: Text -> Attribute
-name = Attr.name . textValue
+method :: Text -> Maybe Attribute
+method = Just . Attr.method . textValue
 
 
-novalidate :: Text -> Attribute
-novalidate = Attr.novalidate . textValue
+min :: Text -> Maybe Attribute
+min = Just . Attr.min . textValue
 
 
-onbeforeonload :: Text -> Attribute
-onbeforeonload = Attr.onbeforeonload . textValue
+multiple :: Bool -> Maybe Attribute
+multiple True  = Just $ Attr.multiple "multiple"
+multiple False = Nothing
 
 
-onbeforeprint :: Text -> Attribute
-onbeforeprint = Attr.onbeforeprint . textValue
+muted :: Bool -> Maybe Attribute
+muted True  = Just $ customAttribute "muted" "muted"
+muted False = Nothing
 
 
-onblur :: Text -> Attribute
-onblur = Attr.onblur . textValue
+name :: Text -> Maybe Attribute
+name = Just . Attr.name . textValue
 
 
-oncanplay :: Text -> Attribute
-oncanplay = Attr.oncanplay . textValue
+nomodule :: Bool -> Maybe Attribute
+nomodule True  = Just $ customAttribute "nomodule" "nomodule"
+nomodule False = Nothing
 
 
-oncanplaythrough :: Text -> Attribute
-oncanplaythrough = Attr.oncanplaythrough . textValue
+novalidate :: Bool -> Maybe Attribute
+novalidate True  = Just $ Attr.novalidate "novalidate"
+novalidate False = Nothing
 
 
-onchange :: Text -> Attribute
-onchange = Attr.onchange . textValue
+onbeforeonload :: Text -> Maybe Attribute
+onbeforeonload = Just . Attr.onbeforeonload . textValue
 
 
-onclick :: Text -> Attribute
-onclick = Attr.onclick . textValue
+onbeforeprint :: Text -> Maybe Attribute
+onbeforeprint = Just . Attr.onbeforeprint . textValue
 
 
-oncontextmenu :: Text -> Attribute
-oncontextmenu = Attr.oncontextmenu . textValue
+onblur :: Text -> Maybe Attribute
+onblur = Just . Attr.onblur . textValue
 
 
-ondblclick :: Text -> Attribute
-ondblclick = Attr.ondblclick . textValue
+oncanplay :: Text -> Maybe Attribute
+oncanplay = Just . Attr.oncanplay . textValue
 
 
-ondrag :: Text -> Attribute
-ondrag = Attr.ondrag . textValue
+oncanplaythrough :: Text -> Maybe Attribute
+oncanplaythrough = Just . Attr.oncanplaythrough . textValue
 
 
-ondragend :: Text -> Attribute
-ondragend = Attr.ondragend . textValue
+onchange :: Text -> Maybe Attribute
+onchange = Just . Attr.onchange . textValue
 
 
-ondragenter :: Text -> Attribute
-ondragenter = Attr.ondragenter . textValue
+onclick :: Text -> Maybe Attribute
+onclick = Just . Attr.onclick . textValue
 
 
-ondragleave :: Text -> Attribute
-ondragleave = Attr.ondragleave . textValue
+oncontextmenu :: Text -> Maybe Attribute
+oncontextmenu = Just . Attr.oncontextmenu . textValue
 
 
-ondragover :: Text -> Attribute
-ondragover = Attr.ondragover . textValue
+ondblclick :: Text -> Maybe Attribute
+ondblclick = Just . Attr.ondblclick . textValue
 
 
-ondragstart :: Text -> Attribute
-ondragstart = Attr.ondragstart . textValue
+ondrag :: Text -> Maybe Attribute
+ondrag = Just . Attr.ondrag . textValue
 
 
-ondrop :: Text -> Attribute
-ondrop = Attr.ondrop . textValue
+ondragend :: Text -> Maybe Attribute
+ondragend = Just . Attr.ondragend . textValue
 
 
-ondurationchange :: Text -> Attribute
-ondurationchange = Attr.ondurationchange . textValue
+ondragenter :: Text -> Maybe Attribute
+ondragenter = Just . Attr.ondragenter . textValue
 
 
-onemptied :: Text -> Attribute
-onemptied = Attr.onemptied . textValue
+ondragleave :: Text -> Maybe Attribute
+ondragleave = Just . Attr.ondragleave . textValue
 
 
-onended :: Text -> Attribute
-onended = Attr.onended . textValue
+ondragover :: Text -> Maybe Attribute
+ondragover = Just . Attr.ondragover . textValue
 
 
-onerror :: Text -> Attribute
-onerror = Attr.onerror . textValue
+ondragstart :: Text -> Maybe Attribute
+ondragstart = Just . Attr.ondragstart . textValue
 
 
-onfocus :: Text -> Attribute
-onfocus = Attr.onfocus . textValue
+ondrop :: Text -> Maybe Attribute
+ondrop = Just . Attr.ondrop . textValue
 
 
-onformchange :: Text -> Attribute
-onformchange = Attr.onformchange . textValue
+ondurationchange :: Text -> Maybe Attribute
+ondurationchange = Just . Attr.ondurationchange . textValue
 
 
-onforminput :: Text -> Attribute
-onforminput = Attr.onforminput . textValue
+onemptied :: Text -> Maybe Attribute
+onemptied = Just . Attr.onemptied . textValue
 
 
-onhaschange :: Text -> Attribute
-onhaschange = Attr.onhaschange . textValue
+onended :: Text -> Maybe Attribute
+onended = Just . Attr.onended . textValue
 
 
-oninput :: Text -> Attribute
-oninput = Attr.oninput . textValue
+onerror :: Text -> Maybe Attribute
+onerror = Just . Attr.onerror . textValue
 
 
-oninvalid :: Text -> Attribute
-oninvalid = Attr.oninvalid . textValue
+onfocus :: Text -> Maybe Attribute
+onfocus = Just . Attr.onfocus . textValue
 
 
-onkeydown :: Text -> Attribute
-onkeydown = Attr.onkeydown . textValue
+onformchange :: Text -> Maybe Attribute
+onformchange = Just . Attr.onformchange . textValue
 
 
-onkeyup :: Text -> Attribute
-onkeyup = Attr.onkeyup . textValue
+onforminput :: Text -> Maybe Attribute
+onforminput = Just . Attr.onforminput . textValue
 
 
-onload :: Text -> Attribute
-onload = Attr.onload . textValue
+onhaschange :: Text -> Maybe Attribute
+onhaschange = Just . Attr.onhaschange . textValue
 
 
-onloadeddata :: Text -> Attribute
-onloadeddata = Attr.onloadeddata . textValue
+oninput :: Text -> Maybe Attribute
+oninput = Just . Attr.oninput . textValue
 
 
-onloadedmetadata :: Text -> Attribute
-onloadedmetadata = Attr.onloadedmetadata . textValue
+oninvalid :: Text -> Maybe Attribute
+oninvalid = Just . Attr.oninvalid . textValue
 
 
-onloadstart :: Text -> Attribute
-onloadstart = Attr.onloadstart . textValue
+onkeydown :: Text -> Maybe Attribute
+onkeydown = Just . Attr.onkeydown . textValue
 
 
-onmessage :: Text -> Attribute
-onmessage = Attr.onmessage . textValue
+onkeyup :: Text -> Maybe Attribute
+onkeyup = Just . Attr.onkeyup . textValue
 
 
-onmousedown :: Text -> Attribute
-onmousedown = Attr.onmousedown . textValue
+onload :: Text -> Maybe Attribute
+onload = Just . Attr.onload . textValue
 
 
-onmousemove :: Text -> Attribute
-onmousemove = Attr.onmousemove . textValue
+onloadeddata :: Text -> Maybe Attribute
+onloadeddata = Just . Attr.onloadeddata . textValue
 
 
-onmouseout :: Text -> Attribute
-onmouseout = Attr.onmouseout . textValue
+onloadedmetadata :: Text -> Maybe Attribute
+onloadedmetadata = Just . Attr.onloadedmetadata . textValue
 
 
-onmouseover :: Text -> Attribute
-onmouseover = Attr.onmouseover . textValue
+onloadstart :: Text -> Maybe Attribute
+onloadstart = Just . Attr.onloadstart . textValue
 
 
-onmouseup :: Text -> Attribute
-onmouseup = Attr.onmouseup . textValue
+onmessage :: Text -> Maybe Attribute
+onmessage = Just . Attr.onmessage . textValue
 
 
-onmousewheel :: Text -> Attribute
-onmousewheel = Attr.onmousewheel . textValue
+onmousedown :: Text -> Maybe Attribute
+onmousedown = Just . Attr.onmousedown . textValue
 
 
-ononline :: Text -> Attribute
-ononline = Attr.ononline . textValue
+onmousemove :: Text -> Maybe Attribute
+onmousemove = Just . Attr.onmousemove . textValue
 
 
-onpagehide :: Text -> Attribute
-onpagehide = Attr.onpagehide . textValue
+onmouseout :: Text -> Maybe Attribute
+onmouseout = Just . Attr.onmouseout . textValue
 
 
-onpageshow :: Text -> Attribute
-onpageshow = Attr.onpageshow . textValue
+onmouseover :: Text -> Maybe Attribute
+onmouseover = Just . Attr.onmouseover . textValue
 
 
-onpause :: Text -> Attribute
-onpause = Attr.onpause . textValue
+onmouseup :: Text -> Maybe Attribute
+onmouseup = Just . Attr.onmouseup . textValue
 
 
-onplay :: Text -> Attribute
-onplay = Attr.onplay . textValue
+onmousewheel :: Text -> Maybe Attribute
+onmousewheel = Just . Attr.onmousewheel . textValue
 
 
-onplaying :: Text -> Attribute
-onplaying = Attr.onplaying . textValue
+ononline :: Text -> Maybe Attribute
+ononline = Just . Attr.ononline . textValue
 
 
-onprogress :: Text -> Attribute
-onprogress = Attr.onprogress . textValue
+onpagehide :: Text -> Maybe Attribute
+onpagehide = Just . Attr.onpagehide . textValue
 
 
-onpropstate :: Text -> Attribute
-onpropstate = Attr.onpropstate . textValue
+onpageshow :: Text -> Maybe Attribute
+onpageshow = Just . Attr.onpageshow . textValue
 
 
-onratechange :: Text -> Attribute
-onratechange = Attr.onratechange . textValue
+onpause :: Text -> Maybe Attribute
+onpause = Just . Attr.onpause . textValue
 
 
-onreadystatechange :: Text -> Attribute
-onreadystatechange = Attr.onreadystatechange . textValue
+onplay :: Text -> Maybe Attribute
+onplay = Just . Attr.onplay . textValue
 
 
-onredo :: Text -> Attribute
-onredo = Attr.onredo . textValue
+onplaying :: Text -> Maybe Attribute
+onplaying = Just . Attr.onplaying . textValue
 
 
-onresize :: Text -> Attribute
-onresize = Attr.onresize . textValue
+onprogress :: Text -> Maybe Attribute
+onprogress = Just . Attr.onprogress . textValue
 
 
-onscroll :: Text -> Attribute
-onscroll = Attr.onscroll . textValue
+onpropstate :: Text -> Maybe Attribute
+onpropstate = Just . Attr.onpropstate . textValue
 
 
-onseeked :: Text -> Attribute
-onseeked = Attr.onseeked . textValue
+onratechange :: Text -> Maybe Attribute
+onratechange = Just . Attr.onratechange . textValue
 
 
-onseeking :: Text -> Attribute
-onseeking = Attr.onseeking . textValue
+onreadystatechange :: Text -> Maybe Attribute
+onreadystatechange = Just . Attr.onreadystatechange . textValue
 
 
-onselect :: Text -> Attribute
-onselect = Attr.onselect . textValue
+onredo :: Text -> Maybe Attribute
+onredo = Just . Attr.onredo . textValue
 
 
-onstalled :: Text -> Attribute
-onstalled = Attr.onstalled . textValue
+onresize :: Text -> Maybe Attribute
+onresize = Just . Attr.onresize . textValue
 
 
-onstorage :: Text -> Attribute
-onstorage = Attr.onstorage . textValue
+onscroll :: Text -> Maybe Attribute
+onscroll = Just . Attr.onscroll . textValue
 
 
-onsubmit :: Text -> Attribute
-onsubmit = Attr.onsubmit . textValue
+onseeked :: Text -> Maybe Attribute
+onseeked = Just . Attr.onseeked . textValue
 
 
-onsuspend :: Text -> Attribute
-onsuspend = Attr.onsuspend . textValue
+onseeking :: Text -> Maybe Attribute
+onseeking = Just . Attr.onseeking . textValue
 
 
-ontimeupdate :: Text -> Attribute
-ontimeupdate = Attr.ontimeupdate . textValue
+onselect :: Text -> Maybe Attribute
+onselect = Just . Attr.onselect . textValue
 
 
-onundo :: Text -> Attribute
-onundo = Attr.onundo . textValue
+onstalled :: Text -> Maybe Attribute
+onstalled = Just . Attr.onstalled . textValue
 
 
-onunload :: Text -> Attribute
-onunload = Attr.onunload . textValue
+onstorage :: Text -> Maybe Attribute
+onstorage = Just . Attr.onstorage . textValue
 
 
-onvolumechange :: Text -> Attribute
-onvolumechange = Attr.onvolumechange . textValue
+onsubmit :: Text -> Maybe Attribute
+onsubmit = Just . Attr.onsubmit . textValue
 
 
-onwaiting :: Text -> Attribute
-onwaiting = Attr.onwaiting . textValue
+onsuspend :: Text -> Maybe Attribute
+onsuspend = Just . Attr.onsuspend . textValue
 
 
-open :: Text -> Attribute
-open = Attr.open . textValue
+ontimeupdate :: Text -> Maybe Attribute
+ontimeupdate = Just . Attr.ontimeupdate . textValue
 
 
-optimum :: Text -> Attribute
-optimum = Attr.optimum . textValue
+onundo :: Text -> Maybe Attribute
+onundo = Just . Attr.onundo . textValue
 
 
-pattern :: Text -> Attribute
-pattern = Attr.pattern . textValue
+onunload :: Text -> Maybe Attribute
+onunload = Just . Attr.onunload . textValue
 
 
-ping :: Text -> Attribute
-ping = Attr.ping . textValue
+onvolumechange :: Text -> Maybe Attribute
+onvolumechange = Just . Attr.onvolumechange . textValue
 
 
-placeholder :: Text -> Attribute
-placeholder = Attr.placeholder . textValue
+onwaiting :: Text -> Maybe Attribute
+onwaiting = Just . Attr.onwaiting . textValue
 
 
-preload :: Text -> Attribute
-preload = Attr.preload . textValue
+open :: Bool -> Maybe Attribute
+open True  = Just $ Attr.open "open"
+open False = Nothing
 
 
-pubdate :: Text -> Attribute
-pubdate = Attr.pubdate . textValue
+optimum :: Text -> Maybe Attribute
+optimum = Just . Attr.optimum . textValue
 
 
-radiogroup :: Text -> Attribute
-radiogroup = Attr.radiogroup . textValue
+pattern :: Text -> Maybe Attribute
+pattern = Just . Attr.pattern . textValue
 
 
-readonly :: Text -> Attribute
-readonly = Attr.readonly . textValue
+ping :: Text -> Maybe Attribute
+ping = Just . Attr.ping . textValue
 
 
-rel :: Text -> Attribute
-rel = Attr.rel . textValue
+placeholder :: Text -> Maybe Attribute
+placeholder = Just . Attr.placeholder . textValue
 
 
-required :: Text -> Attribute
-required = Attr.required . textValue
+playsinline :: Bool -> Maybe Attribute
+playsinline True  = Just $ customAttribute "playsinline" "playsinline"
+playsinline False = Nothing
 
 
-reversed :: Text -> Attribute
-reversed = Attr.reversed . textValue
+preload :: Text -> Maybe Attribute
+preload = Just . Attr.preload . textValue
 
 
-role :: Text -> Attribute
-role = Attr.role . textValue
+pubdate :: Text -> Maybe Attribute
+pubdate = Just . Attr.pubdate . textValue
 
 
-rows :: Text -> Attribute
-rows = Attr.rows . textValue
+radiogroup :: Text -> Maybe Attribute
+radiogroup = Just . Attr.radiogroup . textValue
 
 
-rowspan :: Text -> Attribute
-rowspan = Attr.rowspan . textValue
+readonly :: Bool -> Maybe Attribute
+readonly True  = Just $ Attr.readonly "readonly"
+readonly False = Nothing
 
 
-sandbox :: Text -> Attribute
-sandbox = Attr.sandbox . textValue
+rel :: Text -> Maybe Attribute
+rel = Just . Attr.rel . textValue
 
 
-scope :: Text -> Attribute
-scope = Attr.scope . textValue
+required :: Bool -> Maybe Attribute
+required True  = Just $ Attr.required "required"
+required False = Nothing
 
 
-scoped :: Text -> Attribute
-scoped = Attr.scoped . textValue
+reversed :: Bool -> Maybe Attribute
+reversed True  = Just $ Attr.reversed "reversed"
+reversed False = Nothing
 
 
-seamless :: Text -> Attribute
-seamless = Attr.seamless . textValue
+role :: Text -> Maybe Attribute
+role = Just . Attr.role . textValue
 
 
-selected :: Text -> Attribute
-selected = Attr.selected . textValue
+rows :: Text -> Maybe Attribute
+rows = Just . Attr.rows . textValue
 
 
-shape :: Text -> Attribute
-shape = Attr.shape . textValue
+rowspan :: Text -> Maybe Attribute
+rowspan = Just . Attr.rowspan . textValue
 
 
-size :: Text -> Attribute
-size = Attr.size . textValue
+sandbox :: Text -> Maybe Attribute
+sandbox = Just . Attr.sandbox . textValue
 
 
-sizes :: Text -> Attribute
-sizes = Attr.sizes . textValue
+scope :: Text -> Maybe Attribute
+scope = Just . Attr.scope . textValue
 
 
-span :: Text -> Attribute
-span = Attr.span . textValue
+scoped :: Bool -> Maybe Attribute
+scoped True  = Just $ Attr.scoped "scoped"
+scoped False = Nothing
 
 
-spellcheck :: Text -> Attribute
-spellcheck = Attr.spellcheck . textValue
+seamless :: Bool -> Maybe Attribute
+seamless True  = Just $ Attr.seamless "seamless"
+seamless False = Nothing
 
 
-src :: Text -> Attribute
-src = Attr.src . textValue
+selected :: Bool -> Maybe Attribute
+selected True  = Just $ Attr.selected "selected"
+selected False = Nothing
 
 
-srcdoc :: Text -> Attribute
-srcdoc = Attr.srcdoc . textValue
+shape :: Text -> Maybe Attribute
+shape = Just . Attr.shape . textValue
 
 
-start :: Text -> Attribute
-start = Attr.start . textValue
+size :: Text -> Maybe Attribute
+size = Just . Attr.size . textValue
 
 
-step :: Text -> Attribute
-step = Attr.step . textValue
+sizes :: Text -> Maybe Attribute
+sizes = Just . Attr.sizes . textValue
 
 
-style :: [Text] -> Attribute
-style = Attr.style . textValue . unwords
+span :: Text -> Maybe Attribute
+span = Just . Attr.span . textValue
 
 
-subject :: Text -> Attribute
-subject = Attr.subject . textValue
+spellcheck :: Text -> Maybe Attribute
+spellcheck = Just . Attr.spellcheck . textValue
 
 
-summary :: Text -> Attribute
-summary = Attr.summary . textValue
+src :: Text -> Maybe Attribute
+src = Just . Attr.src . textValue
 
 
-tabindex :: Text -> Attribute
-tabindex = Attr.tabindex . textValue
+srcdoc :: Text -> Maybe Attribute
+srcdoc = Just . Attr.srcdoc . textValue
 
 
-target :: Text -> Attribute
-target = Attr.target . textValue
+start :: Text -> Maybe Attribute
+start = Just . Attr.start . textValue
 
 
-title :: Text -> Attribute
-title = Attr.title . textValue
+step :: Text -> Maybe Attribute
+step = Just . Attr.step . textValue
 
 
-type_ :: Text -> Attribute
-type_ = Attr.type_ . textValue
+style :: [Text] -> Maybe Attribute
+style = Just . Attr.style . textValue . unwords
 
 
-usemap :: Text -> Attribute
-usemap = Attr.usemap . textValue
+subject :: Text -> Maybe Attribute
+subject = Just . Attr.subject . textValue
 
 
-value :: Text -> Attribute
-value = Attr.value . textValue
+summary :: Text -> Maybe Attribute
+summary = Just . Attr.summary . textValue
 
 
-width :: Text -> Attribute
-width = Attr.width . textValue
+tabindex :: Text -> Maybe Attribute
+tabindex = Just . Attr.tabindex . textValue
 
 
-wrap :: Text -> Attribute
-wrap = Attr.wrap . textValue
+target :: Text -> Maybe Attribute
+target = Just . Attr.target . textValue
 
 
-xmlns :: Text -> Attribute
-xmlns = Attr.xmlns . textValue
+title :: Text -> Maybe Attribute
+title = Just . Attr.title . textValue
+
+
+truespeed :: Bool -> Maybe Attribute
+truespeed True  = Just $ customAttribute "truespeed" "truespeed"
+truespeed False = Nothing
+
+
+type_ :: Text -> Maybe Attribute
+type_ = Just . Attr.type_ . textValue
+
+
+typemustmatch :: Bool -> Maybe Attribute
+typemustmatch True  = Just $ customAttribute "typemustmatch" "typemustmatch"
+typemustmatch False = Nothing
+
+
+usemap :: Text -> Maybe Attribute
+usemap = Just . Attr.usemap . textValue
+
+
+value :: Text -> Maybe Attribute
+value = Just . Attr.value . textValue
+
+
+width :: Text -> Maybe Attribute
+width = Just . Attr.width . textValue
+
+
+wrap :: Text -> Maybe Attribute
+wrap = Just . Attr.wrap . textValue
+
+
+xmlns :: Text -> Maybe Attribute
+xmlns = Just . Attr.xmlns . textValue

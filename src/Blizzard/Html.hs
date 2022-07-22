@@ -116,6 +116,7 @@ module Blizzard.Html
     ) where
 
 
+import Prelude (Maybe)
 import Text.Blaze.Html (Attribute, Html)
 
 import qualified Text.Blaze.Html5 as Html
@@ -131,433 +132,433 @@ docTypeHtml :: [Html] -> Html
 docTypeHtml = documentTag Html.docTypeHtml
 
 
-a :: [Attribute] -> [Html] -> Html
+a :: [Maybe Attribute] -> [Html] -> Html
 a = normalTag Html.a
 
 
-abbr :: [Attribute] -> [Html] -> Html
+abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag Html.abbr
 
 
-address :: [Attribute] -> [Html] -> Html
+address :: [Maybe Attribute] -> [Html] -> Html
 address = normalTag Html.address
 
 
-area :: [Attribute] -> Html
+area :: [Maybe Attribute] -> Html
 area = voidTag Html.area
 
 
-article :: [Attribute] -> [Html] -> Html
+article :: [Maybe Attribute] -> [Html] -> Html
 article = normalTag Html.article
 
 
-aside :: [Attribute] -> [Html] -> Html
+aside :: [Maybe Attribute] -> [Html] -> Html
 aside = normalTag Html.aside
 
 
-audio :: [Attribute] -> [Html] -> Html
+audio :: [Maybe Attribute] -> [Html] -> Html
 audio = normalTag Html.audio
 
 
-b :: [Attribute] -> [Html] -> Html
+b :: [Maybe Attribute] -> [Html] -> Html
 b = normalTag Html.b
 
 
-base :: [Attribute] -> Html
+base :: [Maybe Attribute] -> Html
 base = voidTag Html.base
 
 
-bdo :: [Attribute] -> [Html] -> Html
+bdo :: [Maybe Attribute] -> [Html] -> Html
 bdo = normalTag Html.bdo
 
 
-blockquote :: [Attribute] -> [Html] -> Html
+blockquote :: [Maybe Attribute] -> [Html] -> Html
 blockquote = normalTag Html.blockquote
 
 
-body :: [Attribute] -> [Html] -> Html
+body :: [Maybe Attribute] -> [Html] -> Html
 body = normalTag Html.body
 
 
-br :: [Attribute] -> Html
+br :: [Maybe Attribute] -> Html
 br = voidTag Html.br
 
 
-button :: [Attribute] -> [Html] -> Html
+button :: [Maybe Attribute] -> [Html] -> Html
 button = normalTag Html.button
 
 
-canvas :: [Attribute] -> [Html] -> Html
+canvas :: [Maybe Attribute] -> [Html] -> Html
 canvas = normalTag Html.canvas
 
 
-caption :: [Attribute] -> [Html] -> Html
+caption :: [Maybe Attribute] -> [Html] -> Html
 caption = normalTag Html.caption
 
 
-cite :: [Attribute] -> [Html] -> Html
+cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag Html.cite
 
 
-code :: [Attribute] -> [Html] -> Html
+code :: [Maybe Attribute] -> [Html] -> Html
 code = normalTag Html.code
 
 
-col :: [Attribute] -> Html
+col :: [Maybe Attribute] -> Html
 col = voidTag Html.col
 
 
-colgroup :: [Attribute] -> [Html] -> Html
+colgroup :: [Maybe Attribute] -> [Html] -> Html
 colgroup = normalTag Html.colgroup
 
 
-command :: [Attribute] -> [Html] -> Html
+command :: [Maybe Attribute] -> [Html] -> Html
 command = normalTag Html.command
 
 
-datalist :: [Attribute] -> [Html] -> Html
+datalist :: [Maybe Attribute] -> [Html] -> Html
 datalist = normalTag Html.datalist
 
 
-dd :: [Attribute] -> [Html] -> Html
+dd :: [Maybe Attribute] -> [Html] -> Html
 dd = normalTag Html.dd
 
 
-del :: [Attribute] -> [Html] -> Html
+del :: [Maybe Attribute] -> [Html] -> Html
 del = normalTag Html.del
 
 
-details :: [Attribute] -> [Html] -> Html
+details :: [Maybe Attribute] -> [Html] -> Html
 details = normalTag Html.details
 
 
-dfn :: [Attribute] -> [Html] -> Html
+dfn :: [Maybe Attribute] -> [Html] -> Html
 dfn = normalTag Html.dfn
 
 
-div :: [Attribute] -> [Html] -> Html
+div :: [Maybe Attribute] -> [Html] -> Html
 div = normalTag Html.div
 
 
-dl :: [Attribute] -> [Html] -> Html
+dl :: [Maybe Attribute] -> [Html] -> Html
 dl = normalTag Html.dl
 
 
-dt :: [Attribute] -> [Html] -> Html
+dt :: [Maybe Attribute] -> [Html] -> Html
 dt = normalTag Html.dt
 
 
-em :: [Attribute] -> [Html] -> Html
+em :: [Maybe Attribute] -> [Html] -> Html
 em = normalTag Html.em
 
 
-embed :: [Attribute] -> Html
+embed :: [Maybe Attribute] -> Html
 embed = voidTag Html.embed
 
 
-fieldset :: [Attribute] -> [Html] -> Html
+fieldset :: [Maybe Attribute] -> [Html] -> Html
 fieldset = normalTag Html.fieldset
 
 
-figcaption :: [Attribute] -> [Html] -> Html
+figcaption :: [Maybe Attribute] -> [Html] -> Html
 figcaption = normalTag Html.figcaption
 
 
-figure :: [Attribute] -> [Html] -> Html
+figure :: [Maybe Attribute] -> [Html] -> Html
 figure = normalTag Html.figure
 
 
-footer :: [Attribute] -> [Html] -> Html
+footer :: [Maybe Attribute] -> [Html] -> Html
 footer = normalTag Html.footer
 
 
-form :: [Attribute] -> [Html] -> Html
+form :: [Maybe Attribute] -> [Html] -> Html
 form = normalTag Html.form
 
 
-h1 :: [Attribute] -> [Html] -> Html
+h1 :: [Maybe Attribute] -> [Html] -> Html
 h1 = normalTag Html.h1
 
 
-h2 :: [Attribute] -> [Html] -> Html
+h2 :: [Maybe Attribute] -> [Html] -> Html
 h2 = normalTag Html.h2
 
 
-h3 :: [Attribute] -> [Html] -> Html
+h3 :: [Maybe Attribute] -> [Html] -> Html
 h3 = normalTag Html.h3
 
 
-h4 :: [Attribute] -> [Html] -> Html
+h4 :: [Maybe Attribute] -> [Html] -> Html
 h4 = normalTag Html.h4
 
 
-h5 :: [Attribute] -> [Html] -> Html
+h5 :: [Maybe Attribute] -> [Html] -> Html
 h5 = normalTag Html.h5
 
 
-h6 :: [Attribute] -> [Html] -> Html
+h6 :: [Maybe Attribute] -> [Html] -> Html
 h6 = normalTag Html.h6
 
 
-head :: [Attribute] -> [Html] -> Html
+head :: [Maybe Attribute] -> [Html] -> Html
 head = normalTag Html.head
 
 
-header :: [Attribute] -> [Html] -> Html
+header :: [Maybe Attribute] -> [Html] -> Html
 header = normalTag Html.header
 
 
-hgroup :: [Attribute] -> [Html] -> Html
+hgroup :: [Maybe Attribute] -> [Html] -> Html
 hgroup = normalTag Html.hgroup
 
 
-hr :: [Attribute] -> Html
+hr :: [Maybe Attribute] -> Html
 hr = voidTag Html.hr
 
 
-html :: [Attribute] -> [Html] -> Html
+html :: [Maybe Attribute] -> [Html] -> Html
 html = normalTag Html.html
 
 
-i :: [Attribute] -> [Html] -> Html
+i :: [Maybe Attribute] -> [Html] -> Html
 i = normalTag Html.i
 
 
-iframe :: [Attribute] -> [Html] -> Html
+iframe :: [Maybe Attribute] -> [Html] -> Html
 iframe = normalTag Html.iframe
 
 
-img :: [Attribute] -> Html
+img :: [Maybe Attribute] -> Html
 img = voidTag Html.img
 
 
-input :: [Attribute] -> Html
+input :: [Maybe Attribute] -> Html
 input = voidTag Html.input
 
 
-ins :: [Attribute] -> [Html] -> Html
+ins :: [Maybe Attribute] -> [Html] -> Html
 ins = normalTag Html.ins
 
 
-kbd :: [Attribute] -> [Html] -> Html
+kbd :: [Maybe Attribute] -> [Html] -> Html
 kbd = normalTag Html.kbd
 
 
-keygen :: [Attribute] -> Html
+keygen :: [Maybe Attribute] -> Html
 keygen = voidTag Html.keygen
 
 
-label :: [Attribute] -> [Html] -> Html
+label :: [Maybe Attribute] -> [Html] -> Html
 label = normalTag Html.label
 
 
-legend :: [Attribute] -> [Html] -> Html
+legend :: [Maybe Attribute] -> [Html] -> Html
 legend = normalTag Html.legend
 
 
-li :: [Attribute] -> [Html] -> Html
+li :: [Maybe Attribute] -> [Html] -> Html
 li = normalTag Html.li
 
 
-link :: [Attribute] -> Html
+link :: [Maybe Attribute] -> Html
 link = voidTag Html.link
 
 
-main :: [Attribute] -> [Html] -> Html
+main :: [Maybe Attribute] -> [Html] -> Html
 main = normalTag Html.main
 
 
-map :: [Attribute] -> [Html] -> Html
+map :: [Maybe Attribute] -> [Html] -> Html
 map = normalTag Html.map
 
 
-mark :: [Attribute] -> [Html] -> Html
+mark :: [Maybe Attribute] -> [Html] -> Html
 mark = normalTag Html.mark
 
 
-menu :: [Attribute] -> [Html] -> Html
+menu :: [Maybe Attribute] -> [Html] -> Html
 menu = normalTag Html.menu
 
 
-menuitem :: [Attribute] -> Html
+menuitem :: [Maybe Attribute] -> Html
 menuitem = voidTag Html.menuitem
 
 
-meta :: [Attribute] -> Html
+meta :: [Maybe Attribute] -> Html
 meta = voidTag Html.meta
 
 
-meter :: [Attribute] -> [Html] -> Html
+meter :: [Maybe Attribute] -> [Html] -> Html
 meter = normalTag Html.meter
 
 
-nav :: [Attribute] -> [Html] -> Html
+nav :: [Maybe Attribute] -> [Html] -> Html
 nav = normalTag Html.nav
 
 
-noscript :: [Attribute] -> [Html] -> Html
+noscript :: [Maybe Attribute] -> [Html] -> Html
 noscript = normalTag Html.noscript
 
 
-object :: [Attribute] -> [Html] -> Html
+object :: [Maybe Attribute] -> [Html] -> Html
 object = normalTag Html.object
 
 
-ol :: [Attribute] -> [Html] -> Html
+ol :: [Maybe Attribute] -> [Html] -> Html
 ol = normalTag Html.ol
 
 
-optgroup :: [Attribute] -> [Html] -> Html
+optgroup :: [Maybe Attribute] -> [Html] -> Html
 optgroup = normalTag Html.optgroup
 
 
-option :: [Attribute] -> [Html] -> Html
+option :: [Maybe Attribute] -> [Html] -> Html
 option = normalTag Html.option
 
 
-output :: [Attribute] -> [Html] -> Html
+output :: [Maybe Attribute] -> [Html] -> Html
 output = normalTag Html.output
 
 
-p :: [Attribute] -> [Html] -> Html
+p :: [Maybe Attribute] -> [Html] -> Html
 p = normalTag Html.p
 
 
-param :: [Attribute] -> Html
+param :: [Maybe Attribute] -> Html
 param = voidTag Html.param
 
 
-pre :: [Attribute] -> [Html] -> Html
+pre :: [Maybe Attribute] -> [Html] -> Html
 pre = normalTag Html.pre
 
 
-progress :: [Attribute] -> [Html] -> Html
+progress :: [Maybe Attribute] -> [Html] -> Html
 progress = normalTag Html.progress
 
 
-q :: [Attribute] -> [Html] -> Html
+q :: [Maybe Attribute] -> [Html] -> Html
 q = normalTag Html.q
 
 
-rp :: [Attribute] -> [Html] -> Html
+rp :: [Maybe Attribute] -> [Html] -> Html
 rp = normalTag Html.rp
 
 
-rt :: [Attribute] -> [Html] -> Html
+rt :: [Maybe Attribute] -> [Html] -> Html
 rt = normalTag Html.rt
 
 
-ruby :: [Attribute] -> [Html] -> Html
+ruby :: [Maybe Attribute] -> [Html] -> Html
 ruby = normalTag Html.ruby
 
 
-samp :: [Attribute] -> [Html] -> Html
+samp :: [Maybe Attribute] -> [Html] -> Html
 samp = normalTag Html.samp
 
 
-script :: [Attribute] -> [Html] -> Html
+script :: [Maybe Attribute] -> [Html] -> Html
 script = normalTag Html.script
 
 
-section :: [Attribute] -> [Html] -> Html
+section :: [Maybe Attribute] -> [Html] -> Html
 section = normalTag Html.section
 
 
-select :: [Attribute] -> [Html] -> Html
+select :: [Maybe Attribute] -> [Html] -> Html
 select = normalTag Html.select
 
 
-small :: [Attribute] -> [Html] -> Html
+small :: [Maybe Attribute] -> [Html] -> Html
 small = normalTag Html.small
 
 
-source :: [Attribute] -> Html
+source :: [Maybe Attribute] -> Html
 source = voidTag Html.source
 
 
-span :: [Attribute] -> [Html] -> Html
+span :: [Maybe Attribute] -> [Html] -> Html
 span = normalTag Html.span
 
 
-strong :: [Attribute] -> [Html] -> Html
+strong :: [Maybe Attribute] -> [Html] -> Html
 strong = normalTag Html.strong
 
 
-style :: [Attribute] -> [Html] -> Html
+style :: [Maybe Attribute] -> [Html] -> Html
 style = normalTag Html.style
 
 
-sub :: [Attribute] -> [Html] -> Html
+sub :: [Maybe Attribute] -> [Html] -> Html
 sub = normalTag Html.sub
 
 
-summary :: [Attribute] -> [Html] -> Html
+summary :: [Maybe Attribute] -> [Html] -> Html
 summary = normalTag Html.summary
 
 
-sup :: [Attribute] -> [Html] -> Html
+sup :: [Maybe Attribute] -> [Html] -> Html
 sup = normalTag Html.sup
 
 
-table :: [Attribute] -> [Html] -> Html
+table :: [Maybe Attribute] -> [Html] -> Html
 table = normalTag Html.table
 
 
-tbody :: [Attribute] -> [Html] -> Html
+tbody :: [Maybe Attribute] -> [Html] -> Html
 tbody = normalTag Html.tbody
 
 
-td :: [Attribute] -> [Html] -> Html
+td :: [Maybe Attribute] -> [Html] -> Html
 td = normalTag Html.td
 
 
-textarea :: [Attribute] -> [Html] -> Html
+textarea :: [Maybe Attribute] -> [Html] -> Html
 textarea = normalTag Html.textarea
 
 
-tfoot :: [Attribute] -> [Html] -> Html
+tfoot :: [Maybe Attribute] -> [Html] -> Html
 tfoot = normalTag Html.tfoot
 
 
-th :: [Attribute] -> [Html] -> Html
+th :: [Maybe Attribute] -> [Html] -> Html
 th = normalTag Html.th
 
 
-thead :: [Attribute] -> [Html] -> Html
+thead :: [Maybe Attribute] -> [Html] -> Html
 thead = normalTag Html.thead
 
 
-time :: [Attribute] -> [Html] -> Html
+time :: [Maybe Attribute] -> [Html] -> Html
 time = normalTag Html.time
 
 
-title :: [Attribute] -> [Html] -> Html
+title :: [Maybe Attribute] -> [Html] -> Html
 title = normalTag Html.title
 
 
-tr :: [Attribute] -> [Html] -> Html
+tr :: [Maybe Attribute] -> [Html] -> Html
 tr = normalTag Html.tr
 
 
-track :: [Attribute] -> Html
+track :: [Maybe Attribute] -> Html
 track = voidTag Html.track
 
 
-u :: [Attribute] -> [Html] -> Html
+u :: [Maybe Attribute] -> [Html] -> Html
 u = normalTag Html.u
 
 
-ul :: [Attribute] -> [Html] -> Html
+ul :: [Maybe Attribute] -> [Html] -> Html
 ul = normalTag Html.ul
 
 
-var :: [Attribute] -> [Html] -> Html
+var :: [Maybe Attribute] -> [Html] -> Html
 var = normalTag Html.var
 
 
-video :: [Attribute] -> [Html] -> Html
+video :: [Maybe Attribute] -> [Html] -> Html
 video = normalTag Html.video
 
 
-wbr :: [Attribute] -> Html
+wbr :: [Maybe Attribute] -> Html
 wbr = voidTag Html.wbr

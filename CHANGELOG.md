@@ -1,5 +1,9 @@
 # Revision history for blizzard-html
 
+## 0.4.0.0 -- 2022-07-22
+
+* Added additional attributes.
+
 ## 0.3.0.0 -- 2022-07-22
 
 * Added wrappers around attribute functions.
