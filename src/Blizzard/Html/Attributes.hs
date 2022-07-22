@@ -90,6 +90,7 @@ module Blizzard.Html.Attributes
     , onforminput
     , onhaschange
     , oninput
+    , oninvalid
     , onkeydown
     , onkeyup
     , onload
