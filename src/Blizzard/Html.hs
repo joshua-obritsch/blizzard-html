@@ -118,446 +118,446 @@ module Blizzard.Html
 
 import Text.Blaze.Html (Attribute, Html)
 
-import qualified Text.Blaze.Html5 as H
+import qualified Text.Blaze.Html5 as Html
 
 import Blizzard.Internal.Html (documentTag, normalTag, voidTag)
 
 
 docType :: Html
-docType = H.docType
+docType = Html.docType
 
 
 docTypeHtml :: [Html] -> Html
-docTypeHtml = documentTag H.docTypeHtml
+docTypeHtml = documentTag Html.docTypeHtml
 
 
 a :: [Attribute] -> [Html] -> Html
-a = normalTag H.a
+a = normalTag Html.a
 
 
 abbr :: [Attribute] -> [Html] -> Html
-abbr = normalTag H.abbr
+abbr = normalTag Html.abbr
 
 
 address :: [Attribute] -> [Html] -> Html
-address = normalTag H.address
+address = normalTag Html.address
 
 
 area :: [Attribute] -> Html
-area = voidTag H.area
+area = voidTag Html.area
 
 
 article :: [Attribute] -> [Html] -> Html
-article = normalTag H.article
+article = normalTag Html.article
 
 
 aside :: [Attribute] -> [Html] -> Html
-aside = normalTag H.aside
+aside = normalTag Html.aside
 
 
 audio :: [Attribute] -> [Html] -> Html
-audio = normalTag H.audio
+audio = normalTag Html.audio
 
 
 b :: [Attribute] -> [Html] -> Html
-b = normalTag H.b
+b = normalTag Html.b
 
 
 base :: [Attribute] -> Html
-base = voidTag H.base
+base = voidTag Html.base
 
 
 bdo :: [Attribute] -> [Html] -> Html
-bdo = normalTag H.bdo
+bdo = normalTag Html.bdo
 
 
 blockquote :: [Attribute] -> [Html] -> Html
-blockquote = normalTag H.blockquote
+blockquote = normalTag Html.blockquote
 
 
 body :: [Attribute] -> [Html] -> Html
-body = normalTag H.body
+body = normalTag Html.body
 
 
 br :: [Attribute] -> Html
-br = voidTag H.br
+br = voidTag Html.br
 
 
 button :: [Attribute] -> [Html] -> Html
-button = normalTag H.button
+button = normalTag Html.button
 
 
 canvas :: [Attribute] -> [Html] -> Html
-canvas = normalTag H.canvas
+canvas = normalTag Html.canvas
 
 
 caption :: [Attribute] -> [Html] -> Html
-caption = normalTag H.caption
+caption = normalTag Html.caption
 
 
 cite :: [Attribute] -> [Html] -> Html
-cite = normalTag H.cite
+cite = normalTag Html.cite
 
 
 code :: [Attribute] -> [Html] -> Html
-code = normalTag H.code
+code = normalTag Html.code
 
 
 col :: [Attribute] -> Html
-col = voidTag H.col
+col = voidTag Html.col
 
 
 colgroup :: [Attribute] -> [Html] -> Html
-colgroup = normalTag H.colgroup
+colgroup = normalTag Html.colgroup
 
 
 command :: [Attribute] -> [Html] -> Html
-command = normalTag H.command
+command = normalTag Html.command
 
 
 datalist :: [Attribute] -> [Html] -> Html
-datalist = normalTag H.datalist
+datalist = normalTag Html.datalist
 
 
 dd :: [Attribute] -> [Html] -> Html
-dd = normalTag H.dd
+dd = normalTag Html.dd
 
 
 del :: [Attribute] -> [Html] -> Html
-del = normalTag H.del
+del = normalTag Html.del
 
 
 details :: [Attribute] -> [Html] -> Html
-details = normalTag H.details
+details = normalTag Html.details
 
 
 dfn :: [Attribute] -> [Html] -> Html
-dfn = normalTag H.dfn
+dfn = normalTag Html.dfn
 
 
 div :: [Attribute] -> [Html] -> Html
-div = normalTag H.div
+div = normalTag Html.div
 
 
 dl :: [Attribute] -> [Html] -> Html
-dl = normalTag H.dl
+dl = normalTag Html.dl
 
 
 dt :: [Attribute] -> [Html] -> Html
-dt = normalTag H.dt
+dt = normalTag Html.dt
 
 
 em :: [Attribute] -> [Html] -> Html
-em = normalTag H.em
+em = normalTag Html.em
 
 
 embed :: [Attribute] -> Html
-embed = voidTag H.embed
+embed = voidTag Html.embed
 
 
 fieldset :: [Attribute] -> [Html] -> Html
-fieldset = normalTag H.fieldset
+fieldset = normalTag Html.fieldset
 
 
 figcaption :: [Attribute] -> [Html] -> Html
-figcaption = normalTag H.figcaption
+figcaption = normalTag Html.figcaption
 
 
 figure :: [Attribute] -> [Html] -> Html
-figure = normalTag H.figure
+figure = normalTag Html.figure
 
 
 footer :: [Attribute] -> [Html] -> Html
-footer = normalTag H.footer
+footer = normalTag Html.footer
 
 
 form :: [Attribute] -> [Html] -> Html
-form = normalTag H.form
+form = normalTag Html.form
 
 
 h1 :: [Attribute] -> [Html] -> Html
-h1 = normalTag H.h1
+h1 = normalTag Html.h1
 
 
 h2 :: [Attribute] -> [Html] -> Html
-h2 = normalTag H.h2
+h2 = normalTag Html.h2
 
 
 h3 :: [Attribute] -> [Html] -> Html
-h3 = normalTag H.h3
+h3 = normalTag Html.h3
 
 
 h4 :: [Attribute] -> [Html] -> Html
-h4 = normalTag H.h4
+h4 = normalTag Html.h4
 
 
 h5 :: [Attribute] -> [Html] -> Html
-h5 = normalTag H.h5
+h5 = normalTag Html.h5
 
 
 h6 :: [Attribute] -> [Html] -> Html
-h6 = normalTag H.h6
+h6 = normalTag Html.h6
 
 
 head :: [Attribute] -> [Html] -> Html
-head = normalTag H.head
+head = normalTag Html.head
 
 
 header :: [Attribute] -> [Html] -> Html
-header = normalTag H.header
+header = normalTag Html.header
 
 
 hgroup :: [Attribute] -> [Html] -> Html
-hgroup = normalTag H.hgroup
+hgroup = normalTag Html.hgroup
 
 
 hr :: [Attribute] -> Html
-hr = voidTag H.hr
+hr = voidTag Html.hr
 
 
 html :: [Attribute] -> [Html] -> Html
-html = normalTag H.html
+html = normalTag Html.html
 
 
 i :: [Attribute] -> [Html] -> Html
-i = normalTag H.i
+i = normalTag Html.i
 
 
 iframe :: [Attribute] -> [Html] -> Html
-iframe = normalTag H.iframe
+iframe = normalTag Html.iframe
 
 
 img :: [Attribute] -> Html
-img = voidTag H.img
+img = voidTag Html.img
 
 
 input :: [Attribute] -> Html
-input = voidTag H.input
+input = voidTag Html.input
 
 
 ins :: [Attribute] -> [Html] -> Html
-ins = normalTag H.ins
+ins = normalTag Html.ins
 
 
 kbd :: [Attribute] -> [Html] -> Html
-kbd = normalTag H.kbd
+kbd = normalTag Html.kbd
 
 
 keygen :: [Attribute] -> Html
-keygen = voidTag H.keygen
+keygen = voidTag Html.keygen
 
 
 label :: [Attribute] -> [Html] -> Html
-label = normalTag H.label
+label = normalTag Html.label
 
 
 legend :: [Attribute] -> [Html] -> Html
-legend = normalTag H.legend
+legend = normalTag Html.legend
 
 
 li :: [Attribute] -> [Html] -> Html
-li = normalTag H.li
+li = normalTag Html.li
 
 
 link :: [Attribute] -> Html
-link = voidTag H.link
+link = voidTag Html.link
 
 
 main :: [Attribute] -> [Html] -> Html
-main = normalTag H.main
+main = normalTag Html.main
 
 
 map :: [Attribute] -> [Html] -> Html
-map = normalTag H.map
+map = normalTag Html.map
 
 
 mark :: [Attribute] -> [Html] -> Html
-mark = normalTag H.mark
+mark = normalTag Html.mark
 
 
 menu :: [Attribute] -> [Html] -> Html
-menu = normalTag H.menu
+menu = normalTag Html.menu
 
 
 menuitem :: [Attribute] -> Html
-menuitem = voidTag H.menuitem
+menuitem = voidTag Html.menuitem
 
 
 meta :: [Attribute] -> Html
-meta = voidTag H.meta
+meta = voidTag Html.meta
 
 
 meter :: [Attribute] -> [Html] -> Html
-meter = normalTag H.meter
+meter = normalTag Html.meter
 
 
 nav :: [Attribute] -> [Html] -> Html
-nav = normalTag H.nav
+nav = normalTag Html.nav
 
 
 noscript :: [Attribute] -> [Html] -> Html
-noscript = normalTag H.noscript
+noscript = normalTag Html.noscript
 
 
 object :: [Attribute] -> [Html] -> Html
-object = normalTag H.object
+object = normalTag Html.object
 
 
 ol :: [Attribute] -> [Html] -> Html
-ol = normalTag H.ol
+ol = normalTag Html.ol
 
 
 optgroup :: [Attribute] -> [Html] -> Html
-optgroup = normalTag H.optgroup
+optgroup = normalTag Html.optgroup
 
 
 option :: [Attribute] -> [Html] -> Html
-option = normalTag H.option
+option = normalTag Html.option
 
 
 output :: [Attribute] -> [Html] -> Html
-output = normalTag H.output
+output = normalTag Html.output
 
 
 p :: [Attribute] -> [Html] -> Html
-p = normalTag H.p
+p = normalTag Html.p
 
 
 param :: [Attribute] -> Html
-param = voidTag H.param
+param = voidTag Html.param
 
 
 pre :: [Attribute] -> [Html] -> Html
-pre = normalTag H.pre
+pre = normalTag Html.pre
 
 
 progress :: [Attribute] -> [Html] -> Html
-progress = normalTag H.progress
+progress = normalTag Html.progress
 
 
 q :: [Attribute] -> [Html] -> Html
-q = normalTag H.q
+q = normalTag Html.q
 
 
 rp :: [Attribute] -> [Html] -> Html
-rp = normalTag H.rp
+rp = normalTag Html.rp
 
 
 rt :: [Attribute] -> [Html] -> Html
-rt = normalTag H.rt
+rt = normalTag Html.rt
 
 
 ruby :: [Attribute] -> [Html] -> Html
-ruby = normalTag H.ruby
+ruby = normalTag Html.ruby
 
 
 samp :: [Attribute] -> [Html] -> Html
-samp = normalTag H.samp
+samp = normalTag Html.samp
 
 
 script :: [Attribute] -> [Html] -> Html
-script = normalTag H.script
+script = normalTag Html.script
 
 
 section :: [Attribute] -> [Html] -> Html
-section = normalTag H.section
+section = normalTag Html.section
 
 
 select :: [Attribute] -> [Html] -> Html
-select = normalTag H.select
+select = normalTag Html.select
 
 
 small :: [Attribute] -> [Html] -> Html
-small = normalTag H.small
+small = normalTag Html.small
 
 
 source :: [Attribute] -> Html
-source = voidTag H.source
+source = voidTag Html.source
 
 
 span :: [Attribute] -> [Html] -> Html
-span = normalTag H.span
+span = normalTag Html.span
 
 
 strong :: [Attribute] -> [Html] -> Html
-strong = normalTag H.strong
+strong = normalTag Html.strong
 
 
 style :: [Attribute] -> [Html] -> Html
-style = normalTag H.style
+style = normalTag Html.style
 
 
 sub :: [Attribute] -> [Html] -> Html
-sub = normalTag H.sub
+sub = normalTag Html.sub
 
 
 summary :: [Attribute] -> [Html] -> Html
-summary = normalTag H.summary
+summary = normalTag Html.summary
 
 
 sup :: [Attribute] -> [Html] -> Html
-sup = normalTag H.sup
+sup = normalTag Html.sup
 
 
 table :: [Attribute] -> [Html] -> Html
-table = normalTag H.table
+table = normalTag Html.table
 
 
 tbody :: [Attribute] -> [Html] -> Html
-tbody = normalTag H.tbody
+tbody = normalTag Html.tbody
 
 
 td :: [Attribute] -> [Html] -> Html
-td = normalTag H.td
+td = normalTag Html.td
 
 
 textarea :: [Attribute] -> [Html] -> Html
-textarea = normalTag H.textarea
+textarea = normalTag Html.textarea
 
 
 tfoot :: [Attribute] -> [Html] -> Html
-tfoot = normalTag H.tfoot
+tfoot = normalTag Html.tfoot
 
 
 th :: [Attribute] -> [Html] -> Html
-th = normalTag H.th
+th = normalTag Html.th
 
 
 thead :: [Attribute] -> [Html] -> Html
-thead = normalTag H.thead
+thead = normalTag Html.thead
 
 
 time :: [Attribute] -> [Html] -> Html
-time = normalTag H.time
+time = normalTag Html.time
 
 
 title :: [Attribute] -> [Html] -> Html
-title = normalTag H.title
+title = normalTag Html.title
 
 
 tr :: [Attribute] -> [Html] -> Html
-tr = normalTag H.tr
+tr = normalTag Html.tr
 
 
 track :: [Attribute] -> Html
-track = voidTag H.track
+track = voidTag Html.track
 
 
 u :: [Attribute] -> [Html] -> Html
-u = normalTag H.u
+u = normalTag Html.u
 
 
 ul :: [Attribute] -> [Html] -> Html
-ul = normalTag H.ul
+ul = normalTag Html.ul
 
 
 var :: [Attribute] -> [Html] -> Html
-var = normalTag H.var
+var = normalTag Html.var
 
 
 video :: [Attribute] -> [Html] -> Html
-video = normalTag H.video
+video = normalTag Html.video
 
 
 wbr :: [Attribute] -> Html
-wbr = voidTag H.wbr
+wbr = voidTag Html.wbr
