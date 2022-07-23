@@ -1,3 +1,4 @@
+{-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Html.Attributes
@@ -126,14 +127,24 @@ module Blizzard.Html.Attributes
     , width
     , wrap
 
-    , onbeforeonload
+    , onauxclick
+    , onafterprint
+    , onbeforematch
     , onbeforeprint
+    , onbeforeunload
     , onblur
+    , oncancel
     , oncanplay
     , oncanplaythrough
     , onchange
     , onclick
+    , onclose
+    , oncontextlost
     , oncontextmenu
+    , oncontextrestored
+    , oncopy
+    , oncuechange
+    , oncut
     , ondblclick
     , ondrag
     , ondragend
@@ -147,60 +158,66 @@ module Blizzard.Html.Attributes
     , onended
     , onerror
     , onfocus
-    , onformchange
-    , onforminput
-    , onhaschange
+    , onformdata
+    , onhashchange
     , oninput
     , oninvalid
     , onkeydown
+    , onkeypress
     , onkeyup
+    , onlanguagechange
     , onload
     , onloadeddata
     , onloadedmetadata
     , onloadstart
     , onmessage
+    , onmessageerror
     , onmousedown
+    , onmouseenter
+    , onmouseleave
     , onmousemove
     , onmouseout
     , onmouseover
     , onmouseup
-    , onmousewheel
+    , onoffline
     , ononline
     , onpagehide
     , onpageshow
+    , onpaste
     , onpause
     , onplay
     , onplaying
+    , onpopstate
     , onprogress
-    , onpropstate
     , onratechange
-    , onreadystatechange
-    , onredo
+    , onreset
     , onresize
+    , onrejectionhandled
     , onscroll
+    , onsecuritypolicyviolation
     , onseeked
     , onseeking
     , onselect
+    , onslotchange
     , onstalled
     , onstorage
     , onsubmit
     , onsuspend
     , ontimeupdate
-    , onundo
+    , ontoggle
+    , onunhandledrejection
     , onunload
     , onvolumechange
     , onwaiting
+    , onwheel
 
     , css
     ) where
 
 
 import Data.Text (Text, unwords)
-import Prelude hiding (id, max, min, span, unwords)
-import Text.Blaze.Html (Attribute, customAttribute, textValue)
-import Text.Blaze.Internal (attribute)
-
-import qualified Text.Blaze.Html5.Attributes as Attr
+import Prelude (($), (.), Bool, Maybe)
+import Text.Blaze.Internal (Attribute, attribute)
 
 import Blizzard.Internal.Html (boolAttribute, textAttribute)
 
@@ -701,263 +718,337 @@ wrap :: Text -> Maybe Attribute
 wrap = textAttribute $ attribute "wrap" " wrap=\""
 
 
+onauxclick :: Text -> Maybe Attribute
+onauxclick = textAttribute $ attribute "onauxclick" " onauxclick=\""
 
-onbeforeonload :: Text -> Maybe Attribute
-onbeforeonload = textAttribute Attr.onbeforeonload
+
+onafterprint :: Text -> Maybe Attribute
+onafterprint = textAttribute $ attribute "onafterprint" " onafterprint=\""
+
+
+onbeforematch :: Text -> Maybe Attribute
+onbeforematch = textAttribute $ attribute "onbeforematch" " onbeforematch=\""
 
 
 onbeforeprint :: Text -> Maybe Attribute
-onbeforeprint = textAttribute Attr.onbeforeprint
+onbeforeprint = textAttribute $ attribute "onbeforeprint" " onbeforeprint=\""
+
+
+onbeforeunload :: Text -> Maybe Attribute
+onbeforeunload = textAttribute $ attribute "onbeforeunload" " onbeforeunload=\""
 
 
 onblur :: Text -> Maybe Attribute
-onblur = textAttribute Attr.onblur
+onblur = textAttribute $ attribute "onblur" " onblur=\""
+
+
+oncancel :: Text -> Maybe Attribute
+oncancel = textAttribute $ attribute "oncancel" " oncancel=\""
 
 
 oncanplay :: Text -> Maybe Attribute
-oncanplay = textAttribute Attr.oncanplay
+oncanplay = textAttribute $ attribute "oncanplay" " oncanplay=\""
 
 
 oncanplaythrough :: Text -> Maybe Attribute
-oncanplaythrough = textAttribute Attr.oncanplaythrough
+oncanplaythrough = textAttribute $ attribute "oncanplaythrough" " oncanplaythrough=\""
 
 
 onchange :: Text -> Maybe Attribute
-onchange = textAttribute Attr.onchange
+onchange = textAttribute $ attribute "onchange" " onchange=\""
 
 
 onclick :: Text -> Maybe Attribute
-onclick = textAttribute Attr.onclick
+onclick = textAttribute $ attribute "onclick" " onclick=\""
+
+
+onclose :: Text -> Maybe Attribute
+onclose = textAttribute $ attribute "onclose" " onclose=\""
+
+
+oncontextlost :: Text -> Maybe Attribute
+oncontextlost = textAttribute $ attribute "oncontextlost" " oncontextlost=\""
 
 
 oncontextmenu :: Text -> Maybe Attribute
-oncontextmenu = textAttribute Attr.oncontextmenu
+oncontextmenu = textAttribute $ attribute "oncontextmenu" " oncontextmenu=\""
+
+
+oncontextrestored :: Text -> Maybe Attribute
+oncontextrestored = textAttribute $ attribute "oncontextrestored" " oncontextrestored=\""
+
+
+oncopy :: Text -> Maybe Attribute
+oncopy = textAttribute $ attribute "oncopy" " oncopy=\""
+
+
+oncuechange :: Text -> Maybe Attribute
+oncuechange = textAttribute $ attribute "oncuechange" " oncuechange=\""
+
+
+oncut :: Text -> Maybe Attribute
+oncut = textAttribute $ attribute "oncut" " oncut=\""
 
 
 ondblclick :: Text -> Maybe Attribute
-ondblclick = textAttribute Attr.ondblclick
+ondblclick = textAttribute $ attribute "ondblclick" " ondblclick=\""
 
 
 ondrag :: Text -> Maybe Attribute
-ondrag = textAttribute Attr.ondrag
+ondrag = textAttribute $ attribute "ondrag" " ondrag=\""
 
 
 ondragend :: Text -> Maybe Attribute
-ondragend = textAttribute Attr.ondragend
+ondragend = textAttribute $ attribute "ondragend" " ondragend=\""
 
 
 ondragenter :: Text -> Maybe Attribute
-ondragenter = textAttribute Attr.ondragenter
+ondragenter = textAttribute $ attribute "ondragenter" " ondragenter=\""
 
 
 ondragleave :: Text -> Maybe Attribute
-ondragleave = textAttribute Attr.ondragleave
+ondragleave = textAttribute $ attribute "ondragleave" " ondragleave=\""
 
 
 ondragover :: Text -> Maybe Attribute
-ondragover = textAttribute Attr.ondragover
+ondragover = textAttribute $ attribute "ondragover" " ondragover=\""
 
 
 ondragstart :: Text -> Maybe Attribute
-ondragstart = textAttribute Attr.ondragstart
+ondragstart = textAttribute $ attribute "ondragstart" " ondragstart=\""
 
 
 ondrop :: Text -> Maybe Attribute
-ondrop = textAttribute Attr.ondrop
+ondrop = textAttribute $ attribute "ondrop" " ondrop=\""
 
 
 ondurationchange :: Text -> Maybe Attribute
-ondurationchange = textAttribute Attr.ondurationchange
+ondurationchange = textAttribute $ attribute "ondurationchange" " ondurationchange=\""
 
 
 onemptied :: Text -> Maybe Attribute
-onemptied = textAttribute Attr.onemptied
+onemptied = textAttribute $ attribute "onemptied" " onemptied=\""
 
 
 onended :: Text -> Maybe Attribute
-onended = textAttribute Attr.onended
+onended = textAttribute $ attribute "onended" " onended=\""
 
 
 onerror :: Text -> Maybe Attribute
-onerror = textAttribute Attr.onerror
+onerror = textAttribute $ attribute "onerror" " onerror=\""
 
 
 onfocus :: Text -> Maybe Attribute
-onfocus = textAttribute Attr.onfocus
+onfocus = textAttribute $ attribute "onfocus" " onfocus=\""
 
 
-onformchange :: Text -> Maybe Attribute
-onformchange = textAttribute Attr.onformchange
+onformdata :: Text -> Maybe Attribute
+onformdata = textAttribute $ attribute "onformdata" " onformdata=\""
 
 
-onforminput :: Text -> Maybe Attribute
-onforminput = textAttribute Attr.onforminput
-
-
-onhaschange :: Text -> Maybe Attribute
-onhaschange = textAttribute Attr.onhaschange
+onhashchange :: Text -> Maybe Attribute
+onhashchange = textAttribute $ attribute "onhashchange" " onhashchange=\""
 
 
 oninput :: Text -> Maybe Attribute
-oninput = textAttribute Attr.oninput
+oninput = textAttribute $ attribute "oninput" " oninput=\""
 
 
 oninvalid :: Text -> Maybe Attribute
-oninvalid = textAttribute Attr.oninvalid
+oninvalid = textAttribute $ attribute "oninvalid" " oninvalid=\""
 
 
 onkeydown :: Text -> Maybe Attribute
-onkeydown = textAttribute Attr.onkeydown
+onkeydown = textAttribute $ attribute "onkeydown" " onkeydown=\""
+
+
+onkeypress :: Text -> Maybe Attribute
+onkeypress = textAttribute $ attribute "onkeypress" " onkeypress=\""
 
 
 onkeyup :: Text -> Maybe Attribute
-onkeyup = textAttribute Attr.onkeyup
+onkeyup = textAttribute $ attribute "onkeyup" " onkeyup=\""
+
+
+onlanguagechange :: Text -> Maybe Attribute
+onlanguagechange = textAttribute $ attribute "onlanguagechange" " onlanguagechange=\""
 
 
 onload :: Text -> Maybe Attribute
-onload = textAttribute Attr.onload
+onload = textAttribute $ attribute "onload" " onload=\""
 
 
 onloadeddata :: Text -> Maybe Attribute
-onloadeddata = textAttribute Attr.onloadeddata
+onloadeddata = textAttribute $ attribute "onloadeddata" " onloadeddata=\""
 
 
 onloadedmetadata :: Text -> Maybe Attribute
-onloadedmetadata = textAttribute Attr.onloadedmetadata
+onloadedmetadata = textAttribute $ attribute "onloadedmetadata" " onloadedmetadata=\""
 
 
 onloadstart :: Text -> Maybe Attribute
-onloadstart = textAttribute Attr.onloadstart
+onloadstart = textAttribute $ attribute "onloadstart" " onloadstart=\""
 
 
 onmessage :: Text -> Maybe Attribute
-onmessage = textAttribute Attr.onmessage
+onmessage = textAttribute $ attribute "onmessage" " onmessage=\""
+
+
+onmessageerror :: Text -> Maybe Attribute
+onmessageerror = textAttribute $ attribute "onmessageerror" " onmessageerror=\""
 
 
 onmousedown :: Text -> Maybe Attribute
-onmousedown = textAttribute Attr.onmousedown
+onmousedown = textAttribute $ attribute "onmousedown" " onmousedown=\""
+
+
+onmouseenter :: Text -> Maybe Attribute
+onmouseenter = textAttribute $ attribute "onmouseenter" " onmouseenter=\""
+
+
+onmouseleave :: Text -> Maybe Attribute
+onmouseleave = textAttribute $ attribute "onmouseleave" " onmouseleave=\""
 
 
 onmousemove :: Text -> Maybe Attribute
-onmousemove = textAttribute Attr.onmousemove
+onmousemove = textAttribute $ attribute "onmousemove" " onmousemove=\""
 
 
 onmouseout :: Text -> Maybe Attribute
-onmouseout = textAttribute Attr.onmouseout
+onmouseout = textAttribute $ attribute "onmouseout" " onmouseout=\""
 
 
 onmouseover :: Text -> Maybe Attribute
-onmouseover = textAttribute Attr.onmouseover
+onmouseover = textAttribute $ attribute "onmouseover" " onmouseover=\""
 
 
 onmouseup :: Text -> Maybe Attribute
-onmouseup = textAttribute Attr.onmouseup
+onmouseup = textAttribute $ attribute "onmouseup" " onmouseup=\""
 
 
-onmousewheel :: Text -> Maybe Attribute
-onmousewheel = textAttribute Attr.onmousewheel
+onoffline :: Text -> Maybe Attribute
+onoffline = textAttribute $ attribute "onoffline" " onoffline=\""
 
 
 ononline :: Text -> Maybe Attribute
-ononline = textAttribute Attr.ononline
+ononline = textAttribute $ attribute "ononline" " ononline=\""
 
 
 onpagehide :: Text -> Maybe Attribute
-onpagehide = textAttribute Attr.onpagehide
+onpagehide = textAttribute $ attribute "onpagehide" " onpagehide=\""
 
 
 onpageshow :: Text -> Maybe Attribute
-onpageshow = textAttribute Attr.onpageshow
+onpageshow = textAttribute $ attribute "onpageshow" " onpageshow=\""
+
+
+onpaste :: Text -> Maybe Attribute
+onpaste = textAttribute $ attribute "onpaste" " onpaste=\""
 
 
 onpause :: Text -> Maybe Attribute
-onpause = textAttribute Attr.onpause
+onpause = textAttribute $ attribute "onpause" " onpause=\""
 
 
 onplay :: Text -> Maybe Attribute
-onplay = textAttribute Attr.onplay
+onplay = textAttribute $ attribute "onplay" " onplay=\""
 
 
 onplaying :: Text -> Maybe Attribute
-onplaying = textAttribute Attr.onplaying
+onplaying = textAttribute $ attribute "onplaying" " onplaying=\""
+
+
+onpopstate :: Text -> Maybe Attribute
+onpopstate = textAttribute $ attribute "onpopstate" " onpopstate=\""
 
 
 onprogress :: Text -> Maybe Attribute
-onprogress = textAttribute Attr.onprogress
-
-
-onpropstate :: Text -> Maybe Attribute
-onpropstate = textAttribute Attr.onpropstate
+onprogress = textAttribute $ attribute "onprogress" " onprogress=\""
 
 
 onratechange :: Text -> Maybe Attribute
-onratechange = textAttribute Attr.onratechange
+onratechange = textAttribute $ attribute "onratechange" " onratechange=\""
 
 
-onreadystatechange :: Text -> Maybe Attribute
-onreadystatechange = textAttribute Attr.onreadystatechange
-
-
-onredo :: Text -> Maybe Attribute
-onredo = textAttribute Attr.onredo
+onreset :: Text -> Maybe Attribute
+onreset = textAttribute $ attribute "onreset" " onreset=\""
 
 
 onresize :: Text -> Maybe Attribute
-onresize = textAttribute Attr.onresize
+onresize = textAttribute $ attribute "onresize" " onresize=\""
+
+
+onrejectionhandled :: Text -> Maybe Attribute
+onrejectionhandled = textAttribute $ attribute "onrejectionhandled" " onrejectionhandled=\""
 
 
 onscroll :: Text -> Maybe Attribute
-onscroll = textAttribute Attr.onscroll
+onscroll = textAttribute $ attribute "onscroll" " onscroll=\""
+
+
+onsecuritypolicyviolation :: Text -> Maybe Attribute
+onsecuritypolicyviolation = textAttribute $ attribute "onsecuritypolicyviolation" " onsecuritypolicyviolation=\""
 
 
 onseeked :: Text -> Maybe Attribute
-onseeked = textAttribute Attr.onseeked
+onseeked = textAttribute $ attribute "onseeked" " onseeked=\""
 
 
 onseeking :: Text -> Maybe Attribute
-onseeking = textAttribute Attr.onseeking
+onseeking = textAttribute $ attribute "onseeking" " onseeking=\""
 
 
 onselect :: Text -> Maybe Attribute
-onselect = textAttribute Attr.onselect
+onselect = textAttribute $ attribute "onselect" " onselect=\""
+
+
+onslotchange :: Text -> Maybe Attribute
+onslotchange = textAttribute $ attribute "onslotchange" " onslotchange=\""
 
 
 onstalled :: Text -> Maybe Attribute
-onstalled = textAttribute Attr.onstalled
+onstalled = textAttribute $ attribute "onstalled" " onstalled=\""
 
 
 onstorage :: Text -> Maybe Attribute
-onstorage = textAttribute Attr.onstorage
+onstorage = textAttribute $ attribute "onstorage" " onstorage=\""
 
 
 onsubmit :: Text -> Maybe Attribute
-onsubmit = textAttribute Attr.onsubmit
+onsubmit = textAttribute $ attribute "onsubmit" " onsubmit=\""
 
 
 onsuspend :: Text -> Maybe Attribute
-onsuspend = textAttribute Attr.onsuspend
+onsuspend = textAttribute $ attribute "onsuspend" " onsuspend=\""
 
 
 ontimeupdate :: Text -> Maybe Attribute
-ontimeupdate = textAttribute Attr.ontimeupdate
+ontimeupdate = textAttribute $ attribute "ontimeupdate" " ontimeupdate=\""
 
 
-onundo :: Text -> Maybe Attribute
-onundo = textAttribute Attr.onundo
+ontoggle :: Text -> Maybe Attribute
+ontoggle = textAttribute $ attribute "ontoggle" " ontoggle=\""
+
+
+onunhandledrejection :: Text -> Maybe Attribute
+onunhandledrejection = textAttribute $ attribute "onunhandledrejection" " onunhandledrejection=\""
 
 
 onunload :: Text -> Maybe Attribute
-onunload = textAttribute Attr.onunload
+onunload = textAttribute $ attribute "onunload" " onunload=\""
 
 
 onvolumechange :: Text -> Maybe Attribute
-onvolumechange = textAttribute Attr.onvolumechange
+onvolumechange = textAttribute $ attribute "onvolumechange" " onvolumechange=\""
 
 
 onwaiting :: Text -> Maybe Attribute
-onwaiting = textAttribute Attr.onwaiting
+onwaiting = textAttribute $ attribute "onwaiting" " onwaiting=\""
 
+
+onwheel :: Text -> Maybe Attribute
+onwheel = textAttribute $ attribute "onwheel" " onwheel=\""
 
 
 css :: [Text] -> Maybe Attribute
-css = textAttribute Attr.class_ . unwords
+css = textAttribute (attribute "class" " class=\"") . unwords
