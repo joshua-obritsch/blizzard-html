@@ -1,15 +1,28 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Internal.Html
-    ( documentTag
+    ( boolAttribute
+    , textAttribute
+    , documentTag
     , normalTag
     , voidTag
     ) where
 
 
 import Data.Maybe (catMaybes)
-import Data.Text (Text)
+import Data.Text (Text, null)
+import Prelude hiding (null)
 import Text.Blaze.Html
+
+
+boolAttribute :: Attribute -> Bool -> Maybe Attribute
+boolAttribute attr False = Nothing
+boolAttribute attr True  = Just attr
+
+
+textAttribute :: (AttributeValue -> Attribute) -> Text -> Maybe Attribute
+textAttribute attr text | null text = Nothing
+textAttribute attr text             = Just . attr . textValue $ text
 
 
 documentTag :: (Html -> Html) -> [Html] -> Html

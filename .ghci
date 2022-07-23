@@ -3,5 +3,6 @@
 :set -XOverloadedStrings
 :load Blizzard.Html Blizzard.Html.Attributes
 
+import Prelude
 import Blizzard.Html
 import Blizzard.Html.Attributes
