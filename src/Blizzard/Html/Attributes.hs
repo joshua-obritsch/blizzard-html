@@ -198,6 +198,7 @@ module Blizzard.Html.Attributes
 import Data.Text (Text, unwords)
 import Prelude hiding (id, max, min, span, unwords)
 import Text.Blaze.Html (Attribute, customAttribute, textValue)
+import Text.Blaze.Internal (attribute)
 
 import qualified Text.Blaze.Html5.Attributes as Attr
 
@@ -205,499 +206,499 @@ import Blizzard.Internal.Html (boolAttribute, textAttribute)
 
 
 abbr :: Text -> Maybe Attribute
-abbr = textAttribute $ customAttribute "abbr"
+abbr = textAttribute $ attribute "abbr" " abbr=\""
 
 
 accept :: Text -> Maybe Attribute
-accept = textAttribute Attr.accept
+accept = textAttribute $ attribute "accept" " accept=\""
 
 
 acceptCharset :: Text -> Maybe Attribute
-acceptCharset = textAttribute Attr.acceptCharset
+acceptCharset = textAttribute $ attribute "accept-charset" " accept-charset=\""
 
 
 accesskey :: Text -> Maybe Attribute
-accesskey = textAttribute Attr.accesskey
+accesskey = textAttribute $ attribute "accesskey" " accesskey=\""
 
 
 action :: Text -> Maybe Attribute
-action = textAttribute Attr.action
+action = textAttribute $ attribute "action" " action=\""
 
 
 allow :: Text -> Maybe Attribute
-allow = textAttribute $ customAttribute "allow"
+allow = textAttribute $ attribute "allow" " allow=\""
 
 
 allowfullscreen :: Bool -> Maybe Attribute
-allowfullscreen = boolAttribute $ customAttribute "allowfullscreen" "allowfullscreen"
+allowfullscreen = boolAttribute $ attribute "allowfullscreen" " allowfullscreen=\"" "allowfullscreen"
 
 
 alt :: Text -> Maybe Attribute
-alt = textAttribute Attr.alt
+alt = textAttribute $ attribute "alt" " alt=\""
 
 
 as :: Text -> Maybe Attribute
-as = textAttribute $ customAttribute "as"
+as = textAttribute $ attribute "as" " as=\""
 
 
 async :: Bool -> Maybe Attribute
-async = boolAttribute $ Attr.async "async"
+async = boolAttribute $ attribute "async" " async=\"" "async"
 
 
 autocapitalize :: Text -> Maybe Attribute
-autocapitalize = textAttribute $ customAttribute "autocapitalize"
+autocapitalize = textAttribute $ attribute "autocapitalize" " autocapitalize=\""
 
 
 autocomplete :: Text -> Maybe Attribute
-autocomplete = textAttribute Attr.autocomplete
+autocomplete = textAttribute $ attribute "autocomplete" " autocomplete=\""
 
 
 autofocus :: Bool -> Maybe Attribute
-autofocus = boolAttribute $ Attr.autofocus "autofocus"
+autofocus = boolAttribute $ attribute "autofocus" " autofocus=\"" "autofocus"
 
 
 autoplay :: Bool -> Maybe Attribute
-autoplay = boolAttribute $ Attr.autoplay "autoplay"
+autoplay = boolAttribute $ attribute "autoplay" " autoplay=\"" "autoplay"
 
 
 blocking :: Text -> Maybe Attribute
-blocking = textAttribute $ customAttribute "blocking"
+blocking = textAttribute $ attribute "blocking" " blocking=\""
 
 
 charset :: Text -> Maybe Attribute
-charset = textAttribute Attr.charset
+charset = textAttribute $ attribute "charset" " charset=\""
 
 
 checked :: Bool -> Maybe Attribute
-checked = boolAttribute $ Attr.checked "checked"
+checked = boolAttribute $ attribute "checked" " checked=\"" "checked"
 
 
 cite :: Text -> Maybe Attribute
-cite = textAttribute Attr.cite
+cite = textAttribute $ attribute "cite" " cite=\""
 
 
 class_ :: Text -> Maybe Attribute
-class_ = textAttribute Attr.class_
+class_ = textAttribute $ attribute "class" " class=\""
 
 
 color :: Text -> Maybe Attribute
-color = textAttribute $ customAttribute "color"
+color = textAttribute $ attribute "color" " color=\""
 
 
 cols :: Text -> Maybe Attribute
-cols = textAttribute Attr.cols
+cols = textAttribute $ attribute "cols" " cols=\""
 
 
 colspan :: Text -> Maybe Attribute
-colspan = textAttribute Attr.colspan
+colspan = textAttribute $ attribute "colspan" " colspan=\""
 
 
 content :: Text -> Maybe Attribute
-content = textAttribute Attr.content
+content = textAttribute $ attribute "content" " content=\""
 
 
 contenteditable :: Text -> Maybe Attribute
-contenteditable = textAttribute Attr.contenteditable
+contenteditable = textAttribute $ attribute "contenteditable" " contenteditable=\""
 
 
 controls :: Bool -> Maybe Attribute
-controls = boolAttribute $ Attr.controls "controls"
+controls = boolAttribute $ attribute "controls" " controls=\"" "controls"
 
 
 coords :: Text -> Maybe Attribute
-coords = textAttribute Attr.coords
+coords = textAttribute $ attribute "coords" " coords=\""
 
 
 crossorigin :: Text -> Maybe Attribute
-crossorigin = textAttribute $ customAttribute "crossorigin"
+crossorigin = textAttribute $ attribute "crossorigin" " crossorigin=\""
 
 
 data_ :: Text -> Maybe Attribute
-data_ = textAttribute Attr.data_
+data_ = textAttribute $ attribute "data" " data=\""
 
 
 datetime :: Text -> Maybe Attribute
-datetime = textAttribute Attr.datetime
+datetime = textAttribute $ attribute "datetime" " datetime=\""
 
 
 decoding :: Text -> Maybe Attribute
-decoding = textAttribute $ customAttribute "decoding"
+decoding = textAttribute $ attribute "decoding" " decoding=\""
 
 
 default_ :: Bool -> Maybe Attribute
-default_ = boolAttribute $ customAttribute "default" "default"
+default_ = boolAttribute $ attribute "default" " default=\"" "default"
 
 
 defer :: Bool -> Maybe Attribute
-defer = boolAttribute $ Attr.defer "defer"
+defer = boolAttribute $ attribute "defer" " defer=\"" "defer"
 
 
 dir :: Text -> Maybe Attribute
-dir = textAttribute Attr.dir
+dir = textAttribute $ attribute "dir" " dir=\""
 
 
 disabled :: Bool -> Maybe Attribute
-disabled = boolAttribute $ Attr.disabled "disabled"
+disabled = boolAttribute $ attribute "disabled" " disabled=\"" "disabled"
 
 
 download :: Text -> Maybe Attribute
-download = textAttribute $ customAttribute "download"
+download = textAttribute $ attribute "download" " download=\""
 
 
 draggable :: Text -> Maybe Attribute
-draggable = textAttribute Attr.draggable
+draggable = textAttribute $ attribute "draggable" " draggable=\""
 
 
 enctype :: Text -> Maybe Attribute
-enctype = textAttribute Attr.enctype
+enctype = textAttribute $ attribute "enctype" " enctype=\""
 
 
 enterkeyhint :: Text -> Maybe Attribute
-enterkeyhint = textAttribute $ customAttribute "enterkeyhint"
+enterkeyhint = textAttribute $ attribute "enterkeyhint" " enterkeyhint=\""
 
 
 for :: Text -> Maybe Attribute
-for = textAttribute Attr.for
+for = textAttribute $ attribute "for" " for=\""
 
 
 form :: Text -> Maybe Attribute
-form = textAttribute Attr.form
+form = textAttribute $ attribute "form" " form=\""
 
 
 formaction :: Text -> Maybe Attribute
-formaction = textAttribute Attr.formaction
+formaction = textAttribute $ attribute "formaction" " formaction=\""
 
 
 formenctype :: Text -> Maybe Attribute
-formenctype = textAttribute Attr.formenctype
+formenctype = textAttribute $ attribute "formenctype" " formenctype=\""
 
 
 formmethod :: Text -> Maybe Attribute
-formmethod = textAttribute Attr.formmethod
+formmethod = textAttribute $ attribute "formmethod" " formmethod=\""
 
 
 formnovalidate :: Bool -> Maybe Attribute
-formnovalidate = boolAttribute $ Attr.formnovalidate "formnovalidate"
+formnovalidate = boolAttribute $ attribute "formnovalidate" " formnovalidate=\"" "formnovalidate"
 
 
 formtarget :: Text -> Maybe Attribute
-formtarget = textAttribute Attr.formtarget
+formtarget = textAttribute $ attribute "formtarget" " formtarget=\""
 
 
 headers :: Text -> Maybe Attribute
-headers = textAttribute Attr.headers
+headers = textAttribute $ attribute "headers" " headers=\""
 
 
 height :: Text -> Maybe Attribute
-height = textAttribute Attr.height
+height = textAttribute $ attribute "height" " height=\""
 
 
 hidden :: Bool -> Maybe Attribute
-hidden = boolAttribute $ Attr.hidden "hidden"
+hidden = boolAttribute $ attribute "hidden" " hidden=\"" "hidden"
 
 
 high :: Text -> Maybe Attribute
-high = textAttribute Attr.high
+high = textAttribute $ attribute "high" " high=\""
 
 
 href :: Text -> Maybe Attribute
-href = textAttribute Attr.href
+href = textAttribute $ attribute "href" " href=\""
 
 
 hreflang :: Text -> Maybe Attribute
-hreflang = textAttribute Attr.hreflang
+hreflang = textAttribute $ attribute "hreflang" " hreflang=\""
 
 
 httpEquiv :: Text -> Maybe Attribute
-httpEquiv = textAttribute Attr.httpEquiv
+httpEquiv = textAttribute $ attribute "http-equiv" " http-equiv=\""
 
 
 id :: Text -> Maybe Attribute
-id = textAttribute Attr.id
+id = textAttribute $ attribute "id" " id=\""
 
 
 imagesizes :: Text -> Maybe Attribute
-imagesizes = textAttribute $ customAttribute "imagesizes"
+imagesizes = textAttribute $ attribute "imagesizes" " imagesizes=\""
 
 
 imagesrcset :: Text -> Maybe Attribute
-imagesrcset = textAttribute $ customAttribute "imagesrcset"
+imagesrcset = textAttribute $ attribute "imagesrcset" " imagesrcset=\""
 
 
 inert :: Bool -> Maybe Attribute
-inert = boolAttribute $ customAttribute "inert" "inert"
+inert = boolAttribute $ attribute "inert" " inert=\"" "inert"
 
 
 inputmode :: Text -> Maybe Attribute
-inputmode = textAttribute $ customAttribute "inputmode"
+inputmode = textAttribute $ attribute "inputmode" " inputmode=\""
 
 
 integrity :: Text -> Maybe Attribute
-integrity = textAttribute $ customAttribute "integrity"
+integrity = textAttribute $ attribute "integrity" " integrity=\""
 
 
 is :: Text -> Maybe Attribute
-is = textAttribute $ customAttribute "is"
+is = textAttribute $ attribute "is" " is=\""
 
 
 ismap :: Bool -> Maybe Attribute
-ismap = boolAttribute $ Attr.ismap "ismap"
+ismap = boolAttribute $ attribute "ismap" " ismap=\"" "ismap"
 
 
 itemid :: Text -> Maybe Attribute
-itemid = textAttribute $ customAttribute "itemid"
+itemid = textAttribute $ attribute "itemid" " itemid=\""
 
 
 itemprop :: Text -> Maybe Attribute
-itemprop = textAttribute Attr.itemprop
+itemprop = textAttribute $ attribute "itemprop" " itemprop=\""
 
 
 itemref :: Text -> Maybe Attribute
-itemref = textAttribute $ customAttribute "itemref"
+itemref = textAttribute $ attribute "itemref" " itemref=\""
 
 
 itemscope :: Bool -> Maybe Attribute
-itemscope = boolAttribute $ Attr.itemscope "itemscope"
+itemscope = boolAttribute $ attribute "itemscope" " itemscope=\"" "itemscope"
 
 
 itemtype :: Text -> Maybe Attribute
-itemtype = textAttribute Attr.itemtype
+itemtype = textAttribute $ attribute "itemtype" " itemtype=\""
 
 
 kind :: Text -> Maybe Attribute
-kind = textAttribute $ customAttribute "kind"
+kind = textAttribute $ attribute "kind" " kind=\""
 
 
 label :: Text -> Maybe Attribute
-label = textAttribute Attr.label
+label = textAttribute $ attribute "label" " label=\""
 
 
 lang :: Text -> Maybe Attribute
-lang = textAttribute Attr.lang
+lang = textAttribute $ attribute "lang" " lang=\""
 
 
 list :: Text -> Maybe Attribute
-list = textAttribute Attr.list
+list = textAttribute $ attribute "list" " list=\""
 
 
 loading :: Text -> Maybe Attribute
-loading = textAttribute $ customAttribute "loading"
+loading = textAttribute $ attribute "loading" " loading=\""
 
 
 loop :: Bool -> Maybe Attribute
-loop = boolAttribute $ Attr.loop "loop"
+loop = boolAttribute $ attribute "loop" " loop=\"" "loop"
 
 
 low :: Text -> Maybe Attribute
-low = textAttribute Attr.low
+low = textAttribute $ attribute "low" " low=\""
 
 
 max :: Text -> Maybe Attribute
-max = textAttribute Attr.max
+max = textAttribute $ attribute "max" " max=\""
 
 
 maxlength :: Text -> Maybe Attribute
-maxlength = textAttribute Attr.maxlength
+maxlength = textAttribute $ attribute "maxlength" " maxlength=\""
 
 
 media :: Text -> Maybe Attribute
-media = textAttribute Attr.media
+media = textAttribute $ attribute "media" " media=\""
 
 
 method :: Text -> Maybe Attribute
-method = textAttribute Attr.method
+method = textAttribute $ attribute "method" " method=\""
 
 
 min :: Text -> Maybe Attribute
-min = textAttribute Attr.min
+min = textAttribute $ attribute "min" " min=\""
 
 
 minlength :: Text -> Maybe Attribute
-minlength = textAttribute $ customAttribute "minlength"
+minlength = textAttribute $ attribute "minlength" " minlength=\""
 
 
 multiple :: Bool -> Maybe Attribute
-multiple = boolAttribute $ Attr.multiple "multiple"
+multiple = boolAttribute $ attribute "multiple" " multiple=\"" "multiple"
 
 
 muted :: Bool -> Maybe Attribute
-muted = boolAttribute $ customAttribute "muted" "muted"
+muted = boolAttribute $ attribute "muted" " muted=\"" "muted"
 
 
 name :: Text -> Maybe Attribute
-name = textAttribute Attr.name
+name = textAttribute $ attribute "name" " name=\""
 
 
 nomodule :: Bool -> Maybe Attribute
-nomodule = boolAttribute $ customAttribute "nomodule" "nomodule"
+nomodule = boolAttribute $ attribute "nomodule" " nomodule=\"" "nomodule"
 
 
 nonce :: Text -> Maybe Attribute
-nonce = textAttribute $ customAttribute "nonce"
+nonce = textAttribute $ attribute "nonce" " nonce=\""
 
 
 novalidate :: Bool -> Maybe Attribute
-novalidate = boolAttribute $ Attr.novalidate "novalidate"
+novalidate = boolAttribute $ attribute "novalidate" " novalidate=\"" "novalidate"
 
 
 open :: Bool -> Maybe Attribute
-open = boolAttribute $ Attr.open "open"
+open = boolAttribute $ attribute "open" " open=\"" "open"
 
 
 optimum :: Text -> Maybe Attribute
-optimum = textAttribute Attr.optimum
+optimum = textAttribute $ attribute "optimum" " optimum=\""
 
 
 pattern :: Text -> Maybe Attribute
-pattern = textAttribute Attr.pattern
+pattern = textAttribute $ attribute "pattern" " pattern=\""
 
 
 ping :: Text -> Maybe Attribute
-ping = textAttribute Attr.ping
+ping = textAttribute $ attribute "ping" " ping=\""
 
 
 placeholder :: Text -> Maybe Attribute
-placeholder = textAttribute Attr.placeholder
+placeholder = textAttribute $ attribute "placeholder" " placeholder=\""
 
 
 playsinline :: Bool -> Maybe Attribute
-playsinline = boolAttribute $ customAttribute "playsinline" "playsinline"
+playsinline = boolAttribute $ attribute "playsinline" " playsinline=\"" "playsinline"
 
 
 poster :: Text -> Maybe Attribute
-poster = textAttribute $ customAttribute "poster"
+poster = textAttribute $ attribute "poster" " poster=\""
 
 
 preload :: Text -> Maybe Attribute
-preload = textAttribute Attr.preload
+preload = textAttribute $ attribute "preload" " preload=\""
 
 
 readonly :: Bool -> Maybe Attribute
-readonly = boolAttribute $ Attr.readonly "readonly"
+readonly = boolAttribute $ attribute "readonly" " readonly=\"" "readonly"
 
 
 referrerpolicy :: Text -> Maybe Attribute
-referrerpolicy = textAttribute $ customAttribute "referrerpolicy"
+referrerpolicy = textAttribute $ attribute "referrerpolicy" " referrerpolicy=\""
 
 
 rel :: Text -> Maybe Attribute
-rel = textAttribute Attr.rel
+rel = textAttribute $ attribute "rel" " rel=\""
 
 
 required :: Bool -> Maybe Attribute
-required = boolAttribute $ Attr.required "required"
+required = boolAttribute $ attribute "required" " required=\"" "required"
 
 
 reversed :: Bool -> Maybe Attribute
-reversed = boolAttribute $ Attr.reversed "reversed"
+reversed = boolAttribute $ attribute "reversed" " reversed=\"" "reversed"
 
 
 rows :: Text -> Maybe Attribute
-rows = textAttribute Attr.rows
+rows = textAttribute $ attribute "rows" " rows=\""
 
 
 rowspan :: Text -> Maybe Attribute
-rowspan = textAttribute Attr.rowspan
+rowspan = textAttribute $ attribute "rowspan" " rowspan=\""
 
 
 sandbox :: Text -> Maybe Attribute
-sandbox = textAttribute Attr.sandbox
+sandbox = textAttribute $ attribute "sandbox" " sandbox=\""
 
 
 scope :: Text -> Maybe Attribute
-scope = textAttribute Attr.scope
+scope = textAttribute $ attribute "scope" " scope=\""
 
 
 selected :: Bool -> Maybe Attribute
-selected = boolAttribute $ Attr.selected "selected"
+selected = boolAttribute $ attribute "selected" " selected=\"" "selected"
 
 
 shape :: Text -> Maybe Attribute
-shape = textAttribute Attr.shape
+shape = textAttribute $ attribute "shape" " shape=\""
 
 
 size :: Text -> Maybe Attribute
-size = textAttribute Attr.size
+size = textAttribute $ attribute "size" " size=\""
 
 
 sizes :: Text -> Maybe Attribute
-sizes = textAttribute Attr.sizes
+sizes = textAttribute $ attribute "sizes" " sizes=\""
 
 
 slot :: Text -> Maybe Attribute
-slot = textAttribute $ customAttribute "slot"
+slot = textAttribute $ attribute "slot" " slot=\""
 
 
 span :: Text -> Maybe Attribute
-span = textAttribute Attr.span
+span = textAttribute $ attribute "span" " span=\""
 
 
 spellcheck :: Text -> Maybe Attribute
-spellcheck = textAttribute Attr.spellcheck
+spellcheck = textAttribute $ attribute "spellcheck" " spellcheck=\""
 
 
 src :: Text -> Maybe Attribute
-src = textAttribute Attr.src
+src = textAttribute $ attribute "src" " src=\""
 
 
 srcdoc :: Text -> Maybe Attribute
-srcdoc = textAttribute Attr.srcdoc
+srcdoc = textAttribute $ attribute "srcdoc" " srcdoc=\""
 
 
 srclang :: Text -> Maybe Attribute
-srclang = textAttribute $ customAttribute "srclang"
+srclang = textAttribute $ attribute "srclang" " srclang=\""
 
 
 srcset :: Text -> Maybe Attribute
-srcset = textAttribute $ customAttribute "srcset"
+srcset = textAttribute $ attribute "srcset" " srcset=\""
 
 
 start :: Text -> Maybe Attribute
-start = textAttribute Attr.start
+start = textAttribute $ attribute "start" " start=\""
 
 
 step :: Text -> Maybe Attribute
-step = textAttribute Attr.step
+step = textAttribute $ attribute "step" " step=\""
 
 
 style :: [Text] -> Maybe Attribute
-style = textAttribute Attr.style . unwords
+style = textAttribute (attribute "style" " style=\"") . unwords
 
 
 tabindex :: Text -> Maybe Attribute
-tabindex = textAttribute Attr.tabindex
+tabindex = textAttribute $ attribute "tabindex" " tabindex=\""
 
 
 target :: Text -> Maybe Attribute
-target = textAttribute Attr.target
+target = textAttribute $ attribute "target" " target=\""
 
 
 title :: Text -> Maybe Attribute
-title = textAttribute Attr.title
+title = textAttribute $ attribute "title" " title=\""
 
 
 translate :: Text -> Maybe Attribute
-translate = textAttribute $ customAttribute "translate"
+translate = textAttribute $ attribute "translate" " translate=\""
 
 
 type_ :: Text -> Maybe Attribute
-type_ = textAttribute Attr.type_
+type_ = textAttribute $ attribute "type" " type=\""
 
 
 usemap :: Text -> Maybe Attribute
-usemap = textAttribute Attr.usemap
+usemap = textAttribute $ attribute "usemap" " usemap=\""
 
 
 value :: Text -> Maybe Attribute
-value = textAttribute Attr.value
+value = textAttribute $ attribute "value" " value=\""
 
 
 width :: Text -> Maybe Attribute
-width = textAttribute Attr.width
+width = textAttribute $ attribute "width" " width=\""
 
 
 wrap :: Text -> Maybe Attribute
-wrap = textAttribute Attr.wrap
+wrap = textAttribute $ attribute "wrap" " wrap=\""
 
 
 
