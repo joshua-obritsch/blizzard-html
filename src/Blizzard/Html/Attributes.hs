@@ -210,13 +210,11 @@ module Blizzard.Html.Attributes
     , onvolumechange
     , onwaiting
     , onwheel
-
-    , css
     ) where
 
 
-import Data.Text (Text, unwords)
-import Prelude (($), (.), Bool, Maybe)
+import Data.Text (Text)
+import Prelude (($), Bool, Maybe)
 import Text.Blaze.Internal (Attribute, attribute)
 
 import Blizzard.Internal.Html (boolAttribute, textAttribute)
@@ -678,8 +676,8 @@ step :: Text -> Maybe Attribute
 step = textAttribute $ attribute "step" " step=\""
 
 
-style :: [Text] -> Maybe Attribute
-style = textAttribute (attribute "style" " style=\"") . unwords
+style :: Text -> Maybe Attribute
+style = textAttribute $ attribute "style" " style=\""
 
 
 tabindex :: Text -> Maybe Attribute
@@ -1048,7 +1046,3 @@ onwaiting = textAttribute $ attribute "onwaiting" " onwaiting=\""
 
 onwheel :: Text -> Maybe Attribute
 onwheel = textAttribute $ attribute "onwheel" " onwheel=\""
-
-
-css :: [Text] -> Maybe Attribute
-css = textAttribute (attribute "class" " class=\"") . unwords

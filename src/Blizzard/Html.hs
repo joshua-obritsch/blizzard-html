@@ -117,8 +117,8 @@ module Blizzard.Html
     , video
     , wbr
 
-    , docType
-    , docTypeHtml
+    , doctype
+    , doctype'
     , text
     ) where
 
@@ -575,12 +575,12 @@ wbr :: [Maybe Attribute] -> Html
 wbr = voidTag $ Leaf "wbr" "<wbr" ">" ()
 
 
-docType :: Html
-docType = preEscapedText "<!DOCTYPE HTML>\n"
+doctype :: [Html] -> Html
+doctype = documentTag . (:) doctype'
 
 
-docTypeHtml :: [Html] -> Html
-docTypeHtml = documentTag . (:) docType
+doctype' :: Html
+doctype' = preEscapedText "<!DOCTYPE HTML>\n"
 
 
 text :: Text -> Html
