@@ -125,7 +125,12 @@ module Blizzard.Html
 
     -- * Text
     , text
+
+    , renderHtml
     ) where
+
+
+import Text.Blaze.Renderer.Text (renderHtml)
 
 
 import Data.Text (Text)
@@ -182,7 +187,6 @@ abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 --
 -- @
 -- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
 --
 -- Html.address []
 --     [ Html.text \"123 Main St\"
@@ -220,26 +224,142 @@ area :: [Maybe Attribute] -> Html
 area = voidTag $ Leaf "area" "<area" ">" ()
 
 
+-- | Constructs a self-contained syndicatable or reusable composition (the __article__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+--
+-- Html.article []
+--     [ Html.h2 []
+--         [ Html.text \"Franz Kafka's Novels\" ]
+--     , Html.ul []
+--         [ Html.li []
+--             [ Html.text \"The Man Who Disappeared\" ]
+--         , Html.li []
+--             [ Html.text \"The Trial\" ]
+--         , Html.li []
+--             [ Html.text \"The Castle\" ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<article\>
+--     \<h2\>Franz Kafka's Novels\<\/h2\>
+--     \<ul\>
+--         \<li\>The Man Who Disappeared\<\/li\>
+--         \<li\>The Trial\<\/li\>
+--         \<li\>The Castle\<\/li\>
+--     \<\/ul\>
+-- \<\/article\>
+-- @
 article :: [Maybe Attribute] -> [Html] -> Html
 article = normalTag $ Parent "article" "<article" "</article>"
 
 
+-- | Constructs a sidebar for tangentially related content (the __aside__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+--
+-- Html.aside []
+--     [ Html.h4 []
+--         [ Html.text \"House of the Dragon\" ]
+--     , Html.p []
+--         [ Html.text \"House of the Dragon is a prequal to Game of Thrones.\" ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<aside\>
+--     \<h4\>House of the Dragon\<\/h4\>
+--     \<p\>House of the Dragon is a prequel to Game of Thrones.\<\/p\>
+-- \<\/aside\>
+-- @
 aside :: [Maybe Attribute] -> [Html] -> Html
 aside = normalTag $ Parent "aside" "<aside" "</aside>"
 
 
+-- | Constructs an audio player (the __audio__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.audio
+--     [ Attr.controls True ]
+--     [ Html.source
+--         [ Attr.src   \"train.mp3\"
+--         , Attr.type_ \"audio/mpeg\"
+--         ]
+--     , Html.text \"Your browser does not support the audio element.\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<audio controls=\"controls\"\>
+--     \<source src=\"train.mp3\" type=\"audio/mpeg\"\>
+--     Your browser does not support the audio element.
+-- \<\/audio\>
+-- @
 audio :: [Maybe Attribute] -> [Html] -> Html
 audio = normalTag $ Parent "audio" "<audio" "</audio>"
 
 
+-- | Constructs a key word (the __b__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+--
+-- Html.p []
+--     [ Html.text \"Gary Gygax hands Fry his \"
+--     , Html.b []
+--         [ Html.text \"+1 mace\" ]
+--     , Html.text \".\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <p>Gary Gygax hands Fry his <b>+1 mace</b>.</p>
 b :: [Maybe Attribute] -> [Html] -> Html
 b = normalTag $ Parent "b" "<b" "</b>"
 
 
+-- | Constructs a base URL (the __base__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.base
+--     [ Attr.href \"https://news.ycombinator.com\" ]
+-- @
+--
+-- __Result:__
+--
+-- > <base href="https://news.ycombinator.com">
 base :: [Maybe Attribute] -> Html
 base = voidTag $ Leaf "base" "<base" ">" ()
 
 
+-- | Constructs text directionality isolation (the __bdi__ element).
 bdi :: [Maybe Attribute] -> [Html] -> Html
 bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
 
