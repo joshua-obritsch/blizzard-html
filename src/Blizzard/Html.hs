@@ -1,11 +1,10 @@
 {-# LANGUAGE NoImplicitPrelude #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Html
     ( Attribute
     , Html
     , Text
-    , docType
-    , docTypeHtml
     , a
     , abbr
     , address
@@ -15,6 +14,7 @@ module Blizzard.Html
     , audio
     , b
     , base
+    , bdi
     , bdo
     , blockquote
     , body
@@ -26,12 +26,13 @@ module Blizzard.Html
     , code
     , col
     , colgroup
-    , command
+    , data_
     , datalist
     , dd
     , del
     , details
     , dfn
+    , dialog
     , div
     , dl
     , dt
@@ -59,7 +60,6 @@ module Blizzard.Html
     , input
     , ins
     , kbd
-    , keygen
     , label
     , legend
     , li
@@ -68,7 +68,6 @@ module Blizzard.Html
     , map
     , mark
     , menu
-    , menuitem
     , meta
     , meter
     , nav
@@ -79,17 +78,19 @@ module Blizzard.Html
     , option
     , output
     , p
-    , param
+    , picture
     , pre
     , progress
     , q
     , rp
     , rt
     , ruby
+    , s
     , samp
     , script
     , section
     , select
+    , slot
     , small
     , source
     , span
@@ -101,7 +102,7 @@ module Blizzard.Html
     , table
     , tbody
     , td
-    , text
+    , template
     , textarea
     , tfoot
     , th
@@ -115,457 +116,472 @@ module Blizzard.Html
     , var
     , video
     , wbr
+
+    , docType
+    , docTypeHtml
+    , text
     ) where
 
 
 import Data.Text (Text)
-import Prelude (Maybe)
-import Text.Blaze.Html (Attribute, Html)
+import Prelude ((>>), ($), (.), Maybe)
+import Text.Blaze (toMarkup)
+import Text.Blaze.Internal (Attribute, MarkupM(..), preEscapedText)
 
-import qualified Text.Blaze.Html5 as Html
-
-import Blizzard.Internal.Html (documentTag, normalTag, voidTag)
-
-
-docType :: Html
-docType = Html.docType
-
-
-docTypeHtml :: [Html] -> Html
-docTypeHtml = documentTag Html.docTypeHtml
+import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 
 
 a :: [Maybe Attribute] -> [Html] -> Html
-a = normalTag Html.a
+a = normalTag $ Parent "a" "<a" "</a>"
 
 
 abbr :: [Maybe Attribute] -> [Html] -> Html
-abbr = normalTag Html.abbr
+abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 
 
 address :: [Maybe Attribute] -> [Html] -> Html
-address = normalTag Html.address
+address = normalTag $ Parent "address" "<address" "</address>"
 
 
 area :: [Maybe Attribute] -> Html
-area = voidTag Html.area
+area = voidTag $ Leaf "area" "<area" ">" ()
 
 
 article :: [Maybe Attribute] -> [Html] -> Html
-article = normalTag Html.article
+article = normalTag $ Parent "article" "<article" "</article>"
 
 
 aside :: [Maybe Attribute] -> [Html] -> Html
-aside = normalTag Html.aside
+aside = normalTag $ Parent "aside" "<aside" "</aside>"
 
 
 audio :: [Maybe Attribute] -> [Html] -> Html
-audio = normalTag Html.audio
+audio = normalTag $ Parent "audio" "<audio" "</audio>"
 
 
 b :: [Maybe Attribute] -> [Html] -> Html
-b = normalTag Html.b
+b = normalTag $ Parent "b" "<b" "</b>"
 
 
 base :: [Maybe Attribute] -> Html
-base = voidTag Html.base
+base = voidTag $ Leaf "base" "<base" ">" ()
+
+
+bdi :: [Maybe Attribute] -> [Html] -> Html
+bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
 
 
 bdo :: [Maybe Attribute] -> [Html] -> Html
-bdo = normalTag Html.bdo
+bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
 
 
 blockquote :: [Maybe Attribute] -> [Html] -> Html
-blockquote = normalTag Html.blockquote
+blockquote = normalTag $ Parent "blockquote" "<blockquote" "</blockquote>"
 
 
 body :: [Maybe Attribute] -> [Html] -> Html
-body = normalTag Html.body
+body = normalTag $ Parent "body" "<body" "</body>"
 
 
 br :: [Maybe Attribute] -> Html
-br = voidTag Html.br
+br = voidTag $ Leaf "br" "<br" ">" ()
 
 
 button :: [Maybe Attribute] -> [Html] -> Html
-button = normalTag Html.button
+button = normalTag $ Parent "button" "<button" "</button>"
 
 
 canvas :: [Maybe Attribute] -> [Html] -> Html
-canvas = normalTag Html.canvas
+canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
 
 
 caption :: [Maybe Attribute] -> [Html] -> Html
-caption = normalTag Html.caption
+caption = normalTag $ Parent "caption" "<caption" "</caption>"
 
 
 cite :: [Maybe Attribute] -> [Html] -> Html
-cite = normalTag Html.cite
+cite = normalTag $ Parent "cite" "<cite" "</cite>"
 
 
 code :: [Maybe Attribute] -> [Html] -> Html
-code = normalTag Html.code
+code = normalTag $ Parent "code" "<code" "</code>"
 
 
 col :: [Maybe Attribute] -> Html
-col = voidTag Html.col
+col = voidTag $ Leaf "col" "<col" ">" ()
 
 
 colgroup :: [Maybe Attribute] -> [Html] -> Html
-colgroup = normalTag Html.colgroup
+colgroup = normalTag $ Parent "colgroup" "<colgroup" "</colgroup>"
 
 
-command :: [Maybe Attribute] -> [Html] -> Html
-command = normalTag Html.command
+data_ :: [Maybe Attribute] -> [Html] -> Html
+data_ = normalTag $ Parent "data_" "<data_" "</data_>"
 
 
 datalist :: [Maybe Attribute] -> [Html] -> Html
-datalist = normalTag Html.datalist
+datalist = normalTag $ Parent "datalist" "<datalist" "</datalist>"
 
 
 dd :: [Maybe Attribute] -> [Html] -> Html
-dd = normalTag Html.dd
+dd = normalTag $ Parent "dd" "<dd" "</dd>"
 
 
 del :: [Maybe Attribute] -> [Html] -> Html
-del = normalTag Html.del
+del = normalTag $ Parent "del" "<del" "</del>"
 
 
 details :: [Maybe Attribute] -> [Html] -> Html
-details = normalTag Html.details
+details = normalTag $ Parent "details" "<details" "</details>"
 
 
 dfn :: [Maybe Attribute] -> [Html] -> Html
-dfn = normalTag Html.dfn
+dfn = normalTag $ Parent "dfn" "<dfn" "</dfn>"
+
+
+dialog :: [Maybe Attribute] -> [Html] -> Html
+dialog = normalTag $ Parent "dialog" "<dialog" "</dialog>"
 
 
 div :: [Maybe Attribute] -> [Html] -> Html
-div = normalTag Html.div
+div = normalTag $ Parent "div" "<div" "</div>"
 
 
 dl :: [Maybe Attribute] -> [Html] -> Html
-dl = normalTag Html.dl
+dl = normalTag $ Parent "dl" "<dl" "</dl>"
 
 
 dt :: [Maybe Attribute] -> [Html] -> Html
-dt = normalTag Html.dt
+dt = normalTag $ Parent "dt" "<dt" "</dt>"
 
 
 em :: [Maybe Attribute] -> [Html] -> Html
-em = normalTag Html.em
+em = normalTag $ Parent "em" "<em" "</em>"
 
 
 embed :: [Maybe Attribute] -> Html
-embed = voidTag Html.embed
+embed = voidTag $ Leaf "embed" "<embed" ">" ()
 
 
 fieldset :: [Maybe Attribute] -> [Html] -> Html
-fieldset = normalTag Html.fieldset
+fieldset = normalTag $ Parent "fieldset" "<fieldset" "</fieldset>"
 
 
 figcaption :: [Maybe Attribute] -> [Html] -> Html
-figcaption = normalTag Html.figcaption
+figcaption = normalTag $ Parent "figcaption" "<figcaption" "</figcaption>"
 
 
 figure :: [Maybe Attribute] -> [Html] -> Html
-figure = normalTag Html.figure
+figure = normalTag $ Parent "figure" "<figure" "</figure>"
 
 
 footer :: [Maybe Attribute] -> [Html] -> Html
-footer = normalTag Html.footer
+footer = normalTag $ Parent "footer" "<footer" "</footer>"
 
 
 form :: [Maybe Attribute] -> [Html] -> Html
-form = normalTag Html.form
+form = normalTag $ Parent "form" "<form" "</form>"
 
 
 h1 :: [Maybe Attribute] -> [Html] -> Html
-h1 = normalTag Html.h1
+h1 = normalTag $ Parent "h1" "<h1" "</h1>"
 
 
 h2 :: [Maybe Attribute] -> [Html] -> Html
-h2 = normalTag Html.h2
+h2 = normalTag $ Parent "h2" "<h2" "</h2>"
 
 
 h3 :: [Maybe Attribute] -> [Html] -> Html
-h3 = normalTag Html.h3
+h3 = normalTag $ Parent "h3" "<h3" "</h3>"
 
 
 h4 :: [Maybe Attribute] -> [Html] -> Html
-h4 = normalTag Html.h4
+h4 = normalTag $ Parent "h4" "<h4" "</h4>"
 
 
 h5 :: [Maybe Attribute] -> [Html] -> Html
-h5 = normalTag Html.h5
+h5 = normalTag $ Parent "h5" "<h5" "</h5>"
 
 
 h6 :: [Maybe Attribute] -> [Html] -> Html
-h6 = normalTag Html.h6
+h6 = normalTag $ Parent "h6" "<h6" "</h6>"
 
 
 head :: [Maybe Attribute] -> [Html] -> Html
-head = normalTag Html.head
+head = normalTag $ Parent "head" "<head" "</head>"
 
 
 header :: [Maybe Attribute] -> [Html] -> Html
-header = normalTag Html.header
+header = normalTag $ Parent "header" "<header" "</header>"
 
 
 hgroup :: [Maybe Attribute] -> [Html] -> Html
-hgroup = normalTag Html.hgroup
+hgroup = normalTag $ Parent "hgroup" "<hgroup" "</hgroup>"
 
 
 hr :: [Maybe Attribute] -> Html
-hr = voidTag Html.hr
+hr = voidTag $ Leaf "hr" "<hr" ">" ()
 
 
 html :: [Maybe Attribute] -> [Html] -> Html
-html = normalTag Html.html
+html = normalTag $ Parent "html" "<html" "</html>"
 
 
 i :: [Maybe Attribute] -> [Html] -> Html
-i = normalTag Html.i
+i = normalTag $ Parent "i" "<i" "</i>"
 
 
 iframe :: [Maybe Attribute] -> [Html] -> Html
-iframe = normalTag Html.iframe
+iframe = normalTag $ Parent "iframe" "<iframe" "</iframe>"
 
 
 img :: [Maybe Attribute] -> Html
-img = voidTag Html.img
+img = voidTag $ Leaf "img" "<img" ">" ()
 
 
 input :: [Maybe Attribute] -> Html
-input = voidTag Html.input
+input = voidTag $ Leaf "input" "<input" ">" ()
 
 
 ins :: [Maybe Attribute] -> [Html] -> Html
-ins = normalTag Html.ins
+ins = normalTag $ Parent "ins" "<ins" "</ins>"
 
 
 kbd :: [Maybe Attribute] -> [Html] -> Html
-kbd = normalTag Html.kbd
-
-
-keygen :: [Maybe Attribute] -> Html
-keygen = voidTag Html.keygen
+kbd = normalTag $ Parent "kbd" "<kbd" "</kbd>"
 
 
 label :: [Maybe Attribute] -> [Html] -> Html
-label = normalTag Html.label
+label = normalTag $ Parent "label" "<label" "</label>"
 
 
 legend :: [Maybe Attribute] -> [Html] -> Html
-legend = normalTag Html.legend
+legend = normalTag $ Parent "legend" "<legend" "</legend>"
 
 
 li :: [Maybe Attribute] -> [Html] -> Html
-li = normalTag Html.li
+li = normalTag $ Parent "li" "<li" "</li>"
 
 
 link :: [Maybe Attribute] -> Html
-link = voidTag Html.link
+link = voidTag $ Leaf "link" "<link" ">" ()
 
 
 main :: [Maybe Attribute] -> [Html] -> Html
-main = normalTag Html.main
+main = normalTag $ Parent "main" "<main" "</main>"
 
 
 map :: [Maybe Attribute] -> [Html] -> Html
-map = normalTag Html.map
+map = normalTag $ Parent "map" "<map" "</map>"
 
 
 mark :: [Maybe Attribute] -> [Html] -> Html
-mark = normalTag Html.mark
+mark = normalTag $ Parent "mark" "<mark" "</mark>"
 
 
 menu :: [Maybe Attribute] -> [Html] -> Html
-menu = normalTag Html.menu
-
-
-menuitem :: [Maybe Attribute] -> Html
-menuitem = voidTag Html.menuitem
+menu = normalTag $ Parent "menu" "<menu" "</menu>"
 
 
 meta :: [Maybe Attribute] -> Html
-meta = voidTag Html.meta
+meta = voidTag $ Leaf "meta" "<meta" ">" ()
 
 
 meter :: [Maybe Attribute] -> [Html] -> Html
-meter = normalTag Html.meter
+meter = normalTag $ Parent "meter" "<meter" "</meter>"
 
 
 nav :: [Maybe Attribute] -> [Html] -> Html
-nav = normalTag Html.nav
+nav = normalTag $ Parent "nav" "<nav" "</nav>"
 
 
 noscript :: [Maybe Attribute] -> [Html] -> Html
-noscript = normalTag Html.noscript
+noscript = normalTag $ Parent "noscript" "<noscript" "</noscript>"
 
 
 object :: [Maybe Attribute] -> [Html] -> Html
-object = normalTag Html.object
+object = normalTag $ Parent "object" "<object" "</object>"
 
 
 ol :: [Maybe Attribute] -> [Html] -> Html
-ol = normalTag Html.ol
+ol = normalTag $ Parent "ol" "<ol" "</ol>"
 
 
 optgroup :: [Maybe Attribute] -> [Html] -> Html
-optgroup = normalTag Html.optgroup
+optgroup = normalTag $ Parent "optgroup" "<optgroup" "</optgroup>"
 
 
 option :: [Maybe Attribute] -> [Html] -> Html
-option = normalTag Html.option
+option = normalTag $ Parent "option" "<option" "</option>"
 
 
 output :: [Maybe Attribute] -> [Html] -> Html
-output = normalTag Html.output
+output = normalTag $ Parent "output" "<output" "</output>"
 
 
 p :: [Maybe Attribute] -> [Html] -> Html
-p = normalTag Html.p
+p = normalTag $ Parent "p" "<p" "</p>"
 
 
-param :: [Maybe Attribute] -> Html
-param = voidTag Html.param
+picture :: [Maybe Attribute] -> [Html] -> Html
+picture = normalTag $ Parent "picture" "<picture" "</picture>"
 
 
 pre :: [Maybe Attribute] -> [Html] -> Html
-pre = normalTag Html.pre
+pre = normalTag $ Parent "pre" "<pre" "</pre>"
 
 
 progress :: [Maybe Attribute] -> [Html] -> Html
-progress = normalTag Html.progress
+progress = normalTag $ Parent "progress" "<progress" "</progress>"
 
 
 q :: [Maybe Attribute] -> [Html] -> Html
-q = normalTag Html.q
+q = normalTag $ Parent "q" "<q" "</q>"
 
 
 rp :: [Maybe Attribute] -> [Html] -> Html
-rp = normalTag Html.rp
+rp = normalTag $ Parent "rp" "<rp" "</rp>"
 
 
 rt :: [Maybe Attribute] -> [Html] -> Html
-rt = normalTag Html.rt
+rt = normalTag $ Parent "rt" "<rt" "</rt>"
 
 
 ruby :: [Maybe Attribute] -> [Html] -> Html
-ruby = normalTag Html.ruby
+ruby = normalTag $ Parent "ruby" "<ruby" "</ruby>"
+
+
+s :: [Maybe Attribute] -> [Html] -> Html
+s = normalTag $ Parent "s" "<s" "</s>"
 
 
 samp :: [Maybe Attribute] -> [Html] -> Html
-samp = normalTag Html.samp
+samp = normalTag $ Parent "samp" "<samp" "</samp>"
 
 
 script :: [Maybe Attribute] -> [Html] -> Html
-script = normalTag Html.script
+script = normalTag $ Parent "script" "<script" "</script>"
 
 
 section :: [Maybe Attribute] -> [Html] -> Html
-section = normalTag Html.section
+section = normalTag $ Parent "section" "<section" "</section>"
 
 
 select :: [Maybe Attribute] -> [Html] -> Html
-select = normalTag Html.select
+select = normalTag $ Parent "select" "<select" "</select>"
+
+
+slot :: [Maybe Attribute] -> [Html] -> Html
+slot = normalTag $ Parent "slot" "<slot" "</slot>"
 
 
 small :: [Maybe Attribute] -> [Html] -> Html
-small = normalTag Html.small
+small = normalTag $ Parent "small" "<small" "</small>"
 
 
 source :: [Maybe Attribute] -> Html
-source = voidTag Html.source
+source = voidTag $ Leaf "source" "<source" ">" ()
 
 
 span :: [Maybe Attribute] -> [Html] -> Html
-span = normalTag Html.span
+span = normalTag $ Parent "span" "<span" "</span>"
 
 
 strong :: [Maybe Attribute] -> [Html] -> Html
-strong = normalTag Html.strong
+strong = normalTag $ Parent "strong" "<strong" "</strong>"
 
 
 style :: [Maybe Attribute] -> [Html] -> Html
-style = normalTag Html.style
+style = normalTag $ Parent "style" "<style" "</style>"
 
 
 sub :: [Maybe Attribute] -> [Html] -> Html
-sub = normalTag Html.sub
+sub = normalTag $ Parent "sub" "<sub" "</sub>"
 
 
 summary :: [Maybe Attribute] -> [Html] -> Html
-summary = normalTag Html.summary
+summary = normalTag $ Parent "summary" "<summary" "</summary>"
 
 
 sup :: [Maybe Attribute] -> [Html] -> Html
-sup = normalTag Html.sup
+sup = normalTag $ Parent "sup" "<sup" "</sup>"
 
 
 table :: [Maybe Attribute] -> [Html] -> Html
-table = normalTag Html.table
+table = normalTag $ Parent "table" "<table" "</table>"
 
 
 tbody :: [Maybe Attribute] -> [Html] -> Html
-tbody = normalTag Html.tbody
+tbody = normalTag $ Parent "tbody" "<tbody" "</tbody>"
 
 
 td :: [Maybe Attribute] -> [Html] -> Html
-td = normalTag Html.td
+td = normalTag $ Parent "td" "<td" "</td>"
 
 
-text :: Text -> Html
-text = Html.toHtml
+template :: [Maybe Attribute] -> [Html] -> Html
+template = normalTag $ Parent "template" "<template" "</template>"
 
 
 textarea :: [Maybe Attribute] -> [Html] -> Html
-textarea = normalTag Html.textarea
+textarea = normalTag $ Parent "textarea" "<textarea" "</textarea>"
 
 
 tfoot :: [Maybe Attribute] -> [Html] -> Html
-tfoot = normalTag Html.tfoot
+tfoot = normalTag $ Parent "tfoot" "<tfoot" "</tfoot>"
 
 
 th :: [Maybe Attribute] -> [Html] -> Html
-th = normalTag Html.th
+th = normalTag $ Parent "th" "<th" "</th>"
 
 
 thead :: [Maybe Attribute] -> [Html] -> Html
-thead = normalTag Html.thead
+thead = normalTag $ Parent "thead" "<thead" "</thead>"
 
 
 time :: [Maybe Attribute] -> [Html] -> Html
-time = normalTag Html.time
+time = normalTag $ Parent "time" "<time" "</time>"
 
 
 title :: [Maybe Attribute] -> [Html] -> Html
-title = normalTag Html.title
+title = normalTag $ Parent "title" "<title" "</title>"
 
 
 tr :: [Maybe Attribute] -> [Html] -> Html
-tr = normalTag Html.tr
+tr = normalTag $ Parent "tr" "<tr" "</tr>"
 
 
 track :: [Maybe Attribute] -> Html
-track = voidTag Html.track
+track = voidTag $ Leaf "track" "<track" ">" ()
 
 
 u :: [Maybe Attribute] -> [Html] -> Html
-u = normalTag Html.u
+u = normalTag $ Parent "u" "<u" "</u>"
 
 
 ul :: [Maybe Attribute] -> [Html] -> Html
-ul = normalTag Html.ul
+ul = normalTag $ Parent "ul" "<ul" "</ul>"
 
 
 var :: [Maybe Attribute] -> [Html] -> Html
-var = normalTag Html.var
+var = normalTag $ Parent "var" "<var" "</var>"
 
 
 video :: [Maybe Attribute] -> [Html] -> Html
-video = normalTag Html.video
+video = normalTag $ Parent "video" "<video" "</video>"
 
 
 wbr :: [Maybe Attribute] -> Html
-wbr = voidTag Html.wbr
+wbr = voidTag $ Leaf "wbr" "<wbr" ">" ()
+
+
+docType :: Html
+docType = preEscapedText "<!DOCTYPE HTML>\n"
+
+
+docTypeHtml :: [Html] -> Html
+docTypeHtml = documentTag . (:) docType
+
+
+text :: Text -> Html
+text = toMarkup
