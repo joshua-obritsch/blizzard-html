@@ -2,7 +2,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Blizzard.Html.Attributes
-    ( abbr
+    ( -- * Attributes (Excluding Event Handler Content Attributes)
+      abbr
     , accept
     , acceptCharset
     , accesskey
@@ -127,6 +128,7 @@ module Blizzard.Html.Attributes
     , width
     , wrap
 
+      -- * Event Handler Content Attributes
     , onauxclick
     , onafterprint
     , onbeforematch

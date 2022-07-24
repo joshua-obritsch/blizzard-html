@@ -5,6 +5,8 @@ module Blizzard.Html
     ( Attribute
     , Html
     , Text
+
+      -- * Elements
     , a
     , abbr
     , address
@@ -117,8 +119,11 @@ module Blizzard.Html
     , video
     , wbr
 
+    -- * Documents
     , doctype
     , doctype'
+
+    -- * Text
     , text
     ) where
 
