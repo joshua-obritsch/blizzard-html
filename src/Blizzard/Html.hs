@@ -1,12 +1,25 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
+-- | All examples assume the following imports:
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+-- @
 module Blizzard.Html
-    ( Attribute
-    , Html
+    ( -- * Data Types
+      Attribute
     , Text
 
-      -- * Elements
+      -- * Type Synonyms
+    , Html
+
+      -- * Doctype
+    , doctype
+    , doctype'
+
+      -- * Standard Elements
     , a
     , abbr
     , address
@@ -119,11 +132,7 @@ module Blizzard.Html
     , video
     , wbr
 
-    -- * Documents
-    , doctype
-    , doctype'
-
-    -- * Text
+      -- * Auxiliary Elements
     , text
 
     , renderHtml
@@ -141,14 +150,19 @@ import Text.Blaze.Internal (Attribute, MarkupM(..), preEscapedText)
 import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 
 
+doctype :: [Html] -> Html
+doctype = documentTag . (:) doctype'
+
+
+doctype' :: Html
+doctype' = preEscapedText "<!DOCTYPE HTML>\n"
+
+
 -- | The __\<a\>__ tag defines a hyperlink.
 --
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
---
 -- Html.a
 --     [ Attr.href \"/about\" ]
 --     [ Html.text \"About\" ]
@@ -166,9 +180,6 @@ a = normalTag $ Parent "a" "<a" "</a>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
---
 -- Html.abbr
 --     [ Attr.title \"American Standard Code for Information Interchange\" ]
 --     [ Html.text \"ASCII\" ]
@@ -186,8 +197,6 @@ abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
---
 -- Html.address []
 --     [ Html.text \"123 Main St\"
 --     , Html.br []
@@ -207,9 +216,6 @@ address = normalTag $ Parent "address" "<address" "</address>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
---
 -- Html.map
 --     [ Attr.name \"downtown\" ]
 --     [ Html.area
@@ -236,8 +242,6 @@ area = voidTag $ Leaf "area" "<area" ">" ()
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
---
 -- Html.article []
 --     [ Html.h2 []
 --         [ Html.text \"Franz Kafka's Novels\" ]
@@ -273,8 +277,6 @@ article = normalTag $ Parent "article" "<article" "</article>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
---
 -- Html.aside []
 --     [ Html.h4 []
 --         [ Html.text \"House of the Dragon\" ]
@@ -300,9 +302,6 @@ aside = normalTag $ Parent "aside" "<aside" "</aside>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
---
 -- Html.audio
 --     [ Attr.controls True ]
 --     [ Html.source
@@ -330,8 +329,6 @@ audio = normalTag $ Parent "audio" "<audio" "</audio>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
---
 -- Html.p []
 --     [ Html.text \"Gary Gygax hands Fry his \"
 --     , Html.b []
@@ -352,9 +349,6 @@ b = normalTag $ Parent "b" "<b" "</b>"
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
--- import qualified Blizzard.Html.Attributes as Attr
---
 -- Html.head []
 --     [ Html.base
 --         [ Attr.href \"https:\/\/news.ycombinator.com\" ]
@@ -377,14 +371,12 @@ base = voidTag $ Leaf "base" "<base" ">" ()
 -- ==== __Example__
 --
 -- @
--- import qualified Blizzard.Html as Html
---
 -- Html.ul []
 --     [ Html.li []
 --         [ Html.text \"Character \"
 --         , Html.bdi []
---             [ Html.text \"Elfo\" ]
---         , Html.text \": Elf\"
+--             [ Html.text \"فاصوليا\" ]
+--         , Html.text \": Human\"
 --         ]
 --     , Html.li []
 --         [ Html.text \"Character \"
@@ -395,8 +387,8 @@ base = voidTag $ Leaf "base" "<base" ">" ()
 --     , Html.li []
 --         [ Html.text \"Character \"
 --         , Html.bdi []
---             [ Html.text \"فاصوليا\" ]
---         , Html.text \": Human\"
+--             [ Html.text \"Elfo\" ]
+--         , Html.text \": Elf\"
 --         ]
 --     ]
 -- @
@@ -414,38 +406,207 @@ bdi :: [Maybe Attribute] -> [Html] -> Html
 bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
 
 
+-- | The __\<bdo\>__ tag defines text directionality formatting.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.bdo
+--     [ Attr.dir "rtl" ]
+--     [ Html.text "The sun rises in the east and sets in the west." ]
+-- @
+--
+-- __Result:__
+--
+-- > <bdo dir="rtl">The sun rises in the east and sets in the west.</bdo>
 bdo :: [Maybe Attribute] -> [Html] -> Html
 bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
 
 
+-- | The __\<blockquote\>__ tag defines a section quoted from another source.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.blockquote []
+--     [ Html.p []
+--         [ Html.text \"What's in a name?\" ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<blockquote\>
+--     \<p\>What's in a name?\<\/p\>
+-- \<\/blockquote\>
+-- @
 blockquote :: [Maybe Attribute] -> [Html] -> Html
 blockquote = normalTag $ Parent "blockquote" "<blockquote" "</blockquote>"
 
 
+-- | The __\<body\>__ tag defines the document body.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.body []
+--     [ Html.h1 []
+--         [ Html.text \"An Introduction to Elm\" ]
+--     , Html.p []
+--         [ Html.text \"Elm is a functional language for front-end web development.\" ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<body\>
+--     \<h1\>An Introduction to Elm\<\/h1\>
+--     \<p\>Elm is a functional language for front-end web development.\<\/p\>
+-- \<\/body\>
+-- @
 body :: [Maybe Attribute] -> [Html] -> Html
 body = normalTag $ Parent "body" "<body" "</body>"
 
 
+-- | The __\<br\>__ tag defines a line break.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.p []
+--     [ Html.text \"That which we call a rose\"
+--     , Html.br []
+--     , Html.text \"By any other name would smell as sweet.\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <p>That which we call a rose<br>By any other name would smell as sweet.</p>
 br :: [Maybe Attribute] -> Html
 br = voidTag $ Leaf "br" "<br" ">" ()
 
 
+-- | The __\<button\>__ tag defines a button control.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.button
+--     [ Attr.type_ \"submit\" ]
+--     [ Html.text \"Log in\" ]
+-- @
+--
+-- __Result:__
+--
+-- > <button type="submit">Log in</button>
 button :: [Maybe Attribute] -> [Html] -> Html
 button = normalTag $ Parent "button" "<button" "</button>"
 
 
+-- | The __\<canvas\>__ tag defines a scriptable bitmap canvas.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.canvas
+--     [ Attr.height \"500\"
+--     , Attr.width  \"500\"
+--     ]
+--     [ Html.text \"Your browser does not support the canvas tag.\" ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<canvas height=\"500\" width=\"500\"\>
+--     Your browser does not support the canvas tag.
+-- \<\/canvas\>
+-- @
 canvas :: [Maybe Attribute] -> [Html] -> Html
 canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
 
 
+-- | The __\<caption\>__ tag defines a table caption.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.table []
+--     [ Html.caption []
+--         [ Html.text \"Monthly profits\" ]
+--     , Html.tr []
+--         [ Html.th []
+--             [ Html.text \"Month\" ]
+--         , Html.th []
+--             [ Html.text \"Profits\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"January\" ]
+--         , Html.td []
+--             [ Html.text \"$20,000\" ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<table\>
+--     \<caption\>Monthly profits\<\/caption\>
+--     \<tr\>
+--         \<th\>Month\<\/th\>
+--         \<th\>Profits\<\/th\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>January\<\/td\>
+--         \<td\>$20,000\<\/td\>
+--     \<\/tr\>
+-- \<\/table\>
+-- @
 caption :: [Maybe Attribute] -> [Html] -> Html
 caption = normalTag $ Parent "caption" "<caption" "</caption>"
 
 
+-- | The __\<cite\>__ tag defines the title of a work.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.p []
+--     [ Html.text \"My favorite episode of Futurama is \"
+--     , Html.cite []
+--         [ Html.text \"Fear of a Bot Planet\" ]
+--     , Html.text \".\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <p>My favorite episode of Futurama is <cite>Fear of a Bot Planet</cite>.</p>
 cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag $ Parent "cite" "<cite" "</cite>"
 
 
+-- | The __\<code\>__ tag defines computer code.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.p []
+--     [ Html.text \"This is valid Dart code: \"
+--     , Html.code []
+--         [ Html.text \"!someBoolean!\" ]
+--     , Html.text \".\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <p>This is valid Dart code: <code>!someBoolean!</code>.</p>
 code :: [Maybe Attribute] -> [Html] -> Html
 code = normalTag $ Parent "code" "<code" "</code>"
 
@@ -816,14 +977,6 @@ video = normalTag $ Parent "video" "<video" "</video>"
 
 wbr :: [Maybe Attribute] -> Html
 wbr = voidTag $ Leaf "wbr" "<wbr" ">" ()
-
-
-doctype :: [Html] -> Html
-doctype = documentTag . (:) doctype'
-
-
-doctype' :: Html
-doctype' = preEscapedText "<!DOCTYPE HTML>\n"
 
 
 text :: Text -> Html
