@@ -5,12 +5,10 @@ bug-reports:        https://github.com/joshua-obritsch/blizzard-html/issues
 build-type:         Simple
 category:           Text
 copyright:          2021 Joshua Obritsch
-description:        An HTML renderer for the Haskell programming
-                    language. It functions mostly as a wrapper
-                    for blaze-markup. The syntax was inspired by
-                    Elm. A CSS solution is currently being
-                    experimented with. For now, I'd recommend
-                    using this with Tailwind CSS.
+description:        An HTML generator. It functions mostly as a wrapper for
+                    blaze-markup. The syntax was inspired by Elm. A CSS
+                    solution (blizzard-css) is currently being experimented
+                    with. For now, I'd recommend using this with Tailwind CSS.
 extra-source-files: CHANGELOG.md
 homepage:           https://github.com/joshua-obritsch/blizzard-html
 license:            MIT
@@ -18,7 +16,7 @@ license-file:       LICENSE
 maintainer:         Joshua Obritsch <joshua@obritsch.com>
 name:               blizzard-html
 stability:          Experimental
-synopsis:           An HTML renderer for Haskell
+synopsis:           An HTML generator for Haskell
 version:            0.5.0.0
 
 
