@@ -136,18 +136,86 @@ import Text.Blaze.Internal (Attribute, MarkupM(..), preEscapedText)
 import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 
 
+-- | Constructs a hyperlink (the __a__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.a
+--     [ Attr.href \"/about\" ]
+--     [ Html.text \"About\" ]
+-- @
+--
+-- __Result:__
+--
+-- > <a href="/about">About</a>
 a :: [Maybe Attribute] -> [Html] -> Html
 a = normalTag $ Parent "a" "<a" "</a>"
 
 
+-- | Constructs an abbreviation or acronym (the __abbr__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.abbr
+--     [ Attr.title \"American Standard Code for Information Interchange\" ]
+--     [ Html.text \"ASCII\" ]
+-- @
+--
+-- __Result:__
+--
+-- > <abbr title="American Standard Code for Information Interchange">ASCII</abbr>
 abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 
 
+-- | Constructs contact information for a page or article (the __address__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.address []
+--     [ Html.text \"123 Main St\"
+--     , Html.br []
+--     , Html.text \"Anytown, USA\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <address>123 Main St<br>Anytown, USA</address>
 address :: [Maybe Attribute] -> [Html] -> Html
 address = normalTag $ Parent "address" "<address" "</address>"
 
 
+-- | Constructs a hyperlink or dead area on an image map (the __area__ element).
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- Html.area
+--     [ Attr.alt    \"Library\"
+--     , Attr.coords \"52,36,160,240\"
+--     , Attr.shape  \"rect\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <area alt="Library" coords="52,36,160,240" shape="rect">
 area :: [Maybe Attribute] -> Html
 area = voidTag $ Leaf "area" "<area" ">" ()
 

@@ -213,8 +213,8 @@ module Blizzard.Html.Attributes
     , onwaiting
     , onwheel
 
-    -- * CSS
-    , css
+    -- * Tailwind CSS
+    , tailwind
     ) where
 
 
@@ -1053,5 +1053,5 @@ onwheel :: Text -> Maybe Attribute
 onwheel = textAttribute $ attribute "onwheel" " onwheel=\""
 
 
-css :: [Text] -> Maybe Attribute
-css = textAttribute (attribute "class" " class=\"") . unwords
+tailwind :: [Text] -> Maybe Attribute
+tailwind = textAttribute (attribute "class" " class=\"") . unwords
