@@ -212,11 +212,14 @@ module Blizzard.Html.Attributes
     , onvolumechange
     , onwaiting
     , onwheel
+
+    -- * CSS
+    , css
     ) where
 
 
-import Data.Text (Text)
-import Prelude (($), Bool, Maybe)
+import Data.Text (Text, unwords)
+import Prelude (($), (.), Bool, Maybe)
 import Text.Blaze.Internal (Attribute, attribute)
 
 import Blizzard.Internal.Html (boolAttribute, textAttribute)
@@ -1048,3 +1051,7 @@ onwaiting = textAttribute $ attribute "onwaiting" " onwaiting=\""
 
 onwheel :: Text -> Maybe Attribute
 onwheel = textAttribute $ attribute "onwheel" " onwheel=\""
+
+
+css :: [Text] -> Maybe Attribute
+css = textAttribute (attribute "class" " class=\"") . unwords
