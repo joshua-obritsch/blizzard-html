@@ -141,7 +141,7 @@ import Text.Blaze.Internal (Attribute, MarkupM(..), preEscapedText)
 import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 
 
--- | Constructs a hyperlink (the __a__ element).
+-- | The __\<a\>__ tag defines a hyperlink.
 --
 -- ==== __Example__
 --
@@ -161,7 +161,7 @@ a :: [Maybe Attribute] -> [Html] -> Html
 a = normalTag $ Parent "a" "<a" "</a>"
 
 
--- | Constructs an abbreviation or acronym (the __abbr__ element).
+-- | The __\<abbr\>__ tag defines an abbreviation or acronym.
 --
 -- ==== __Example__
 --
@@ -181,7 +181,7 @@ abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 
 
--- | Constructs contact information for a page or article (the __address__ element).
+-- | The __\<address\>__ tag defines contact information for a page or article.
 --
 -- ==== __Example__
 --
@@ -202,7 +202,7 @@ address :: [Maybe Attribute] -> [Html] -> Html
 address = normalTag $ Parent "address" "<address" "</address>"
 
 
--- | Constructs a hyperlink or dead area on an image map (the __area__ element).
+-- | The __\<area\>__ tag defines a hyperlink or dead area on an image map.
 --
 -- ==== __Example__
 --
@@ -210,21 +210,28 @@ address = normalTag $ Parent "address" "<address" "</address>"
 -- import qualified Blizzard.Html as Html
 -- import qualified Blizzard.Html.Attributes as Attr
 --
--- Html.area
---     [ Attr.alt    \"Library\"
---     , Attr.coords \"52,36,160,240\"
---     , Attr.shape  \"rect\"
+-- Html.map
+--     [ Attr.name \"downtown\" ]
+--     [ Html.area
+--         [ Attr.alt    \"Library\"
+--         , Attr.coords \"52,36,160,240\"
+--         , Attr.shape  \"rect\"
+--         ]
 --     ]
 -- @
 --
 -- __Result:__
 --
--- > <area alt="Library" coords="52,36,160,240" shape="rect">
+-- @
+-- \<map name=\"downtown\"\>
+--     \<area alt=\"Library\" coords=\"52,36,160,240\" shape=\"rect\"\>
+-- \<\/map\>
+-- @
 area :: [Maybe Attribute] -> Html
 area = voidTag $ Leaf "area" "<area" ">" ()
 
 
--- | Constructs a self-contained syndicatable or reusable composition (the __article__ element).
+-- | The __\<article\>__ tag defines a self-contained syndicatable or reusable composition.
 --
 -- ==== __Example__
 --
@@ -261,7 +268,7 @@ article :: [Maybe Attribute] -> [Html] -> Html
 article = normalTag $ Parent "article" "<article" "</article>"
 
 
--- | Constructs a sidebar for tangentially related content (the __aside__ element).
+-- | The __\<aside\>__ tag defines a sidebar for tangentially related content.
 --
 -- ==== __Example__
 --
@@ -288,7 +295,7 @@ aside :: [Maybe Attribute] -> [Html] -> Html
 aside = normalTag $ Parent "aside" "<aside" "</aside>"
 
 
--- | Constructs an audio player (the __audio__ element).
+-- | The __\<audio\>__ tag defines an audio player.
 --
 -- ==== __Example__
 --
@@ -299,10 +306,10 @@ aside = normalTag $ Parent "aside" "<aside" "</aside>"
 -- Html.audio
 --     [ Attr.controls True ]
 --     [ Html.source
---         [ Attr.src   \"train.mp3\"
+--         [ Attr.src   \"bossfight-warp.mp3\"
 --         , Attr.type_ \"audio/mpeg\"
 --         ]
---     , Html.text \"Your browser does not support the audio element.\"
+--     , Html.text \"Your browser does not support the audio tag.\"
 --     ]
 -- @
 --
@@ -310,15 +317,15 @@ aside = normalTag $ Parent "aside" "<aside" "</aside>"
 --
 -- @
 -- \<audio controls=\"controls\"\>
---     \<source src=\"train.mp3\" type=\"audio/mpeg\"\>
---     Your browser does not support the audio element.
+--     \<source src=\"bossfight-warp.mp3\" type=\"audio/mpeg\"\>
+--     Your browser does not support the audio tag.
 -- \<\/audio\>
 -- @
 audio :: [Maybe Attribute] -> [Html] -> Html
 audio = normalTag $ Parent "audio" "<audio" "</audio>"
 
 
--- | Constructs a key word (the __b__ element).
+-- | The __\<b\>__ tag defines a key word.
 --
 -- ==== __Example__
 --
@@ -340,7 +347,7 @@ b :: [Maybe Attribute] -> [Html] -> Html
 b = normalTag $ Parent "b" "<b" "</b>"
 
 
--- | Constructs a base URL (the __base__ element).
+-- | The __\<base\>__ tag defines the base URL of a document.
 --
 -- ==== __Example__
 --
@@ -348,18 +355,61 @@ b = normalTag $ Parent "b" "<b" "</b>"
 -- import qualified Blizzard.Html as Html
 -- import qualified Blizzard.Html.Attributes as Attr
 --
--- Html.base
---     [ Attr.href \"https://news.ycombinator.com\" ]
+-- Html.head []
+--     [ Html.base
+--         [ Attr.href \"https:\/\/news.ycombinator.com\" ]
+--     ]
 -- @
 --
 -- __Result:__
 --
--- > <base href="https://news.ycombinator.com">
+-- @
+-- \<head\>
+--     \<base href=\"https:\/\/news.ycombinator.com\"\>
+-- \<\/head\>
+-- @
 base :: [Maybe Attribute] -> Html
 base = voidTag $ Leaf "base" "<base" ">" ()
 
 
--- | Constructs text directionality isolation (the __bdi__ element).
+-- | The __\<bdi\>__ tag defines text directionality isolation.
+--
+-- ==== __Example__
+--
+-- @
+-- import qualified Blizzard.Html as Html
+--
+-- Html.ul []
+--     [ Html.li []
+--         [ Html.text \"Character \"
+--         , Html.bdi []
+--             [ Html.text \"Elfo\" ]
+--         , Html.text \": Elf\"
+--         ]
+--     , Html.li []
+--         [ Html.text \"Character \"
+--         , Html.bdi []
+--             [ Html.text \"Lucy\" ]
+--         , Html.text \": Demon\"
+--         ]
+--     , Html.li []
+--         [ Html.text \"Character \"
+--         , Html.bdi []
+--             [ Html.text \"فاصوليا\" ]
+--         , Html.text \": Human\"
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<ul\>
+--     \<li\>Character \<bdi\>فاصوليا\<\/bdi\>: Human\<\/li\>
+--     \<li\>Character \<bdi\>Lucy\<\/bdi\>: Demon\<\/li\>
+--     \<li\>Character \<bdi\>Elfo\<\/bdi\>: Elf\<\/li\>
+-- \<\/ul\>
+-- @
 bdi :: [Maybe Attribute] -> [Html] -> Html
 bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
 
