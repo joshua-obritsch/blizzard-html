@@ -430,7 +430,7 @@ bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
 -- @
 -- Html.blockquote []
 --     [ Html.p []
---         [ Html.text \"What's in a name?\" ]
+--         [ Html.text \"When life gives you lemons, make lemonade.\" ]
 --     ]
 -- @
 --
@@ -438,7 +438,7 @@ bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
 --
 -- @
 -- \<blockquote\>
---     \<p\>What's in a name?\<\/p\>
+--     \<p\>When life gives you lemons, make lemonade.\<\/p\>
 -- \<\/blockquote\>
 -- @
 blockquote :: [Maybe Attribute] -> [Html] -> Html
@@ -577,16 +577,16 @@ caption = normalTag $ Parent "caption" "<caption" "</caption>"
 --
 -- @
 -- Html.p []
---     [ Html.text \"My favorite episode of Futurama is \"
+--     [ Html.text \"My favorite movie by Alfred Hitchcock is \"
 --     , Html.cite []
---         [ Html.text \"Fear of a Bot Planet\" ]
+--         [ Html.text \"Psycho\" ]
 --     , Html.text \".\"
 --     ]
 -- @
 --
 -- __Result:__
 --
--- > <p>My favorite episode of Futurama is <cite>Fear of a Bot Planet</cite>.</p>
+-- > <p>My favorite movie by Alfred Hitchcock is <cite>Psycho</cite>.</p>
 cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag $ Parent "cite" "<cite" "</cite>"
 
@@ -597,20 +597,28 @@ cite = normalTag $ Parent "cite" "<cite" "</cite>"
 --
 -- @
 -- Html.p []
---     [ Html.text \"This is valid Dart code: \"
+--     [ Html.text \"The \"
 --     , Html.code []
---         [ Html.text \"!someBoolean!\" ]
---     , Html.text \".\"
+--         [ Html.text \"map\" ]
+--     , Html.text \" function is a higher-order function.\"
 --     ]
 -- @
 --
 -- __Result:__
 --
--- > <p>This is valid Dart code: <code>!someBoolean!</code>.</p>
+-- > <p>The <code>map</code> function is a higher-order function.</p>
 code :: [Maybe Attribute] -> [Html] -> Html
 code = normalTag $ Parent "code" "<code" "</code>"
 
 
+-- | The __\<col\>__ tag defines a table column.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.table []
+--     []
+-- @
 col :: [Maybe Attribute] -> Html
 col = voidTag $ Leaf "col" "<col" ">" ()
 
