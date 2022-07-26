@@ -575,18 +575,24 @@ canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
 -- @
 -- Html.table []
 --     [ Html.caption []
---         [ Html.text \"Monthly profits\" ]
+--         [ Html.text \"Monthly earnings\" ]
 --     , Html.tr []
 --         [ Html.th []
 --             [ Html.text \"Month\" ]
 --         , Html.th []
---             [ Html.text \"Profits\" ]
+--             [ Html.text \"Earnings\" ]
 --         ]
 --     , Html.tr []
 --         [ Html.td []
 --             [ Html.text \"January\" ]
 --         , Html.td []
---             [ Html.text \"$20,000\" ]
+--             [ Html.text \"$4,456\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"February\" ]
+--         , Html.td []
+--             [ Html.text \"$4,230\" ]
 --         ]
 --     ]
 -- @
@@ -595,14 +601,18 @@ canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
 --
 -- @
 -- \<table\>
---     \<caption\>Monthly profits\<\/caption\>
+--     \<caption\>Monthly earnings\<\/caption\>
 --     \<tr\>
 --         \<th\>Month\<\/th\>
---         \<th\>Profits\<\/th\>
+--         \<th\>Earnings\<\/th\>
 --     \<\/tr\>
 --     \<tr\>
 --         \<td\>January\<\/td\>
---         \<td\>$20,000\<\/td\>
+--         \<td\>$4,456\<\/td\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>February\<\/td\>
+--         \<td\>$4,230\<\/td\>
 --     \<\/tr\>
 -- \<\/table\>
 -- @
@@ -616,16 +626,16 @@ caption = normalTag $ Parent "caption" "<caption" "</caption>"
 --
 -- @
 -- Html.p []
---     [ Html.text \"My favorite movie by Alfred Hitchcock is \"
+--     [ Html.text \"My favorite movie is \"
 --     , Html.cite []
 --         [ Html.text \"Psycho\" ]
---     , Html.text \".\"
+--     , Html.text \" by Alfred Hitchcock.\"
 --     ]
 -- @
 --
 -- __Result:__
 --
--- > <p>My favorite movie by Alfred Hitchcock is <cite>Psycho</cite>.</p>
+-- > <p>My favorite movie is <cite>Psycho</cite> by Alfred Hitchcock.</p>
 cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag $ Parent "cite" "<cite" "</cite>"
 
@@ -659,10 +669,10 @@ code = normalTag $ Parent "code" "<code" "</code>"
 --     [ Html.colgroup []
 --         [ Html.col
 --             [ Attr.span  \"2\"
---             , Attr.style \"background-color: purple;\"
+--             , Attr.style \"background-color: red;\"
 --             ]
 --         , Html.col
---             [ Attr.style \"background-color: orange;\" ]
+--             [ Attr.style \"background-color: blue;\" ]
 --         ]
 --     , Html.tr []
 --         [ Html.th []
@@ -696,8 +706,8 @@ code = normalTag $ Parent "code" "<code" "</code>"
 -- @
 -- \<table\>
 --     \<colgroup\>
---         \<col span="2" style="background-color: purple;"\>
---         \<col style="background-color: orange;"\>
+--         \<col span=\"2\" style=\"background-color: red;\"\>
+--         \<col style=\"background-color: blue;\"\>
 --     \<\/colgroup\>
 --     \<tr\>
 --         \<th\>ISBN\<\/th\>
@@ -721,18 +731,182 @@ col = voidTag $ Leaf "col" "<col" ">" ()
 
 
 -- | The __\<colgroup\>__ tag defines a group of columns in a table.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.table []
+--     [ Html.colgroup []
+--         [ Html.col
+--             [ Attr.span  \"2\"
+--             , Attr.style \"background-color: purple;\"
+--             ]
+--         , Html.col
+--             [ Attr.style \"background-color: white;\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.th []
+--             [ Html.text \"Framework\" ]
+--         , Html.th []
+--             [ Html.text \"Language\" ]
+--         , Html.th []
+--             [ Html.text \"Github Stars\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"IHP\" ]
+--         , Html.td []
+--             [ Html.text \"Haskell\" ]
+--         , Html.td []
+--             [ Html.text \"3.4k\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"Phoenix\" ]
+--         , Html.td []
+--             [ Html.text \"Elixir\" ]
+--         , Html.td []
+--             [ Html.text \"18.3k\" ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<table\>
+--     \<colgroup\>
+--         \<col span=\"2\" style=\"background-color: purple;\"\>
+--         \<col style=\"background-color: white;\"\>
+--     \<\/colgroup\>
+--     \<tr\>
+--         \<th\>Framework\<\/th\>
+--         \<th\>Language\<\/th\>
+--         \<th\>Github Stars\<\/th\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>IHP\<\/td\>
+--         \<td\>Haskell\<\/td\>
+--         \<td\>3.4k\<\/td\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>Phoenix\<\/td\>
+--         \<td\>Elixir\<\/td\>
+--         \<td\>18.3k\<\/td\>
+--     \<\/tr\>
+-- \<\/table\>
+-- @
 colgroup :: [Maybe Attribute] -> [Html] -> Html
 colgroup = normalTag $ Parent "colgroup" "<colgroup" "</colgroup>"
 
 
+-- | The __\<data\>__ tag defines a machine-readable equivalent of its content.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.ul []
+--     [ Html.li []
+--         [ Html.data_
+--             [ Attr.value \"1976\" ]
+--             [ Html.text  \"Apple I\" ]
+--         ]
+--     , Html.li []
+--         [ Html.data_
+--             [ Attr.value \"1977\" ]
+--             [ Html.text  \"Apple II\" ]
+--         ]
+--     , Html.li []
+--         [ Html.data_
+--             [ Attr.value \"1980\" ]
+--             [ Html.text  \"Apple III\" ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<ul\>
+--     \<li\>
+--         \<data value=\"1976\"\>Apple I\<\/data\>
+--     \<\/li\>
+--     \<li\>
+--         \<data value=\"1977\"\>Apple II\<\/data\>
+--     \<\/li\>
+--     \<li\>
+--         \<data value=\"1980\"\>Apple III\<\/data\>
+--     \<\/li\>
+-- \<\/ul\>
+-- @
 data_ :: [Maybe Attribute] -> [Html] -> Html
 data_ = normalTag $ Parent "data_" "<data_" "</data_>"
 
 
+-- | The __\<datalist\>__ tag defines a container for options for a combo box control.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.label []
+--     [ Html.text \"Language:\"
+--     , Html.input
+--         [ Attr.name \"language\"
+--         , Attr.list \"languages\"
+--         ]
+--     , Html.datalist
+--         [ Attr.id \"languages\" ]
+--         [ Html.option
+--             [ Attr.value \"English\" ] []
+--         , Html.option
+--             [ Attr.value \"German\" ] []
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<label\>
+--     Language:
+--     \<input name=\"language\" list=\"languages\"\>
+--     \<datalist id=\"languages\">
+--         \<option value=\"English\"\>\<\/option\>
+--         \<option value=\"German\"\>\<\/option\>
+--     \<\/datalist\>
+-- \<\/label\>
+-- @
 datalist :: [Maybe Attribute] -> [Html] -> Html
 datalist = normalTag $ Parent "datalist" "<datalist" "</datalist>"
 
 
+-- | The __\<dd\>__ tag defines the description part of a term-description group in a description list.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.dl []
+--     [ Html.dt []
+--         [ Html.text \"Chicken adobo\" ]
+--     , Html.dd []
+--         [ Html.text \"Chicken marinated in vinegar and soy sauce\" ]
+--     , Html.dt []
+--         [ Html.text \"Pancit\" ]
+--     , Html.dd []
+--         [ Html.text \"Rice noodles with pork\" ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<dl\>
+--     \<dt\>Chicken adobo\<\/dt\>
+--     \<dd\>Chicken marinated in vinegar and soy sauce\<\/dd\>
+--     \<dt\>Pancit\<\/dt\>
+--     \<dd\>Rice noodles with pork\<\/dd\>
+-- \<\/dl\>
+-- @
 dd :: [Maybe Attribute] -> [Html] -> Html
 dd = normalTag $ Parent "dd" "<dd" "</dd>"
 
@@ -757,10 +931,12 @@ div :: [Maybe Attribute] -> [Html] -> Html
 div = normalTag $ Parent "div" "<div" "</div>"
 
 
+-- | The __\<dl\>__ tag defines a description list.
 dl :: [Maybe Attribute] -> [Html] -> Html
 dl = normalTag $ Parent "dl" "<dl" "</dl>"
 
 
+-- | The __\<dt\>__ tag defines the term part of a term-description group in a description list.
 dt :: [Maybe Attribute] -> [Html] -> Html
 dt = normalTag $ Parent "dt" "<dt" "</dt>"
 
