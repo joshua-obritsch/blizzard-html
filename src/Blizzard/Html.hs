@@ -1,23 +1,21 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | All examples assume the following imports:
+-- | This module defines a set of types and functions responsible for generating and using HTML elements; and aims to be
+-- compliant with the HTML Living Standard.
+--
+-- All element examples assume the following imports:
 --
 -- @
 -- import qualified Blizzard.Html as Html
 -- import qualified Blizzard.Html.Attributes as Attr
 -- @
 module Blizzard.Html
-    ( -- * Data Types
-      Attribute
-    , Text
+    ( Html
+    , Attribute
 
-      -- * Type Synonyms
-    , Html
-
-      -- * Doctype
+      -- * Doctype Declaration
     , doctype
-    , doctype'
 
       -- * Standard Elements
     , a
@@ -145,17 +143,58 @@ import Text.Blaze.Renderer.Text (renderHtml)
 import Data.Text (Text)
 import Prelude ((>>), ($), (.), Maybe)
 import Text.Blaze (toMarkup)
-import Text.Blaze.Internal (Attribute, MarkupM(..), preEscapedText)
+import Text.Blaze.Internal (MarkupM(..), preEscapedText)
+
+import qualified Text.Blaze.Internal
 
 import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 
 
+-- | The __Attribute__ type defines an HTML attribute.
+--
+-- ==== __Example__
+--
+-- @
+-- import Blizzard.Html (Attribute, Html)
+--
+-- import qualified Blizzard.Html as Html
+--
+-- renderSubmitButton :: [Attribute] -> Html
+-- renderSubmitButton attrs =
+--     [ Html.button attrs
+--         [ Html.text \"Submit\" ]
+--     ]
+-- @
+type Attribute = Text.Blaze.Internal.Attribute
+
+
+-- | The __DOCTYPE__ declaration declares the version of HTML in which the document is written.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.doctype
+--     [ Html.html []
+--         [ Html.body []
+--             [ Html.p []
+--                 [ Html.text "Hello, World!" ]
+--             ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<!DOCTYPE html\>
+-- \<html\>
+--     \<body\>
+--         \<p\>Hello, World!\<\/p\>
+--     \<\/body\>
+-- \<\/html\>
+-- @
 doctype :: [Html] -> Html
-doctype = documentTag . (:) doctype'
-
-
-doctype' :: Html
-doctype' = preEscapedText "<!DOCTYPE HTML>\n"
+doctype = documentTag . (:) (preEscapedText "<!DOCTYPE html>\n")
 
 
 -- | The __\<a\>__ tag defines a hyperlink.
@@ -192,7 +231,7 @@ abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 
 
--- | The __\<address\>__ tag defines contact information for a page or article.
+-- | The __\<address\>__ tag defines contact information.
 --
 -- ==== __Example__
 --
@@ -324,7 +363,7 @@ audio :: [Maybe Attribute] -> [Html] -> Html
 audio = normalTag $ Parent "audio" "<audio" "</audio>"
 
 
--- | The __\<b\>__ tag defines a key word.
+-- | The __\<b\>__ tag defines a span of text to which attention is being drawn without conveying extra importance.
 --
 -- ==== __Example__
 --
@@ -591,7 +630,7 @@ cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag $ Parent "cite" "<cite" "</cite>"
 
 
--- | The __\<code\>__ tag defines computer code.
+-- | The __\<code\>__ tag defines a fragment of computer code.
 --
 -- ==== __Example__
 --
@@ -617,12 +656,71 @@ code = normalTag $ Parent "code" "<code" "</code>"
 --
 -- @
 -- Html.table []
---     []
+--     [ Html.colgroup []
+--         [ Html.col
+--             [ Attr.span  \"2\"
+--             , Attr.style \"background-color: purple;\"
+--             ]
+--         , Html.col
+--             [ Attr.style \"background-color: orange;\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.th []
+--             [ Html.text \"ISBN\" ]
+--         , Html.th []
+--             [ Html.text \"Author\" ]
+--         , Html.th []
+--             [ Html.text \"Title\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"9781617293764\" ]
+--         , Html.td []
+--             [ Html.text \"Will Kurt\" ]
+--         , Html.td []
+--             [ Html.text \"Get Programming with Haskell\" ]
+--         ]
+--     , Html.tr []
+--         [ Html.td []
+--             [ Html.text \"9781617295409\" ]
+--         , Html.td []
+--             [ Html.text \"Vitaly Bragilevsky\" ]
+--         , Html.td []
+--             [ Html.text \"Haskell in Depth\" ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<table\>
+--     \<colgroup\>
+--         \<col span="2" style="background-color: purple;"\>
+--         \<col style="background-color: orange;"\>
+--     \<\/colgroup\>
+--     \<tr\>
+--         \<th\>ISBN\<\/th\>
+--         \<th\>Author\<\/th\>
+--         \<th\>Title\<\/th\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>9781617293764\<\/td\>
+--         \<td\>Will Kurt\<\/td\>
+--         \<td\>Get Programming with Haskell\<\/td\>
+--     \<\/tr\>
+--     \<tr\>
+--         \<td\>9781617295409\<\/td\>
+--         \<td\>Vitaly Bragilevsky\<\/td\>
+--         \<td\>Haskell in Depth\<\/td\>
+--     \<\/tr\>
+-- \<\/table\>
 -- @
 col :: [Maybe Attribute] -> Html
 col = voidTag $ Leaf "col" "<col" ">" ()
 
 
+-- | The __\<colgroup\>__ tag defines a group of columns in a table.
 colgroup :: [Maybe Attribute] -> [Html] -> Html
 colgroup = normalTag $ Parent "colgroup" "<colgroup" "</colgroup>"
 

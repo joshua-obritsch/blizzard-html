@@ -18,6 +18,24 @@ import Prelude ((>>), ($), (.), Bool(..), Maybe(..), foldl, foldl1)
 import Text.Blaze.Internal ((!), Attribute, AttributeValue, Markup, textValue)
 
 
+-- | The __Html__ type defines an HTML element.
+--
+-- ==== __Example__
+--
+-- @
+-- import Data.Text (Text)
+--
+-- import Blizzard.Html (Html)
+--
+-- import qualified Blizzard.Html as Html
+-- import qualified Blizzard.Html.Attributes as Attr
+--
+-- renderLink :: (Text, Text) -> Html
+-- renderLink (href, text) =
+--     Html.a
+--         [ Attr.href href ]
+--         [ Html.text text ]
+-- @
 type Html = Markup
 
 
