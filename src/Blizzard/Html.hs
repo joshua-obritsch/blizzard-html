@@ -4,7 +4,7 @@
 -- | This module defines a set of types and functions responsible for generating and using HTML elements; and aims to be
 -- compliant with the HTML Living Standard.
 --
--- All element examples assume the following imports:
+-- All examples of elements assume the following imports:
 --
 -- @
 -- import qualified Blizzard.Html as Html
@@ -168,16 +168,20 @@ import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 type Attribute = Text.Blaze.Internal.Attribute
 
 
--- | The __DOCTYPE__ declaration declares the version of HTML in which the document is written.
+-- | The __DOCTYPE__ preamble declares the document type as HTML.
 --
 -- ==== __Example__
 --
 -- @
 -- Html.doctype
 --     [ Html.html []
---         [ Html.body []
+--         [ Html.head []
+--             [ Html.title []
+--                 [ Html.text \"Gigatron\" ]
+--             ]
+--         , Html.body []
 --             [ Html.p []
---                 [ Html.text "Hello, World!" ]
+--                 [ Html.text \"Gigatron is an 8-bit microcomputer built from TTL chips.\" ]
 --             ]
 --         ]
 --     ]
@@ -188,8 +192,11 @@ type Attribute = Text.Blaze.Internal.Attribute
 -- @
 -- \<!DOCTYPE html\>
 -- \<html\>
+--     \<head\>
+--         \<title\>Gigatron\<\/title\>
+--     \<\/head\>
 --     \<body\>
---         \<p\>Hello, World!\<\/p\>
+--         \<p\>Gigatron is an 8-bit microcomputer built from TTL chips.\<\/p\>
 --     \<\/body\>
 -- \<\/html\>
 -- @
@@ -203,7 +210,7 @@ doctype = documentTag . (:) (preEscapedText "<!DOCTYPE html>\n")
 --
 -- @
 -- Html.a
---     [ Attr.href \"/about\" ]
+--     [ Attr.href \"\/about\" ]
 --     [ Html.text \"About\" ]
 -- @
 --
@@ -911,10 +918,38 @@ dd :: [Maybe Attribute] -> [Html] -> Html
 dd = normalTag $ Parent "dd" "<dd" "</dd>"
 
 
+-- | The __\<del\>__ tag defines a removal from the document.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.p []
+--     [ Html.text \"Appointments are available on \"
+--     , Html.del []
+--         [ Html.text \"Tuesdays\" ]
+--     , Html.text \", Wednesdays and Fridays.\"
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- > <p>Appointments are available on <del>Tuesdays</del>, Wednesdays and Fridays.</p>
 del :: [Maybe Attribute] -> [Html] -> Html
 del = normalTag $ Parent "del" "<del" "</del>"
 
 
+-- | The __\<details\>__ tag defines a disclosure control for hiding details.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.details []
+--     [ Html.summary []
+--         [ Html.text \"\" ]
+--     , Html.p []
+--         [ Html.text \"\" ]
+--     ]
+-- @
 details :: [Maybe Attribute] -> [Html] -> Html
 details = normalTag $ Parent "details" "<details" "</details>"
 
