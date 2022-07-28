@@ -945,10 +945,19 @@ del = normalTag $ Parent "del" "<del" "</del>"
 -- @
 -- Html.details []
 --     [ Html.summary []
---         [ Html.text \"\" ]
+--         [ Html.text \"Phrasal Verbs\" ]
 --     , Html.p []
---         [ Html.text \"\" ]
+--         [ Html.text \"A phrasal verb combines a normal verb with either a preposition or an adverb.\" ]
 --     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<details\>
+--     \<summary\>Phrasal Verbs\<\/summary\>
+--     \<p\>A phrasal verb combines a normal verb with either a preposition or an adverb.\<\/p\>
+-- \<\/details\>
 -- @
 details :: [Maybe Attribute] -> [Html] -> Html
 details = normalTag $ Parent "details" "<details" "</details>"
