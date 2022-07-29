@@ -132,12 +132,7 @@ module Blizzard.Html
 
       -- * Auxiliary Elements
     , text
-
-    , renderHtml
     ) where
-
-
-import Text.Blaze.Renderer.Text (renderHtml)
 
 
 import Data.Text (Text)
