@@ -1,6 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
+
 -- | This module defines a set of types and functions responsible for generating and using HTML elements; and aims to be
 -- compliant with the HTML Living Standard.
 --
@@ -13,11 +14,12 @@
 module Blizzard.Html
     ( Html
     , Attribute
+    , (<|)
 
-      -- * Doctype Declaration
+      -- * Declarations
     , doctype
 
-      -- * Standard Elements
+      -- * Elements
     , a
     , abbr
     , address
@@ -130,7 +132,7 @@ module Blizzard.Html
     , video
     , wbr
 
-      -- * Auxiliary Elements
+      -- * Text
     , text
     ) where
 
@@ -161,6 +163,11 @@ import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 --     ]
 -- @
 type Attribute = Text.Blaze.Internal.Attribute
+
+
+infixr 0 <|
+
+(<|) = ($)
 
 
 -- | The __DOCTYPE__ preamble declares the document type as HTML.
