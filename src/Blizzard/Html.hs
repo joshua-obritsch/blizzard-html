@@ -158,9 +158,8 @@ import Blizzard.Internal.Html (Html, documentTag, normalTag, voidTag)
 --
 -- renderSubmitButton :: [Attribute] -> Html
 -- renderSubmitButton attrs =
---     [ Html.button attrs
+--     Html.button attrs
 --         [ Html.text \"Submit\" ]
---     ]
 -- @
 type Attribute = Text.Blaze.Internal.Attribute
 
