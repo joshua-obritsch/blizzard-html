@@ -203,6 +203,7 @@ infixr 0 <|
 -- @
 doctype :: [Html] -> Html
 doctype = documentTag . (:) (preEscapedText "<!DOCTYPE html>\n")
+{-# INLINE doctype #-}
 
 
 -- | The __\<a\>__ tag defines a hyperlink.
@@ -220,6 +221,7 @@ doctype = documentTag . (:) (preEscapedText "<!DOCTYPE html>\n")
 -- > <a href="/about">About</a>
 a :: [Maybe Attribute] -> [Html] -> Html
 a = normalTag $ Parent "a" "<a" "</a>"
+{-# INLINE a #-}
 
 
 -- | The __\<abbr\>__ tag defines an abbreviation or acronym.
@@ -237,6 +239,7 @@ a = normalTag $ Parent "a" "<a" "</a>"
 -- > <abbr title="American Standard Code for Information Interchange">ASCII</abbr>
 abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
+{-# INLINE abbr #-}
 
 
 -- | The __\<address\>__ tag defines contact information.
@@ -256,6 +259,7 @@ abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 -- > <address>123 Main St<br>Anytown, USA</address>
 address :: [Maybe Attribute] -> [Html] -> Html
 address = normalTag $ Parent "address" "<address" "</address>"
+{-# INLINE address #-}
 
 
 -- | The __\<area\>__ tag defines a hyperlink or dead area on an image map.
@@ -282,6 +286,7 @@ address = normalTag $ Parent "address" "<address" "</address>"
 -- @
 area :: [Maybe Attribute] -> Html
 area = voidTag $ Leaf "area" "<area" ">" ()
+{-# INLINE area #-}
 
 
 -- | The __\<article\>__ tag defines a self-contained syndicatable or reusable composition.
@@ -317,6 +322,7 @@ area = voidTag $ Leaf "area" "<area" ">" ()
 -- @
 article :: [Maybe Attribute] -> [Html] -> Html
 article = normalTag $ Parent "article" "<article" "</article>"
+{-# INLINE article #-}
 
 
 -- | The __\<aside\>__ tag defines a sidebar for tangentially related content.
@@ -342,6 +348,7 @@ article = normalTag $ Parent "article" "<article" "</article>"
 -- @
 aside :: [Maybe Attribute] -> [Html] -> Html
 aside = normalTag $ Parent "aside" "<aside" "</aside>"
+{-# INLINE aside #-}
 
 
 -- | The __\<audio\>__ tag defines an audio player.
@@ -369,6 +376,7 @@ aside = normalTag $ Parent "aside" "<aside" "</aside>"
 -- @
 audio :: [Maybe Attribute] -> [Html] -> Html
 audio = normalTag $ Parent "audio" "<audio" "</audio>"
+{-# INLINE audio #-}
 
 
 -- | The __\<b\>__ tag defines a span of text to which attention is being drawn without conveying extra importance.
@@ -389,6 +397,7 @@ audio = normalTag $ Parent "audio" "<audio" "</audio>"
 -- > <p>Gary Gygax hands Fry his <b>+1 mace</b>.</p>
 b :: [Maybe Attribute] -> [Html] -> Html
 b = normalTag $ Parent "b" "<b" "</b>"
+{-# INLINE b #-}
 
 
 -- | The __\<base\>__ tag defines the base URL of a document.
@@ -411,6 +420,7 @@ b = normalTag $ Parent "b" "<b" "</b>"
 -- @
 base :: [Maybe Attribute] -> Html
 base = voidTag $ Leaf "base" "<base" ">" ()
+{-# INLINE base #-}
 
 
 -- | The __\<bdi\>__ tag defines text directionality isolation.
@@ -451,6 +461,7 @@ base = voidTag $ Leaf "base" "<base" ">" ()
 -- @
 bdi :: [Maybe Attribute] -> [Html] -> Html
 bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
+{-# INLINE bdi #-}
 
 
 -- | The __\<bdo\>__ tag defines text directionality formatting.
@@ -468,6 +479,7 @@ bdi = normalTag $ Parent "bdi" "<bdi" "</bdi>"
 -- > <bdo dir="rtl">The sun rises in the east and sets in the west.</bdo>
 bdo :: [Maybe Attribute] -> [Html] -> Html
 bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
+{-# INLINE bdo #-}
 
 
 -- | The __\<blockquote\>__ tag defines a section quoted from another source.
@@ -490,6 +502,7 @@ bdo = normalTag $ Parent "bdo" "<bdo" "</bdo>"
 -- @
 blockquote :: [Maybe Attribute] -> [Html] -> Html
 blockquote = normalTag $ Parent "blockquote" "<blockquote" "</blockquote>"
+{-# INLINE blockquote #-}
 
 
 -- | The __\<body\>__ tag defines the document body.
@@ -515,6 +528,7 @@ blockquote = normalTag $ Parent "blockquote" "<blockquote" "</blockquote>"
 -- @
 body :: [Maybe Attribute] -> [Html] -> Html
 body = normalTag $ Parent "body" "<body" "</body>"
+{-# INLINE body #-}
 
 
 -- | The __\<br\>__ tag defines a line break.
@@ -534,6 +548,7 @@ body = normalTag $ Parent "body" "<body" "</body>"
 -- > <p>That which we call a rose<br>By any other name would smell as sweet.</p>
 br :: [Maybe Attribute] -> Html
 br = voidTag $ Leaf "br" "<br" ">" ()
+{-# INLINE br #-}
 
 
 -- | The __\<button\>__ tag defines a button control.
@@ -551,6 +566,7 @@ br = voidTag $ Leaf "br" "<br" ">" ()
 -- > <button type="submit">Log in</button>
 button :: [Maybe Attribute] -> [Html] -> Html
 button = normalTag $ Parent "button" "<button" "</button>"
+{-# INLINE button #-}
 
 
 -- | The __\<canvas\>__ tag defines a scriptable bitmap canvas.
@@ -574,6 +590,7 @@ button = normalTag $ Parent "button" "<button" "</button>"
 -- @
 canvas :: [Maybe Attribute] -> [Html] -> Html
 canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
+{-# INLINE canvas #-}
 
 
 -- | The __\<caption\>__ tag defines a table caption.
@@ -626,6 +643,7 @@ canvas = normalTag $ Parent "canvas" "<canvas" "</canvas>"
 -- @
 caption :: [Maybe Attribute] -> [Html] -> Html
 caption = normalTag $ Parent "caption" "<caption" "</caption>"
+{-# INLINE caption #-}
 
 
 -- | The __\<cite\>__ tag defines the title of a work.
@@ -646,6 +664,7 @@ caption = normalTag $ Parent "caption" "<caption" "</caption>"
 -- > <p>My favorite movie is <cite>Psycho</cite> by Alfred Hitchcock.</p>
 cite :: [Maybe Attribute] -> [Html] -> Html
 cite = normalTag $ Parent "cite" "<cite" "</cite>"
+{-# INLINE cite #-}
 
 
 -- | The __\<code\>__ tag defines a fragment of computer code.
@@ -666,6 +685,7 @@ cite = normalTag $ Parent "cite" "<cite" "</cite>"
 -- > <p>The <code>map</code> function is a higher-order function.</p>
 code :: [Maybe Attribute] -> [Html] -> Html
 code = normalTag $ Parent "code" "<code" "</code>"
+{-# INLINE code #-}
 
 
 -- | The __\<col\>__ tag defines a table column.
@@ -736,6 +756,7 @@ code = normalTag $ Parent "code" "<code" "</code>"
 -- @
 col :: [Maybe Attribute] -> Html
 col = voidTag $ Leaf "col" "<col" ">" ()
+{-# INLINE col #-}
 
 
 -- | The __\<colgroup\>__ tag defines a group of columns in a table.
@@ -806,6 +827,7 @@ col = voidTag $ Leaf "col" "<col" ">" ()
 -- @
 colgroup :: [Maybe Attribute] -> [Html] -> Html
 colgroup = normalTag $ Parent "colgroup" "<colgroup" "</colgroup>"
+{-# INLINE colgroup #-}
 
 
 -- | The __\<data\>__ tag defines a machine-readable equivalent of its content.
@@ -849,6 +871,7 @@ colgroup = normalTag $ Parent "colgroup" "<colgroup" "</colgroup>"
 -- @
 data_ :: [Maybe Attribute] -> [Html] -> Html
 data_ = normalTag $ Parent "data_" "<data_" "</data_>"
+{-# INLINE data_ #-}
 
 
 -- | The __\<datalist\>__ tag defines a container for options for a combo box control.
@@ -886,6 +909,7 @@ data_ = normalTag $ Parent "data_" "<data_" "</data_>"
 -- @
 datalist :: [Maybe Attribute] -> [Html] -> Html
 datalist = normalTag $ Parent "datalist" "<datalist" "</datalist>"
+{-# INLINE datalist #-}
 
 
 -- | The __\<dd\>__ tag defines the description part of a term-description group in a description list.
@@ -917,6 +941,7 @@ datalist = normalTag $ Parent "datalist" "<datalist" "</datalist>"
 -- @
 dd :: [Maybe Attribute] -> [Html] -> Html
 dd = normalTag $ Parent "dd" "<dd" "</dd>"
+{-# INLINE dd #-}
 
 
 -- | The __\<del\>__ tag defines a removal from the document.
@@ -937,6 +962,7 @@ dd = normalTag $ Parent "dd" "<dd" "</dd>"
 -- > <p>Appointments are available on <del>Tuesdays</del>, Wednesdays and Fridays.</p>
 del :: [Maybe Attribute] -> [Html] -> Html
 del = normalTag $ Parent "del" "<del" "</del>"
+{-# INLINE del #-}
 
 
 -- | The __\<details\>__ tag defines a disclosure control for hiding details.
@@ -962,349 +988,436 @@ del = normalTag $ Parent "del" "<del" "</del>"
 -- @
 details :: [Maybe Attribute] -> [Html] -> Html
 details = normalTag $ Parent "details" "<details" "</details>"
+{-# INLINE details #-}
 
 
 dfn :: [Maybe Attribute] -> [Html] -> Html
 dfn = normalTag $ Parent "dfn" "<dfn" "</dfn>"
+{-# INLINE dfn #-}
 
 
 dialog :: [Maybe Attribute] -> [Html] -> Html
 dialog = normalTag $ Parent "dialog" "<dialog" "</dialog>"
+{-# INLINE dialog #-}
 
 
 div :: [Maybe Attribute] -> [Html] -> Html
 div = normalTag $ Parent "div" "<div" "</div>"
+{-# INLINE div #-}
 
 
 -- | The __\<dl\>__ tag defines a description list.
 dl :: [Maybe Attribute] -> [Html] -> Html
 dl = normalTag $ Parent "dl" "<dl" "</dl>"
+{-# INLINE dl #-}
 
 
 -- | The __\<dt\>__ tag defines the term part of a term-description group in a description list.
 dt :: [Maybe Attribute] -> [Html] -> Html
 dt = normalTag $ Parent "dt" "<dt" "</dt>"
+{-# INLINE dt #-}
 
 
 em :: [Maybe Attribute] -> [Html] -> Html
 em = normalTag $ Parent "em" "<em" "</em>"
+{-# INLINE em #-}
 
 
 embed :: [Maybe Attribute] -> Html
 embed = voidTag $ Leaf "embed" "<embed" ">" ()
+{-# INLINE embed #-}
 
 
 fieldset :: [Maybe Attribute] -> [Html] -> Html
 fieldset = normalTag $ Parent "fieldset" "<fieldset" "</fieldset>"
+{-# INLINE fieldset #-}
 
 
 figcaption :: [Maybe Attribute] -> [Html] -> Html
 figcaption = normalTag $ Parent "figcaption" "<figcaption" "</figcaption>"
+{-# INLINE figcaption #-}
 
 
 figure :: [Maybe Attribute] -> [Html] -> Html
 figure = normalTag $ Parent "figure" "<figure" "</figure>"
+{-# INLINE figure #-}
 
 
 footer :: [Maybe Attribute] -> [Html] -> Html
 footer = normalTag $ Parent "footer" "<footer" "</footer>"
+{-# INLINE footer #-}
 
 
 form :: [Maybe Attribute] -> [Html] -> Html
 form = normalTag $ Parent "form" "<form" "</form>"
+{-# INLINE form #-}
 
 
 h1 :: [Maybe Attribute] -> [Html] -> Html
 h1 = normalTag $ Parent "h1" "<h1" "</h1>"
+{-# INLINE h1 #-}
 
 
 h2 :: [Maybe Attribute] -> [Html] -> Html
 h2 = normalTag $ Parent "h2" "<h2" "</h2>"
+{-# INLINE h2 #-}
 
 
 h3 :: [Maybe Attribute] -> [Html] -> Html
 h3 = normalTag $ Parent "h3" "<h3" "</h3>"
+{-# INLINE h3 #-}
 
 
 h4 :: [Maybe Attribute] -> [Html] -> Html
 h4 = normalTag $ Parent "h4" "<h4" "</h4>"
+{-# INLINE h4 #-}
 
 
 h5 :: [Maybe Attribute] -> [Html] -> Html
 h5 = normalTag $ Parent "h5" "<h5" "</h5>"
+{-# INLINE h5 #-}
 
 
 h6 :: [Maybe Attribute] -> [Html] -> Html
 h6 = normalTag $ Parent "h6" "<h6" "</h6>"
+{-# INLINE h6 #-}
 
 
 head :: [Maybe Attribute] -> [Html] -> Html
 head = normalTag $ Parent "head" "<head" "</head>"
+{-# INLINE head #-}
 
 
 header :: [Maybe Attribute] -> [Html] -> Html
 header = normalTag $ Parent "header" "<header" "</header>"
+{-# INLINE header #-}
 
 
 hgroup :: [Maybe Attribute] -> [Html] -> Html
 hgroup = normalTag $ Parent "hgroup" "<hgroup" "</hgroup>"
+{-# INLINE hgroup #-}
 
 
 hr :: [Maybe Attribute] -> Html
 hr = voidTag $ Leaf "hr" "<hr" ">" ()
+{-# INLINE hr #-}
 
 
 html :: [Maybe Attribute] -> [Html] -> Html
 html = normalTag $ Parent "html" "<html" "</html>"
+{-# INLINE html #-}
 
 
 i :: [Maybe Attribute] -> [Html] -> Html
 i = normalTag $ Parent "i" "<i" "</i>"
+{-# INLINE i #-}
 
 
 iframe :: [Maybe Attribute] -> [Html] -> Html
 iframe = normalTag $ Parent "iframe" "<iframe" "</iframe>"
+{-# INLINE iframe #-}
 
 
 img :: [Maybe Attribute] -> Html
 img = voidTag $ Leaf "img" "<img" ">" ()
+{-# INLINE img #-}
 
 
 input :: [Maybe Attribute] -> Html
 input = voidTag $ Leaf "input" "<input" ">" ()
+{-# INLINE input #-}
 
 
 ins :: [Maybe Attribute] -> [Html] -> Html
 ins = normalTag $ Parent "ins" "<ins" "</ins>"
+{-# INLINE ins #-}
 
 
 kbd :: [Maybe Attribute] -> [Html] -> Html
 kbd = normalTag $ Parent "kbd" "<kbd" "</kbd>"
+{-# INLINE kbd #-}
 
 
 label :: [Maybe Attribute] -> [Html] -> Html
 label = normalTag $ Parent "label" "<label" "</label>"
+{-# INLINE label #-}
 
 
 legend :: [Maybe Attribute] -> [Html] -> Html
 legend = normalTag $ Parent "legend" "<legend" "</legend>"
+{-# INLINE legend #-}
 
 
 li :: [Maybe Attribute] -> [Html] -> Html
 li = normalTag $ Parent "li" "<li" "</li>"
+{-# INLINE li #-}
 
 
 link :: [Maybe Attribute] -> Html
 link = voidTag $ Leaf "link" "<link" ">" ()
+{-# INLINE link #-}
 
 
 main :: [Maybe Attribute] -> [Html] -> Html
 main = normalTag $ Parent "main" "<main" "</main>"
+{-# INLINE main #-}
 
 
 map :: [Maybe Attribute] -> [Html] -> Html
 map = normalTag $ Parent "map" "<map" "</map>"
+{-# INLINE map #-}
 
 
 mark :: [Maybe Attribute] -> [Html] -> Html
 mark = normalTag $ Parent "mark" "<mark" "</mark>"
+{-# INLINE mark #-}
 
 
 menu :: [Maybe Attribute] -> [Html] -> Html
 menu = normalTag $ Parent "menu" "<menu" "</menu>"
+{-# INLINE menu #-}
 
 
 meta :: [Maybe Attribute] -> Html
 meta = voidTag $ Leaf "meta" "<meta" ">" ()
+{-# INLINE meta #-}
 
 
 meter :: [Maybe Attribute] -> [Html] -> Html
 meter = normalTag $ Parent "meter" "<meter" "</meter>"
+{-# INLINE meter #-}
 
 
 nav :: [Maybe Attribute] -> [Html] -> Html
 nav = normalTag $ Parent "nav" "<nav" "</nav>"
+{-# INLINE nav #-}
 
 
 noscript :: [Maybe Attribute] -> [Html] -> Html
 noscript = normalTag $ Parent "noscript" "<noscript" "</noscript>"
+{-# INLINE noscript #-}
 
 
 object :: [Maybe Attribute] -> [Html] -> Html
 object = normalTag $ Parent "object" "<object" "</object>"
+{-# INLINE object #-}
 
 
 ol :: [Maybe Attribute] -> [Html] -> Html
 ol = normalTag $ Parent "ol" "<ol" "</ol>"
+{-# INLINE ol #-}
 
 
 optgroup :: [Maybe Attribute] -> [Html] -> Html
 optgroup = normalTag $ Parent "optgroup" "<optgroup" "</optgroup>"
+{-# INLINE optgroup #-}
 
 
 option :: [Maybe Attribute] -> [Html] -> Html
 option = normalTag $ Parent "option" "<option" "</option>"
+{-# INLINE option #-}
 
 
 output :: [Maybe Attribute] -> [Html] -> Html
 output = normalTag $ Parent "output" "<output" "</output>"
+{-# INLINE output #-}
 
 
 p :: [Maybe Attribute] -> [Html] -> Html
 p = normalTag $ Parent "p" "<p" "</p>"
+{-# INLINE p #-}
 
 
 picture :: [Maybe Attribute] -> [Html] -> Html
 picture = normalTag $ Parent "picture" "<picture" "</picture>"
+{-# INLINE picture #-}
 
 
 pre :: [Maybe Attribute] -> [Html] -> Html
 pre = normalTag $ Parent "pre" "<pre" "</pre>"
+{-# INLINE pre #-}
 
 
 progress :: [Maybe Attribute] -> [Html] -> Html
 progress = normalTag $ Parent "progress" "<progress" "</progress>"
+{-# INLINE progress #-}
 
 
 q :: [Maybe Attribute] -> [Html] -> Html
 q = normalTag $ Parent "q" "<q" "</q>"
+{-# INLINE q #-}
 
 
 rp :: [Maybe Attribute] -> [Html] -> Html
 rp = normalTag $ Parent "rp" "<rp" "</rp>"
+{-# INLINE rp #-}
 
 
 rt :: [Maybe Attribute] -> [Html] -> Html
 rt = normalTag $ Parent "rt" "<rt" "</rt>"
+{-# INLINE rt #-}
 
 
 ruby :: [Maybe Attribute] -> [Html] -> Html
 ruby = normalTag $ Parent "ruby" "<ruby" "</ruby>"
+{-# INLINE ruby #-}
 
 
 s :: [Maybe Attribute] -> [Html] -> Html
 s = normalTag $ Parent "s" "<s" "</s>"
+{-# INLINE s #-}
 
 
 samp :: [Maybe Attribute] -> [Html] -> Html
 samp = normalTag $ Parent "samp" "<samp" "</samp>"
+{-# INLINE samp #-}
 
 
 script :: [Maybe Attribute] -> [Html] -> Html
 script = normalTag $ Parent "script" "<script" "</script>"
+{-# INLINE script #-}
 
 
 section :: [Maybe Attribute] -> [Html] -> Html
 section = normalTag $ Parent "section" "<section" "</section>"
+{-# INLINE section #-}
 
 
 select :: [Maybe Attribute] -> [Html] -> Html
 select = normalTag $ Parent "select" "<select" "</select>"
+{-# INLINE select #-}
 
 
 slot :: [Maybe Attribute] -> [Html] -> Html
 slot = normalTag $ Parent "slot" "<slot" "</slot>"
+{-# INLINE slot #-}
 
 
 small :: [Maybe Attribute] -> [Html] -> Html
 small = normalTag $ Parent "small" "<small" "</small>"
+{-# INLINE small #-}
 
 
 source :: [Maybe Attribute] -> Html
 source = voidTag $ Leaf "source" "<source" ">" ()
+{-# INLINE source #-}
 
 
 span :: [Maybe Attribute] -> [Html] -> Html
 span = normalTag $ Parent "span" "<span" "</span>"
+{-# INLINE span #-}
 
 
 strong :: [Maybe Attribute] -> [Html] -> Html
 strong = normalTag $ Parent "strong" "<strong" "</strong>"
+{-# INLINE strong #-}
 
 
 style :: [Maybe Attribute] -> [Html] -> Html
 style = normalTag $ Parent "style" "<style" "</style>"
+{-# INLINE style #-}
 
 
 sub :: [Maybe Attribute] -> [Html] -> Html
 sub = normalTag $ Parent "sub" "<sub" "</sub>"
+{-# INLINE sub #-}
 
 
 summary :: [Maybe Attribute] -> [Html] -> Html
 summary = normalTag $ Parent "summary" "<summary" "</summary>"
+{-# INLINE summary #-}
 
 
 sup :: [Maybe Attribute] -> [Html] -> Html
 sup = normalTag $ Parent "sup" "<sup" "</sup>"
+{-# INLINE sup #-}
 
 
 table :: [Maybe Attribute] -> [Html] -> Html
 table = normalTag $ Parent "table" "<table" "</table>"
+{-# INLINE table #-}
 
 
 tbody :: [Maybe Attribute] -> [Html] -> Html
 tbody = normalTag $ Parent "tbody" "<tbody" "</tbody>"
+{-# INLINE tbody #-}
 
 
 td :: [Maybe Attribute] -> [Html] -> Html
 td = normalTag $ Parent "td" "<td" "</td>"
+{-# INLINE td #-}
 
 
 template :: [Maybe Attribute] -> [Html] -> Html
 template = normalTag $ Parent "template" "<template" "</template>"
+{-# INLINE template #-}
 
 
 textarea :: [Maybe Attribute] -> [Html] -> Html
 textarea = normalTag $ Parent "textarea" "<textarea" "</textarea>"
+{-# INLINE textarea #-}
 
 
 tfoot :: [Maybe Attribute] -> [Html] -> Html
 tfoot = normalTag $ Parent "tfoot" "<tfoot" "</tfoot>"
+{-# INLINE tfoot #-}
 
 
 th :: [Maybe Attribute] -> [Html] -> Html
 th = normalTag $ Parent "th" "<th" "</th>"
+{-# INLINE th #-}
 
 
 thead :: [Maybe Attribute] -> [Html] -> Html
 thead = normalTag $ Parent "thead" "<thead" "</thead>"
+{-# INLINE thead #-}
 
 
 time :: [Maybe Attribute] -> [Html] -> Html
 time = normalTag $ Parent "time" "<time" "</time>"
+{-# INLINE time #-}
 
 
 title :: [Maybe Attribute] -> [Html] -> Html
 title = normalTag $ Parent "title" "<title" "</title>"
+{-# INLINE title #-}
 
 
 tr :: [Maybe Attribute] -> [Html] -> Html
 tr = normalTag $ Parent "tr" "<tr" "</tr>"
+{-# INLINE tr #-}
 
 
 track :: [Maybe Attribute] -> Html
 track = voidTag $ Leaf "track" "<track" ">" ()
+{-# INLINE track #-}
 
 
 u :: [Maybe Attribute] -> [Html] -> Html
 u = normalTag $ Parent "u" "<u" "</u>"
+{-# INLINE u #-}
 
 
 ul :: [Maybe Attribute] -> [Html] -> Html
 ul = normalTag $ Parent "ul" "<ul" "</ul>"
+{-# INLINE ul #-}
 
 
 var :: [Maybe Attribute] -> [Html] -> Html
 var = normalTag $ Parent "var" "<var" "</var>"
+{-# INLINE var #-}
 
 
 video :: [Maybe Attribute] -> [Html] -> Html
 video = normalTag $ Parent "video" "<video" "</video>"
+{-# INLINE video #-}
 
 
 wbr :: [Maybe Attribute] -> Html
 wbr = voidTag $ Leaf "wbr" "<wbr" ">" ()
+{-# INLINE wbr #-}
 
 
 text :: Text -> Html
 text = toMarkup
+{-# INLINE text #-}
