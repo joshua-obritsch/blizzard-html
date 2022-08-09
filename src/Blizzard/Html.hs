@@ -5,9 +5,13 @@
 -- | This module defines a set of types and functions responsible for generating and using HTML elements; and aims to be
 -- compliant with the HTML Living Standard.
 --
--- All examples of elements assume the following imports:
+-- The example results are formatted in this document for the purpose of readability but are minified in practice.
+--
+-- All examples assume the following imports:
 --
 -- @
+-- import Blizzard.Html (Attribute, Html)
+--
 -- import qualified Blizzard.Html as Html
 -- import qualified Blizzard.Html.Attributes as Attr
 -- @
@@ -218,7 +222,11 @@ doctype = documentTag . (:) (preEscapedText "<!DOCTYPE html>\n")
 --
 -- __Result:__
 --
--- > <a href="/about">About</a>
+-- @
+-- \<a href=\"\/about\"\>
+--     About
+-- \<\/a\>
+-- @
 a :: [Maybe Attribute] -> [Html] -> Html
 a = normalTag $ Parent "a" "<a" "</a>"
 {-# INLINE a #-}
@@ -236,7 +244,11 @@ a = normalTag $ Parent "a" "<a" "</a>"
 --
 -- __Result:__
 --
--- > <abbr title="American Standard Code for Information Interchange">ASCII</abbr>
+-- @
+-- \<abbr title=\"American Standard Code for Information Interchange\"\>
+--     ASCII
+-- \<\/abbr\>
+-- @
 abbr :: [Maybe Attribute] -> [Html] -> Html
 abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 {-# INLINE abbr #-}
@@ -256,7 +268,12 @@ abbr = normalTag $ Parent "abbr" "<abbr" "</abbr>"
 --
 -- __Result:__
 --
--- > <address>123 Main St<br>Anytown, USA</address>
+-- @
+-- \<address\>
+--     123 Main St\<br\>
+--     Anytown, USA
+-- \<\/address\>
+-- @
 address :: [Maybe Attribute] -> [Html] -> Html
 address = normalTag $ Parent "address" "<address" "</address>"
 {-# INLINE address #-}
