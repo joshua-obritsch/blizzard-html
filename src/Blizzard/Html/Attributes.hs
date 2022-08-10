@@ -227,6 +227,7 @@ import Blizzard.Internal.Html (boolAttribute, textAttribute)
 
 abbr :: Text -> Maybe Attribute
 abbr = textAttribute $ attribute "abbr" " abbr=\""
+{-# INLINE abbr #-}
 
 
 accept :: Text -> Maybe Attribute
