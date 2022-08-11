@@ -232,6 +232,7 @@ abbr = textAttribute $ attribute "abbr" " abbr=\""
 
 accept :: Text -> Maybe Attribute
 accept = textAttribute $ attribute "accept" " accept=\""
+{-# INLINE accept #-}
 
 
 acceptCharset :: Text -> Maybe Attribute
