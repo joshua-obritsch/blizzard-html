@@ -237,6 +237,7 @@ accept = textAttribute $ attribute "accept" " accept=\""
 
 acceptCharset :: Text -> Maybe Attribute
 acceptCharset = textAttribute $ attribute "accept-charset" " accept-charset=\""
+{-# INLINE acceptCharset #-}
 
 
 accesskey :: Text -> Maybe Attribute
