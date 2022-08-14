@@ -247,6 +247,7 @@ accesskey = textAttribute $ attribute "accesskey" " accesskey=\""
 
 action :: Text -> Maybe Attribute
 action = textAttribute $ attribute "action" " action=\""
+{-# INLINE action #-}
 
 
 allow :: Text -> Maybe Attribute
