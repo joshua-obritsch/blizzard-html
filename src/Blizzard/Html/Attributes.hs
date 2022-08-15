@@ -252,6 +252,7 @@ action = textAttribute $ attribute "action" " action=\""
 
 allow :: Text -> Maybe Attribute
 allow = textAttribute $ attribute "allow" " allow=\""
+{-# INLINE allow #-}
 
 
 allowfullscreen :: Bool -> Maybe Attribute
