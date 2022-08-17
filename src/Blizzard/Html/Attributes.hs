@@ -262,6 +262,7 @@ allowfullscreen = boolAttribute $ attribute "allowfullscreen" " allowfullscreen=
 
 alt :: Text -> Maybe Attribute
 alt = textAttribute $ attribute "alt" " alt=\""
+{-# INLINE alt #-}
 
 
 as :: Text -> Maybe Attribute
