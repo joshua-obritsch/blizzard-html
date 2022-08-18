@@ -267,6 +267,7 @@ alt = textAttribute $ attribute "alt" " alt=\""
 
 as :: Text -> Maybe Attribute
 as = textAttribute $ attribute "as" " as=\""
+{-# INLINE as #-}
 
 
 async :: Bool -> Maybe Attribute
