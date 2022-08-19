@@ -272,6 +272,7 @@ as = textAttribute $ attribute "as" " as=\""
 
 async :: Bool -> Maybe Attribute
 async = boolAttribute $ attribute "async" " async=\"" "async"
+{-# INLINE async #-}
 
 
 autocapitalize :: Text -> Maybe Attribute
