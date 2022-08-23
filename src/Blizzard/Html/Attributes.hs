@@ -282,6 +282,7 @@ autocapitalize = textAttribute $ attribute "autocapitalize" " autocapitalize=\""
 
 autocomplete :: Text -> Maybe Attribute
 autocomplete = textAttribute $ attribute "autocomplete" " autocomplete=\""
+{-# INLINE autocomplete #-}
 
 
 autofocus :: Bool -> Maybe Attribute
