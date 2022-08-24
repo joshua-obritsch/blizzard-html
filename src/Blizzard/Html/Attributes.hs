@@ -287,6 +287,7 @@ autocomplete = textAttribute $ attribute "autocomplete" " autocomplete=\""
 
 autofocus :: Bool -> Maybe Attribute
 autofocus = boolAttribute $ attribute "autofocus" " autofocus=\"" "autofocus"
+{-# INLINE autofocus #-}
 
 
 autoplay :: Bool -> Maybe Attribute
