@@ -292,6 +292,7 @@ autofocus = boolAttribute $ attribute "autofocus" " autofocus=\"" "autofocus"
 
 autoplay :: Bool -> Maybe Attribute
 autoplay = boolAttribute $ attribute "autoplay" " autoplay=\"" "autoplay"
+{-# INLINE autoplay #-}
 
 
 blocking :: Text -> Maybe Attribute
