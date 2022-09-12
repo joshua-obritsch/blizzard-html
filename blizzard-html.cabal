@@ -20,11 +20,9 @@ version:            0.5.0.0
 
 
 library
-    build-depends:      base               >= 4    && <= 4.17
-                      , blaze-markup       >= 0.5  && <= 0.9
-                      , neat-interpolation >= 0.5  && <= 0.6
-                      , template-haskell
-                      , text               >= 0.10 && <= 2.1
+    build-depends:      base         >= 4    && <= 4.17
+                      , blaze-markup >= 0.5  && <= 0.9
+                      , text         >= 0.10 && <= 2.1
     default-language:   Haskell2010
     exposed-modules:    Blizzard.Html
                       , Blizzard.Html.Attributes
