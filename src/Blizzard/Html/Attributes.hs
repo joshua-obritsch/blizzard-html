@@ -219,6 +219,8 @@ module Blizzard.Html.Attributes
 
 
 import Data.Text (Text, unwords)
+import Language.Haskell.TH.Quote (QuasiQuoter)
+import NeatInterpolation (trimming)
 import Prelude (($), (.), Bool, Maybe)
 import Text.Blaze.Internal (Attribute, attribute)
 
@@ -1067,5 +1069,5 @@ onwheel :: Text -> Maybe Attribute
 onwheel = textAttribute $ attribute "onwheel" " onwheel=\""
 
 
-tailwind :: [Text] -> Maybe Attribute
-tailwind = textAttribute (attribute "class" " class=\"") . unwords
+tailwind :: QuasiQuoter
+tailwind = trimming

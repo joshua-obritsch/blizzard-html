@@ -6,9 +6,8 @@ build-type:         Simple
 category:           Text
 copyright:          2021 Joshua Obritsch
 description:        An HTML generator. It functions mostly as a wrapper for
-                    blaze-markup. The syntax was inspired by Elm. A CSS
-                    solution (blizzard-css) is currently being experimented
-                    with. For now, I'd recommend using this with Tailwind CSS.
+                    blaze-markup. The syntax was inspired by Elm. I'd
+                    recommend using this with Tailwind CSS.
 extra-source-files: CHANGELOG.md
 homepage:           https://github.com/joshua-obritsch/blizzard-html
 license:            MIT
@@ -21,9 +20,11 @@ version:            0.5.0.0
 
 
 library
-    build-depends:      base         >= 4    && <= 4.17
-                      , blaze-markup >= 0.5  && <= 0.9
-                      , text         >= 0.10 && <= 2.1
+    build-depends:      base               >= 4    && <= 4.17
+                      , blaze-markup       >= 0.5  && <= 0.9
+                      , neat-interpolation >= 0.5  && <= 0.6
+                      , template-haskell
+                      , text               >= 0.10 && <= 2.1
     default-language:   Haskell2010
     exposed-modules:    Blizzard.Html
                       , Blizzard.Html.Attributes
