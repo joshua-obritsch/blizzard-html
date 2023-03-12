@@ -2,18 +2,41 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | This module defines a set of types and functions responsible for generating and using HTML elements; and aims to be
--- compliant with the HTML Living Standard.
+-- | The __Html__ module provides a set of data types and functions for generating HTML elements.
 --
--- The example results are formatted in this document for the purpose of readability but are minified in practice.
+-- These elements can be used to generate HTML documents programmatically, without relying on string concatenation or other techniques that
+-- can be error-prone and difficult to maintain.
 --
--- All examples assume the following imports:
+-- All examples in this module assume the following imports:
 --
 -- @
--- import Html (Attribute, Html)
+-- import Html (Html)
 --
--- import qualified Html as Html
+-- import qualified Html
 -- import qualified Html.Attributes as Attr
+-- @
+--
+-- All example results in this module are formatted neatly for readability but are condensed in practice.
+--
+-- ==== __Example__
+--
+-- @
+-- Html.article
+--     [ Attr.class_ "main" ]
+--     [ Html.h1 []
+--         [ Html.text "Exploring Skyrim's Vast Open World" ]
+--     , Html.p []
+--         [ Html.text "Embark on a journey through the rugged mountains and lush forests of Skyrim." ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<article class=\"main\"\>
+--     \<h1\>Exploring Skyrim's Vast Open World\<\/h1\>
+--     \<p\>Embark on a journey through the rugged mountains and lush forests of Skyrim.\<\/p\>
+-- \<\/article\>
 -- @
 module Html
     ( Html
@@ -141,6 +164,7 @@ module Html
 
 
 import Prelude ((.), mconcat)
+
 import qualified Prelude
 
 import Data.Text.Lazy.Builder (Builder)
@@ -148,6 +172,9 @@ import Html.Attributes (Attribute)
 import Html.Internal (Buildable(..))
 
 
+-- | Represents an HTML element.
+--
+-- This data type can be used to generate HTML elements programmatically using the functions provided by the __Html__ module.
 data Html
     = TextNode   Builder
     | LeafNode   Builder         [Attribute]
@@ -171,7 +198,7 @@ instance Buildable [Html] where
     build = mconcat . Prelude.map build
 
 
--- | The __DOCTYPE__ preamble declares the document type as HTML.
+-- | Generates an HTML document type declaration with the given contents.
 --
 -- ==== __Example__
 --
@@ -208,7 +235,7 @@ doctype = RootNode "<!DOCTYPE html>\n"
 {-# INLINE doctype #-}
 
 
--- | The __\<a\>__ tag defines a hyperlink.
+-- | Generates an HTML anchor element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -230,7 +257,7 @@ a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
--- | The __\<abbr\>__ tag defines an abbreviation or acronym.
+-- | Generates an HTML abbreviation element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -252,15 +279,17 @@ abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
 
--- | The __\<address\>__ tag defines contact information.
+-- | Generates an HTML address element with the given attributes and contents.
 --
 -- ==== __Example__
 --
 -- @
 -- Html.address []
---     [ Html.text \"123 Main St\"
+--     [ Html.text \"John Smith\"
 --     , Html.br []
---     , Html.text \"Anytown, USA\"
+--     , Html.text \"123 Main St.\"
+--     , Html.br []
+--     , Html.text \"Anytown, USA 12345\"
 --     ]
 -- @
 --
@@ -268,8 +297,9 @@ abbr = ParentNode "<abbr" "</abbr>"
 --
 -- @
 -- \<address\>
---     123 Main St\<br\>
---     Anytown, USA
+--     John Smith\<br\>
+--     123 Main St.\<br\>
+--     Anytown, USA 12345
 -- \<\/address\>
 -- @
 address :: [Attribute] -> [Html] -> Html
@@ -277,7 +307,7 @@ address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
 
--- | The __\<area\>__ tag defines a hyperlink or dead area on an image map.
+-- | Generates an HTML area element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -304,7 +334,7 @@ area = LeafNode "<area"
 {-# INLINE area #-}
 
 
--- | The __\<article\>__ tag defines a self-contained syndicatable or reusable composition.
+-- | Generates an HTML article element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -340,7 +370,7 @@ article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
 
--- | The __\<aside\>__ tag defines a sidebar for tangentially related content.
+-- | Generates an HTML aside element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -366,7 +396,7 @@ aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
 
--- | The __\<audio\>__ tag defines an audio player.
+-- | Generates an HTML audio element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -384,7 +414,7 @@ aside = ParentNode "<aside" "</aside>"
 -- __Result:__
 --
 -- @
--- \<audio controls=\"controls\"\>
+-- \<audio controls\>
 --     \<source src=\"bossfight-warp.mp3\" type=\"audio/mpeg\"\>
 --     Your browser does not support the audio tag.
 -- \<\/audio\>
@@ -394,7 +424,7 @@ audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
 
--- | The __\<b\>__ tag defines a span of text to which attention is being drawn without conveying extra importance.
+-- | Generates an HTML bold element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -415,7 +445,7 @@ b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
 
--- | The __\<base\>__ tag defines the base URL of a document.
+-- | Generates an HTML base element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -438,7 +468,7 @@ base = LeafNode "<base"
 {-# INLINE base #-}
 
 
--- | The __\<bdi\>__ tag defines text directionality isolation.
+-- | Generates an HTML bidirectional isolation element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -479,7 +509,7 @@ bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
 
--- | The __\<bdo\>__ tag defines text directionality formatting.
+-- | Generates an HTML bidirectional override element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -497,7 +527,7 @@ bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
 
--- | The __\<blockquote\>__ tag defines a section quoted from another source.
+-- | Generates an HTML blockquote element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -520,7 +550,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
 
--- | The __\<body\>__ tag defines the document body.
+-- | Generates an HTML body element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -546,7 +576,7 @@ body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
 
--- | The __\<br\>__ tag defines a line break.
+-- | Generates an HTML line break element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -566,7 +596,7 @@ br = LeafNode "<br"
 {-# INLINE br #-}
 
 
--- | The __\<button\>__ tag defines a button control.
+-- | Generates an HTML button element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -584,7 +614,7 @@ button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
 
--- | The __\<canvas\>__ tag defines a scriptable bitmap canvas.
+-- | Generates an HTML canvas element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -608,7 +638,7 @@ canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
 
--- | The __\<caption\>__ tag defines a table caption.
+-- | Generates an HTML table caption element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -661,7 +691,7 @@ caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
 
--- | The __\<cite\>__ tag defines the title of a work.
+-- | Generates an HTML citation element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -682,7 +712,7 @@ cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
 
--- | The __\<code\>__ tag defines a fragment of computer code.
+-- | Generates an HTML code element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -703,7 +733,7 @@ code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
 
--- | The __\<col\>__ tag defines a table column.
+-- | Generates an HTML table column element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -774,7 +804,7 @@ col = LeafNode "<col"
 {-# INLINE col #-}
 
 
--- | The __\<colgroup\>__ tag defines a group of columns in a table.
+-- | Generates an HTML table column group element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -845,7 +875,7 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
 
--- | The __\<data\>__ tag defines a machine-readable equivalent of its content.
+-- | Generates an HTML data element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -885,11 +915,11 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 -- \<\/ul\>
 -- @
 data_ :: [Attribute] -> [Html] -> Html
-data_ = ParentNode "<data_" "</data_>"
+data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
 
--- | The __\<datalist\>__ tag defines a container for options for a combo box control.
+-- | Generates an HTML datalist element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -927,7 +957,7 @@ datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
 
--- | The __\<dd\>__ tag defines the description part of a term-description group in a description list.
+-- | Generates an HTML description element for a term defined in a description list with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -959,7 +989,7 @@ dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
 
--- | The __\<del\>__ tag defines a removal from the document.
+-- | Generates an HTML deleted text element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -980,7 +1010,7 @@ del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
 
--- | The __\<details\>__ tag defines a disclosure control for hiding details.
+-- | Generates an HTML details element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -1006,43 +1036,49 @@ details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
 
+-- | Generates an HTML definition element with the given attributes and contents.
 dfn :: [Attribute] -> [Html] -> Html
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
 
+-- | Generates an HTML dialog element with the given attributes and contents.
 dialog :: [Attribute] -> [Html] -> Html
 dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
+-- | Generates an HTML division element with the given attributes and contents.
 div :: [Attribute] -> [Html] -> Html
 div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
--- | The __\<dl\>__ tag defines a description list.
+-- | Generates an HTML description list element with the given attributes and contents.
 dl :: [Attribute] -> [Html] -> Html
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
--- | The __\<dt\>__ tag defines the term part of a term-description group in a description list.
+-- | Generates an HTML term element in a description list with the given attributes and contents.
 dt :: [Attribute] -> [Html] -> Html
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
+-- | Generates an HTML emphasized text element with the given attributes and contents.
 em :: [Attribute] -> [Html] -> Html
 em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
+-- | Generates an HTML embed element with the given attributes.
 embed :: [Attribute] -> Html
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
+-- | Generates an HTML fieldset element with the given attributes and contents.
 fieldset :: [Attribute] -> [Html] -> Html
 fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
