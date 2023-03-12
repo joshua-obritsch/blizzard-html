@@ -1,5 +1,13 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-{-# LANGUAGE OverloadedStrings #-}
+module Html.Internal (Buildable(..)) where
+
+
+import Data.Text.Lazy.Builder (Builder)
+
+
+class Buildable a where
+    build :: a -> Builder
+
+{-
 
 module Blizzard.Internal.Html
     ( Html
@@ -60,3 +68,4 @@ normalTag element attributes children = foldl (!) element (catMaybes attributes)
 
 voidTag :: Html -> [Maybe Attribute] -> Html
 voidTag element attributes = foldl (!) element (catMaybes attributes)
+-}

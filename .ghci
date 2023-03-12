@@ -1,8 +1,8 @@
 :set -w
 :set -isrc
 :set -XOverloadedStrings
-:load Blizzard.Html Blizzard.Html.Attributes
+:load Html Html.Attributes
 
 import Prelude
-import Blizzard.Html
-import Blizzard.Html.Attributes
+import Html
+import Html.Attributes
