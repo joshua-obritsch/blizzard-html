@@ -214,10 +214,14 @@ module Html.Attributes
     , onvolumechange
     , onwaiting
     , onwheel
+
+      -- * Css
+    , css
     ) where
 
-import Prelude ((.), Bool(..), map, mconcat)
+import Prelude ((.), (==), Bool(..), filter, foldl, map, mconcat)
 
+import Data.List (partition)
 import Data.Text.Lazy.Builder (Builder)
 import Html.Internal (Buildable(..))
 
@@ -225,17 +229,61 @@ import Html.Internal (Buildable(..))
 data Attribute
     = BoolAttr Builder Bool
     | TextAttr Builder Builder
+    | CssAttr  Builder [Builder]
 
 
 instance Buildable Attribute where
-    build (BoolAttr _   False) = ""
-    build (BoolAttr key True ) = key
-    build (TextAttr _   ""   ) = ""
-    build (TextAttr key value) = mconcat [ key, value, "\"" ]
+    build (BoolAttr _   False ) = ""
+    build (BoolAttr key True  ) = key
+    build (TextAttr _   ""    ) = ""
+    build (TextAttr key value ) = mconcat [ key, value         , "\"" ]
+    build (CssAttr  key values) = mconcat [ key, mconcat values, "\"" ]
 
 
 instance Buildable [Attribute] where
-    build = mconcat . map build
+    build = mconcat . map build . merge
+
+
+merge :: [Attribute] -> [Attribute]
+merge []     = []
+merge [x]    = [ x ]
+merge (x:xs) = case x of
+    BoolAttr key value  -> BoolAttr key (foldBool value  filtered) : merge unfiltered
+    TextAttr key value  -> TextAttr key (foldText value  filtered) : merge unfiltered
+    CssAttr  key values -> TextAttr key (foldCss  values filtered) : merge unfiltered
+  where
+    (filtered, unfiltered) = partition (compare x) xs
+
+
+foldBool :: Bool -> [Attribute] -> Bool
+foldBool = foldl f
+  where
+    f acc (BoolAttr _ value) = value
+    f acc _                  = acc
+
+
+foldText :: Builder -> [Attribute] -> Builder
+foldText = foldl f
+  where
+    f acc (TextAttr _ value ) = mconcat [ acc, " ", value ]
+    f acc (CssAttr  _ values) = mconcat [ acc, " ", mconcat values ]
+    f acc _                   = acc
+
+
+foldCss :: [Builder] -> [Attribute] -> Builder
+foldCss = foldl f . mconcat
+  where
+    f acc (TextAttr _ value ) = mconcat [ acc, " ", value ]
+    f acc (CssAttr  _ values) = mconcat [ acc, " ", mconcat values ]
+    f acc _                   = acc
+
+
+compare :: Attribute -> Attribute -> Bool
+compare (BoolAttr key1 _) (BoolAttr key2 _) = key1 == key2
+compare (TextAttr key1 _) (TextAttr key2 _) = key1 == key2
+compare (TextAttr key1 _) (CssAttr  key2 _) = key1 == key2
+compare (CssAttr  key1 _) (TextAttr key2 _) = key1 == key2
+compare _                 _                 = False
 
 
 abbr :: Builder -> Attribute
@@ -269,7 +317,7 @@ allow = TextAttr " allow=\""
 
 
 allowfullscreen :: Bool -> Attribute
-allowfullscreen = BoolAttr " allowfullscreen=\""
+allowfullscreen = BoolAttr " allowfullscreen"
 {-# INLINE allowfullscreen #-}
 
 
@@ -284,7 +332,7 @@ as = TextAttr " as=\""
 
 
 async :: Bool -> Attribute
-async = BoolAttr " async=\""
+async = BoolAttr " async"
 {-# INLINE async #-}
 
 
@@ -299,12 +347,12 @@ autocomplete = TextAttr " autocomplete=\""
 
 
 autofocus :: Bool -> Attribute
-autofocus = BoolAttr " autofocus=\""
+autofocus = BoolAttr " autofocus"
 {-# INLINE autofocus #-}
 
 
 autoplay :: Bool -> Attribute
-autoplay = BoolAttr " autoplay=\""
+autoplay = BoolAttr " autoplay"
 {-# INLINE autoplay #-}
 
 
@@ -317,7 +365,7 @@ charset = TextAttr " charset=\""
 
 
 checked :: Bool -> Attribute
-checked = BoolAttr " checked=\""
+checked = BoolAttr " checked"
 
 
 cite :: Builder -> Attribute
@@ -349,7 +397,7 @@ contenteditable = TextAttr " contenteditable=\""
 
 
 controls :: Bool -> Attribute
-controls = BoolAttr " controls=\""
+controls = BoolAttr " controls"
 
 
 coords :: Builder -> Attribute
@@ -373,11 +421,11 @@ decoding = TextAttr " decoding=\""
 
 
 default_ :: Bool -> Attribute
-default_ = BoolAttr " default=\""
+default_ = BoolAttr " default"
 
 
 defer :: Bool -> Attribute
-defer = BoolAttr " defer=\""
+defer = BoolAttr " defer"
 
 
 dir :: Builder -> Attribute
@@ -385,7 +433,7 @@ dir = TextAttr " dir=\""
 
 
 disabled :: Bool -> Attribute
-disabled = BoolAttr " disabled=\""
+disabled = BoolAttr " disabled"
 
 
 download :: Builder -> Attribute
@@ -425,7 +473,7 @@ formmethod = TextAttr " formmethod=\""
 
 
 formnovalidate :: Bool -> Attribute
-formnovalidate = BoolAttr " formnovalidate=\""
+formnovalidate = BoolAttr " formnovalidate"
 
 
 formtarget :: Builder -> Attribute
@@ -441,7 +489,7 @@ height = TextAttr " height=\""
 
 
 hidden :: Bool -> Attribute
-hidden = BoolAttr " hidden=\""
+hidden = BoolAttr " hidden"
 
 
 high :: Builder -> Attribute
@@ -473,7 +521,7 @@ imagesrcset = TextAttr " imagesrcset=\""
 
 
 inert :: Bool -> Attribute
-inert = BoolAttr " inert=\""
+inert = BoolAttr " inert"
 
 
 inputmode :: Builder -> Attribute
@@ -489,7 +537,7 @@ is = TextAttr " is=\""
 
 
 ismap :: Bool -> Attribute
-ismap = BoolAttr " ismap=\""
+ismap = BoolAttr " ismap"
 
 
 itemid :: Builder -> Attribute
@@ -505,7 +553,7 @@ itemref = TextAttr " itemref=\""
 
 
 itemscope :: Bool -> Attribute
-itemscope = BoolAttr " itemscope=\""
+itemscope = BoolAttr " itemscope"
 
 
 itemtype :: Builder -> Attribute
@@ -533,7 +581,7 @@ loading = TextAttr " loading=\""
 
 
 loop :: Bool -> Attribute
-loop = BoolAttr " loop=\""
+loop = BoolAttr " loop"
 
 
 low :: Builder -> Attribute
@@ -565,11 +613,11 @@ minlength = TextAttr " minlength=\""
 
 
 multiple :: Bool -> Attribute
-multiple = BoolAttr " multiple=\""
+multiple = BoolAttr " multiple"
 
 
 muted :: Bool -> Attribute
-muted = BoolAttr " muted=\""
+muted = BoolAttr " muted"
 
 
 name :: Builder -> Attribute
@@ -577,7 +625,7 @@ name = TextAttr " name=\""
 
 
 nomodule :: Bool -> Attribute
-nomodule = BoolAttr " nomodule=\""
+nomodule = BoolAttr " nomodule"
 
 
 nonce :: Builder -> Attribute
@@ -585,11 +633,11 @@ nonce = TextAttr " nonce=\""
 
 
 novalidate :: Bool -> Attribute
-novalidate = BoolAttr " novalidate=\""
+novalidate = BoolAttr " novalidate"
 
 
 open :: Bool -> Attribute
-open = BoolAttr " open=\""
+open = BoolAttr " open"
 
 
 optimum :: Builder -> Attribute
@@ -609,7 +657,7 @@ placeholder = TextAttr " placeholder=\""
 
 
 playsinline :: Bool -> Attribute
-playsinline = BoolAttr " playsinline=\""
+playsinline = BoolAttr " playsinline"
 
 
 poster :: Builder -> Attribute
@@ -621,7 +669,7 @@ preload = TextAttr " preload=\""
 
 
 readonly :: Bool -> Attribute
-readonly = BoolAttr " readonly=\""
+readonly = BoolAttr " readonly"
 
 
 referrerpolicy :: Builder -> Attribute
@@ -633,11 +681,11 @@ rel = TextAttr " rel=\""
 
 
 required :: Bool -> Attribute
-required = BoolAttr " required=\""
+required = BoolAttr " required"
 
 
 reversed :: Bool -> Attribute
-reversed = BoolAttr " reversed=\""
+reversed = BoolAttr " reversed"
 
 
 rows :: Builder -> Attribute
@@ -657,7 +705,7 @@ scope = TextAttr " scope=\""
 
 
 selected :: Bool -> Attribute
-selected = BoolAttr " selected=\""
+selected = BoolAttr " selected"
 
 
 shape :: Builder -> Attribute
@@ -1078,3 +1126,7 @@ onwaiting = TextAttr " onwaiting=\""
 
 onwheel :: Builder -> Attribute
 onwheel = TextAttr " onwheel=\""
+
+
+css :: [Builder] -> Attribute
+css = CssAttr " class=\""
