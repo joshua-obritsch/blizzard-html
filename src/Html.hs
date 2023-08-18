@@ -240,17 +240,37 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ==== __Example__
 --
 -- @
--- Html.a
---     [ Attr.href \"\/about\" ]
---     [ Html.text \"About\" ]
+-- Html.nav []
+--     [ Html.ul []
+--         [ Html.li []
+--             [ Html.a
+--                 [ Attr.href \"\/\" ]
+--                 [ Html.text \"Home\" ]
+--             , Html.a
+--                 [ Attr.href \"\/episodes\" ]
+--                 [ Html.text \"Episodes\" ]
+--             , Html.a
+--                 [ Attr.href \"\/characters\" ]
+--                 [ Html.text \"Characters\" ]
+--             , Html.a
+--                 [ Attr.href \"\/merchandise\" ]
+--                 [ Html.text \"Merchandise\" ]
+--             ]
+--         ]
+--     ]
 -- @
 --
 -- __Result:__
 --
 -- @
--- \<a href=\"\/about\"\>
---     About
--- \<\/a\>
+-- \<nav\>
+--     \<ul\>
+--         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/episodes\"\>Episodes\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/characters\"\>Characters\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/merchandise\"\>Merchandise\<\/a\>\<\/li\>
+--     \<\/ul\>
+-- \<\/nav\>
 -- @
 a :: [Attribute] -> [Html] -> Html
 a = ParentNode "<a" "</a>"
@@ -262,17 +282,25 @@ a = ParentNode "<a" "</a>"
 -- ==== __Example__
 --
 -- @
--- Html.abbr
---     [ Attr.title \"American Standard Code for Information Interchange\" ]
---     [ Html.text \"ASCII\" ]
+-- Html.p []
+--     [ Html.text \"The \"
+--     , Html.dfn
+--         [ Attr.id \"ascii\" ]
+--         [ Html.abbr
+--             [ Attr.title \"American Standard Code for Information Interchange\" ]
+--             [ Html.text \"ASCII\" ]
+--         ]
+--     , Html.text \" is a character encoding standard for electronic communication.\"
+--     ]
 -- @
 --
 -- __Result:__
 --
 -- @
--- \<abbr title=\"American Standard Code for Information Interchange\"\>
---     ASCII
--- \<\/abbr\>
+-- \<p\>
+--     The \<dfn id=\"ascii\"\>\<abbr title=\"American Standard Code for Information Interchange\"\>ASCII\<\/abbr\>\<\/dfn\> is a character
+--     encoding standard for electronic communication.
+-- \<\/p\>
 -- @
 abbr :: [Attribute] -> [Html] -> Html
 abbr = ParentNode "<abbr" "</abbr>"
@@ -284,23 +312,30 @@ abbr = ParentNode "<abbr" "</abbr>"
 -- ==== __Example__
 --
 -- @
--- Html.address []
---     [ Html.text \"John Smith\"
---     , Html.br []
---     , Html.text \"123 Main St.\"
---     , Html.br []
---     , Html.text \"Anytown, USA 12345\"
+-- Html.footer []
+--     [ Html.address []
+--         [ Html.text \"For more information, please contact \" ]
+--         , Html.a
+--             [ Attr.href \"mailto:georg.hegel@phenomenology-of-mind.de\" ]
+--             [ Html.text \"Georg Wilhelm Friedrich Hegel\" ]
+--         , Html.text \".\"
+--         , Html.p []
+--             [ Html.small []
+--                 [ Html.text \"Copyright 2153 Georg Hegel\" ]
+--             ]
 --     ]
 -- @
 --
 -- __Result:__
 --
 -- @
--- \<address\>
---     John Smith\<br\>
---     123 Main St.\<br\>
---     Anytown, USA 12345
--- \<\/address\>
+-- \<footer\>
+--     \<address\>
+--         For more information, please contact
+--         \<a href=\"mailto:georg.hegel@phenomenology-of-mind.de\"\>Georg Wilhelm Friedrich Hegel\<\/a\>.
+--         \<p\>\<small\>Copyright 2153 Georg Hegel\<\/small\>\<\/p\>
+--     \<\/address\>
+-- \<\/footer\>
 -- @
 address :: [Attribute] -> [Html] -> Html
 address = ParentNode "<address" "</address>"
