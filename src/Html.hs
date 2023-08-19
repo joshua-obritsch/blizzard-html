@@ -169,7 +169,7 @@ import qualified Prelude
 
 import Data.Text.Lazy.Builder (Builder)
 import Html.Attributes (Attribute)
-import Html.Internal (Buildable(..))
+import Internal (Buildable(..))
 
 
 -- | Represents an HTML element.

@@ -1,11 +1,33 @@
-module Html.Internal (Buildable(..)) where
+module Internal (Buildable(..)) where
 
 
 import Data.Text.Lazy.Builder (Builder)
+import Data.Text.Lazy.Builder.Int (decimal, hexadecimal)
+import Data.Text.Lazy.Builder.RealFloat (realFloat)
 
 
 class Buildable a where
     build :: a -> Builder
+
+
+instance Buildable Int where
+    build = decimal
+
+
+instance Buildable Integer where
+    build = decimal
+
+
+instance Buildable Double where
+    build = realFloat
+
+
+instance Buildable Float where
+    build = realFloat
+
+
+instance Buildable Builder where
+    build = id
 
 {-
 

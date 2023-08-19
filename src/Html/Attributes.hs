@@ -219,25 +219,26 @@ module Html.Attributes
     , css
     ) where
 
-import Prelude ((.), (==), Bool(..), filter, foldl, map, mconcat)
+import Prelude ((.), (==), Bool(..), foldl, map, mconcat)
 
+import Css (Css)
 import Data.List (partition)
 import Data.Text.Lazy.Builder (Builder)
-import Html.Internal (Buildable(..))
+import Internal (Buildable(..))
 
 
 data Attribute
     = BoolAttr Builder Bool
     | TextAttr Builder Builder
-    | CssAttr  Builder [Builder]
+    | CssAttr  Builder [Css]
 
 
 instance Buildable Attribute where
     build (BoolAttr _   False ) = ""
     build (BoolAttr key True  ) = key
     build (TextAttr _   ""    ) = ""
-    build (TextAttr key value ) = mconcat [ key, value         , "\"" ]
-    build (CssAttr  key values) = mconcat [ key, mconcat values, "\"" ]
+    build (TextAttr key value ) = mconcat [ key, value, "\"" ]
+    build (CssAttr  key values) = mconcat [ key, value, "\"" ] where value = build values
 
 
 instance Buildable [Attribute] where
@@ -248,9 +249,9 @@ merge :: [Attribute] -> [Attribute]
 merge []     = []
 merge [x]    = [ x ]
 merge (x:xs) = case x of
-    BoolAttr key value  -> BoolAttr key (foldBool value  filtered) : merge unfiltered
-    TextAttr key value  -> TextAttr key (foldText value  filtered) : merge unfiltered
-    CssAttr  key values -> TextAttr key (foldCss  values filtered) : merge unfiltered
+    BoolAttr key value  -> BoolAttr key (foldBool value filtered) : merge unfiltered
+    TextAttr key value  -> TextAttr key (foldText value filtered) : merge unfiltered
+    CssAttr  key values -> TextAttr key (foldText value filtered) : merge unfiltered where value = build values
   where
     (filtered, unfiltered) = partition (compare x) xs
 
@@ -266,15 +267,7 @@ foldText :: Builder -> [Attribute] -> Builder
 foldText = foldl f
   where
     f acc (TextAttr _ value ) = mconcat [ acc, " ", value ]
-    f acc (CssAttr  _ values) = mconcat [ acc, " ", mconcat values ]
-    f acc _                   = acc
-
-
-foldCss :: [Builder] -> [Attribute] -> Builder
-foldCss = foldl f . mconcat
-  where
-    f acc (TextAttr _ value ) = mconcat [ acc, " ", value ]
-    f acc (CssAttr  _ values) = mconcat [ acc, " ", mconcat values ]
+    f acc (CssAttr  _ values) = mconcat [ acc, " ", value ] where value = build values
     f acc _                   = acc
 
 
@@ -1128,5 +1121,5 @@ onwheel :: Builder -> Attribute
 onwheel = TextAttr " onwheel=\""
 
 
-css :: [Builder] -> Attribute
+css :: [Css] -> Attribute
 css = CssAttr " class=\""
