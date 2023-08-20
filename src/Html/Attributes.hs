@@ -4,6 +4,8 @@
 
 module Html.Attributes
     ( Attribute
+    , build
+
       -- * Attributes (Excluding Event Handler Content Attributes)
     , abbr
     , accept
@@ -214,69 +216,30 @@ module Html.Attributes
     , onvolumechange
     , onwaiting
     , onwheel
-
-      -- * Css
-    , css
     ) where
 
-import Prelude ((.), (==), Bool(..), foldl, map, mconcat)
+import Prelude ((.), Bool(..))
 
-import Css (Css)
-import Data.List (partition)
-import Data.Text.Lazy.Builder (Builder)
+import Data.Foldable (fold, foldr)
+import Data.Monoid ((<>), mempty)
+import Data.Text.Lazy.Builder (Builder, singleton)
 import Internal (Buildable(..))
 
 
 data Attribute
     = BoolAttr Builder Bool
     | TextAttr Builder Builder
-    | CssAttr  Builder [Css]
 
 
 instance Buildable Attribute where
-    build (BoolAttr _   False ) = ""
+    build (BoolAttr _   False ) = mempty
     build (BoolAttr key True  ) = key
-    build (TextAttr _   ""    ) = ""
-    build (TextAttr key value ) = mconcat [ key, value, "\"" ]
-    build (CssAttr  key values) = mconcat [ key, value, "\"" ] where value = build values
+    build (TextAttr _   ""    ) = mempty
+    build (TextAttr key value ) = key <> value <> singleton '"'
 
 
 instance Buildable [Attribute] where
-    build = mconcat . map build . merge
-
-
-merge :: [Attribute] -> [Attribute]
-merge []     = []
-merge [x]    = [ x ]
-merge (x:xs) = case x of
-    BoolAttr key value  -> BoolAttr key (foldBool value filtered) : merge unfiltered
-    TextAttr key value  -> TextAttr key (foldText value filtered) : merge unfiltered
-    CssAttr  key values -> TextAttr key (foldText value filtered) : merge unfiltered where value = build values
-  where
-    (filtered, unfiltered) = partition (compare x) xs
-
-
-foldBool :: Bool -> [Attribute] -> Bool
-foldBool = foldl f
-  where
-    f acc (BoolAttr _ value) = value
-    f acc _                  = acc
-
-
-foldText :: Builder -> [Attribute] -> Builder
-foldText = foldl f
-  where
-    f acc (TextAttr _ value ) = mconcat [ acc, " ", value ]
-    f acc (CssAttr  _ values) = mconcat [ acc, " ", value ] where value = build values
-    f acc _                   = acc
-
-
-compare :: Attribute -> Attribute -> Bool
-compare (BoolAttr key1 _) (BoolAttr key2 _) = key1 == key2
-compare (TextAttr key1 _) (TextAttr key2 _) = key1 == key2
-compare (TextAttr key1 _) (CssAttr  key2 _) = key1 == key2
-compare (CssAttr  key1 _) (TextAttr key2 _) = key1 == key2
-compare _                 _                 = False
+    build = foldr ((<>) . build) mempty
 
 
 abbr :: Builder -> Attribute
@@ -749,8 +712,8 @@ step :: Builder -> Attribute
 step = TextAttr " step=\""
 
 
-style :: Builder -> Attribute
-style = TextAttr " style=\""
+style :: [Builder] -> Attribute
+style = TextAttr " style=\"" . fold
 
 
 tabindex :: Builder -> Attribute
@@ -1119,7 +1082,3 @@ onwaiting = TextAttr " onwaiting=\""
 
 onwheel :: Builder -> Attribute
 onwheel = TextAttr " onwheel=\""
-
-
-css :: [Css] -> Attribute
-css = CssAttr " class=\""

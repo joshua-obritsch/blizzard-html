@@ -41,6 +41,7 @@
 module Html
     ( Html
     , Attribute
+    , build
 
       -- * Declarations
     , doctype
@@ -163,11 +164,11 @@ module Html
     ) where
 
 
-import Prelude ((.), mconcat)
+import Prelude ((.))
 
-import qualified Prelude
-
-import Data.Text.Lazy.Builder (Builder)
+import Data.Foldable (foldr)
+import Data.Monoid ((<>), mempty)
+import Data.Text.Lazy.Builder (Builder, singleton)
 import Html.Attributes (Attribute)
 import Internal (Buildable(..))
 
@@ -184,18 +185,18 @@ data Html
 
 instance Buildable Html where
     build (TextNode   text                               ) = text
-    build (LeafNode   startTag        []                 ) = mconcat [ startTag,                   ">"                         ]
-    build (LeafNode   startTag        attributes         ) = mconcat [ startTag, build attributes, ">"                         ]
-    build (ParentNode startTag endTag []         []      ) = mconcat [ startTag,                   ">",                 endTag ]
-    build (ParentNode startTag endTag attributes []      ) = mconcat [ startTag, build attributes, ">",                 endTag ]
-    build (ParentNode startTag endTag []         children) = mconcat [ startTag,                   ">", build children, endTag ]
-    build (ParentNode startTag endTag attributes children) = mconcat [ startTag, build attributes, ">", build children, endTag ]
-    build (RootNode   startTag                   []      ) = mconcat [ startTag                                                ]
-    build (RootNode   startTag                   children) = mconcat [ startTag,                        build children         ]
+    build (LeafNode   startTag        []                 ) = startTag <>                     singleton '>'
+    build (LeafNode   startTag        attributes         ) = startTag <> build attributes <> singleton '>'
+    build (ParentNode startTag endTag []         []      ) = startTag <>                     singleton '>' <>                   endTag
+    build (ParentNode startTag endTag attributes []      ) = startTag <> build attributes <> singleton '>' <>                   endTag
+    build (ParentNode startTag endTag []         children) = startTag <>                     singleton '>' <> build children <> endTag
+    build (ParentNode startTag endTag attributes children) = startTag <> build attributes <> singleton '>' <> build children <> endTag
+    build (RootNode   startTag                   []      ) = startTag
+    build (RootNode   startTag                   children) = startTag <>                                      build children
 
 
 instance Buildable [Html] where
-    build = mconcat . Prelude.map build
+    build = foldr ((<>) . build) mempty
 
 
 -- | Generates an HTML document type declaration with the given contents.
