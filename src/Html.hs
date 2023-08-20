@@ -164,11 +164,12 @@ module Html
     ) where
 
 
-import Prelude ((.))
+import Prelude ((.), Show(..))
 
 import Data.Foldable (foldr)
 import Data.Monoid ((<>), mempty)
-import Data.Text.Lazy.Builder (Builder, singleton)
+import Data.Text.Lazy (unpack)
+import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 import Html.Attributes (Attribute)
 import Internal (Buildable(..))
 
@@ -181,6 +182,14 @@ data Html
     | LeafNode   Builder         [Attribute]
     | ParentNode Builder Builder [Attribute] [Html]
     | RootNode   Builder                     [Html]
+
+
+instance Show Html where
+    show = unpack . toLazyText . build
+
+
+instance {-# OVERLAPPING #-} Show [Html] where
+    show = unpack . toLazyText . build
 
 
 instance Buildable Html where
