@@ -1,13 +1,9 @@
-{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module Html.Attributes
-    ( Attribute
-    , build
-
-      -- * Attributes (Excluding Event Handler Content Attributes)
-    , abbr
+    ( -- * Attributes (Excluding Event Handler Content Attributes)
+      abbr
     , accept
     , acceptCharset
     , accesskey
@@ -218,1069 +214,1044 @@ module Html.Attributes
     , onwheel
     ) where
 
-import Prelude ((.), Bool(..), Show(..))
 
-import Data.Foldable (fold, foldr)
-import Data.Monoid ((<>), mempty)
-import Data.Text.Lazy (unpack)
-import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
-import Internal (Buildable(..))
+import Prelude ((.), Bool(..))
 
-
-data Attribute
-    = BoolAttr Builder Bool
-    | TextAttr Builder Builder
-
-
-instance Show Attribute where
-    show = unpack . toLazyText . build
-
-
-instance {-# OVERLAPPING #-} Show [Attribute] where
-    show = unpack . toLazyText . build
-
-
-instance Buildable Attribute where
-    build (BoolAttr _   False ) = mempty
-    build (BoolAttr key True  ) = key
-    build (TextAttr _   ""    ) = mempty
-    build (TextAttr key value ) = key <> value <> singleton '"'
-
-
-instance Buildable [Attribute] where
-    build = foldr ((<>) . build) mempty
+import Data.Foldable (fold)
+import Data.Text.Lazy.Builder (Builder)
+import Html (Attribute(..))
 
 
 abbr :: Builder -> Attribute
-abbr = TextAttr " abbr=\""
+abbr = TextAttribute " abbr=\""
 {-# INLINE abbr #-}
 
 
 accept :: Builder -> Attribute
-accept = TextAttr " accept=\""
+accept = TextAttribute " accept=\""
 {-# INLINE accept #-}
 
 
 acceptCharset :: Builder -> Attribute
-acceptCharset = TextAttr " accept-charset=\""
+acceptCharset = TextAttribute " accept-charset=\""
 {-# INLINE acceptCharset #-}
 
 
 accesskey :: Builder -> Attribute
-accesskey = TextAttr " accesskey=\""
+accesskey = TextAttribute " accesskey=\""
 {-# INLINE accesskey #-}
 
 
 action :: Builder -> Attribute
-action = TextAttr " action=\""
+action = TextAttribute " action=\""
 {-# INLINE action #-}
 
 
 allow :: Builder -> Attribute
-allow = TextAttr " allow=\""
+allow = TextAttribute " allow=\""
 {-# INLINE allow #-}
 
 
 allowfullscreen :: Bool -> Attribute
-allowfullscreen = BoolAttr " allowfullscreen"
+allowfullscreen = BoolAttribute " allowfullscreen"
 {-# INLINE allowfullscreen #-}
 
 
 alt :: Builder -> Attribute
-alt = TextAttr " alt=\""
+alt = TextAttribute " alt=\""
 {-# INLINE alt #-}
 
 
 as :: Builder -> Attribute
-as = TextAttr " as=\""
+as = TextAttribute " as=\""
 {-# INLINE as #-}
 
 
 async :: Bool -> Attribute
-async = BoolAttr " async"
+async = BoolAttribute " async"
 {-# INLINE async #-}
 
 
 autocapitalize :: Builder -> Attribute
-autocapitalize = TextAttr " autocapitalize=\""
+autocapitalize = TextAttribute " autocapitalize=\""
 {-# INLINE autocapitalize #-}
 
 
 autocomplete :: Builder -> Attribute
-autocomplete = TextAttr " autocomplete=\""
+autocomplete = TextAttribute " autocomplete=\""
 {-# INLINE autocomplete #-}
 
 
 autofocus :: Bool -> Attribute
-autofocus = BoolAttr " autofocus"
+autofocus = BoolAttribute " autofocus"
 {-# INLINE autofocus #-}
 
 
 autoplay :: Bool -> Attribute
-autoplay = BoolAttr " autoplay"
+autoplay = BoolAttribute " autoplay"
 {-# INLINE autoplay #-}
 
 
 blocking :: Builder -> Attribute
-blocking = TextAttr " blocking=\""
+blocking = TextAttribute " blocking=\""
 {-# INLINE blocking #-}
 
 
 charset :: Builder -> Attribute
-charset = TextAttr " charset=\""
+charset = TextAttribute " charset=\""
 {-# INLINE charset #-}
 
 
 checked :: Bool -> Attribute
-checked = BoolAttr " checked"
+checked = BoolAttribute " checked"
 {-# INLINE checked #-}
 
 
 cite :: Builder -> Attribute
-cite = TextAttr " cite=\""
+cite = TextAttribute " cite=\""
 {-# INLINE cite #-}
 
 
 class_ :: Builder -> Attribute
-class_ = TextAttr " class=\""
+class_ = TextAttribute " class=\""
 {-# INLINE class_ #-}
 
 
 color :: Builder -> Attribute
-color = TextAttr " color=\""
+color = TextAttribute " color=\""
 {-# INLINE color #-}
 
 
 cols :: Builder -> Attribute
-cols = TextAttr " cols=\""
+cols = TextAttribute " cols=\""
 {-# INLINE cols #-}
 
 
 colspan :: Builder -> Attribute
-colspan = TextAttr " colspan=\""
+colspan = TextAttribute " colspan=\""
 {-# INLINE colspan #-}
 
 
 content :: Builder -> Attribute
-content = TextAttr " content=\""
+content = TextAttribute " content=\""
 {-# INLINE content #-}
 
 
 contenteditable :: Builder -> Attribute
-contenteditable = TextAttr " contenteditable=\""
+contenteditable = TextAttribute " contenteditable=\""
 {-# INLINE contenteditable #-}
 
 
 controls :: Bool -> Attribute
-controls = BoolAttr " controls"
+controls = BoolAttribute " controls"
 {-# INLINE controls #-}
 
 
 coords :: Builder -> Attribute
-coords = TextAttr " coords=\""
+coords = TextAttribute " coords=\""
 {-# INLINE coords #-}
 
 
 crossorigin :: Builder -> Attribute
-crossorigin = TextAttr " crossorigin=\""
+crossorigin = TextAttribute " crossorigin=\""
 {-# INLINE crossorigin #-}
 
 
 data_ :: Builder -> Attribute
-data_ = TextAttr " data=\""
+data_ = TextAttribute " data=\""
 {-# INLINE data_ #-}
 
 
 datetime :: Builder -> Attribute
-datetime = TextAttr " datetime=\""
+datetime = TextAttribute " datetime=\""
 {-# INLINE datetime #-}
 
 
 decoding :: Builder -> Attribute
-decoding = TextAttr " decoding=\""
+decoding = TextAttribute " decoding=\""
 {-# INLINE decoding #-}
 
 
 default_ :: Bool -> Attribute
-default_ = BoolAttr " default"
+default_ = BoolAttribute " default"
 {-# INLINE default_ #-}
 
 
 defer :: Bool -> Attribute
-defer = BoolAttr " defer"
+defer = BoolAttribute " defer"
 {-# INLINE defer #-}
 
 
 dir :: Builder -> Attribute
-dir = TextAttr " dir=\""
+dir = TextAttribute " dir=\""
 {-# INLINE dir #-}
 
 
 disabled :: Bool -> Attribute
-disabled = BoolAttr " disabled"
+disabled = BoolAttribute " disabled"
 {-# INLINE disabled #-}
 
 
 download :: Builder -> Attribute
-download = TextAttr " download=\""
+download = TextAttribute " download=\""
 {-# INLINE download #-}
 
 
 draggable :: Builder -> Attribute
-draggable = TextAttr " draggable=\""
+draggable = TextAttribute " draggable=\""
 {-# INLINE draggable #-}
 
 
 enctype :: Builder -> Attribute
-enctype = TextAttr " enctype=\""
+enctype = TextAttribute " enctype=\""
 {-# INLINE enctype #-}
 
 
 enterkeyhint :: Builder -> Attribute
-enterkeyhint = TextAttr " enterkeyhint=\""
+enterkeyhint = TextAttribute " enterkeyhint=\""
 {-# INLINE enterkeyhint #-}
 
 
 for :: Builder -> Attribute
-for = TextAttr " for=\""
+for = TextAttribute " for=\""
 {-# INLINE for #-}
 
 
 form :: Builder -> Attribute
-form = TextAttr " form=\""
+form = TextAttribute " form=\""
 {-# INLINE form #-}
 
 
 formaction :: Builder -> Attribute
-formaction = TextAttr " formaction=\""
+formaction = TextAttribute " formaction=\""
 {-# INLINE formaction #-}
 
 
 formenctype :: Builder -> Attribute
-formenctype = TextAttr " formenctype=\""
+formenctype = TextAttribute " formenctype=\""
 {-# INLINE formenctype #-}
 
 
 formmethod :: Builder -> Attribute
-formmethod = TextAttr " formmethod=\""
+formmethod = TextAttribute " formmethod=\""
 {-# INLINE formmethod #-}
 
 
 formnovalidate :: Bool -> Attribute
-formnovalidate = BoolAttr " formnovalidate"
+formnovalidate = BoolAttribute " formnovalidate"
 {-# INLINE formnovalidate #-}
 
 
 formtarget :: Builder -> Attribute
-formtarget = TextAttr " formtarget=\""
+formtarget = TextAttribute " formtarget=\""
 {-# INLINE formtarget #-}
 
 
 headers :: Builder -> Attribute
-headers = TextAttr " headers=\""
+headers = TextAttribute " headers=\""
 {-# INLINE headers #-}
 
 
 height :: Builder -> Attribute
-height = TextAttr " height=\""
+height = TextAttribute " height=\""
 {-# INLINE height #-}
 
 
 hidden :: Bool -> Attribute
-hidden = BoolAttr " hidden"
+hidden = BoolAttribute " hidden"
 {-# INLINE hidden #-}
 
 
 high :: Builder -> Attribute
-high = TextAttr " high=\""
+high = TextAttribute " high=\""
 {-# INLINE high #-}
 
 
 href :: Builder -> Attribute
-href = TextAttr " href=\""
+href = TextAttribute " href=\""
 {-# INLINE href #-}
 
 
 hreflang :: Builder -> Attribute
-hreflang = TextAttr " hreflang=\""
+hreflang = TextAttribute " hreflang=\""
 {-# INLINE hreflang #-}
 
 
 httpEquiv :: Builder -> Attribute
-httpEquiv = TextAttr " http-equiv=\""
+httpEquiv = TextAttribute " http-equiv=\""
 {-# INLINE httpEquiv #-}
 
 
 id :: Builder -> Attribute
-id = TextAttr " id=\""
+id = TextAttribute " id=\""
 {-# INLINE id #-}
 
 
 imagesizes :: Builder -> Attribute
-imagesizes = TextAttr " imagesizes=\""
+imagesizes = TextAttribute " imagesizes=\""
 {-# INLINE imagesizes #-}
 
 
 imagesrcset :: Builder -> Attribute
-imagesrcset = TextAttr " imagesrcset=\""
+imagesrcset = TextAttribute " imagesrcset=\""
 {-# INLINE imagesrcset #-}
 
 
 inert :: Bool -> Attribute
-inert = BoolAttr " inert"
+inert = BoolAttribute " inert"
 {-# INLINE inert #-}
 
 
 inputmode :: Builder -> Attribute
-inputmode = TextAttr " inputmode=\""
+inputmode = TextAttribute " inputmode=\""
 {-# INLINE inputmode #-}
 
 
 integrity :: Builder -> Attribute
-integrity = TextAttr " integrity=\""
+integrity = TextAttribute " integrity=\""
 {-# INLINE integrity #-}
 
 
 is :: Builder -> Attribute
-is = TextAttr " is=\""
+is = TextAttribute " is=\""
 {-# INLINE is #-}
 
 
 ismap :: Bool -> Attribute
-ismap = BoolAttr " ismap"
+ismap = BoolAttribute " ismap"
 {-# INLINE ismap #-}
 
 
 itemid :: Builder -> Attribute
-itemid = TextAttr " itemid=\""
+itemid = TextAttribute " itemid=\""
 {-# INLINE itemid #-}
 
 
 itemprop :: Builder -> Attribute
-itemprop = TextAttr " itemprop=\""
+itemprop = TextAttribute " itemprop=\""
 {-# INLINE itemprop #-}
 
 
 itemref :: Builder -> Attribute
-itemref = TextAttr " itemref=\""
+itemref = TextAttribute " itemref=\""
 {-# INLINE itemref #-}
 
 
 itemscope :: Bool -> Attribute
-itemscope = BoolAttr " itemscope"
+itemscope = BoolAttribute " itemscope"
 {-# INLINE itemscope #-}
 
 
 itemtype :: Builder -> Attribute
-itemtype = TextAttr " itemtype=\""
+itemtype = TextAttribute " itemtype=\""
 {-# INLINE itemtype #-}
 
 
 kind :: Builder -> Attribute
-kind = TextAttr " kind=\""
+kind = TextAttribute " kind=\""
 {-# INLINE kind #-}
 
 
 label :: Builder -> Attribute
-label = TextAttr " label=\""
+label = TextAttribute " label=\""
 {-# INLINE label #-}
 
 
 lang :: Builder -> Attribute
-lang = TextAttr " lang=\""
+lang = TextAttribute " lang=\""
 {-# INLINE lang #-}
 
 
 list :: Builder -> Attribute
-list = TextAttr " list=\""
+list = TextAttribute " list=\""
 {-# INLINE list #-}
 
 
 loading :: Builder -> Attribute
-loading = TextAttr " loading=\""
+loading = TextAttribute " loading=\""
 {-# INLINE loading #-}
 
 
 loop :: Bool -> Attribute
-loop = BoolAttr " loop"
+loop = BoolAttribute " loop"
 {-# INLINE loop #-}
 
 
 low :: Builder -> Attribute
-low = TextAttr " low=\""
+low = TextAttribute " low=\""
 {-# INLINE low #-}
 
 
 max :: Builder -> Attribute
-max = TextAttr " max=\""
+max = TextAttribute " max=\""
 {-# INLINE max #-}
 
 
 maxlength :: Builder -> Attribute
-maxlength = TextAttr " maxlength=\""
+maxlength = TextAttribute " maxlength=\""
 {-# INLINE maxlength #-}
 
 
 media :: Builder -> Attribute
-media = TextAttr " media=\""
+media = TextAttribute " media=\""
 {-# INLINE media #-}
 
 
 method :: Builder -> Attribute
-method = TextAttr " method=\""
+method = TextAttribute " method=\""
 {-# INLINE method #-}
 
 
 min :: Builder -> Attribute
-min = TextAttr " min=\""
+min = TextAttribute " min=\""
 {-# INLINE min #-}
 
 
 minlength :: Builder -> Attribute
-minlength = TextAttr " minlength=\""
+minlength = TextAttribute " minlength=\""
 {-# INLINE minlength #-}
 
 
 multiple :: Bool -> Attribute
-multiple = BoolAttr " multiple"
+multiple = BoolAttribute " multiple"
 {-# INLINE multiple #-}
 
 
 muted :: Bool -> Attribute
-muted = BoolAttr " muted"
+muted = BoolAttribute " muted"
 {-# INLINE muted #-}
 
 
 name :: Builder -> Attribute
-name = TextAttr " name=\""
+name = TextAttribute " name=\""
 {-# INLINE name #-}
 
 
 nomodule :: Bool -> Attribute
-nomodule = BoolAttr " nomodule"
+nomodule = BoolAttribute " nomodule"
 {-# INLINE nomodule #-}
 
 
 nonce :: Builder -> Attribute
-nonce = TextAttr " nonce=\""
+nonce = TextAttribute " nonce=\""
 {-# INLINE nonce #-}
 
 
 novalidate :: Bool -> Attribute
-novalidate = BoolAttr " novalidate"
+novalidate = BoolAttribute " novalidate"
 {-# INLINE novalidate #-}
 
 
 open :: Bool -> Attribute
-open = BoolAttr " open"
+open = BoolAttribute " open"
 {-# INLINE open #-}
 
 
 optimum :: Builder -> Attribute
-optimum = TextAttr " optimum=\""
+optimum = TextAttribute " optimum=\""
 {-# INLINE optimum #-}
 
 
 pattern :: Builder -> Attribute
-pattern = TextAttr " pattern=\""
+pattern = TextAttribute " pattern=\""
 {-# INLINE pattern #-}
 
 
 ping :: Builder -> Attribute
-ping = TextAttr " ping=\""
+ping = TextAttribute " ping=\""
 {-# INLINE ping #-}
 
 
 placeholder :: Builder -> Attribute
-placeholder = TextAttr " placeholder=\""
+placeholder = TextAttribute " placeholder=\""
 {-# INLINE placeholder #-}
 
 
 playsinline :: Bool -> Attribute
-playsinline = BoolAttr " playsinline"
+playsinline = BoolAttribute " playsinline"
 {-# INLINE playsinline #-}
 
 
 poster :: Builder -> Attribute
-poster = TextAttr " poster=\""
+poster = TextAttribute " poster=\""
 {-# INLINE poster #-}
 
 
 preload :: Builder -> Attribute
-preload = TextAttr " preload=\""
+preload = TextAttribute " preload=\""
 {-# INLINE preload #-}
 
 
 readonly :: Bool -> Attribute
-readonly = BoolAttr " readonly"
+readonly = BoolAttribute " readonly"
 {-# INLINE readonly #-}
 
 
 referrerpolicy :: Builder -> Attribute
-referrerpolicy = TextAttr " referrerpolicy=\""
+referrerpolicy = TextAttribute " referrerpolicy=\""
 {-# INLINE referrerpolicy #-}
 
 
 rel :: Builder -> Attribute
-rel = TextAttr " rel=\""
+rel = TextAttribute " rel=\""
 {-# INLINE rel #-}
 
 
 required :: Bool -> Attribute
-required = BoolAttr " required"
+required = BoolAttribute " required"
 {-# INLINE required #-}
 
 
 reversed :: Bool -> Attribute
-reversed = BoolAttr " reversed"
+reversed = BoolAttribute " reversed"
 {-# INLINE reversed #-}
 
 
 rows :: Builder -> Attribute
-rows = TextAttr " rows=\""
+rows = TextAttribute " rows=\""
 {-# INLINE rows #-}
 
 
 rowspan :: Builder -> Attribute
-rowspan = TextAttr " rowspan=\""
+rowspan = TextAttribute " rowspan=\""
 {-# INLINE rowspan #-}
 
 
 sandbox :: Builder -> Attribute
-sandbox = TextAttr " sandbox=\""
+sandbox = TextAttribute " sandbox=\""
 {-# INLINE sandbox #-}
 
 
 scope :: Builder -> Attribute
-scope = TextAttr " scope=\""
+scope = TextAttribute " scope=\""
 {-# INLINE scope #-}
 
 
 selected :: Bool -> Attribute
-selected = BoolAttr " selected"
+selected = BoolAttribute " selected"
 {-# INLINE selected #-}
 
 
 shape :: Builder -> Attribute
-shape = TextAttr " shape=\""
+shape = TextAttribute " shape=\""
 {-# INLINE shape #-}
 
 
 size :: Builder -> Attribute
-size = TextAttr " size=\""
+size = TextAttribute " size=\""
 {-# INLINE size #-}
 
 
 sizes :: Builder -> Attribute
-sizes = TextAttr " sizes=\""
+sizes = TextAttribute " sizes=\""
 {-# INLINE sizes #-}
 
 
 slot :: Builder -> Attribute
-slot = TextAttr " slot=\""
+slot = TextAttribute " slot=\""
 {-# INLINE slot #-}
 
 
 span :: Builder -> Attribute
-span = TextAttr " span=\""
+span = TextAttribute " span=\""
 {-# INLINE span #-}
 
 
 spellcheck :: Builder -> Attribute
-spellcheck = TextAttr " spellcheck=\""
+spellcheck = TextAttribute " spellcheck=\""
 {-# INLINE spellcheck #-}
 
 
 src :: Builder -> Attribute
-src = TextAttr " src=\""
+src = TextAttribute " src=\""
 {-# INLINE src #-}
 
 
 srcdoc :: Builder -> Attribute
-srcdoc = TextAttr " srcdoc=\""
+srcdoc = TextAttribute " srcdoc=\""
 {-# INLINE srcdoc #-}
 
 
 srclang :: Builder -> Attribute
-srclang = TextAttr " srclang=\""
+srclang = TextAttribute " srclang=\""
 {-# INLINE srclang #-}
 
 
 srcset :: Builder -> Attribute
-srcset = TextAttr " srcset=\""
+srcset = TextAttribute " srcset=\""
 {-# INLINE srcset #-}
 
 
 start :: Builder -> Attribute
-start = TextAttr " start=\""
+start = TextAttribute " start=\""
 {-# INLINE start #-}
 
 
 step :: Builder -> Attribute
-step = TextAttr " step=\""
+step = TextAttribute " step=\""
 {-# INLINE step #-}
 
 
 style :: [Builder] -> Attribute
-style = TextAttr " style=\"" . fold
+style = TextAttribute " style=\"" . fold
 {-# INLINE style #-}
 
 
 tabindex :: Builder -> Attribute
-tabindex = TextAttr " tabindex=\""
+tabindex = TextAttribute " tabindex=\""
 {-# INLINE tabindex #-}
 
 
 target :: Builder -> Attribute
-target = TextAttr " target=\""
+target = TextAttribute " target=\""
 {-# INLINE target #-}
 
 
 title :: Builder -> Attribute
-title = TextAttr " title=\""
+title = TextAttribute " title=\""
 {-# INLINE title #-}
 
 
 translate :: Builder -> Attribute
-translate = TextAttr " translate=\""
+translate = TextAttribute " translate=\""
 {-# INLINE translate #-}
 
 
 type_ :: Builder -> Attribute
-type_ = TextAttr " type=\""
+type_ = TextAttribute " type=\""
 {-# INLINE type_ #-}
 
 
 usemap :: Builder -> Attribute
-usemap = TextAttr " usemap=\""
+usemap = TextAttribute " usemap=\""
 {-# INLINE usemap #-}
 
 
 value :: Builder -> Attribute
-value = TextAttr " value=\""
+value = TextAttribute " value=\""
 {-# INLINE value #-}
 
 
 width :: Builder -> Attribute
-width = TextAttr " width=\""
+width = TextAttribute " width=\""
 {-# INLINE width #-}
 
 
 wrap :: Builder -> Attribute
-wrap = TextAttr " wrap=\""
+wrap = TextAttribute " wrap=\""
 {-# INLINE wrap #-}
 
 
 onauxclick :: Builder -> Attribute
-onauxclick = TextAttr " onauxclick=\""
+onauxclick = TextAttribute " onauxclick=\""
 {-# INLINE onauxclick #-}
 
 
 onafterprint :: Builder -> Attribute
-onafterprint = TextAttr " onafterprint=\""
+onafterprint = TextAttribute " onafterprint=\""
 {-# INLINE onafterprint #-}
 
 
 onbeforematch :: Builder -> Attribute
-onbeforematch = TextAttr " onbeforematch=\""
+onbeforematch = TextAttribute " onbeforematch=\""
 {-# INLINE onbeforematch #-}
 
 
 onbeforeprint :: Builder -> Attribute
-onbeforeprint = TextAttr " onbeforeprint=\""
+onbeforeprint = TextAttribute " onbeforeprint=\""
 {-# INLINE onbeforeprint #-}
 
 
 onbeforeunload :: Builder -> Attribute
-onbeforeunload = TextAttr " onbeforeunload=\""
+onbeforeunload = TextAttribute " onbeforeunload=\""
 {-# INLINE onbeforeunload #-}
 
 
 onblur :: Builder -> Attribute
-onblur = TextAttr " onblur=\""
+onblur = TextAttribute " onblur=\""
 {-# INLINE onblur #-}
 
 
 oncancel :: Builder -> Attribute
-oncancel = TextAttr " oncancel=\""
+oncancel = TextAttribute " oncancel=\""
 {-# INLINE oncancel #-}
 
 
 oncanplay :: Builder -> Attribute
-oncanplay = TextAttr " oncanplay=\""
+oncanplay = TextAttribute " oncanplay=\""
 {-# INLINE oncanplay #-}
 
 
 oncanplaythrough :: Builder -> Attribute
-oncanplaythrough = TextAttr " oncanplaythrough=\""
+oncanplaythrough = TextAttribute " oncanplaythrough=\""
 {-# INLINE oncanplaythrough #-}
 
 
 onchange :: Builder -> Attribute
-onchange = TextAttr " onchange=\""
+onchange = TextAttribute " onchange=\""
 {-# INLINE onchange #-}
 
 
 onclick :: Builder -> Attribute
-onclick = TextAttr " onclick=\""
+onclick = TextAttribute " onclick=\""
 {-# INLINE onclick #-}
 
 
 onclose :: Builder -> Attribute
-onclose = TextAttr " onclose=\""
+onclose = TextAttribute " onclose=\""
 {-# INLINE onclose #-}
 
 
 oncontextlost :: Builder -> Attribute
-oncontextlost = TextAttr " oncontextlost=\""
+oncontextlost = TextAttribute " oncontextlost=\""
 {-# INLINE oncontextlost #-}
 
 
 oncontextmenu :: Builder -> Attribute
-oncontextmenu = TextAttr " oncontextmenu=\""
+oncontextmenu = TextAttribute " oncontextmenu=\""
 {-# INLINE oncontextmenu #-}
 
 
 oncontextrestored :: Builder -> Attribute
-oncontextrestored = TextAttr " oncontextrestored=\""
+oncontextrestored = TextAttribute " oncontextrestored=\""
 {-# INLINE oncontextrestored #-}
 
 
 oncopy :: Builder -> Attribute
-oncopy = TextAttr " oncopy=\""
+oncopy = TextAttribute " oncopy=\""
 {-# INLINE oncopy #-}
 
 
 oncuechange :: Builder -> Attribute
-oncuechange = TextAttr " oncuechange=\""
+oncuechange = TextAttribute " oncuechange=\""
 {-# INLINE oncuechange #-}
 
 
 oncut :: Builder -> Attribute
-oncut = TextAttr " oncut=\""
+oncut = TextAttribute " oncut=\""
 {-# INLINE oncut #-}
 
 
 ondblclick :: Builder -> Attribute
-ondblclick = TextAttr " ondblclick=\""
+ondblclick = TextAttribute " ondblclick=\""
 {-# INLINE ondblclick #-}
 
 
 ondrag :: Builder -> Attribute
-ondrag = TextAttr " ondrag=\""
+ondrag = TextAttribute " ondrag=\""
 {-# INLINE ondrag #-}
 
 
 ondragend :: Builder -> Attribute
-ondragend = TextAttr " ondragend=\""
+ondragend = TextAttribute " ondragend=\""
 {-# INLINE ondragend #-}
 
 
 ondragenter :: Builder -> Attribute
-ondragenter = TextAttr " ondragenter=\""
+ondragenter = TextAttribute " ondragenter=\""
 {-# INLINE ondragenter #-}
 
 
 ondragleave :: Builder -> Attribute
-ondragleave = TextAttr " ondragleave=\""
+ondragleave = TextAttribute " ondragleave=\""
 {-# INLINE ondragleave #-}
 
 
 ondragover :: Builder -> Attribute
-ondragover = TextAttr " ondragover=\""
+ondragover = TextAttribute " ondragover=\""
 {-# INLINE ondragover #-}
 
 
 ondragstart :: Builder -> Attribute
-ondragstart = TextAttr " ondragstart=\""
+ondragstart = TextAttribute " ondragstart=\""
 {-# INLINE ondragstart #-}
 
 
 ondrop :: Builder -> Attribute
-ondrop = TextAttr " ondrop=\""
+ondrop = TextAttribute " ondrop=\""
 {-# INLINE ondrop #-}
 
 
 ondurationchange :: Builder -> Attribute
-ondurationchange = TextAttr " ondurationchange=\""
+ondurationchange = TextAttribute " ondurationchange=\""
 {-# INLINE ondurationchange #-}
 
 
 onemptied :: Builder -> Attribute
-onemptied = TextAttr " onemptied=\""
+onemptied = TextAttribute " onemptied=\""
 {-# INLINE onemptied #-}
 
 
 onended :: Builder -> Attribute
-onended = TextAttr " onended=\""
+onended = TextAttribute " onended=\""
 {-# INLINE onended #-}
 
 
 onerror :: Builder -> Attribute
-onerror = TextAttr " onerror=\""
+onerror = TextAttribute " onerror=\""
 {-# INLINE onerror #-}
 
 
 onfocus :: Builder -> Attribute
-onfocus = TextAttr " onfocus=\""
+onfocus = TextAttribute " onfocus=\""
 {-# INLINE onfocus #-}
 
 
 onformdata :: Builder -> Attribute
-onformdata = TextAttr " onformdata=\""
+onformdata = TextAttribute " onformdata=\""
 {-# INLINE onformdata #-}
 
 
 onhashchange :: Builder -> Attribute
-onhashchange = TextAttr " onhashchange=\""
+onhashchange = TextAttribute " onhashchange=\""
 {-# INLINE onhashchange #-}
 
 
 oninput :: Builder -> Attribute
-oninput = TextAttr " oninput=\""
+oninput = TextAttribute " oninput=\""
 {-# INLINE oninput #-}
 
 
 oninvalid :: Builder -> Attribute
-oninvalid = TextAttr " oninvalid=\""
+oninvalid = TextAttribute " oninvalid=\""
 {-# INLINE oninvalid #-}
 
 
 onkeydown :: Builder -> Attribute
-onkeydown = TextAttr " onkeydown=\""
+onkeydown = TextAttribute " onkeydown=\""
 {-# INLINE onkeydown #-}
 
 
 onkeypress :: Builder -> Attribute
-onkeypress = TextAttr " onkeypress=\""
+onkeypress = TextAttribute " onkeypress=\""
 {-# INLINE onkeypress #-}
 
 
 onkeyup :: Builder -> Attribute
-onkeyup = TextAttr " onkeyup=\""
+onkeyup = TextAttribute " onkeyup=\""
 {-# INLINE onkeyup #-}
 
 
 onlanguagechange :: Builder -> Attribute
-onlanguagechange = TextAttr " onlanguagechange=\""
+onlanguagechange = TextAttribute " onlanguagechange=\""
 {-# INLINE onlanguagechange #-}
 
 
 onload :: Builder -> Attribute
-onload = TextAttr " onload=\""
+onload = TextAttribute " onload=\""
 {-# INLINE onload #-}
 
 
 onloadeddata :: Builder -> Attribute
-onloadeddata = TextAttr " onloadeddata=\""
+onloadeddata = TextAttribute " onloadeddata=\""
 {-# INLINE onloadeddata #-}
 
 
 onloadedmetadata :: Builder -> Attribute
-onloadedmetadata = TextAttr " onloadedmetadata=\""
+onloadedmetadata = TextAttribute " onloadedmetadata=\""
 {-# INLINE onloadedmetadata #-}
 
 
 onloadstart :: Builder -> Attribute
-onloadstart = TextAttr " onloadstart=\""
+onloadstart = TextAttribute " onloadstart=\""
 {-# INLINE onloadstart #-}
 
 
 onmessage :: Builder -> Attribute
-onmessage = TextAttr " onmessage=\""
+onmessage = TextAttribute " onmessage=\""
 {-# INLINE onmessage #-}
 
 
 onmessageerror :: Builder -> Attribute
-onmessageerror = TextAttr " onmessageerror=\""
+onmessageerror = TextAttribute " onmessageerror=\""
 {-# INLINE onmessageerror #-}
 
 
 onmousedown :: Builder -> Attribute
-onmousedown = TextAttr " onmousedown=\""
+onmousedown = TextAttribute " onmousedown=\""
 {-# INLINE onmousedown #-}
 
 
 onmouseenter :: Builder -> Attribute
-onmouseenter = TextAttr " onmouseenter=\""
+onmouseenter = TextAttribute " onmouseenter=\""
 {-# INLINE onmouseenter #-}
 
 
 onmouseleave :: Builder -> Attribute
-onmouseleave = TextAttr " onmouseleave=\""
+onmouseleave = TextAttribute " onmouseleave=\""
 {-# INLINE onmouseleave #-}
 
 
 onmousemove :: Builder -> Attribute
-onmousemove = TextAttr " onmousemove=\""
+onmousemove = TextAttribute " onmousemove=\""
 {-# INLINE onmousemove #-}
 
 
 onmouseout :: Builder -> Attribute
-onmouseout = TextAttr " onmouseout=\""
+onmouseout = TextAttribute " onmouseout=\""
 {-# INLINE onmouseout #-}
 
 
 onmouseover :: Builder -> Attribute
-onmouseover = TextAttr " onmouseover=\""
+onmouseover = TextAttribute " onmouseover=\""
 {-# INLINE onmouseover #-}
 
 
 onmouseup :: Builder -> Attribute
-onmouseup = TextAttr " onmouseup=\""
+onmouseup = TextAttribute " onmouseup=\""
 {-# INLINE onmouseup #-}
 
 
 onoffline :: Builder -> Attribute
-onoffline = TextAttr " onoffline=\""
+onoffline = TextAttribute " onoffline=\""
 {-# INLINE onoffline #-}
 
 
 ononline :: Builder -> Attribute
-ononline = TextAttr " ononline=\""
+ononline = TextAttribute " ononline=\""
 {-# INLINE ononline #-}
 
 
 onpagehide :: Builder -> Attribute
-onpagehide = TextAttr " onpagehide=\""
+onpagehide = TextAttribute " onpagehide=\""
 {-# INLINE onpagehide #-}
 
 
 onpageshow :: Builder -> Attribute
-onpageshow = TextAttr " onpageshow=\""
+onpageshow = TextAttribute " onpageshow=\""
 {-# INLINE onpageshow #-}
 
 
 onpaste :: Builder -> Attribute
-onpaste = TextAttr " onpaste=\""
+onpaste = TextAttribute " onpaste=\""
 {-# INLINE onpaste #-}
 
 
 onpause :: Builder -> Attribute
-onpause = TextAttr " onpause=\""
+onpause = TextAttribute " onpause=\""
 {-# INLINE onpause #-}
 
 
 onplay :: Builder -> Attribute
-onplay = TextAttr " onplay=\""
+onplay = TextAttribute " onplay=\""
 {-# INLINE onplay #-}
 
 
 onplaying :: Builder -> Attribute
-onplaying = TextAttr " onplaying=\""
+onplaying = TextAttribute " onplaying=\""
 {-# INLINE onplaying #-}
 
 
 onpopstate :: Builder -> Attribute
-onpopstate = TextAttr " onpopstate=\""
+onpopstate = TextAttribute " onpopstate=\""
 {-# INLINE onpopstate #-}
 
 
 onprogress :: Builder -> Attribute
-onprogress = TextAttr " onprogress=\""
+onprogress = TextAttribute " onprogress=\""
 {-# INLINE onprogress #-}
 
 
 onratechange :: Builder -> Attribute
-onratechange = TextAttr " onratechange=\""
+onratechange = TextAttribute " onratechange=\""
 {-# INLINE onratechange #-}
 
 
 onreset :: Builder -> Attribute
-onreset = TextAttr " onreset=\""
+onreset = TextAttribute " onreset=\""
 {-# INLINE onreset #-}
 
 
 onresize :: Builder -> Attribute
-onresize = TextAttr " onresize=\""
+onresize = TextAttribute " onresize=\""
 {-# INLINE onresize #-}
 
 
 onrejectionhandled :: Builder -> Attribute
-onrejectionhandled = TextAttr " onrejectionhandled=\""
+onrejectionhandled = TextAttribute " onrejectionhandled=\""
 {-# INLINE onrejectionhandled #-}
 
 
 onscroll :: Builder -> Attribute
-onscroll = TextAttr " onscroll=\""
+onscroll = TextAttribute " onscroll=\""
 {-# INLINE onscroll #-}
 
 
 onsecuritypolicyviolation :: Builder -> Attribute
-onsecuritypolicyviolation = TextAttr " onsecuritypolicyviolation=\""
+onsecuritypolicyviolation = TextAttribute " onsecuritypolicyviolation=\""
 {-# INLINE onsecuritypolicyviolation #-}
 
 
 onseeked :: Builder -> Attribute
-onseeked = TextAttr " onseeked=\""
+onseeked = TextAttribute " onseeked=\""
 {-# INLINE onseeked #-}
 
 
 onseeking :: Builder -> Attribute
-onseeking = TextAttr " onseeking=\""
+onseeking = TextAttribute " onseeking=\""
 {-# INLINE onseeking #-}
 
 
 onselect :: Builder -> Attribute
-onselect = TextAttr " onselect=\""
+onselect = TextAttribute " onselect=\""
 {-# INLINE onselect #-}
 
 
 onslotchange :: Builder -> Attribute
-onslotchange = TextAttr " onslotchange=\""
+onslotchange = TextAttribute " onslotchange=\""
 {-# INLINE onslotchange #-}
 
 
 onstalled :: Builder -> Attribute
-onstalled = TextAttr " onstalled=\""
+onstalled = TextAttribute " onstalled=\""
 {-# INLINE onstalled #-}
 
 
 onstorage :: Builder -> Attribute
-onstorage = TextAttr " onstorage=\""
+onstorage = TextAttribute " onstorage=\""
 {-# INLINE onstorage #-}
 
 
 onsubmit :: Builder -> Attribute
-onsubmit = TextAttr " onsubmit=\""
+onsubmit = TextAttribute " onsubmit=\""
 {-# INLINE onsubmit #-}
 
 
 onsuspend :: Builder -> Attribute
-onsuspend = TextAttr " onsuspend=\""
+onsuspend = TextAttribute " onsuspend=\""
 {-# INLINE onsuspend #-}
 
 
 ontimeupdate :: Builder -> Attribute
-ontimeupdate = TextAttr " ontimeupdate=\""
+ontimeupdate = TextAttribute " ontimeupdate=\""
 {-# INLINE ontimeupdate #-}
 
 
 ontoggle :: Builder -> Attribute
-ontoggle = TextAttr " ontoggle=\""
+ontoggle = TextAttribute " ontoggle=\""
 {-# INLINE ontoggle #-}
 
 
 onunhandledrejection :: Builder -> Attribute
-onunhandledrejection = TextAttr " onunhandledrejection=\""
+onunhandledrejection = TextAttribute " onunhandledrejection=\""
 {-# INLINE onunhandledrejection #-}
 
 
 onunload :: Builder -> Attribute
-onunload = TextAttr " onunload=\""
+onunload = TextAttribute " onunload=\""
 {-# INLINE onunload #-}
 
 
 onvolumechange :: Builder -> Attribute
-onvolumechange = TextAttr " onvolumechange=\""
+onvolumechange = TextAttribute " onvolumechange=\""
 {-# INLINE onvolumechange #-}
 
 
 onwaiting :: Builder -> Attribute
-onwaiting = TextAttr " onwaiting=\""
+onwaiting = TextAttribute " onwaiting=\""
 {-# INLINE onwaiting #-}
 
 
 onwheel :: Builder -> Attribute
-onwheel = TextAttr " onwheel=\""
+onwheel = TextAttribute " onwheel=\""
 {-# INLINE onwheel #-}

@@ -1,8 +1,9 @@
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The __Html__ module provides a set of data types and functions for generating HTML elements.
+-- | The __Html__ module provides a set of data types, typeclasses and functions for generating HTML elements.
 --
 -- These elements can be used to generate HTML documents programmatically, without relying on string concatenation or other techniques that
 -- can be error-prone and difficult to maintain.
@@ -39,8 +40,12 @@
 -- \<\/article\>
 -- @
 module Html
-    ( Html
-    , build
+    ( -- * Types
+      Html(..)
+    , Attribute(..)
+
+      -- * Classes
+    , ToBuilder(..)
 
       -- * Declarations
     , doctype
@@ -163,48 +168,88 @@ module Html
     ) where
 
 
-import Prelude ((.), Show(..))
+import Prelude ((.), Bool(..), Show(..))
 
 import Data.Foldable (foldr)
 import Data.Monoid ((<>), mempty)
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
-import Html.Attributes (Attribute)
-import Internal (Buildable(..))
+
+
+-- TYPES
 
 
 -- | Represents an HTML element.
 --
--- This data type can be used to generate HTML elements programmatically using the functions provided by the __Html__ module.
+-- This data type can be used to generate HTML elements programmatically with the functions provided in this module.
 data Html
-    = TextNode   Builder
-    | LeafNode   Builder         [Attribute]
-    | ParentNode Builder Builder [Attribute] [Html]
-    | RootNode   Builder                     [Html]
-
-
-instance Buildable Html where
-    build (TextNode   text                               ) = text
-    build (LeafNode   startTag        []                 ) = startTag <>                     singleton '>'
-    build (LeafNode   startTag        attributes         ) = startTag <> build attributes <> singleton '>'
-    build (ParentNode startTag endTag []         []      ) = startTag <>                     singleton '>' <>                   endTag
-    build (ParentNode startTag endTag attributes []      ) = startTag <> build attributes <> singleton '>' <>                   endTag
-    build (ParentNode startTag endTag []         children) = startTag <>                     singleton '>' <> build children <> endTag
-    build (ParentNode startTag endTag attributes children) = startTag <> build attributes <> singleton '>' <> build children <> endTag
-    build (RootNode   startTag                   []      ) = startTag
-    build (RootNode   startTag                   children) = startTag <>                                      build children
-
-
-instance Buildable [Html] where
-    build = foldr ((<>) . build) mempty
+    = TextNode   Builder                            -- ^ Constructs an HTML text node.
+    | LeafNode   Builder         [Attribute]        -- ^ Constructs an HTML leaf node.
+    | ParentNode Builder Builder [Attribute] [Html] -- ^ Constructs an HTML parent node.
+    | RootNode   Builder                     [Html] -- ^ Constructs an HTML root node.
 
 
 instance Show Html where
-    show = unpack . toLazyText . build
+    show = unpack . toLazyText . toBuilder
+
+
+instance ToBuilder Html where
+    toBuilder = \case
+        TextNode   text                                -> text
+        LeafNode   startTag        []                  -> startTag <>                         singleton '>'
+        LeafNode   startTag        attributes          -> startTag <> toBuilder attributes <> singleton '>'
+        ParentNode startTag endTag []         []       -> startTag <>                         singleton '>' <>                       endTag
+        ParentNode startTag endTag attributes []       -> startTag <> toBuilder attributes <> singleton '>' <>                       endTag
+        ParentNode startTag endTag []         children -> startTag <>                         singleton '>' <> toBuilder children <> endTag
+        ParentNode startTag endTag attributes children -> startTag <> toBuilder attributes <> singleton '>' <> toBuilder children <> endTag
+        RootNode   startTag                   []       -> startTag
+        RootNode   startTag                   children -> startTag <>                                          toBuilder children
 
 
 instance {-# OVERLAPPING #-} Show [Html] where
-    show = unpack . toLazyText . build
+    show = unpack . toLazyText . toBuilder
+
+
+instance ToBuilder [Html] where
+    toBuilder = foldr ((<>) . toBuilder) mempty
+    {-# INLINE toBuilder #-}
+
+
+-- | Represents an attribute on an HTML element.
+--
+-- This data type can be used to generate attributes on HTML elements programmatically with the functions provided in the "Html.Attributes"
+-- module.
+data Attribute
+    = BoolAttribute Builder Bool    -- ^ Constructs a boolean HTML attribute.
+    | TextAttribute Builder Builder -- ^ Constructs a textual HTML attribute.
+
+
+instance Show Attribute where
+    show = unpack . toLazyText . toBuilder
+
+
+instance ToBuilder Attribute where
+    toBuilder = \case
+        BoolAttribute _   False -> mempty
+        BoolAttribute key True  -> key
+        TextAttribute _   ""    -> mempty
+        TextAttribute key value -> key <> value <> singleton '"'
+
+
+instance {-# OVERLAPPING #-} Show [Attribute] where
+    show = unpack . toLazyText . toBuilder
+
+
+instance ToBuilder [Attribute] where
+    toBuilder = foldr ((<>) . toBuilder) mempty
+    {-# INLINE toBuilder #-}
+
+
+-- CLASSES
+
+
+class ToBuilder a where
+    toBuilder :: a -> Builder
 
 
 -- DECLARATIONS
@@ -1666,6 +1711,9 @@ video = ParentNode "<video" "</video>"
 wbr :: [Attribute] -> Html
 wbr = LeafNode "<wbr"
 {-# INLINE wbr #-}
+
+
+-- TEXT
 
 
 -- | Generates an HTML text node with the given contents.
