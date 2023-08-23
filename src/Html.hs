@@ -1,14 +1,74 @@
 {-# LANGUAGE FlexibleInstances #-}
-{-# LANGUAGE LambdaCase #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The __Html__ module provides a set of data types, typeclasses and functions for generating HTML elements.
+-- | The "Html" module provides a set of data types, typeclasses and functions for generating HTML elements.
 --
--- These elements can be used to generate HTML documents programmatically, without relying on string concatenation or other techniques that
--- can be error-prone and difficult to maintain.
+-- These elements along with their attributes in "Html.Attributes" can be used to generate HTML documents directly in Haskell, without
+-- relying on templating engines or other techniques that can be error-prone and difficult to maintain.
 --
--- All examples in this module assume the following imports:
+-- __Example:__
+--
+-- @
+-- Html.doctype []
+--     [ Html.html []
+--         [ Html.head []
+--             [ Html.title []
+--                 [ Html.text \"The Elder Scrolls: Skyrim Guide\" ]
+--             ]
+--         , Html.body []
+--             [ Html.h1 []
+--                 [ Html.text \"Mastering Skyrim: A Guide to Becoming the Dragonborn\" ]
+--             , Html.article []
+--                 [ Html.h2 []
+--                     [ Html.text \"Alchemy for Beginners\" ]
+--                 , Html.p []
+--                     [ Html.text \"Learn the art of potion-making and uncover rare ingredients to enhance your adventures.\" ]
+--                 ]
+--             , Html.article []
+--                 [ Html.h2 []
+--                     [ Html.text \"Battling Dragons\" ]
+--                 , Html.p []
+--                     [ Html.text \"Equip yourself with strategies and weapons to conquer fearsome dragons.\" ]
+--                 ]
+--             , Html.article []
+--                 [ Html.h2 []
+--                     [ Html.text \"Thieves Guild Secrets\" ]
+--                 , Html.p []
+--                     [ Html.text \"Join the Thieves Guild and delve into the hidden world of stealth and thievery.\" ]
+--                 ]
+--             ]
+--         ]
+--     ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<!DOCTYPE html\>
+-- \<html\>
+--     \<head\>
+--         \<title\>The Elder Scrolls: Skyrim Guide\<\/title\>
+--     \<\/head\>
+--     \<body\>
+--         \<h1\>Mastering Skyrim: A Guide to Becoming the Dragonborn\<\/h1\>
+--         \<article\>
+--             \<h2\>Alchemy for Beginners\<\/h2\>
+--             \<p\>Learn the art of potion-making and uncover rare ingredients to enhance your adventures.\<\/p\>
+--         \<\/article\>
+--         \<article\>
+--             \<h2\>Battling Dragons\<\/h2\>
+--             \<p\>Equip yourself with strategies and weapons to conquer fearsome dragons.\<\/p\>
+--         \<\/article\>
+--         \<article\>
+--             \<h2\>Thieves Guild Secrets\<\/h2\>
+--             \<p\>Join the Thieves Guild and delve into the hidden world of stealth and thievery.\<\/p\>
+--         \<\/article\>
+--     \<\/body\>
+-- \<\/html\>
+-- @
+--
+-- /Note: All examples in this module assume the following imports:/
 --
 -- @
 -- import Html (Html)
@@ -17,28 +77,7 @@
 -- import qualified Html.Attributes as Attr
 -- @
 --
--- All example results in this module are formatted neatly for readability but are condensed in practice.
---
--- ==== __Example__
---
--- @
--- Html.article
---     [ Attr.class_ \"main\" ]
---     [ Html.h1 []
---         [ Html.text \"Exploring Skyrim's Vast Open World\" ]
---     , Html.p []
---         [ Html.text \"Embark on a journey through the rugged mountains and lush forests of Skyrim.\" ]
---     ]
--- @
---
--- __Result:__
---
--- @
--- \<article class=\"main\"\>
---     \<h1\>Exploring Skyrim's Vast Open World\<\/h1\>
---     \<p\>Embark on a journey through the rugged mountains and lush forests of Skyrim.\<\/p\>
--- \<\/article\>
--- @
+-- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
 module Html
     ( -- * Types
       Html(..)
@@ -191,10 +230,11 @@ data Html
 
 instance Show Html where
     show = unpack . toLazyText . toBuilder
+    {-# INLINE show #-}
 
 
 instance ToBuilder Html where
-    toBuilder = \case
+    toBuilder html = case html of
         TextNode   text                                -> text
         LeafNode   startTag        []                  -> startTag <>                         singleton '>'
         LeafNode   startTag        attributes          -> startTag <> toBuilder attributes <> singleton '>'
@@ -208,6 +248,7 @@ instance ToBuilder Html where
 
 instance {-# OVERLAPPING #-} Show [Html] where
     show = unpack . toLazyText . toBuilder
+    {-# INLINE show #-}
 
 
 instance ToBuilder [Html] where
@@ -215,10 +256,9 @@ instance ToBuilder [Html] where
     {-# INLINE toBuilder #-}
 
 
--- | Represents an attribute on an HTML element.
+-- | Represents an HTML attribute.
 --
--- This data type can be used to generate attributes on HTML elements programmatically with the functions provided in the "Html.Attributes"
--- module.
+-- This data type can be used to generate HTML attributes programmatically with the functions provided in the "Html.Attributes" module.
 data Attribute
     = BoolAttribute Builder Bool    -- ^ Constructs a boolean HTML attribute.
     | TextAttribute Builder Builder -- ^ Constructs a textual HTML attribute.
@@ -226,10 +266,11 @@ data Attribute
 
 instance Show Attribute where
     show = unpack . toLazyText . toBuilder
+    {-# INLINE show #-}
 
 
 instance ToBuilder Attribute where
-    toBuilder = \case
+    toBuilder attribute = case attribute of
         BoolAttribute _   False -> mempty
         BoolAttribute key True  -> key
         TextAttribute _   ""    -> mempty
@@ -238,6 +279,7 @@ instance ToBuilder Attribute where
 
 instance {-# OVERLAPPING #-} Show [Attribute] where
     show = unpack . toLazyText . toBuilder
+    {-# INLINE show #-}
 
 
 instance ToBuilder [Attribute] where
@@ -248,17 +290,19 @@ instance ToBuilder [Attribute] where
 -- CLASSES
 
 
+-- | This interface enables a value to be converted to a 'Builder'.
 class ToBuilder a where
+    -- | Converts a value to a 'Builder'.
     toBuilder :: a -> Builder
 
 
 -- DECLARATIONS
 
 
--- | Generates an HTML document type declaration with the given contents.
+-- | Generates an HTML @\<!DOCTYPE\>@ declaration with the given contents.
 --
--- The __\<!DOCTYPE\>__ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers
--- and sets the standard for the document's structure.
+-- The @\<!DOCTYPE\>@ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers and
+-- sets the standard for the document's structure.
 --
 -- ==== __Example__
 --
@@ -301,10 +345,10 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ELEMENTS
 
 
--- | Generates an HTML __a__ element with the given attributes and contents.
+-- | Generates an HTML @\<a\>@ element with the given attributes and contents.
 --
--- The __\<a\>__ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the
--- clickable content that, when clicked, navigates to the specified URL.
+-- The @\<a\>@ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
+-- content that, when clicked, navigates to the specified URL.
 --
 -- ==== __Example__
 --
@@ -313,17 +357,17 @@ doctype = RootNode "<!DOCTYPE html>\n"
 --     [ Html.ul []
 --         [ Html.li []
 --             [ Html.a
---                 [ Attr.href \"\/\" ]
---                 [ Html.text \"Home\" ]
+--                 [ Attr.href \"#heroes\" ]
+--                 [ Html.text \"Valiant Adventurers\" ]
 --             , Html.a
---                 [ Attr.href \"\/episodes\" ]
---                 [ Html.text \"Episodes\" ]
+--                 [ Attr.href \"#monsters\" ]
+--                 [ Html.text \"Unspeakable Horrors\" ]
 --             , Html.a
---                 [ Attr.href \"\/characters\" ]
---                 [ Html.text \"Characters\" ]
+--                 [ Attr.href \"#trinkets\" ]
+--                 [ Html.text \"Cursed Relics\" ]
 --             , Html.a
---                 [ Attr.href \"\/merchandise\" ]
---                 [ Html.text \"Merchandise\" ]
+--                 [ Attr.href \"#strategies\" ]
+--                 [ Html.text \"Descent Tactics\" ]
 --             ]
 --         ]
 --     ]
@@ -334,10 +378,10 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- @
 -- \<nav\>
 --     \<ul\>
---         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/episodes\"\>Episodes\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/characters\"\>Characters\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/merchandise\"\>Merchandise\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"#heroes\"\>Valiant Adventurers\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"#monsters\"\>Unspeakable Horrors\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"#trinkets\"\>Cursed Relics\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"#strategies\"\>Descent Tactics\<\/a\>\<\/li\>
 --     \<\/ul\>
 -- \<\/nav\>
 -- @
@@ -346,33 +390,27 @@ a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
--- | Generates an HTML __abbr__ element with the given attributes and contents.
+-- | Generates an HTML @\<abbr\>@ element with the given attributes and contents.
 --
--- The __\<abbr\>__ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full
--- or expanded form of the abbreviation when hovered over.
+-- The @\<abbr\>@ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full or
+-- expanded form of the abbreviation when hovered over.
 --
 -- ==== __Example__
 --
 -- @
 -- Html.p []
 --     [ Html.text \"The \"
---     , Html.dfn
---         [ Attr.id \"ascii\" ]
---         [ Html.abbr
---             [ Attr.title \"American Standard Code for Information Interchange\" ]
---             [ Html.text \"ASCII\" ]
---         ]
---     , Html.text \" is a character encoding standard for electronic communication.\"
+--     , Html.abbr
+--         [ Attr.title \"Hypertext Markup Language\" ]
+--         [ Html.text \"HTML\" ]
+--     , Html.text \" standard revolutionized web development.\"
 --     ]
 -- @
 --
 -- __Result:__
 --
 -- @
--- \<p\>
---     The \<dfn id=\"ascii\"\>\<abbr title=\"American Standard Code for Information Interchange\"\>ASCII\<\/abbr\>\<\/dfn\> is a character\
---     encoding standard for electronic communication.
--- \<\/p\>
+-- \<p\>The \<abbr title=\"Hypertext Markup Language\"\>HTML\<\/abbr\> standard revolutionized web development.\<\/p\>
 -- @
 abbr :: [Attribute] -> [Html] -> Html
 abbr = ParentNode "<abbr" "</abbr>"
