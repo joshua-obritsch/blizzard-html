@@ -40,7 +40,6 @@
 -- @
 module Html
     ( Html
-    , Attribute
     , build
 
       -- * Declarations
@@ -184,14 +183,6 @@ data Html
     | RootNode   Builder                     [Html]
 
 
-instance Show Html where
-    show = unpack . toLazyText . build
-
-
-instance {-# OVERLAPPING #-} Show [Html] where
-    show = unpack . toLazyText . build
-
-
 instance Buildable Html where
     build (TextNode   text                               ) = text
     build (LeafNode   startTag        []                 ) = startTag <>                     singleton '>'
@@ -208,7 +199,21 @@ instance Buildable [Html] where
     build = foldr ((<>) . build) mempty
 
 
+instance Show Html where
+    show = unpack . toLazyText . build
+
+
+instance {-# OVERLAPPING #-} Show [Html] where
+    show = unpack . toLazyText . build
+
+
+-- DECLARATIONS
+
+
 -- | Generates an HTML document type declaration with the given contents.
+--
+-- The __\<!DOCTYPE\>__ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers
+-- and sets the standard for the document's structure.
 --
 -- ==== __Example__
 --
@@ -220,7 +225,9 @@ instance Buildable [Html] where
 --                 [ Html.text \"Gigatron\" ]
 --             ]
 --         , Html.body []
---             [ Html.p []
+--             [ Html.h1 []
+--                 [ Html.text \"About\" ]
+--             , Html.p []
 --                 [ Html.text \"Gigatron is an 8-bit microcomputer built from TTL chips.\" ]
 --             ]
 --         ]
@@ -236,6 +243,7 @@ instance Buildable [Html] where
 --         \<title\>Gigatron\<\/title\>
 --     \<\/head\>
 --     \<body\>
+--         \<h1\>About\<\/h1\>
 --         \<p\>Gigatron is an 8-bit microcomputer built from TTL chips.\<\/p\>
 --     \<\/body\>
 -- \<\/html\>
@@ -245,7 +253,13 @@ doctype = RootNode "<!DOCTYPE html>\n"
 {-# INLINE doctype #-}
 
 
+-- ELEMENTS
+
+
 -- | Generates an HTML __a__ element with the given attributes and contents.
+--
+-- The __\<a\>__ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the
+-- clickable content that, when clicked, navigates to the specified URL.
 --
 -- ==== __Example__
 --
@@ -289,6 +303,9 @@ a = ParentNode "<a" "</a>"
 
 -- | Generates an HTML __abbr__ element with the given attributes and contents.
 --
+-- The __\<abbr\>__ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full
+-- or expanded form of the abbreviation when hovered over.
+--
 -- ==== __Example__
 --
 -- @
@@ -308,7 +325,7 @@ a = ParentNode "<a" "</a>"
 --
 -- @
 -- \<p\>
---     The \<dfn id=\"ascii\"\>\<abbr title=\"American Standard Code for Information Interchange\"\>ASCII\<\/abbr\>\<\/dfn\> is a character
+--     The \<dfn id=\"ascii\"\>\<abbr title=\"American Standard Code for Information Interchange\"\>ASCII\<\/abbr\>\<\/dfn\> is a character\
 --     encoding standard for electronic communication.
 -- \<\/p\>
 -- @
@@ -318,6 +335,9 @@ abbr = ParentNode "<abbr" "</abbr>"
 
 
 -- | Generates an HTML __address__ element with the given attributes and contents.
+--
+-- The `<address>` element is used to provide contact information or author details for the nearest `<article>` or `<body>` ancestor. It
+-- typically includes information such as names, addresses, emails, or phone numbers.
 --
 -- ==== __Example__
 --
@@ -354,6 +374,9 @@ address = ParentNode "<address" "</address>"
 
 -- | Generates an HTML __area__ element with the given attributes.
 --
+-- The `<area>` element is used within a `<map>` element to define clickable areas within an image map. Each `<area>` defines a clickable
+-- region that links to a specific URL or performs an action when clicked.
+--
 -- ==== __Example__
 --
 -- @
@@ -380,6 +403,9 @@ area = LeafNode "<area"
 
 
 -- | Generates an HTML __article__ element with the given attributes and contents.
+--
+-- The `<article>` element represents a self-contained composition within a document. It encapsulates content that can be distributed or
+-- reused independently, such as news articles, blog posts, or forum entries.
 --
 -- ==== __Example__
 --
