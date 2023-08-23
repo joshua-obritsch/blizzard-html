@@ -1,6 +1,7 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
+-- | The "Html.Attributes" module provides a set of functions for generating HTML attributes.
 module Html.Attributes
     ( -- * Attributes (Excluding Event Handler Content Attributes)
       abbr
@@ -215,9 +216,8 @@ module Html.Attributes
     ) where
 
 
-import Prelude ((.), Bool(..))
+import Prelude (Bool(..))
 
-import Data.Foldable (fold)
 import Data.Text.Lazy.Builder (Builder)
 import Html (Attribute(..))
 
@@ -792,8 +792,8 @@ step = TextAttribute " step=\""
 {-# INLINE step #-}
 
 
-style :: [Builder] -> Attribute
-style = TextAttribute " style=\"" . fold
+style :: Builder -> Attribute
+style = TextAttribute " style=\""
 {-# INLINE style #-}
 
 
