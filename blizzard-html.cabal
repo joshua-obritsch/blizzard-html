@@ -5,9 +5,8 @@ bug-reports:        https://github.com/joshua-obritsch/blizzard-html/issues
 build-type:         Simple
 category:           Text
 copyright:          2021 Joshua Obritsch
-description:        An HTML generator. It functions mostly as a wrapper for
-                    blaze-markup. The syntax was inspired by Elm. I'd
-                    recommend using this with Tailwind CSS.
+description:        An HTML generator. Intended to replace the need for a
+                    templating engine in multi-page web applications.
 extra-source-files: CHANGELOG.md
 homepage:           https://github.com/joshua-obritsch/blizzard-html
 license:            MIT
