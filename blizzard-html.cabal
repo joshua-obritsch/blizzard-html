@@ -24,4 +24,5 @@ library
     default-language:   Haskell2010
     exposed-modules:    Html
                       , Html.Attributes
+                      , Html.Intl
     hs-source-dirs:     src

@@ -5,8 +5,14 @@
 
 -- | The "Html" module provides a set of data types, typeclasses and functions for generating HTML elements.
 --
--- These elements along with their attributes in "Html.Attributes" can be used to generate HTML documents directly in Haskell, without
--- relying on templating engines or other techniques that can be error-prone and difficult to maintain.
+-- These elements along with their attributes in the "Html.Attributes" module can be used to generate HTML documents directly in Haskell,
+-- without relying on templating engines or other techniques that can be error-prone and difficult to maintain.
+--
+-- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
+--
+-- = Examples
+--
+-- == HTML Elements
 --
 -- __Example:__
 --
@@ -69,13 +75,19 @@
 -- \<\/html\>
 -- @
 --
+-- == HTML Attributes
+--
+-- == HTML Internationalization
+--
 -- /Note: All examples in this module assume the following imports:/
 --
 -- @
 -- import Html (Html)
+-- import Html.Intl (translate)
 --
 -- import qualified Html
 -- import qualified Html.Attributes as Attr
+-- import qualified Html.Intl as Html
 -- @
 --
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
@@ -85,7 +97,8 @@ module Html
     , Attribute(..)
 
       -- * Classes
-    , ToBuilder(..)
+    , Buildable(..)
+    , Translatable(..)
 
       -- * Declarations
     , doctype
@@ -215,35 +228,15 @@ import Data.Monoid ((<>), mempty)
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 
-import qualified Prelude
+
+data Intl = Intl
+    { de :: Builder
+    , en :: Builder
+    }
 
 
---data Intl = Intl
-    --{ de :: Builder
-    --, en :: Builder
-    --}
-
-
---instance ToHtml Intl where
-    --toHtml = IntlNode
-
-
-class ToHtml a where
-    toHtml :: a -> Html a
-
-
-intl :: ToHtml a => a -> Html a
-intl = IntlNode
-
-
-translate :: ToHtml a => (a -> Builder) -> Html a -> Html a
-translate lang html = case html of
-    IntlNode   intl                                -> TextNode   text'                                where text'     = lang intl
-    ParentNode startTag endTag attributes children -> ParentNode startTag endTag attributes children' where children' = map children
-    RootNode   startTag                   children -> RootNode   startTag                   children' where children' = map children
-    node                                           -> node
-  where
-    map = Prelude.map (translate lang)
+instance Translatable Intl where
+    defaultLanguage = en
 
 
 -- TYPES
@@ -251,66 +244,75 @@ translate lang html = case html of
 
 -- | Represents an HTML element.
 --
--- This data type can be used to generate HTML elements programmatically with the functions provided in this module.
+-- This data type can be used to generate HTML elements programmatically with the functions provided in this module. The type constraint
+-- facilitates internationalization.
 data Html a where
-    IntlNode   :: ToHtml a => a       ->                                       Html a -- ^ Constructs a multilingual HTML text node.
-    TextNode   ::             Builder ->                                       Html a -- ^ Constructs a monolingual HTML text node.
-    LeafNode   ::             Builder ->            [Attribute] ->             Html a -- ^ Constructs an HTML leaf node.
-    ParentNode ::             Builder -> Builder -> [Attribute] -> [Html a] -> Html a -- ^ Constructs an HTML parent node.
-    RootNode   ::             Builder ->                           [Html a] -> Html a -- ^ Constructs an HTML root node.
-    {-
-    = IntlNode   Intl                               -- ^ Constructs a multilingual HTML text node.
-    | TextNode   Builder                            -- ^ Constructs a monolingual HTML text node.
-    | LeafNode   Builder         [Attribute]        -- ^ Constructs an HTML leaf node.
-    | ParentNode Builder Builder [Attribute] [Html a] -- ^ Constructs an HTML parent node.
-    | RootNode   Builder                     [Html a] -- ^ Constructs an HTML root node.
-    -}
+
+    -- | Constructs an HTML parent node.
+    ParentNode :: Builder -> Builder -> [Attribute] -> [Html a] -> Html a
+
+    -- | Constructs an HTML leaf node.
+    LeafNode :: Builder -> [Attribute] -> Html a
+
+    -- | Constructs an HTML root node.
+    RootNode :: Builder -> [Html a] -> Html a
+
+    -- | Constructs a monolingual HTML text node.
+    TextNode :: Builder -> Html a
+
+    -- | Constructs a multilingual HTML text node.
+    IntlNode :: Translatable a => a -> Html a
 
 
 instance Show (Html a) where
-    show = unpack . toLazyText . toBuilder
+    show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance ToBuilder (Html a) where
-    toBuilder html = case html of
-        IntlNode   intl                                -> ""
-        TextNode   text                                -> text
-        LeafNode   startTag        []                  -> startTag <>                         singleton '>'
-        LeafNode   startTag        attributes          -> startTag <> toBuilder attributes <> singleton '>'
-        ParentNode startTag endTag []         []       -> startTag <>                         singleton '>' <>                       endTag
-        ParentNode startTag endTag attributes []       -> startTag <> toBuilder attributes <> singleton '>' <>                       endTag
-        ParentNode startTag endTag []         children -> startTag <>                         singleton '>' <> toBuilder children <> endTag
-        ParentNode startTag endTag attributes children -> startTag <> toBuilder attributes <> singleton '>' <> toBuilder children <> endTag
+instance Buildable (Html a) where
+    build html = case html of
+        ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
+        ParentNode startTag endTag attributes []       -> startTag <> build attributes <> singleton '>' <>                   endTag
+        ParentNode startTag endTag []         children -> startTag <>                     singleton '>' <> build children <> endTag
+        ParentNode startTag endTag attributes children -> startTag <> build attributes <> singleton '>' <> build children <> endTag
+        LeafNode   startTag        []                  -> startTag <>                     singleton '>'
+        LeafNode   startTag        attributes          -> startTag <> build attributes <> singleton '>'
         RootNode   startTag                   []       -> startTag
-        RootNode   startTag                   children -> startTag <>                                          toBuilder children
+        RootNode   startTag                   children -> startTag <>                                      build children
+        TextNode   text                                -> text
+        IntlNode   intl                                -> text
+          where text = defaultLanguage intl
 
 
 instance {-# OVERLAPPING #-} Show [Html a] where
-    show = unpack . toLazyText . toBuilder
+    show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance ToBuilder [Html a] where
-    toBuilder = foldr ((<>) . toBuilder) mempty
-    {-# INLINE toBuilder #-}
+instance Buildable [Html a] where
+    build = foldr ((<>) . build) mempty
+    {-# INLINE build #-}
 
 
 -- | Represents an HTML attribute.
 --
 -- This data type can be used to generate HTML attributes programmatically with the functions provided in the "Html.Attributes" module.
-data Attribute
-    = BoolAttribute Builder Bool    -- ^ Constructs a boolean HTML attribute.
-    | TextAttribute Builder Builder -- ^ Constructs a textual HTML attribute.
+data Attribute where
+
+    -- | Constructs a boolean HTML attribute.
+    BoolAttribute :: Builder -> Bool -> Attribute
+
+    -- | Constructs a textual HTML attribute.
+    TextAttribute :: Builder -> Builder -> Attribute
 
 
 instance Show Attribute where
-    show = unpack . toLazyText . toBuilder
+    show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance ToBuilder Attribute where
-    toBuilder attribute = case attribute of
+instance Buildable Attribute where
+    build attribute = case attribute of
         BoolAttribute _   False -> mempty
         BoolAttribute key True  -> key
         TextAttribute _   ""    -> mempty
@@ -318,22 +320,28 @@ instance ToBuilder Attribute where
 
 
 instance {-# OVERLAPPING #-} Show [Attribute] where
-    show = unpack . toLazyText . toBuilder
+    show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance ToBuilder [Attribute] where
-    toBuilder = foldr ((<>) . toBuilder) mempty
-    {-# INLINE toBuilder #-}
+instance Buildable [Attribute] where
+    build = foldr ((<>) . build) mempty
+    {-# INLINE build #-}
 
 
 -- CLASSES
 
 
--- | This interface enables a value to be converted to a 'Builder'.
-class ToBuilder a where
+-- | This typeclass enables a value to be converted to a 'Builder'.
+class Buildable a where
     -- | Converts a value to a 'Builder'.
-    toBuilder :: a -> Builder
+    build :: a -> Builder
+
+
+-- | This typeclass enables the use of multilingual text nodes.
+class Translatable a where
+    -- | Sets the default language to use when building HTML without the 'Html.Intl.translate' function.
+    defaultLanguage :: a -> Builder
 
 
 -- DECLARATIONS
