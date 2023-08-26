@@ -246,30 +246,30 @@ instance Translatable Intl where
 --
 -- This data type can be used to generate HTML elements programmatically with the functions provided in this module. The type constraint
 -- facilitates internationalization.
-data Html a where
+data Html lng where
 
     -- | Constructs an HTML parent node.
-    ParentNode :: Builder -> Builder -> [Attribute] -> [Html a] -> Html a
+    ParentNode :: Builder -> Builder -> [Attribute] -> [Html lng] -> Html lng
 
     -- | Constructs an HTML leaf node.
-    LeafNode :: Builder -> [Attribute] -> Html a
+    LeafNode :: Builder -> [Attribute] -> Html lng
 
     -- | Constructs an HTML root node.
-    RootNode :: Builder -> [Html a] -> Html a
+    RootNode :: Builder -> [Html lng] -> Html lng
 
     -- | Constructs a monolingual HTML text node.
-    TextNode :: Builder -> Html a
+    TextNode :: Builder -> Html lng
 
     -- | Constructs a multilingual HTML text node.
-    IntlNode :: Translatable a => a -> Html a
+    IntlNode :: Translatable lng => lng -> Html lng
 
 
-instance Show (Html a) where
+instance Show (Html lng) where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance Buildable (Html a) where
+instance Buildable (Html lng) where
     build html = case html of
         ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
         ParentNode startTag endTag attributes []       -> startTag <> build attributes <> singleton '>' <>                   endTag
@@ -284,12 +284,12 @@ instance Buildable (Html a) where
           where text = defaultLanguage intl
 
 
-instance {-# OVERLAPPING #-} Show [Html a] where
+instance {-# OVERLAPPING #-} Show [Html lng] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
-instance Buildable [Html a] where
+instance Buildable [Html lng] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
 
@@ -385,7 +385,7 @@ class Translatable a where
 --     \<\/body\>
 -- \<\/html\>
 -- @
-doctype :: [Html a] -> Html a
+doctype :: [Html lng] -> Html lng
 doctype = RootNode "<!DOCTYPE html>\n"
 {-# INLINE doctype #-}
 
@@ -433,7 +433,7 @@ doctype = RootNode "<!DOCTYPE html>\n"
 --     \<\/ul\>
 -- \<\/nav\>
 -- @
-a :: [Attribute] -> [Html a] -> Html a
+a :: [Attribute] -> [Html lng] -> Html lng
 a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
@@ -460,7 +460,7 @@ a = ParentNode "<a" "</a>"
 -- @
 -- \<p\>The \<abbr title=\"Hypertext Markup Language\"\>HTML\<\/abbr\> standard revolutionized web development.\<\/p\>
 -- @
-abbr :: [Attribute] -> [Html a] -> Html a
+abbr :: [Attribute] -> [Html lng] -> Html lng
 abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
@@ -498,7 +498,7 @@ abbr = ParentNode "<abbr" "</abbr>"
 --     \<p\>Email: \<a href=\"mailto:info\@hegelarchives.org\"\>info\@hegelarchives.org\<\/a\>\<\/p\>
 -- \<\/address\>
 -- @
-address :: [Attribute] -> [Html a] -> Html a
+address :: [Attribute] -> [Html lng] -> Html lng
 address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
@@ -528,7 +528,7 @@ address = ParentNode "<address" "</address>"
 --     \<area alt=\"Library\" coords=\"52,36,160,240\" shape=\"rect\"\>
 -- \<\/map\>
 -- @
-area :: [Attribute] -> Html a
+area :: [Attribute] -> Html lng
 area = LeafNode "<area"
 {-# INLINE area #-}
 
@@ -567,7 +567,7 @@ area = LeafNode "<area"
 --     \<\/ul\>
 -- \<\/article\>
 -- @
-article :: [Attribute] -> [Html a] -> Html a
+article :: [Attribute] -> [Html lng] -> Html lng
 article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
@@ -593,7 +593,7 @@ article = ParentNode "<article" "</article>"
 --     \<p\>House of the Dragon is a prequel to Game of Thrones.\<\/p\>
 -- \<\/aside\>
 -- @
-aside :: [Attribute] -> [Html a] -> Html a
+aside :: [Attribute] -> [Html lng] -> Html lng
 aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
@@ -621,7 +621,7 @@ aside = ParentNode "<aside" "</aside>"
 --     Your browser does not support the audio tag.
 -- \<\/audio\>
 -- @
-audio :: [Attribute] -> [Html a] -> Html a
+audio :: [Attribute] -> [Html lng] -> Html lng
 audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
@@ -642,7 +642,7 @@ audio = ParentNode "<audio" "</audio>"
 -- __Result:__
 --
 -- > <p>Gary Gygax hands Fry his <b>+1 mace</b>.</p>
-b :: [Attribute] -> [Html a] -> Html a
+b :: [Attribute] -> [Html lng] -> Html lng
 b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
@@ -665,7 +665,7 @@ b = ParentNode "<b" "</b>"
 --     \<base href=\"https:\/\/news.ycombinator.com\"\>
 -- \<\/head\>
 -- @
-base :: [Attribute] -> Html a
+base :: [Attribute] -> Html lng
 base = LeafNode "<base"
 {-# INLINE base #-}
 
@@ -706,7 +706,7 @@ base = LeafNode "<base"
 --     \<li\>Character \<bdi\>Elfo\<\/bdi\>: Elf\<\/li\>
 -- \<\/ul\>
 -- @
-bdi :: [Attribute] -> [Html a] -> Html a
+bdi :: [Attribute] -> [Html lng] -> Html lng
 bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
@@ -724,7 +724,7 @@ bdi = ParentNode "<bdi" "</bdi>"
 -- __Result:__
 --
 -- > <bdo dir="rtl">The sun rises in the east and sets in the west.</bdo>
-bdo :: [Attribute] -> [Html a] -> Html a
+bdo :: [Attribute] -> [Html lng] -> Html lng
 bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
@@ -747,7 +747,7 @@ bdo = ParentNode "<bdo" "</bdo>"
 --     \<p\>When life gives you lemons, make lemonade.\<\/p\>
 -- \<\/blockquote\>
 -- @
-blockquote :: [Attribute] -> [Html a] -> Html a
+blockquote :: [Attribute] -> [Html lng] -> Html lng
 blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
@@ -773,7 +773,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 --     \<p\>Elm is a functional language for front-end web development.\<\/p\>
 -- \<\/body\>
 -- @
-body :: [Attribute] -> [Html a] -> Html a
+body :: [Attribute] -> [Html lng] -> Html lng
 body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
@@ -793,7 +793,7 @@ body = ParentNode "<body" "</body>"
 -- __Result:__
 --
 -- > <p>That which we call a rose<br>By any other name would smell as sweet.</p>
-br :: [Attribute] -> Html a
+br :: [Attribute] -> Html lng
 br = LeafNode "<br"
 {-# INLINE br #-}
 
@@ -811,7 +811,7 @@ br = LeafNode "<br"
 -- __Result:__
 --
 -- > <button type="submit">Log in</button>
-button :: [Attribute] -> [Html a] -> Html a
+button :: [Attribute] -> [Html lng] -> Html lng
 button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
@@ -835,7 +835,7 @@ button = ParentNode "<button" "</button>"
 --     Your browser does not support the canvas tag.
 -- \<\/canvas\>
 -- @
-canvas :: [Attribute] -> [Html a] -> Html a
+canvas :: [Attribute] -> [Html lng] -> Html lng
 canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
@@ -888,7 +888,7 @@ canvas = ParentNode "<canvas" "</canvas>"
 --     \<\/tr\>
 -- \<\/table\>
 -- @
-caption :: [Attribute] -> [Html a] -> Html a
+caption :: [Attribute] -> [Html lng] -> Html lng
 caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
@@ -909,7 +909,7 @@ caption = ParentNode "<caption" "</caption>"
 -- __Result:__
 --
 -- > <p>My favorite movie is <cite>Psycho</cite> by Alfred Hitchcock.</p>
-cite :: [Attribute] -> [Html a] -> Html a
+cite :: [Attribute] -> [Html lng] -> Html lng
 cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
@@ -930,7 +930,7 @@ cite = ParentNode "<cite" "</cite>"
 -- __Result:__
 --
 -- > <p>The <code>map</code> function is a higher-order function.</p>
-code :: [Attribute] -> [Html a] -> Html a
+code :: [Attribute] -> [Html lng] -> Html lng
 code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
@@ -1001,7 +1001,7 @@ code = ParentNode "<code" "</code>"
 --     \<\/tr\>
 -- \<\/table\>
 -- @
-col :: [Attribute] -> Html a
+col :: [Attribute] -> Html lng
 col = LeafNode "<col"
 {-# INLINE col #-}
 
@@ -1072,7 +1072,7 @@ col = LeafNode "<col"
 --     \<\/tr\>
 -- \<\/table\>
 -- @
-colgroup :: [Attribute] -> [Html a] -> Html a
+colgroup :: [Attribute] -> [Html lng] -> Html lng
 colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
@@ -1116,7 +1116,7 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 --     \<\/li\>
 -- \<\/ul\>
 -- @
-data_ :: [Attribute] -> [Html a] -> Html a
+data_ :: [Attribute] -> [Html lng] -> Html lng
 data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
@@ -1154,7 +1154,7 @@ data_ = ParentNode "<data" "</data>"
 --     \<\/datalist\>
 -- \<\/label\>
 -- @
-datalist :: [Attribute] -> [Html a] -> Html a
+datalist :: [Attribute] -> [Html lng] -> Html lng
 datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
@@ -1186,7 +1186,7 @@ datalist = ParentNode "<datalist" "</datalist>"
 --     \<dd\>Rice noodles with pork\<\/dd\>
 -- \<\/dl\>
 -- @
-dd :: [Attribute] -> [Html a] -> Html a
+dd :: [Attribute] -> [Html lng] -> Html lng
 dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
@@ -1207,7 +1207,7 @@ dd = ParentNode "<dd" "</dd>"
 -- __Result:__
 --
 -- > <p>Appointments are available on <del>Tuesdays</del>, Wednesdays and Fridays.</p>
-del :: [Attribute] -> [Html a] -> Html a
+del :: [Attribute] -> [Html lng] -> Html lng
 del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
@@ -1233,7 +1233,7 @@ del = ParentNode "<del" "</del>"
 --     \<p\>A phrasal verb combines a normal verb with either a preposition or an adverb.\<\/p\>
 -- \<\/details\>
 -- @
-details :: [Attribute] -> [Html a] -> Html a
+details :: [Attribute] -> [Html lng] -> Html lng
 details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
@@ -1253,7 +1253,7 @@ details = ParentNode "<details" "</details>"
 -- __Result:__
 --
 -- > <p><dfn>ChatGPT</dfn> is an OpenAI language model.</p>
-dfn :: [Attribute] -> [Html a] -> Html a
+dfn :: [Attribute] -> [Html lng] -> Html lng
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
@@ -1296,505 +1296,505 @@ dfn = ParentNode "<dfn" "</dfn>"
 --     \<\/dialog\>
 -- \<\/body\>
 -- @
-dialog :: [Attribute] -> [Html a] -> Html a
+dialog :: [Attribute] -> [Html lng] -> Html lng
 dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
 -- | Generates an HTML __div__ element with the given attributes and contents.
-div :: [Attribute] -> [Html a] -> Html a
+div :: [Attribute] -> [Html lng] -> Html lng
 div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
 -- | Generates an HTML __dl__ element with the given attributes and contents.
-dl :: [Attribute] -> [Html a] -> Html a
+dl :: [Attribute] -> [Html lng] -> Html lng
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
 -- | Generates an HTML __dt__ element with the given attributes and contents.
-dt :: [Attribute] -> [Html a] -> Html a
+dt :: [Attribute] -> [Html lng] -> Html lng
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
 -- | Generates an HTML __em__ element with the given attributes and contents.
-em :: [Attribute] -> [Html a] -> Html a
+em :: [Attribute] -> [Html lng] -> Html lng
 em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
 -- | Generates an HTML __embed__ element with the given attributes.
-embed :: [Attribute] -> Html a
+embed :: [Attribute] -> Html lng
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
 -- | Generates an HTML __fieldset__ element with the given attributes and contents.
-fieldset :: [Attribute] -> [Html a] -> Html a
+fieldset :: [Attribute] -> [Html lng] -> Html lng
 fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
 
 
 -- | Generates an HTML __figcaption__ element with the given attributes and contents.
-figcaption :: [Attribute] -> [Html a] -> Html a
+figcaption :: [Attribute] -> [Html lng] -> Html lng
 figcaption = ParentNode "<figcaption" "</figcaption>"
 {-# INLINE figcaption #-}
 
 
 -- | Generates an HTML __figure__ element with the given attributes and contents.
-figure :: [Attribute] -> [Html a] -> Html a
+figure :: [Attribute] -> [Html lng] -> Html lng
 figure = ParentNode "<figure" "</figure>"
 {-# INLINE figure #-}
 
 
 -- | Generates an HTML __footer__ element with the given attributes and contents.
-footer :: [Attribute] -> [Html a] -> Html a
+footer :: [Attribute] -> [Html lng] -> Html lng
 footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
 
 
 -- | Generates an HTML __form__ element with the given attributes and contents.
-form :: [Attribute] -> [Html a] -> Html a
+form :: [Attribute] -> [Html lng] -> Html lng
 form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
 
 
 -- | Generates an HTML __h1__ element with the given attributes and contents.
-h1 :: [Attribute] -> [Html a] -> Html a
+h1 :: [Attribute] -> [Html lng] -> Html lng
 h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
 
 
 -- | Generates an HTML __h2__ element with the given attributes and contents.
-h2 :: [Attribute] -> [Html a] -> Html a
+h2 :: [Attribute] -> [Html lng] -> Html lng
 h2 = ParentNode "<h2" "</h2>"
 {-# INLINE h2 #-}
 
 
 -- | Generates an HTML __h3__ element with the given attributes and contents.
-h3 :: [Attribute] -> [Html a] -> Html a
+h3 :: [Attribute] -> [Html lng] -> Html lng
 h3 = ParentNode "<h3" "</h3>"
 {-# INLINE h3 #-}
 
 
 -- | Generates an HTML __h4__ element with the given attributes and contents.
-h4 :: [Attribute] -> [Html a] -> Html a
+h4 :: [Attribute] -> [Html lng] -> Html lng
 h4 = ParentNode "<h4" "</h4>"
 {-# INLINE h4 #-}
 
 
 -- | Generates an HTML __h5__ element with the given attributes and contents.
-h5 :: [Attribute] -> [Html a] -> Html a
+h5 :: [Attribute] -> [Html lng] -> Html lng
 h5 = ParentNode "<h5" "</h5>"
 {-# INLINE h5 #-}
 
 
 -- | Generates an HTML __h6__ element with the given attributes and contents.
-h6 :: [Attribute] -> [Html a] -> Html a
+h6 :: [Attribute] -> [Html lng] -> Html lng
 h6 = ParentNode "<h6" "</h6>"
 {-# INLINE h6 #-}
 
 
 -- | Generates an HTML __head__ element with the given attributes and contents.
-head :: [Attribute] -> [Html a] -> Html a
+head :: [Attribute] -> [Html lng] -> Html lng
 head = ParentNode "<head" "</head>"
 {-# INLINE head #-}
 
 
 -- | Generates an HTML __header__ element with the given attributes and contents.
-header :: [Attribute] -> [Html a] -> Html a
+header :: [Attribute] -> [Html lng] -> Html lng
 header = ParentNode "<header" "</header>"
 {-# INLINE header #-}
 
 
 -- | Generates an HTML __hgroup__ element with the given attributes and contents.
-hgroup :: [Attribute] -> [Html a] -> Html a
+hgroup :: [Attribute] -> [Html lng] -> Html lng
 hgroup = ParentNode "<hgroup" "</hgroup>"
 {-# INLINE hgroup #-}
 
 
 -- | Generates an HTML __hr__ element with the given attributes.
-hr :: [Attribute] -> Html a
+hr :: [Attribute] -> Html lng
 hr = LeafNode "<hr"
 {-# INLINE hr #-}
 
 
 -- | Generates an HTML __html__ element with the given attributes and contents.
-html :: [Attribute] -> [Html a] -> Html a
+html :: [Attribute] -> [Html lng] -> Html lng
 html = ParentNode "<html" "</html>"
 {-# INLINE html #-}
 
 
 -- | Generates an HTML __i__ element with the given attributes and contents.
-i :: [Attribute] -> [Html a] -> Html a
+i :: [Attribute] -> [Html lng] -> Html lng
 i = ParentNode "<i" "</i>"
 {-# INLINE i #-}
 
 
 -- | Generates an HTML __iframe__ element with the given attributes and contents.
-iframe :: [Attribute] -> [Html a] -> Html a
+iframe :: [Attribute] -> [Html lng] -> Html lng
 iframe = ParentNode "<iframe" "</iframe>"
 {-# INLINE iframe #-}
 
 
 -- | Generates an HTML __img__ element with the given attributes.
-img :: [Attribute] -> Html a
+img :: [Attribute] -> Html lng
 img = LeafNode "<img"
 {-# INLINE img #-}
 
 
 -- | Generates an HTML __input__ element with the given attributes.
-input :: [Attribute] -> Html a
+input :: [Attribute] -> Html lng
 input = LeafNode "<input"
 {-# INLINE input #-}
 
 
 -- | Generates an HTML __ins__ element with the given attributes and contents.
-ins :: [Attribute] -> [Html a] -> Html a
+ins :: [Attribute] -> [Html lng] -> Html lng
 ins = ParentNode "<ins" "</ins>"
 {-# INLINE ins #-}
 
 
 -- | Generates an HTML __kbd__ element with the given attributes and contents.
-kbd :: [Attribute] -> [Html a] -> Html a
+kbd :: [Attribute] -> [Html lng] -> Html lng
 kbd = ParentNode "<kbd" "</kbd>"
 {-# INLINE kbd #-}
 
 
 -- | Generates an HTML __label__ element with the given attributes and contents.
-label :: [Attribute] -> [Html a] -> Html a
+label :: [Attribute] -> [Html lng] -> Html lng
 label = ParentNode "<label" "</label>"
 {-# INLINE label #-}
 
 
 -- | Generates an HTML __legend__ element with the given attributes and contents.
-legend :: [Attribute] -> [Html a] -> Html a
+legend :: [Attribute] -> [Html lng] -> Html lng
 legend = ParentNode "<legend" "</legend>"
 {-# INLINE legend #-}
 
 
 -- | Generates an HTML __li__ element with the given attributes and contents.
-li :: [Attribute] -> [Html a] -> Html a
+li :: [Attribute] -> [Html lng] -> Html lng
 li = ParentNode "<li" "</li>"
 {-# INLINE li #-}
 
 
 -- | Generates an HTML __link__ element with the given attributes.
-link :: [Attribute] -> Html a
+link :: [Attribute] -> Html lng
 link = LeafNode "<link"
 {-# INLINE link #-}
 
 
 -- | Generates an HTML __main__ element with the given attributes and contents.
-main :: [Attribute] -> [Html a] -> Html a
+main :: [Attribute] -> [Html lng] -> Html lng
 main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
 
 
 -- | Generates an HTML __map__ element with the given attributes and contents.
-map :: [Attribute] -> [Html a] -> Html a
+map :: [Attribute] -> [Html lng] -> Html lng
 map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
 
 
 -- | Generates an HTML __mark__ element with the given attributes and contents.
-mark :: [Attribute] -> [Html a] -> Html a
+mark :: [Attribute] -> [Html lng] -> Html lng
 mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
 
 
 -- | Generates an HTML __menu__ element with the given attributes and contents.
-menu :: [Attribute] -> [Html a] -> Html a
+menu :: [Attribute] -> [Html lng] -> Html lng
 menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
 
 
 -- | Generates an HTML __meta__ element with the given attributes.
-meta :: [Attribute] -> Html a
+meta :: [Attribute] -> Html lng
 meta = LeafNode "<meta"
 {-# INLINE meta #-}
 
 
 -- | Generates an HTML __meter__ element with the given attributes and contents.
-meter :: [Attribute] -> [Html a] -> Html a
+meter :: [Attribute] -> [Html lng] -> Html lng
 meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
 
 
 -- | Generates an HTML __nav__ element with the given attributes and contents.
-nav :: [Attribute] -> [Html a] -> Html a
+nav :: [Attribute] -> [Html lng] -> Html lng
 nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
 
 
 -- | Generates an HTML __noscript__ element with the given attributes and contents.
-noscript :: [Attribute] -> [Html a] -> Html a
+noscript :: [Attribute] -> [Html lng] -> Html lng
 noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
 
 
 -- | Generates an HTML __object__ element with the given attributes and contents.
-object :: [Attribute] -> [Html a] -> Html a
+object :: [Attribute] -> [Html lng] -> Html lng
 object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
 
 
 -- | Generates an HTML __ol__ element with the given attributes and contents.
-ol :: [Attribute] -> [Html a] -> Html a
+ol :: [Attribute] -> [Html lng] -> Html lng
 ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
 
 
 -- | Generates an HTML __optgroup__ element with the given attributes and contents.
-optgroup :: [Attribute] -> [Html a] -> Html a
+optgroup :: [Attribute] -> [Html lng] -> Html lng
 optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
 
 
 -- | Generates an HTML __option__ element with the given attributes and contents.
-option :: [Attribute] -> [Html a] -> Html a
+option :: [Attribute] -> [Html lng] -> Html lng
 option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
 
 
 -- | Generates an HTML __output__ element with the given attributes and contents.
-output :: [Attribute] -> [Html a] -> Html a
+output :: [Attribute] -> [Html lng] -> Html lng
 output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
 
 
 -- | Generates an HTML __p__ element with the given attributes and contents.
-p :: [Attribute] -> [Html a] -> Html a
+p :: [Attribute] -> [Html lng] -> Html lng
 p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
 
 
 -- | Generates an HTML __picture__ element with the given attributes and contents.
-picture :: [Attribute] -> [Html a] -> Html a
+picture :: [Attribute] -> [Html lng] -> Html lng
 picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
 
 
 -- | Generates an HTML __pre__ element with the given attributes and contents.
-pre :: [Attribute] -> [Html a] -> Html a
+pre :: [Attribute] -> [Html lng] -> Html lng
 pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
 
 
 -- | Generates an HTML __progress__ element with the given attributes and contents.
-progress :: [Attribute] -> [Html a] -> Html a
+progress :: [Attribute] -> [Html lng] -> Html lng
 progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
 
 
 -- | Generates an HTML __q__ element with the given attributes and contents.
-q :: [Attribute] -> [Html a] -> Html a
+q :: [Attribute] -> [Html lng] -> Html lng
 q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
 
 
 -- | Generates an HTML __rp__ element with the given attributes and contents.
-rp :: [Attribute] -> [Html a] -> Html a
+rp :: [Attribute] -> [Html lng] -> Html lng
 rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
 
 
 -- | Generates an HTML __rt__ element with the given attributes and contents.
-rt :: [Attribute] -> [Html a] -> Html a
+rt :: [Attribute] -> [Html lng] -> Html lng
 rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
 
 
 -- | Generates an HTML __ruby__ element with the given attributes and contents.
-ruby :: [Attribute] -> [Html a] -> Html a
+ruby :: [Attribute] -> [Html lng] -> Html lng
 ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
 
 
 -- | Generates an HTML __s__ element with the given attributes and contents.
-s :: [Attribute] -> [Html a] -> Html a
+s :: [Attribute] -> [Html lng] -> Html lng
 s = ParentNode "<s" "</s>"
 {-# INLINE s #-}
 
 
 -- | Generates an HTML __samp__ element with the given attributes and contents.
-samp :: [Attribute] -> [Html a] -> Html a
+samp :: [Attribute] -> [Html lng] -> Html lng
 samp = ParentNode "<samp" "</samp>"
 {-# INLINE samp #-}
 
 
 -- | Generates an HTML __script__ element with the given attributes and contents.
-script :: [Attribute] -> [Html a] -> Html a
+script :: [Attribute] -> [Html lng] -> Html lng
 script = ParentNode "<script" "</script>"
 {-# INLINE script #-}
 
 
 -- | Generates an HTML __section__ element with the given attributes and contents.
-section :: [Attribute] -> [Html a] -> Html a
+section :: [Attribute] -> [Html lng] -> Html lng
 section = ParentNode "<section" "</section>"
 {-# INLINE section #-}
 
 
 -- | Generates an HTML __select__ element with the given attributes and contents.
-select :: [Attribute] -> [Html a] -> Html a
+select :: [Attribute] -> [Html lng] -> Html lng
 select = ParentNode "<select" "</select>"
 {-# INLINE select #-}
 
 
 -- | Generates an HTML __slot__ element with the given attributes and contents.
-slot :: [Attribute] -> [Html a] -> Html a
+slot :: [Attribute] -> [Html lng] -> Html lng
 slot = ParentNode "<slot" "</slot>"
 {-# INLINE slot #-}
 
 
 -- | Generates an HTML __small__ element with the given attributes and contents.
-small :: [Attribute] -> [Html a] -> Html a
+small :: [Attribute] -> [Html lng] -> Html lng
 small = ParentNode "<small" "</small>"
 {-# INLINE small #-}
 
 
 -- | Generates an HTML __source__ element with the given attributes.
-source :: [Attribute] -> Html a
+source :: [Attribute] -> Html lng
 source = LeafNode "<source"
 {-# INLINE source #-}
 
 
 -- | Generates an HTML __span__ element with the given attributes and contents.
-span :: [Attribute] -> [Html a] -> Html a
+span :: [Attribute] -> [Html lng] -> Html lng
 span = ParentNode "<span" "</span>"
 {-# INLINE span #-}
 
 
 -- | Generates an HTML __strong__ element with the given attributes and contents.
-strong :: [Attribute] -> [Html a] -> Html a
+strong :: [Attribute] -> [Html lng] -> Html lng
 strong = ParentNode "<strong" "</strong>"
 {-# INLINE strong #-}
 
 
 -- | Generates an HTML __style__ element with the given attributes and contents.
-style :: [Attribute] -> [Html a] -> Html a
+style :: [Attribute] -> [Html lng] -> Html lng
 style = ParentNode "<style" "</style>"
 {-# INLINE style #-}
 
 
 -- | Generates an HTML __sub__ element with the given attributes and contents.
-sub :: [Attribute] -> [Html a] -> Html a
+sub :: [Attribute] -> [Html lng] -> Html lng
 sub = ParentNode "<sub" "</sub>"
 {-# INLINE sub #-}
 
 
 -- | Generates an HTML __summary__ element with the given attributes and contents.
-summary :: [Attribute] -> [Html a] -> Html a
+summary :: [Attribute] -> [Html lng] -> Html lng
 summary = ParentNode "<summary" "</summary>"
 {-# INLINE summary #-}
 
 
 -- | Generates an HTML __sup__ element with the given attributes and contents.
-sup :: [Attribute] -> [Html a] -> Html a
+sup :: [Attribute] -> [Html lng] -> Html lng
 sup = ParentNode "<sup" "</sup>"
 {-# INLINE sup #-}
 
 
 -- | Generates an HTML __table__ element with the given attributes and contents.
-table :: [Attribute] -> [Html a] -> Html a
+table :: [Attribute] -> [Html lng] -> Html lng
 table = ParentNode "<table" "</table>"
 {-# INLINE table #-}
 
 
 -- | Generates an HTML __tbody__ element with the given attributes and contents.
-tbody :: [Attribute] -> [Html a] -> Html a
+tbody :: [Attribute] -> [Html lng] -> Html lng
 tbody = ParentNode "<tbody" "</tbody>"
 {-# INLINE tbody #-}
 
 
 -- | Generates an HTML __td__ element with the given attributes and contents.
-td :: [Attribute] -> [Html a] -> Html a
+td :: [Attribute] -> [Html lng] -> Html lng
 td = ParentNode "<td" "</td>"
 {-# INLINE td #-}
 
 
 -- | Generates an HTML __template__ element with the given attributes and contents.
-template :: [Attribute] -> [Html a] -> Html a
+template :: [Attribute] -> [Html lng] -> Html lng
 template = ParentNode "<template" "</template>"
 {-# INLINE template #-}
 
 
 -- | Generates an HTML __textarea__ element with the given attributes and contents.
-textarea :: [Attribute] -> [Html a] -> Html a
+textarea :: [Attribute] -> [Html lng] -> Html lng
 textarea = ParentNode "<textarea" "</textarea>"
 {-# INLINE textarea #-}
 
 
 -- | Generates an HTML __tfoot__ element with the given attributes and contents.
-tfoot :: [Attribute] -> [Html a] -> Html a
+tfoot :: [Attribute] -> [Html lng] -> Html lng
 tfoot = ParentNode "<tfoot" "</tfoot>"
 {-# INLINE tfoot #-}
 
 
 -- | Generates an HTML __th__ element with the given attributes and contents.
-th :: [Attribute] -> [Html a] -> Html a
+th :: [Attribute] -> [Html lng] -> Html lng
 th = ParentNode "<th" "</th>"
 {-# INLINE th #-}
 
 
 -- | Generates an HTML __thead__ element with the given attributes and contents.
-thead :: [Attribute] -> [Html a] -> Html a
+thead :: [Attribute] -> [Html lng] -> Html lng
 thead = ParentNode "<thead" "</thead>"
 {-# INLINE thead #-}
 
 
 -- | Generates an HTML __time__ element with the given attributes and contents.
-time :: [Attribute] -> [Html a] -> Html a
+time :: [Attribute] -> [Html lng] -> Html lng
 time = ParentNode "<time" "</time>"
 {-# INLINE time #-}
 
 
 -- | Generates an HTML __title__ element with the given attributes and contents.
-title :: [Attribute] -> [Html a] -> Html a
+title :: [Attribute] -> [Html lng] -> Html lng
 title = ParentNode "<title" "</title>"
 {-# INLINE title #-}
 
 
 -- | Generates an HTML __tr__ element with the given attributes and contents.
-tr :: [Attribute] -> [Html a] -> Html a
+tr :: [Attribute] -> [Html lng] -> Html lng
 tr = ParentNode "<tr" "</tr>"
 {-# INLINE tr #-}
 
 
 -- | Generates an HTML __track__ element with the given attributes.
-track :: [Attribute] -> Html a
+track :: [Attribute] -> Html lng
 track = LeafNode "<track"
 {-# INLINE track #-}
 
 
 -- | Generates an HTML __u__ element with the given attributes and contents.
-u :: [Attribute] -> [Html a] -> Html a
+u :: [Attribute] -> [Html lng] -> Html lng
 u = ParentNode "<u" "</u>"
 {-# INLINE u #-}
 
 
 -- | Generates an HTML __ul__ element with the given attributes and contents.
-ul :: [Attribute] -> [Html a] -> Html a
+ul :: [Attribute] -> [Html lng] -> Html lng
 ul = ParentNode "<ul" "</ul>"
 {-# INLINE ul #-}
 
 
 -- | Generates an HTML __var__ element with the given attributes and contents.
-var :: [Attribute] -> [Html a] -> Html a
+var :: [Attribute] -> [Html lng] -> Html lng
 var = ParentNode "<var" "</var>"
 {-# INLINE var #-}
 
 
 -- | Generates an HTML __video__ element with the given attributes and contents.
-video :: [Attribute] -> [Html a] -> Html a
+video :: [Attribute] -> [Html lng] -> Html lng
 video = ParentNode "<video" "</video>"
 {-# INLINE video #-}
 
 
 -- | Generates an HTML __wbr__ element with the given attributes.
-wbr :: [Attribute] -> Html a
+wbr :: [Attribute] -> Html lng
 wbr = LeafNode "<wbr"
 {-# INLINE wbr #-}
 
@@ -1803,6 +1803,6 @@ wbr = LeafNode "<wbr"
 
 
 -- | Generates an HTML text node with the given contents.
-text :: Builder -> Html a
+text :: Builder -> Html lng
 text = TextNode
 {-# INLINE text #-}
