@@ -3,14 +3,16 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The "Html" module provides a set of data types, typeclasses and functions for generating HTML elements.
+-- | The "Html" module provides a set of types, classes and functions for generating HTML elements.
 --
 -- These elements along with their attributes in the "Html.Attributes" module can be used to dynamically compose HTML documents natively in
 -- Haskell, without relying on templating engines or other techniques that can be error-prone and difficult to maintain.
 --
 -- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
 --
--- __Example:__
+-- === __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.doctype []
@@ -45,7 +47,7 @@
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<!DOCTYPE html\>
@@ -87,10 +89,6 @@ module Html
       -- * Classes
     , Buildable(..)
     , Translatable(..)
-
-      -- * Operators
-    , (<|)
-    , (|>)
 
       -- * Declarations
     , doctype
@@ -214,13 +212,13 @@ module Html
     ) where
 
 
-import Prelude ((.), Bool(..), Show(..))
-
+import Data.Bool (Bool(..))
 import Data.Foldable (foldr)
-import Data.Function (($), (&))
+import Data.Function (($), (.))
 import Data.Monoid ((<>), mempty)
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
+import Text.Show (Show(..), showString)
 
 
 data Intl = Intl
@@ -252,20 +250,20 @@ data Html lng where
     -- | Constructs an HTML root node.
     RootNode :: Builder -> [Html lng] -> Html lng
 
-    -- | Constructs a multilingual HTML text node.
-    IntlNode :: Translatable lng => lng -> Html lng
-
     -- | Constructs a monolingual HTML text node.
     TextNode :: Builder -> Html lng
 
+    -- | Constructs a multilingual HTML text node.
+    IntlNode :: Translatable lng => lng -> Html lng
 
--- | Enables conversion of 'Html' to 'Data.String.String'.
+
+-- | Enables conversion of 'Html.Html' to 'Data.String.String'.
 instance Show (Html lng) where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of 'Html' to 'Data.Text.Lazy.Builder.Builder'.
+-- | Enables conversion of 'Html.Html' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable (Html lng) where
     build html = case html of
         ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
@@ -276,17 +274,18 @@ instance Buildable (Html lng) where
         LeafNode   startTag        attributes          -> startTag <> build attributes <> singleton '>'
         RootNode   startTag                   []       -> startTag
         RootNode   startTag                   children -> startTag <>                                      build children
-        IntlNode   intlText                            -> intlText |> defaultLanguage
         TextNode   text                                -> text
+        IntlNode   intl                                -> text
+          where text = defaultLanguage intl
 
 
--- | Enables conversion of ['Html'] to 'Data.String.String'.
+-- | Enables conversion of ['Html.Html'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Html lng] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of ['Html'] to 'Data.Text.Lazy.Builder.Builder'.
+-- | Enables conversion of ['Html.Html'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Html lng] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -304,13 +303,13 @@ data Attribute where
     TextAttribute :: Builder -> Builder -> Attribute
 
 
--- | Enables conversion of 'Html' to 'Data.String.String'.
+-- | Enables conversion of 'Html.Attribute' to 'Data.String.String'.
 instance Show Attribute where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of 'Html' to 'Data.Text.Lazy.Builder.Builder'.
+-- | Enables conversion of 'Html.Attribute' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable Attribute where
     build attribute = case attribute of
         BoolAttribute _   False -> mempty
@@ -319,13 +318,13 @@ instance Buildable Attribute where
         TextAttribute key value -> key <> value <> singleton '"'
 
 
--- | Enables conversion of ['Html'] to 'Data.String.String'.
+-- | Enables conversion of ['Html.Attribute'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Attribute] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of ['Html'] to 'Data.Text.Lazy.Builder.Builder'.
+-- | Enables conversion of ['Html.Attribute'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Attribute] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -340,17 +339,13 @@ class Buildable a where
     build :: a -> Builder
 
 
--- | Enables the use of multilingual text nodes.
+-- | Enables the use of multilingual text nodes with 'Html.Html'.
+--
+-- A default language must be set to ensure proper conversion of 'Html.Html' to 'Data.Text.Lazy.Builder.Builder' and 'Data.String.String'
+-- when generated without the use of 'Html.Intl.translate'.
 class Translatable a where
-    -- | Sets the default language to use when building HTML without the 'Html.Intl.translate' function.
+    -- | Sets the default language to use for internationalization with 'Html.Html'.
     defaultLanguage :: a -> Builder
-
-
--- OPERATORS
-
-
-(<|) = ($)
-(|>) = (&)
 
 
 -- DECLARATIONS
@@ -362,6 +357,8 @@ class Translatable a where
 -- sets the standard for the document's structure.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.doctype
@@ -380,7 +377,7 @@ class Translatable a where
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<!DOCTYPE html\>
@@ -402,12 +399,14 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ELEMENTS
 
 
--- | Generates an HTML @\<a\>@ element with the given attributes and contents.
+-- | Generates an HTML /\<a\>/ element with the given attributes and contents.
 --
--- The @\<a\>@ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
+-- The /\<a\>/ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
 -- content that, when clicked, navigates to the specified URL.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.nav []
@@ -447,12 +446,14 @@ a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
--- | Generates an HTML @\<abbr\>@ element with the given attributes and contents.
+-- | Generates an HTML /\<abbr\>/ element with the given attributes and contents.
 --
--- The @\<abbr\>@ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full or
+-- The /\<abbr\>/ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full or
 -- expanded form of the abbreviation when hovered over.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -474,12 +475,14 @@ abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
 
--- | Generates an HTML @\<address\>@ element with the given attributes and contents.
+-- | Generates an HTML /\<address\>/ element with the given attributes and contents.
 --
--- The @\<address\>@ element is used to provide contact information or author details for the nearest @\<article\>@ or @\<body\>@ ancestor.
+-- The /\<address\>/ element is used to provide contact information or author details for the nearest /\<article\>/ or /\<body\>/ ancestor.
 -- It typically includes information such as names, addresses, emails, or phone numbers.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.address []
@@ -512,10 +515,10 @@ address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
 
--- | Generates an HTML @\<area\>@ element with the given attributes.
+-- | Generates an HTML /\<area\>/ element with the given attributes.
 --
--- The @\<area\>@ element is used within a `<map>` element to define clickable areas within an image map. Each `<area>` defines a clickable
--- region that links to a specific URL or performs an action when clicked.
+-- The /\<area\>/ element is used within a /\<map\>/ element to define clickable areas within an image map. Each /\<area\>/ defines a
+-- clickable region that links to a specific URL or performs an action when clicked.
 --
 -- ==== __Example__
 --
@@ -542,9 +545,9 @@ area = LeafNode "<area"
 {-# INLINE area #-}
 
 
--- | Generates an HTML __article__ element with the given attributes and contents.
+-- | Generates an HTML /\<article\>/ element with the given attributes and contents.
 --
--- The `<article>` element represents a self-contained composition within a document. It encapsulates content that can be distributed or
+-- The /\<article\>/ element represents a self-contained composition within a document. It encapsulates content that can be distributed or
 -- reused independently, such as news articles, blog posts, or forum entries.
 --
 -- ==== __Example__
@@ -581,7 +584,7 @@ article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
 
--- | Generates an HTML __aside__ element with the given attributes and contents.
+-- | Generates an HTML /\<aside\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -607,7 +610,7 @@ aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
 
--- | Generates an HTML __audio__ element with the given attributes and contents.
+-- | Generates an HTML /\<audio\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -635,7 +638,7 @@ audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
 
--- | Generates an HTML __b__ element with the given attributes and contents.
+-- | Generates an HTML /\<b\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -656,7 +659,7 @@ b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
 
--- | Generates an HTML __base__ element with the given attributes.
+-- | Generates an HTML /\<base\>/ element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -679,7 +682,7 @@ base = LeafNode "<base"
 {-# INLINE base #-}
 
 
--- | Generates an HTML __bdi__ element with the given attributes and contents.
+-- | Generates an HTML /\<bdi\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -720,7 +723,7 @@ bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
 
--- | Generates an HTML __bdo__ element with the given attributes and contents.
+-- | Generates an HTML /\<bdo\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -738,7 +741,7 @@ bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
 
--- | Generates an HTML __blockquote__ element with the given attributes and contents.
+-- | Generates an HTML /\<blockquote\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -761,7 +764,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
 
--- | Generates an HTML __body__ element with the given attributes and contents.
+-- | Generates an HTML /\<body\>/ element with the given attributes and contents.
 --
 -- ==== __Example__
 --
@@ -787,7 +790,7 @@ body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
 
--- | Generates an HTML __br__ element with the given attributes.
+-- | Generates an HTML /\<br\>/ element with the given attributes.
 --
 -- ==== __Example__
 --
@@ -1811,13 +1814,75 @@ wbr = LeafNode "<wbr"
 -- TEXT
 
 
--- | Generates an HTML text node with the given contents.
+-- | Generates a monolingual HTML text node with the given contents.
+--
+-- See 'Html.Intl.intl' for multilingual text nodes.
 text :: Builder -> Html lng
 text = TextNode
 {-# INLINE text #-}
 
 
 -- | Generates an empty HTML text node.
+--
+-- Intended to be used in /if-else expressions/ to generate nothing when the given condition is met.
+--
+-- ==== __Example__
+--
+-- __Input:__
+--
+-- @
+-- Html.nav []
+--     Html.ul []
+--         [ Html.li []
+--             [ Html.a
+--                 [ Attr.href \"\/\" ]
+--                 [ Html.text \"Home\" ]
+--             , Html.a
+--                 [ Attr.href \"\/about\" ]
+--                 [ Html.text \"About\" ]
+--             , if isLoggedIn then
+--                 Html.a
+--                     [ Attr.href \"\/profile\" ]
+--                     [ Html.text \"Profile\" ]
+--               else
+--                 Html.empty
+--             , if isLoggedIn then
+--                 Html.a
+--                     [ Attr.href \"\/log-out\" ]
+--                     [ Html.text \"Log out\" ]
+--               else
+--                 Html.a
+--                     [ Attr.href \"\/log-in\" ]
+--                     [ Html.text \"Log in\" ]
+--             ]
+--         ]
+--     ]
+-- @
+--
+-- __Output__ (when /isLoggedIn/ is /True/)__:__
+--
+-- @
+-- \<nav\>
+--     \<ul\>
+--         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/about\"\>About\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/profile\"\>Profile\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/log-out\"\>Log out\<\/a\>\<\/li\>
+--     \<\/ul\>
+-- \<\/nav\>
+-- @
+--
+-- __Output__ (when /isLoggedIn/ is /False/)__:__
+--
+-- @
+-- \<nav\>
+--     \<ul\>
+--         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/about\"\>About\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\/log-in\"\>Log in\<\/a\>\<\/li\>
+--     \<\/ul\>
+-- \<\/nav\>
+-- @
 empty :: Html lng
 empty = TextNode ""
 {-# INLINE empty #-}
