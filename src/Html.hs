@@ -5,14 +5,10 @@
 
 -- | The "Html" module provides a set of data types, typeclasses and functions for generating HTML elements.
 --
--- These elements along with their attributes in the "Html.Attributes" module can be used to generate HTML documents directly in Haskell,
--- without relying on templating engines or other techniques that can be error-prone and difficult to maintain.
+-- These elements along with their attributes in the "Html.Attributes" module can be used to dynamically compose HTML documents natively in
+-- Haskell, without relying on templating engines or other techniques that can be error-prone and difficult to maintain.
 --
 -- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
---
--- = Examples
---
--- == HTML Elements
 --
 -- __Example:__
 --
@@ -75,19 +71,11 @@
 -- \<\/html\>
 -- @
 --
--- == HTML Attributes
---
--- == HTML Internationalization
---
 -- /Note: All examples in this module assume the following imports:/
 --
 -- @
--- import Html (Html)
--- import Html.Intl (translate)
---
 -- import qualified Html
 -- import qualified Html.Attributes as Attr
--- import qualified Html.Intl as Html
 -- @
 --
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
@@ -99,6 +87,10 @@ module Html
       -- * Classes
     , Buildable(..)
     , Translatable(..)
+
+      -- * Operators
+    , (<|)
+    , (|>)
 
       -- * Declarations
     , doctype
@@ -218,12 +210,14 @@ module Html
 
       -- * Text
     , text
+    , empty
     ) where
 
 
 import Prelude ((.), Bool(..), Show(..))
 
 import Data.Foldable (foldr)
+import Data.Function (($), (&))
 import Data.Monoid ((<>), mempty)
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
@@ -244,8 +238,9 @@ instance Translatable Intl where
 
 -- | Represents an HTML element.
 --
--- This data type can be used to generate HTML elements programmatically with the functions provided in this module. The type constraint
--- facilitates internationalization.
+-- This data type can be used to generate HTML elements programmatically with the functions provided in the "Html" module.
+--
+-- The type variable /lng/ stands for /language/ and is intended to facilitate internationalization.
 data Html lng where
 
     -- | Constructs an HTML parent node.
@@ -257,18 +252,20 @@ data Html lng where
     -- | Constructs an HTML root node.
     RootNode :: Builder -> [Html lng] -> Html lng
 
-    -- | Constructs a monolingual HTML text node.
-    TextNode :: Builder -> Html lng
-
     -- | Constructs a multilingual HTML text node.
     IntlNode :: Translatable lng => lng -> Html lng
 
+    -- | Constructs a monolingual HTML text node.
+    TextNode :: Builder -> Html lng
 
+
+-- | Enables conversion of 'Html' to 'Data.String.String'.
 instance Show (Html lng) where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
+-- | Enables conversion of 'Html' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable (Html lng) where
     build html = case html of
         ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
@@ -279,16 +276,17 @@ instance Buildable (Html lng) where
         LeafNode   startTag        attributes          -> startTag <> build attributes <> singleton '>'
         RootNode   startTag                   []       -> startTag
         RootNode   startTag                   children -> startTag <>                                      build children
+        IntlNode   intlText                            -> intlText |> defaultLanguage
         TextNode   text                                -> text
-        IntlNode   intl                                -> text
-          where text = defaultLanguage intl
 
 
+-- | Enables conversion of ['Html'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Html lng] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
+-- | Enables conversion of ['Html'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Html lng] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -306,11 +304,13 @@ data Attribute where
     TextAttribute :: Builder -> Builder -> Attribute
 
 
+-- | Enables conversion of 'Html' to 'Data.String.String'.
 instance Show Attribute where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
+-- | Enables conversion of 'Html' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable Attribute where
     build attribute = case attribute of
         BoolAttribute _   False -> mempty
@@ -319,11 +319,13 @@ instance Buildable Attribute where
         TextAttribute key value -> key <> value <> singleton '"'
 
 
+-- | Enables conversion of ['Html'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Attribute] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
+-- | Enables conversion of ['Html'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Attribute] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -332,24 +334,31 @@ instance Buildable [Attribute] where
 -- CLASSES
 
 
--- | This typeclass enables a value to be converted to a 'Builder'.
+-- | Enables conversion to 'Data.Text.Lazy.Builder.Builder'.
 class Buildable a where
-    -- | Converts a value to a 'Builder'.
+    -- | Converts to 'Data.Text.Lazy.Builder.Builder'.
     build :: a -> Builder
 
 
--- | This typeclass enables the use of multilingual text nodes.
+-- | Enables the use of multilingual text nodes.
 class Translatable a where
     -- | Sets the default language to use when building HTML without the 'Html.Intl.translate' function.
     defaultLanguage :: a -> Builder
 
 
+-- OPERATORS
+
+
+(<|) = ($)
+(|>) = (&)
+
+
 -- DECLARATIONS
 
 
--- | Generates an HTML @\<!DOCTYPE\>@ declaration with the given contents.
+-- | Generates an HTML /\<!DOCTYPE\>/ declaration with the given contents.
 --
--- The @\<!DOCTYPE\>@ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers and
+-- The /\<!DOCTYPE\>/ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers and
 -- sets the standard for the document's structure.
 --
 -- ==== __Example__
@@ -1806,3 +1815,9 @@ wbr = LeafNode "<wbr"
 text :: Builder -> Html lng
 text = TextNode
 {-# INLINE text #-}
+
+
+-- | Generates an empty HTML text node.
+empty :: Html lng
+empty = TextNode ""
+{-# INLINE empty #-}

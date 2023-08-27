@@ -2,6 +2,114 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | The "Html.Attributes" module provides a set of functions for generating HTML attributes.
+--
+-- __Example:__
+--
+-- @
+-- Html.doctype []
+--     [ Html.html []
+--         [ Html.head []
+--             [ Html.meta
+--                 [ Attr.charset \"UTF-8\" ]
+--             , Html.meta
+--                 [ Attr.name \"viewport\"
+--                 , Attr.content \"width=device-width, initial-scale=1.0\"
+--                 ]
+--             , Html.title []
+--                 [ Html.text \"Commodore 64\" ]
+--             ]
+--         , Html.body []
+--             [ Html.h1 []
+--                 [ Html.text \"Commodore 64\" ]
+--             , Html.img
+--                 [ Attr.src \"commodore64.jpg\"
+--                 , Attr.alt \"Commodore 64\"
+--                 , Attr.width \"300\"
+--                 , Attr.height \"200\"
+--                 ]
+--             , Html.h2 []
+--                 [ Html.text \"Introduction\" ]
+--             , Html.p []
+--                 [ Html.text \"The \"
+--                 , Html.strong []
+--                     [ Html.text \"Commodore 64\" ]
+--                 , Html.text \" is a legendary 8-bit home computer introduced in 1982.\"
+--                 ]
+--             , Html.h2 []
+--                 [ Html.text \"Key Features\" ]
+--             , Html.ul []
+--                 [ Html.li []
+--                     [ Html.text \"Released: \"
+--                     , Html.span
+--                         [ Attr.class_ \"highlight\" ]
+--                         [ Html.text \"August 1982\" ]
+--                     ]
+--                 , Html.li []
+--                     [ Html.text \"CPU: \"
+--                     , Html.span
+--                         [ Attr.class_ \"highlight\"
+--                         , Attr.title \"MOS Technology 6510\"
+--                         ]
+--                         [ Html.text \"6510\" ]
+--                     ]
+--                 , Html.li []
+--                     [ Html.text \"RAM: \"
+--                     , Html.span
+--                         [ Attr.class_ \"highlight\" ]
+--                         [ Html.text \"64 KB\" ]
+--                     ]
+--                 , Html.li []
+--                     [ Html.text \"Graphics: \"
+--                     , Html.span
+--                         [ Attr.class_ \"highlight\" ]
+--                         [ Html.text \"VIC-II\" ]
+--                     ]
+--                 , Html.li []
+--                     [ Html.text \"Sound: \"
+--                     , Html.span
+--                         [ Attr.class_ \"highlight\" ]
+--                         [ Html.text \"SID 6581\" ]
+--                     ]
+--                 ]
+--             ]
+--         ]
+-- @
+--
+-- __Result:__
+--
+-- @
+-- \<!DOCTYPE html\>
+-- \<html\>
+--     \<head\>
+--         \<meta charset=\"UTF-8\"\>
+--         \<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\"\>
+--         \<title\>Commodore 64\<\/title\>
+--     \<\/head\>
+--     \<body\>
+--         \<h1\>Commodore 64\<\/h1\>
+--         \<img src=\"commodore64.jpg\" alt=\"Commodore 64\" width=\"300\" height=\"200\"\>
+--         \<h2\>Introduction\<\/h2\>
+--         \<p\>The \<strong\>Commodore 64\<\/strong\> is a legendary 8-bit computer introduced in 1982.\<\/p\>
+--         \<h2\>Key Features\<\/h2\>
+--         \<ul\>
+--             \<li\>Released: \<span class=\"highlight\"\>August 1982\<\/span\>\<\/li\>
+--             \<li\>CPU: \<span class=\"highlight\" title=\"MOS Technology 6510\"\>6510\<\/span\>\<\/li\>
+--             \<li\>RAM: \<span class=\"highlight\"\>64 KB\<\/span\>\<\/li\>
+--             \<li\>Graphics: \<span class=\"highlight\"\>VIC-II\<\/span\>\<\/li\>
+--             \<li\>Sound: \<span class=\"highlight\"\>SID 6581\<\/span\>\<\/li\>
+--         \<\/ul\>
+--     \<\/body\>
+-- \<\/html\>
+-- @
+--
+-- /Note: All examples in this module assume the following imports:/
+--
+-- @
+-- import qualified Html
+-- import qualified Html.Attributes as Attr
+-- @
+--
+-- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
 module Html.Attributes
     ( -- * Attributes (Excluding Event Handler Content Attributes)
       abbr
