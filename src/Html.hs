@@ -10,7 +10,7 @@
 --
 -- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
 --
--- === __Example__
+-- === Example
 --
 -- __Input:__
 --
@@ -257,13 +257,11 @@ data Html lng where
     IntlNode :: Translatable lng => lng -> Html lng
 
 
--- | Enables conversion of 'Html.Html' to 'Data.String.String'.
 instance Show (Html lng) where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of 'Html.Html' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable (Html lng) where
     build html = case html of
         ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
@@ -279,13 +277,11 @@ instance Buildable (Html lng) where
           where text = defaultLanguage intl
 
 
--- | Enables conversion of ['Html.Html'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Html lng] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of ['Html.Html'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Html lng] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -294,22 +290,20 @@ instance Buildable [Html lng] where
 -- | Represents an HTML attribute.
 --
 -- This data type can be used to generate HTML attributes programmatically with the functions provided in the "Html.Attributes" module.
-data Attribute where
+data Attribute
 
     -- | Constructs a boolean HTML attribute.
-    BoolAttribute :: Builder -> Bool -> Attribute
+    = BoolAttribute Builder Bool
 
     -- | Constructs a textual HTML attribute.
-    TextAttribute :: Builder -> Builder -> Attribute
+    | TextAttribute Builder Builder
 
 
--- | Enables conversion of 'Html.Attribute' to 'Data.String.String'.
 instance Show Attribute where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of 'Html.Attribute' to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable Attribute where
     build attribute = case attribute of
         BoolAttribute _   False -> mempty
@@ -318,13 +312,11 @@ instance Buildable Attribute where
         TextAttribute key value -> key <> value <> singleton '"'
 
 
--- | Enables conversion of ['Html.Attribute'] to 'Data.String.String'.
 instance {-# OVERLAPPING #-} Show [Attribute] where
     show = unpack . toLazyText . build
     {-# INLINE show #-}
 
 
--- | Enables conversion of ['Html.Attribute'] to 'Data.Text.Lazy.Builder.Builder'.
 instance Buildable [Attribute] where
     build = foldr ((<>) . build) mempty
     {-# INLINE build #-}
@@ -413,31 +405,31 @@ doctype = RootNode "<!DOCTYPE html>\n"
 --     [ Html.ul []
 --         [ Html.li []
 --             [ Html.a
---                 [ Attr.href \"#heroes\" ]
+--                 [ Attr.href \"\#heroes\" ]
 --                 [ Html.text \"Valiant Adventurers\" ]
 --             , Html.a
---                 [ Attr.href \"#monsters\" ]
+--                 [ Attr.href \"\#monsters\" ]
 --                 [ Html.text \"Unspeakable Horrors\" ]
 --             , Html.a
---                 [ Attr.href \"#trinkets\" ]
+--                 [ Attr.href \"\#trinkets\" ]
 --                 [ Html.text \"Cursed Relics\" ]
 --             , Html.a
---                 [ Attr.href \"#strategies\" ]
+--                 [ Attr.href \"\#strategies\" ]
 --                 [ Html.text \"Descent Tactics\" ]
 --             ]
 --         ]
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<nav\>
 --     \<ul\>
---         \<li\>\<a href=\"#heroes\"\>Valiant Adventurers\<\/a\>\<\/li\>
---         \<li\>\<a href=\"#monsters\"\>Unspeakable Horrors\<\/a\>\<\/li\>
---         \<li\>\<a href=\"#trinkets\"\>Cursed Relics\<\/a\>\<\/li\>
---         \<li\>\<a href=\"#strategies\"\>Descent Tactics\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\#heroes\"\>Valiant Adventurers\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\#monsters\"\>Unspeakable Horrors\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\#trinkets\"\>Cursed Relics\<\/a\>\<\/li\>
+--         \<li\>\<a href=\"\#strategies\"\>Descent Tactics\<\/a\>\<\/li\>
 --     \<\/ul\>
 -- \<\/nav\>
 -- @
@@ -465,7 +457,7 @@ a = ParentNode "<a" "</a>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<p\>The \<abbr title=\"Hypertext Markup Language\"\>HTML\<\/abbr\> standard revolutionized web development.\<\/p\>
@@ -486,28 +478,24 @@ abbr = ParentNode "<abbr" "</abbr>"
 --
 -- @
 -- Html.address []
---     [ Html.p []
---         [ Html.text \"Contact the Hegelian Society:\" ]
---     , Html.p []
---         [ Html.strong []
---             [ Html.text \"Hegel Archives, Jena\" ]
---         ]
---     , Html.p []
---         [ Html.text \"Email: \"
---         , Html.a
---             [ Attr.href \"mailto:info\@hegelarchives.org\" ]
---             [ Html.text \"info\@hegelarchives.org\" ]
---         ]
+--     [ Html.text \"Adventuring through Middle-earth? Get in touch with the Fellowship:\"
+--     , Html.br []
+--     , Html.text \"Eagle-Mail: \"
+--     , Html.a
+--         [ Attr.href \"mailto:frodo\@theringquest.me\" ]
+--         [ Html.text \"frodo\@theringquest.me\" ]
+--     , Html.br []
+--     , Html.text \"Entphone: 1-800-ENT-GUARD\"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<address\>
---     \<p\>Contact the Hegelian Society:\<\/p\>
---     \<p\>\<strong\>Hegel Archives, Jena\<\/strong\>\<\/p\>
---     \<p\>Email: \<a href=\"mailto:info\@hegelarchives.org\"\>info\@hegelarchives.org\<\/a\>\<\/p\>
+--     Adventuring through Middle-earth? Get in touch with the Fellowship:\<br\>
+--     Eagle-Mail: \<a href=\"mailto:frodo\@theringquest.me\"\>frodo\@theringquest.me\<\/a\>\<br\>
+--     Entphone: 1-800-ENT-GUARD
 -- \<\/address\>
 -- @
 address :: [Attribute] -> [Html lng] -> Html lng
@@ -522,22 +510,24 @@ address = ParentNode "<address" "</address>"
 --
 -- ==== __Example__
 --
+-- __Input:__
+--
 -- @
 -- Html.map
---     [ Attr.name \"downtown\" ]
+--     [ Attr.name \"stonehenge-map\" ]
 --     [ Html.area
---         [ Attr.alt    \"Library\"
---         , Attr.coords \"52,36,160,240\"
---         , Attr.shape  \"rect\"
+--         [ Attr.alt    \"Stonehenge\"
+--         , Attr.coords \"150,150,100\"
+--         , Attr.shape  \"circle\"
 --         ]
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
--- \<map name=\"downtown\"\>
---     \<area alt=\"Library\" coords=\"52,36,160,240\" shape=\"rect\"\>
+-- \<map name=\"stonehenge-map\"\>
+--     \<area alt=\"Stonehenge\" coords=\"150,150,100\" shape=\"circle\"\>
 -- \<\/map\>
 -- @
 area :: [Attribute] -> Html lng
@@ -552,10 +542,12 @@ area = LeafNode "<area"
 --
 -- ==== __Example__
 --
+-- __Input:__
+--
 -- @
 -- Html.article []
 --     [ Html.h2 []
---         [ Html.text \"Franz Kafka's Novels\" ]
+--         [ Html.text \"Franz Kafka\'s Novels\" ]
 --     , Html.ul []
 --         [ Html.li []
 --             [ Html.text \"The Man Who Disappeared\" ]
@@ -567,11 +559,11 @@ area = LeafNode "<area"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<article\>
---     \<h2\>Franz Kafka's Novels\<\/h2\>
+--     \<h2\>Franz Kafka\'s Novels\<\/h2\>
 --     \<ul\>
 --         \<li\>The Man Who Disappeared\<\/li\>
 --         \<li\>The Trial\<\/li\>
@@ -586,7 +578,12 @@ article = ParentNode "<article" "</article>"
 
 -- | Generates an HTML /\<aside\>/ element with the given attributes and contents.
 --
+-- The /\<aside\>/ element represents content that is tangentially related to the main content of a page. It is often used for sidebars,
+-- pull quotes, or advertisements.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.aside []
@@ -597,7 +594,7 @@ article = ParentNode "<article" "</article>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<aside\>
@@ -612,24 +609,29 @@ aside = ParentNode "<aside" "</aside>"
 
 -- | Generates an HTML /\<audio\>/ element with the given attributes and contents.
 --
+-- The /\<audio\>/ element embeds audio content in a web page. It allows you to include audio files like music, podcasts, or sound effects
+-- that users can play directly in their browsers.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.audio
 --     [ Attr.controls True ]
 --     [ Html.source
 --         [ Attr.src   \"bossfight-warp.mp3\"
---         , Attr.type_ \"audio/mpeg\"
+--         , Attr.type_ \"audio\/mpeg\"
 --         ]
 --     , Html.text \"Your browser does not support the audio tag.\"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<audio controls\>
---     \<source src=\"bossfight-warp.mp3\" type=\"audio/mpeg\"\>
+--     \<source src=\"bossfight-warp.mp3\" type=\"audio\/mpeg\"\>
 --     Your browser does not support the audio tag.
 -- \<\/audio\>
 -- @
@@ -640,7 +642,12 @@ audio = ParentNode "<audio" "</audio>"
 
 -- | Generates an HTML /\<b\>/ element with the given attributes and contents.
 --
+-- The /\<b\>/ element is used to apply bold formatting to the enclosed text, indicating that the content should be presented in a stronger
+-- or more prominent manner, without implying any specific semantic importance.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -651,9 +658,11 @@ audio = ParentNode "<audio" "</audio>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p>Gary Gygax hands Fry his <b>+1 mace</b>.</p>
+-- @
+-- \<p\>Gary Gygax hands Fry his \<b\>+1 mace\<\/b\>.\<\/p\>
+-- @
 b :: [Attribute] -> [Html lng] -> Html lng
 b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
@@ -661,7 +670,12 @@ b = ParentNode "<b" "</b>"
 
 -- | Generates an HTML /\<base\>/ element with the given attributes.
 --
+-- The /\<base\>/ element specifies a base URL for relative URLs in a document. It helps browsers resolve relative URLs for assets like
+-- images, stylesheets, and scripts.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.head []
@@ -670,7 +684,7 @@ b = ParentNode "<b" "</b>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<head\>
@@ -684,7 +698,12 @@ base = LeafNode "<base"
 
 -- | Generates an HTML /\<bdi\>/ element with the given attributes and contents.
 --
+-- The /\<bdi\>/ element isolates a span of text that needs to be formatted in a specific direction for languages that are written
+-- right-to-left, like Arabic or Hebrew, within a predominantly left-to-right text.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.ul []
@@ -709,7 +728,7 @@ base = LeafNode "<base"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<ul\>
@@ -725,17 +744,24 @@ bdi = ParentNode "<bdi" "</bdi>"
 
 -- | Generates an HTML /\<bdo\>/ element with the given attributes and contents.
 --
+-- The /\<bdo\>/ element overrides the bidirectional algorithm setting of the surrounding text. It is used to explicitly define the text
+-- direction, either left-to-right or right-to-left, for languages with different writing directions.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.bdo
---     [ Attr.dir "rtl" ]
---     [ Html.text "The sun rises in the east and sets in the west." ]
+--     [ Attr.dir \"rtl\" ]
+--     [ Html.text \"The sun rises in the east and sets in the west.\" ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <bdo dir="rtl">The sun rises in the east and sets in the west.</bdo>
+-- @
+-- \<bdo dir=\"rtl\"\>The sun rises in the east and sets in the west.\<\/bdo\>
+-- @
 bdo :: [Attribute] -> [Html lng] -> Html lng
 bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
@@ -743,7 +769,12 @@ bdo = ParentNode "<bdo" "</bdo>"
 
 -- | Generates an HTML /\<blockquote\>/ element with the given attributes and contents.
 --
+-- The /\<blockquote\>/ element is used to indicate a block of quoted text from another source. It is often used to provide attributions
+-- for cited content.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.blockquote []
@@ -752,7 +783,7 @@ bdo = ParentNode "<bdo" "</bdo>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<blockquote\>
@@ -766,7 +797,12 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 
 -- | Generates an HTML /\<body\>/ element with the given attributes and contents.
 --
+-- The /\<body\>/ element represents the main content of an HTML document. It contains the visible content that is displayed in the browser
+-- window.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.body []
@@ -777,7 +813,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<body\>
@@ -792,7 +828,12 @@ body = ParentNode "<body" "</body>"
 
 -- | Generates an HTML /\<br\>/ element with the given attributes.
 --
+-- The /\<br\>/ element represents a line break, indicating that the content following it should appear on the next line. It is used to
+-- create single-line breaks within text.
+--
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -802,17 +843,24 @@ body = ParentNode "<body" "</body>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p>That which we call a rose<br>By any other name would smell as sweet.</p>
+-- @
+-- \<p\>That which we call a rose\<br\>By any other name would smell as sweet.\<\/p\>
+-- @
 br :: [Attribute] -> Html lng
 br = LeafNode "<br"
 {-# INLINE br #-}
 
 
--- | Generates an HTML __button__ element with the given attributes and contents.
+-- | Generates an HTML /\<button\>/ element with the given attributes and contents.
+--
+-- The /\<button\>/ element represents a clickable button that can trigger actions or events when clicked by the user. It can be used for
+-- various interactive purposes on a web page.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.button
@@ -820,17 +868,24 @@ br = LeafNode "<br"
 --     [ Html.text \"Log in\" ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <button type="submit">Log in</button>
+-- @
+-- \<button type=\"submit\"\>Log in\<\/button\>
+-- @
 button :: [Attribute] -> [Html lng] -> Html lng
 button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
 
--- | Generates an HTML __canvas__ element with the given attributes and contents.
+-- | Generates an HTML /\<canvas\>/ element with the given attributes and contents.
+--
+-- The /\<canvas\>/ element provides a space within which graphics, animations, and drawings can be rendered using JavaScript. It offers a
+-- versatile way to create dynamic visual content on a web page.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.canvas
@@ -840,7 +895,7 @@ button = ParentNode "<button" "</button>"
 --     [ Html.text \"Your browser does not support the canvas tag.\" ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<canvas height=\"500\" width=\"500\"\>
@@ -852,9 +907,14 @@ canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
 
--- | Generates an HTML __caption__ element with the given attributes and contents.
+-- | Generates an HTML /\<caption\>/ element with the given attributes and contents.
+--
+-- The /\<caption\>/ element is used to provide a title or description for a /\<table\>/ element. It is typically placed as the first child
+-- within the /\<table\>/ element to provide context for the table\'s content.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.table []
@@ -881,7 +941,7 @@ canvas = ParentNode "<canvas" "</canvas>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<table\>
@@ -905,9 +965,14 @@ caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
 
--- | Generates an HTML __cite__ element with the given attributes and contents.
+-- | Generates an HTML /\<cite\>/ element with the given attributes and contents.
+--
+-- The /\<cite\>/ element is used to mark a reference to a creative work, such as a book, movie, or song, within a text. It indicates the
+-- title of the work and can be used for citations.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -918,17 +983,24 @@ caption = ParentNode "<caption" "</caption>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p>My favorite movie is <cite>Psycho</cite> by Alfred Hitchcock.</p>
+-- @
+-- \<p\>My favorite movie is \<cite\>Psycho\<\/cite\> by Alfred Hitchcock.\<\/p\>
+-- @
 cite :: [Attribute] -> [Html lng] -> Html lng
 cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
 
--- | Generates an HTML __code__ element with the given attributes and contents.
+-- | Generates an HTML /\<code\>/ element with the given attributes and contents.
+--
+-- The /\<code\>/ element is used to represent a fragment of computer code within a document. It is typically used to display code examples,
+-- snippets, or programming instructions.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -939,17 +1011,24 @@ cite = ParentNode "<cite" "</cite>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p>The <code>map</code> function is a higher-order function.</p>
+-- @
+-- \<p\>The \<code\>map\<\/code\> function is a higher-order function.\<\/p\>
+-- @
 code :: [Attribute] -> [Html lng] -> Html lng
 code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
 
--- | Generates an HTML __col__ element with the given attributes.
+-- | Generates an HTML /\<col\>/ element with the given attributes.
+--
+-- The /\<col\>/ element is used to define properties for a group of columns within a /\<table\>/ element. It allows you to apply styling or
+-- attributes to multiple columns at once.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.table []
@@ -988,7 +1067,7 @@ code = ParentNode "<code" "</code>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<table\>
@@ -1018,9 +1097,14 @@ col = LeafNode "<col"
 {-# INLINE col #-}
 
 
--- | Generates an HTML __colgroup__ element with the given attributes and contents.
+-- | Generates an HTML /\<colgroup\>/ element with the given attributes and contents.
+--
+-- The /\<colgroup\>/ element is used to group and define properties for one or more columns within a /\<table\>/ element. It is typically
+-- used in conjunction with the /\<col\>/ element to apply styling or attributes to columns collectively.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.table []
@@ -1059,7 +1143,7 @@ col = LeafNode "<col"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<table\>
@@ -1089,9 +1173,14 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
 
--- | Generates an HTML __data__ element with the given attributes and contents.
+-- | Generates an HTML /\<data\>/ element with the given attributes and contents.
+--
+-- The /\<data\>/ element represents machine-readable data within the content, typically used to provide additional information that is not
+-- meant for display but can be processed by scripts or applications.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.ul []
@@ -1113,7 +1202,7 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<ul\>
@@ -1133,9 +1222,14 @@ data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
 
--- | Generates an HTML __datalist__ element with the given attributes and contents.
+-- | Generates an HTML /\<datalist\>/ element with the given attributes and contents.
+--
+-- The /\<datalist\>/ element provides a predefined list of options that can be associated with an /\<input\>/ element\'s autocomplete
+-- feature, making it easier for users to enter data.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.label []
@@ -1154,7 +1248,7 @@ data_ = ParentNode "<data" "</data>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<label\>
@@ -1171,9 +1265,14 @@ datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
 
--- | Generates an HTML __dd__ element with the given attributes and contents.
+-- | Generates an HTML /\<dd\>/ element with the given attributes and contents.
+--
+-- The /\<dd\>/ element is used within a definition list \(/\<dl\>/\) to provide the description of definition of a term \(/\<dt\>/\). It is
+-- commonly used to pair terms with their corresponding explanations.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.dl []
@@ -1188,7 +1287,7 @@ datalist = ParentNode "<datalist" "</datalist>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<dl\>
@@ -1203,9 +1302,14 @@ dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
 
--- | Generates an HTML __del__ element with the given attributes and contents.
+-- | Generates an HTML /\<del\>/ element with the given attributes and contents.
+--
+-- The /\<del\>/ element represents text that has been deleted or removed from a document. It is often used to show changes in revisions or
+-- edits.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -1216,17 +1320,24 @@ dd = ParentNode "<dd" "</dd>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p>Appointments are available on <del>Tuesdays</del>, Wednesdays and Fridays.</p>
+-- @
+-- \<p\>Appointments are available on \<del\>Tuesdays\<\/del\>, Wednesdays and Fridays.\<\/p\>
+-- @
 del :: [Attribute] -> [Html lng] -> Html lng
 del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
 
--- | Generates an HTML __details__ element with the given attributes and contents.
+-- | Generates an HTML /\<details\>/ element with the given attributes and contents.
+--
+-- The /\<details\>/ element represents a disclosure widget that allows users to view or hide additional content. It is often used to create
+-- collapsible sections of information.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.details []
@@ -1237,7 +1348,7 @@ del = ParentNode "<del" "</del>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<details\>
@@ -1250,9 +1361,13 @@ details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
 
--- | Generates an HTML __dfn__ element with the given attributes and contents.
+-- | Generates an HTML /\<dfn\>/ element with the given attributes and contents.
+--
+-- The /\<dfn\>/ element marks text that is being defined within a document, often indicating terms that are being introduced or explained.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.p []
@@ -1262,22 +1377,29 @@ details = ParentNode "<details" "</details>"
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
--- > <p><dfn>ChatGPT</dfn> is an OpenAI language model.</p>
+-- @
+-- \<p\>\<dfn\>ChatGPT\<\/dfn\> is an OpenAI language model.\<\/p\>
+-- @
 dfn :: [Attribute] -> [Html lng] -> Html lng
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
 
--- | Generates an HTML __dialog__ element with the given attributes and contents.
+-- | Generates an HTML /\<dialog\>/ element with the given attributes and contents.
+--
+-- The /\<dialog\>/ element represents a dialog box or modal window that can be used for interactive communication with the user. It is
+-- often used for displaying alerts, messages, or user prompts.
 --
 -- ==== __Example__
+--
+-- __Input:__
 --
 -- @
 -- Html.body []
 --     [ Html.button
---         [ Attr.onclick \"openConfirmDialog()\" ]
+--         [ Attr.onclick \"openConfirmDialog\(\)\" ]
 --         [ Html.text \"Confirm\" ]
 --     , Html.dialog
 --         [ Attr.id "confirmDialog" ]
@@ -1286,25 +1408,25 @@ dfn = ParentNode "<dfn" "</dfn>"
 --         , Html.p []
 --             [ Html.text \"Would you really like to purchase this item?\" ]
 --         , Html.button
---             [ Html.onclick \"confirmTransaction()\" ]
+--             [ Html.onclick \"confirmTransaction\(\)\" ]
 --             [ Html.text \"Yes\" ]
 --         , Html.button
---             [ Html.onclick \"cancelTransaction()\" ]
+--             [ Html.onclick \"cancelTransaction\(\)\" ]
 --             [ Html.text \"No\" ]
 --         ]
 --     ]
 -- @
 --
--- __Result:__
+-- __Output:__
 --
 -- @
 -- \<body\>
---     \<button onclick=\"openConfirmDialog()\"\>Confirm\<\/button\>
+--     \<button onclick=\"openConfirmDialog\(\)\"\>Confirm\<\/button\>
 --     \<dialog id=\"confirmDialog\"\>
 --         \<h1\>Confirm Transaction\<\/h1\>
 --         \<p\>Would you really like to purchase this item?\<\/p\>
---         \<button onclick=\"confirmTransaction()\"\>Yes\<\/button\>
---         \<button onclick=\"cancelTransaction()\"\>No\<\/button\>
+--         \<button onclick=\"confirmTransaction\(\)\"\>Yes\<\/button\>
+--         \<button onclick=\"cancelTransaction\(\)\"\>No\<\/button\>
 --     \<\/dialog\>
 -- \<\/body\>
 -- @
