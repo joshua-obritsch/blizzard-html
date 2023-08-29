@@ -1267,7 +1267,7 @@ datalist = ParentNode "<datalist" "</datalist>"
 
 -- | Generates an HTML /\<dd\>/ element with the given attributes and contents.
 --
--- The /\<dd\>/ element is used within a definition list \(/\<dl\>/\) to provide the description of definition of a term \(/\<dt\>/\). It is
+-- The /\<dd\>/ element is used within a definition list (/\<dl\>/) to provide the description of definition of a term (/\<dt\>/). It is
 -- commonly used to pair terms with their corresponding explanations.
 --
 -- ==== __Example__
@@ -1399,7 +1399,7 @@ dfn = ParentNode "<dfn" "</dfn>"
 -- @
 -- Html.body []
 --     [ Html.button
---         [ Attr.onclick \"openConfirmDialog\(\)\" ]
+--         [ Attr.onclick \"openConfirmDialog()\" ]
 --         [ Html.text \"Confirm\" ]
 --     , Html.dialog
 --         [ Attr.id "confirmDialog" ]
@@ -1408,10 +1408,10 @@ dfn = ParentNode "<dfn" "</dfn>"
 --         , Html.p []
 --             [ Html.text \"Would you really like to purchase this item?\" ]
 --         , Html.button
---             [ Html.onclick \"confirmTransaction\(\)\" ]
+--             [ Html.onclick \"confirmTransaction()\" ]
 --             [ Html.text \"Yes\" ]
 --         , Html.button
---             [ Html.onclick \"cancelTransaction\(\)\" ]
+--             [ Html.onclick \"cancelTransaction()\" ]
 --             [ Html.text \"No\" ]
 --         ]
 --     ]
@@ -1421,12 +1421,12 @@ dfn = ParentNode "<dfn" "</dfn>"
 --
 -- @
 -- \<body\>
---     \<button onclick=\"openConfirmDialog\(\)\"\>Confirm\<\/button\>
+--     \<button onclick=\"openConfirmDialog()\"\>Confirm\<\/button\>
 --     \<dialog id=\"confirmDialog\"\>
 --         \<h1\>Confirm Transaction\<\/h1\>
 --         \<p\>Would you really like to purchase this item?\<\/p\>
---         \<button onclick=\"confirmTransaction\(\)\"\>Yes\<\/button\>
---         \<button onclick=\"cancelTransaction\(\)\"\>No\<\/button\>
+--         \<button onclick=\"confirmTransaction()\"\>Yes\<\/button\>
+--         \<button onclick=\"cancelTransaction()\"\>No\<\/button\>
 --     \<\/dialog\>
 -- \<\/body\>
 -- @
@@ -1435,313 +1435,464 @@ dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
--- | Generates an HTML __div__ element with the given attributes and contents.
+-- | Generates an HTML /\<div\>/ element with the given attributes and contents.
+--
+-- The /\<div\>/ element is a generic container that is often used to group and structure content for styling or scripting purposes. It does
+-- not inherently carry any specific meaning on its own.
 div :: [Attribute] -> [Html lng] -> Html lng
 div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
--- | Generates an HTML __dl__ element with the given attributes and contents.
+-- | Generates an HTML /\<dl\>/ element with the given attributes and contents.
+--
+-- The /\<dl\>/ element represents a description list, consisting of terms (/\<dt\>/) and their corresponding descriptions (/\<dd\>/).
+-- It is commonly used to present glossaries or sets of definitions.
 dl :: [Attribute] -> [Html lng] -> Html lng
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
--- | Generates an HTML __dt__ element with the given attributes and contents.
+-- | Generates an HTML /\<dt\>/ element with the given attributes and contents.
+--
+-- The /\<dt\>/ element is used withing a description list (/\<dl\>/) to define a term or name that is followed by its corresponding
+-- description (/\<dd\>/).
 dt :: [Attribute] -> [Html lng] -> Html lng
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
--- | Generates an HTML __em__ element with the given attributes and contents.
+-- | Generates an HTML /\<em\>/ element with the given attributes and contents.
+--
+-- The /\<em\>/ element is used to indicate text that should be emphasized, typically displayed in italic style. It carries semantic
+-- meaning, implying that the enclosed content is of particular importance or should be stressed.
 em :: [Attribute] -> [Html lng] -> Html lng
 em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
--- | Generates an HTML __embed__ element with the given attributes.
+-- | Generates an HTML /\<embed\>/ element with the given attributes.
+--
+-- The /\<embed\>/ element embeds external content, typically multimedia like audio, video, or interactive applications, directly into a web
+-- page. It is used to seamlessly integrate content from other sources.
 embed :: [Attribute] -> Html lng
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
--- | Generates an HTML __fieldset__ element with the given attributes and contents.
+-- | Generates an HTML /\<fieldset\>/ element with the given attributes and contents.
+--
+-- The /\<fieldset\>/ element is used to group related form elements together, providing a visual and logical grouping for better
+-- organization and styling. It is often used in forms to structure related input elements.
 fieldset :: [Attribute] -> [Html lng] -> Html lng
 fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
 
 
--- | Generates an HTML __figcaption__ element with the given attributes and contents.
+-- | Generates an HTML /\<figcaption\>/ element with the given attributes and contents.
+--
+-- The /\<figcaption\>/ element is used to provide a caption or description for a /\<figure\>/ element, typically used to describe images,
+-- illustrations, or multimedia content.
 figcaption :: [Attribute] -> [Html lng] -> Html lng
 figcaption = ParentNode "<figcaption" "</figcaption>"
 {-# INLINE figcaption #-}
 
 
--- | Generates an HTML __figure__ element with the given attributes and contents.
+-- | Generates an HTML /\<figure\>/ element with the given attributes and contents.
+--
+-- The /\<figure\>/ element is used to encapsulate and group related content, often used with an associated /\<figcaption\>/ to provide
+-- context or explanation for the content within.
 figure :: [Attribute] -> [Html lng] -> Html lng
 figure = ParentNode "<figure" "</figure>"
 {-# INLINE figure #-}
 
 
--- | Generates an HTML __footer__ element with the given attributes and contents.
+-- | Generates an HTML /\<footer\>/ element with the given attributes and contents.
+--
+-- The /\<footer\>/ element represents a footer section or container typically used to include information such as authorship, copyright
+-- details, or contact information at the bottom of a document or section.
 footer :: [Attribute] -> [Html lng] -> Html lng
 footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
 
 
--- | Generates an HTML __form__ element with the given attributes and contents.
+-- | Generates an HTML /\<form\>/ element with the given attributes and contents.
+--
+-- The /\<form\>/ element is used to create a container for a set of form controls like input fields, checkboxes, radio buttons, and
+-- buttons. It is used to collect user input that can be submitted to a server for processing.
 form :: [Attribute] -> [Html lng] -> Html lng
 form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
 
 
--- | Generates an HTML __h1__ element with the given attributes and contents.
+-- | Generates an HTML /\<h1\>/ element with the given attributes and contents.
+--
+-- The /\<h1\>/ element represents the highest-level heading, typically used to indicate the main topic or section of a document.
 h1 :: [Attribute] -> [Html lng] -> Html lng
 h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
 
 
--- | Generates an HTML __h2__ element with the given attributes and contents.
+-- | Generates an HTML /\<h2\>/ element with the given attributes and contents.
+--
+-- The /\<h2\>/ element signifies a heading of a slightly lower level than /\<h1\>/, often used to subdivide content within sections of a
+-- document.
 h2 :: [Attribute] -> [Html lng] -> Html lng
 h2 = ParentNode "<h2" "</h2>"
 {-# INLINE h2 #-}
 
 
--- | Generates an HTML __h3__ element with the given attributes and contents.
+-- | Generates an HTML /\<h3\>/ element with the given attributes and contents.
+--
+-- The /\<h3\>/ element denotes a heading that is of a lower level than /\<h2\>/, typically used to indicate sub-sections or finer details
+-- within the content.
 h3 :: [Attribute] -> [Html lng] -> Html lng
 h3 = ParentNode "<h3" "</h3>"
 {-# INLINE h3 #-}
 
 
--- | Generates an HTML __h4__ element with the given attributes and contents.
+-- | Generates an HTML /\<h4\>/ element with the given attributes and contents.
+--
+-- The /\<h4\>/ element represents a heading with a lower hierarchical level than /\<h3\>/, usually utilized to introduce sub-subsections or
+-- finer points within the content.
 h4 :: [Attribute] -> [Html lng] -> Html lng
 h4 = ParentNode "<h4" "</h4>"
 {-# INLINE h4 #-}
 
 
--- | Generates an HTML __h5__ element with the given attributes and contents.
+-- | Generates an HTML /\<h5\>/ element with the given attributes and contents.
+--
+-- The /\<h5\>/ element signifies a heading of a reduced level compared to /\<h4\>/, often used to introduce even more specific details or
+-- subsections within the content.
 h5 :: [Attribute] -> [Html lng] -> Html lng
 h5 = ParentNode "<h5" "</h5>"
 {-# INLINE h5 #-}
 
 
--- | Generates an HTML __h6__ element with the given attributes and contents.
+-- | Generates an HTML /\<h6\>/ element with the given attributes and contents.
+--
+-- The /\<h6\>/ element defines the lowest-level heading among the heading elements, typically employed for the most specific details or
+-- subsections within the content.
 h6 :: [Attribute] -> [Html lng] -> Html lng
 h6 = ParentNode "<h6" "</h6>"
 {-# INLINE h6 #-}
 
 
--- | Generates an HTML __head__ element with the given attributes and contents.
+-- | Generates an HTML /\<head\>/ element with the given attributes and contents.
+--
+-- The /\<head\>/ element serves as a container for metadata and other non-visible information about the document, such as title, character
+-- encoding, and linked stylesheets.
 head :: [Attribute] -> [Html lng] -> Html lng
 head = ParentNode "<head" "</head>"
 {-# INLINE head #-}
 
 
--- | Generates an HTML __header__ element with the given attributes and contents.
+-- | Generates an HTML /\<header\>/ element with the given attributes and contents.
+--
+-- The /\<header\>/ element represents a container for introductory content or a group of navigation and branding elements typically found
+-- at the top of a section or page.
 header :: [Attribute] -> [Html lng] -> Html lng
 header = ParentNode "<header" "</header>"
 {-# INLINE header #-}
 
 
--- | Generates an HTML __hgroup__ element with the given attributes and contents.
+-- | Generates an HTML /\<hgroup\>/ element with the given attributes and contents.
+--
+-- The /\<hgroup\>/ element groups together multiple heading elements (/\<h1\>/ to /\<h6\>/) as a single entity, often used to create a
+-- heading with a subheading or a title with a subtitle.
 hgroup :: [Attribute] -> [Html lng] -> Html lng
 hgroup = ParentNode "<hgroup" "</hgroup>"
 {-# INLINE hgroup #-}
 
 
--- | Generates an HTML __hr__ element with the given attributes.
+-- | Generates an HTML /\<hr\>/ element with the given attributes.
+--
+-- The /\<hr\>/ element is a self-closing tag that represents a thematic break or separation between content, typically displayed as a
+-- horizontal line.
 hr :: [Attribute] -> Html lng
 hr = LeafNode "<hr"
 {-# INLINE hr #-}
 
 
--- | Generates an HTML __html__ element with the given attributes and contents.
+-- | Generates an HTML /\<html\>/ element with the given attributes and contents.
+--
+-- The /\<html\>/ element encloses the entire HTML document and serves as the root element, containing all other HTML elements like
+-- /\<head\>/ and /\<body\>/.
 html :: [Attribute] -> [Html lng] -> Html lng
 html = ParentNode "<html" "</html>"
 {-# INLINE html #-}
 
 
--- | Generates an HTML __i__ element with the given attributes and contents.
+-- | Generates an HTML /\<i\>/ element with the given attributes and contents.
+--
+-- The /\<i\>/ element is used to apply italics to text, indicating that the content within should be styled in an italic font.
 i :: [Attribute] -> [Html lng] -> Html lng
 i = ParentNode "<i" "</i>"
 {-# INLINE i #-}
 
 
--- | Generates an HTML __iframe__ element with the given attributes and contents.
+-- | Generates an HTML /\<iframe\>/ element with the given attributes and contents.
+--
+-- The /\<iframe\>/ element embeds another HTML document within the current document, allowing for the display of external content such as
+-- web pages or multimedia.
 iframe :: [Attribute] -> [Html lng] -> Html lng
 iframe = ParentNode "<iframe" "</iframe>"
 {-# INLINE iframe #-}
 
 
--- | Generates an HTML __img__ element with the given attributes.
+-- | Generates an HTML /\<img\>/ element with the given attributes.
+--
+-- The /\<img\>/ element embeds an image in the document, displaying the visual content specified by the /src/ attribute.
 img :: [Attribute] -> Html lng
 img = LeafNode "<img"
 {-# INLINE img #-}
 
 
--- | Generates an HTML __input__ element with the given attributes.
+-- | Generates an HTML /\<input\>/ element with the given attributes.
+--
+-- The /\<input\>/ element creates a user-input field, such as a text box, radio button, checkbox, or submit button, allowing users to enter
+-- or select data.
 input :: [Attribute] -> Html lng
 input = LeafNode "<input"
 {-# INLINE input #-}
 
 
--- | Generates an HTML __ins__ element with the given attributes and contents.
+-- | Generates an HTML /\<ins\>/ element with the given attributes and contents.
+--
+-- The /\<ins\>/ element represents text that has been inserted into the document after the original content, often displayed with an
+-- underline.
 ins :: [Attribute] -> [Html lng] -> Html lng
 ins = ParentNode "<ins" "</ins>"
 {-# INLINE ins #-}
 
 
--- | Generates an HTML __kbd__ element with the given attributes and contents.
+-- | Generates an HTML /\<kbd\>/ element with the given attributes and contents.
+--
+-- The /\<kbd\>/ element is used to indicate user input, typically keyboard input, within the content, often rendering the enclosed text in
+-- a monospace font.
 kbd :: [Attribute] -> [Html lng] -> Html lng
 kbd = ParentNode "<kbd" "</kbd>"
 {-# INLINE kbd #-}
 
 
--- | Generates an HTML __label__ element with the given attributes and contents.
+-- | Generates an HTML /\<label\>/ element with the given attributes and contents.
+--
+-- The /\<label\>/ element associates a text label with a form control, enhancing usability and accessibility by providing a descriptive
+-- label for user interaction.
 label :: [Attribute] -> [Html lng] -> Html lng
 label = ParentNode "<label" "</label>"
 {-# INLINE label #-}
 
 
--- | Generates an HTML __legend__ element with the given attributes and contents.
+-- | Generates an HTML /\<legend\>/ element with the given attributes and contents.
+--
+-- The /\<legend\>/ element provides a caption or title for a /\<fieldset\>/ element, offering a concise description or heading for the
+-- group of related form controls within the fieldset.
 legend :: [Attribute] -> [Html lng] -> Html lng
 legend = ParentNode "<legend" "</legend>"
 {-# INLINE legend #-}
 
 
--- | Generates an HTML __li__ element with the given attributes and contents.
+-- | Generates an HTML /\<li\>/ element with the given attributes and contents.
+--
+-- The /\<li\>/ element defines a list item within an ordered (/\<ol\>/) or unordered (/\<ul\>/) list, representing an individual entry or
+-- point in the list.
 li :: [Attribute] -> [Html lng] -> Html lng
 li = ParentNode "<li" "</li>"
 {-# INLINE li #-}
 
 
--- | Generates an HTML __link__ element with the given attributes.
+-- | Generates an HTML /\<link\>/ element with the given attributes.
+--
+-- The /\<link\>/ element associates external resources, typically stylesheets, with the document, enabling the application of additional
+-- styles and behaviors to the content.
 link :: [Attribute] -> Html lng
 link = LeafNode "<link"
 {-# INLINE link #-}
 
 
--- | Generates an HTML __main__ element with the given attributes and contents.
+-- | Generates an HTML /\<main\>/ element with the given attributes and contents.
+--
+-- The /\<main\>/ element indicates the main content of the document, providing a distinct region for the central subject matter of the
+-- webpage.
 main :: [Attribute] -> [Html lng] -> Html lng
 main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
 
 
--- | Generates an HTML __map__ element with the given attributes and contents.
+-- | Generates an HTML /\<map\>/ element with the given attributes and contents.
+--
+-- The /\<map\>/ element defines an image map, which is used to associate clickable areas within an image to specific links or actions.
 map :: [Attribute] -> [Html lng] -> Html lng
 map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
 
 
--- | Generates an HTML __mark__ element with the given attributes and contents.
+-- | Generates an HTML /\<mark\>/ element with the given attributes and contents.
+--
+-- The /\<mark\>/ element highlights text as if it has been marked for reference or emphasis, often rendering the enclosed content with a
+-- distinctive background color.
 mark :: [Attribute] -> [Html lng] -> Html lng
 mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
 
 
--- | Generates an HTML __menu__ element with the given attributes and contents.
+-- | Generates an HTML /\<menu\>/ element with the given attributes and contents.
+--
+-- The /\<menu\>/ element represents a list of commands or options, typically used for contextual menus or navigation menus in web
+-- applications.
 menu :: [Attribute] -> [Html lng] -> Html lng
 menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
 
 
--- | Generates an HTML __meta__ element with the given attributes.
+-- | Generates an HTML /\<meta\>/ element with the given attributes.
+--
+-- The /\<meta\>/ element provides metadata about the document, such as character encoding, authorship, and viewport settings, which are
+-- used by browsers and search engines but not typically displayed to users.
 meta :: [Attribute] -> Html lng
 meta = LeafNode "<meta"
 {-# INLINE meta #-}
 
 
--- | Generates an HTML __meter__ element with the given attributes and contents.
+-- | Generates an HTML /\<meter\>/ element with the given attributes and contents.
+--
+-- The /\<meter\>/ element represents a scalar measurement within a known range, often used to display gauges, progress bars, or other
+-- visual representations of data.
 meter :: [Attribute] -> [Html lng] -> Html lng
 meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
 
 
--- | Generates an HTML __nav__ element with the given attributes and contents.
+-- | Generates an HTML /\<nav\>/ element with the given attributes and contents.
+--
+-- The /\<nav\>/ element defines a section of navigation links or menus, typically containing links to other pages, sections of the current
+-- page, or related content.
 nav :: [Attribute] -> [Html lng] -> Html lng
 nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
 
 
--- | Generates an HTML __noscript__ element with the given attributes and contents.
+-- | Generates an HTML /\<noscript\>/ element with the given attributes and contents.
+--
+-- The /\<noscript\>/ element is used to provide alternative content that should be displayed if a browser does not support scripting or if
+-- scripting is disabled. It is often used to display a message or instructions for enabling JavaScript.
 noscript :: [Attribute] -> [Html lng] -> Html lng
 noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
 
 
--- | Generates an HTML __object__ element with the given attributes and contents.
+-- | Generates an HTML /\<object\>/ element with the given attributes and contents.
+--
+-- The /\<object\>/ element embeds external resources, such as multimedia or interactive content, into a web page. It is often used to embed
+-- multimedia content like audio, video, or Flash animations.
 object :: [Attribute] -> [Html lng] -> Html lng
 object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
 
 
--- | Generates an HTML __ol__ element with the given attributes and contents.
+-- | Generates an HTML /\<ol\>/ element with the given attributes and contents.
+--
+-- The /\<ol\>/ element is used to create an ordered list, where each list item is numbered sequentially. It is commonly used to represent
+-- items with a specific order or sequence.
 ol :: [Attribute] -> [Html lng] -> Html lng
 ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
 
 
--- | Generates an HTML __optgroup__ element with the given attributes and contents.
+-- | Generates an HTML /\<optgroup\>/ element with the given attributes and contents.
+--
+-- The /\<optgroup\>/ element is used to group related options within a /\<select\>/ element, providing a way to create hierarchical or
+-- categorized dropdown lists.
 optgroup :: [Attribute] -> [Html lng] -> Html lng
 optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
 
 
--- | Generates an HTML __option__ element with the given attributes and contents.
+-- | Generates an HTML /\<option\>/ element with the given attributes and contents.
+--
+-- The /\<option\>/ element is used within a /\<select\>/ or /\<datalist\>/ element to define individual options that users can select from
+-- in a dropdown list or autocomplete input.
 option :: [Attribute] -> [Html lng] -> Html lng
 option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
 
 
--- | Generates an HTML __output__ element with the given attributes and contents.
+-- | Generates an HTML /\<output\>/ element with the given attributes and contents.
+--
+-- The /\<output\>/ element is employed to present the outcome of calculations, user interactions, or scripting actions, often utilized in
+-- combination with form components and scripts.
 output :: [Attribute] -> [Html lng] -> Html lng
 output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
 
 
--- | Generates an HTML __p__ element with the given attributes and contents.
+-- | Generates an HTML /\<p\>/ element with the given attributes and contents.
+--
+-- The /\<p\>/ element designates a paragraph of text, providing a structured way to separate and present blocks of content in a readable
+-- format.
 p :: [Attribute] -> [Html lng] -> Html lng
 p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
 
 
--- | Generates an HTML __picture__ element with the given attributes and contents.
+-- | Generates an HTML /\<picture\>/ element with the given attributes and contents.
+--
+-- The /\<picture\>/ element provides multiple sources for an image, allowing the browser to select the most appropriate version based on
+-- factors such as device size or resolution.
 picture :: [Attribute] -> [Html lng] -> Html lng
 picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
 
 
--- | Generates an HTML __pre__ element with the given attributes and contents.
+-- | Generates an HTML /\<pre\>/ element with the given attributes and contents.
+--
+-- The /\<pre\>/ element defines preformatted text, preserving both whitespace and line breaks, often used for displaying code or other
+-- content with fixed formatting.
 pre :: [Attribute] -> [Html lng] -> Html lng
 pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
 
 
--- | Generates an HTML __progress__ element with the given attributes and contents.
+-- | Generates an HTML /\<progress\>/ element with the given attributes and contents.
+--
+-- The /\<progress\>/ element represents the completion progress of a task or process, typically displayed as a bar or other visual
+-- indicator.
 progress :: [Attribute] -> [Html lng] -> Html lng
 progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
 
 
--- | Generates an HTML __q__ element with the given attributes and contents.
+-- | Generates an HTML /\<q\>/ element with the given attributes and contents.
+--
+-- The /\<q\>/ element encloses a short inline quotation, typically surrounded by quotation marks or other formatting.
 q :: [Attribute] -> [Html lng] -> Html lng
 q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
 
 
--- | Generates an HTML __rp__ element with the given attributes and contents.
+-- | Generates an HTML /\<rp\>/ element with the given attributes and contents.
+--
+-- The /\<rp\>/ element provides fallback parentheses for browsers that do not support the ruby annotation feature, often used in East Asian
+-- typography.
 rp :: [Attribute] -> [Html lng] -> Html lng
 rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
 
 
--- | Generates an HTML __rt__ element with the given attributes and contents.
+-- | Generates an HTML /\<rt\>/ element with the given attributes and contents.
+--
+-- The /\<rt\>/ element defines the pronunciation of characters in a ruby annotation, commonly used to provide phonetic information for East
+-- Asian languages.
 rt :: [Attribute] -> [Html lng] -> Html lng
 rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
 
 
--- | Generates an HTML __ruby__ element with the given attributes and contents.
+-- | Generates an HTML /\<ruby\>/ element with the given attributes and contents.
+--
+-- The /\<ruby\>/ element represents a ruby annotation, used to provide additional pronunciation or translation information for East Asian
+-- characters.
 ruby :: [Attribute] -> [Html lng] -> Html lng
 ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
