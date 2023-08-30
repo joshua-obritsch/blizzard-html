@@ -2146,11 +2146,18 @@ li = ParentNode "<li" "</li>"
 --
 -- __Input:__
 --
--- >
+-- >Html.head []
+-- >    [ Html.link
+-- >        [ Attr.rel "stylesheet"
+-- >        , Attr.href "styles.css"
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><head>
+-- >    <link rel="stylesheet" href="styles.css">
+-- ></head>
 link :: [Attribute] -> Html lng
 link = LeafNode "<link"
 {-# INLINE link #-}
@@ -2165,11 +2172,19 @@ link = LeafNode "<link"
 --
 -- __Input:__
 --
--- >
+-- >Html.main []
+-- >    [ Html.h1 []
+-- >        [ Html.text "Welcome to Our Website" ]
+-- >    , Html.p []
+-- >        [ Html.text "This is the main content of the page." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><main>
+-- >    <h1>Welcome to Our Website</h1>
+-- >    <p>This is the main content of the page.</p>
+-- ></main>
 main :: [Attribute] -> [Html lng] -> Html lng
 main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
@@ -2183,11 +2198,35 @@ main = ParentNode "<main" "</main>"
 --
 -- __Input:__
 --
--- >
+-- >[ Html.img
+-- >    [ Attr.src "worldmap.png"
+-- >    , Attr.alt "World Map"
+-- >    , Attr.usemap "#worldmap"
+-- >    ]
+-- >, Html.map
+-- >    [ Attr.name "worldmap" ]
+-- >    [ Html.area
+-- >        [ Attr.shape "rect"
+-- >        , Attr.coords "0,0,200,200"
+-- >        , Attr.alt "North America"
+-- >        , Attr.href "northamerica.html"
+-- >        ]
+-- >    , Html.area
+-- >        [ Attr.shape "rect"
+-- >        , Attr.coords "200,0,400,200"
+-- >        , Attr.alt "Europe"
+-- >        , Attr.href "europe.html"
+-- >        ]
+-- >    ]
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><img src="worldmap.png" alt="World Map" usemap="#worldmap">
+-- ><map name="worldmap">
+-- >    <area shape="rect" coords="0,0,200,200" alt="North America" href="northamerica.html">
+-- >    <area shape="rect" coords="200,0,400,200" alt="Europe" href="europe.html">
+-- ></map>
 map :: [Attribute] -> [Html lng] -> Html lng
 map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
@@ -2202,11 +2241,16 @@ map = ParentNode "<map" "</map>"
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Make sure to "
+-- >    , Html.mark []
+-- >        [ Html.text "complete" ]
+-- >    , Html.text " the assignment by Friday."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Make sure to <mark>complete</mark> the assignment by Friday.</p>
 mark :: [Attribute] -> [Html lng] -> Html lng
 mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
@@ -2221,11 +2265,30 @@ mark = ParentNode "<mark" "</mark>"
 --
 -- __Input:__
 --
--- >
+-- >Html.menu []
+-- >    [ Html.li []
+-- >        [ Html.a
+-- >            [ Attr.href "profile.html" ]
+-- >            [ Html.text "Profile" ]
+-- >        ]
+-- >    , Html.li []
+-- >        [ Html.a
+-- >            [ Attr.href "settings.html" ]
+-- >            [ Html.text "Settings" ]
+-- >    , Html.li []
+-- >        [ Html.a
+-- >            [ Attr.href "logout.html" ]
+-- >            [ Html.text "Logout" ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><menu>
+-- >    <li><a href="profile.html">Profile</a></li>
+-- >    <li><a href="settings.html">Settings</a></li>
+-- >    <li><a href="logout.html">Logout</a></li>
+-- ></menu>
 menu :: [Attribute] -> [Html lng] -> Html lng
 menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
@@ -2240,11 +2303,26 @@ menu = ParentNode "<menu" "</menu>"
 --
 -- __Input:__
 --
--- >
+-- >Html.head []
+-- >    [ Html.meta
+-- >        [ Attr.charset "UTF-8" ]
+-- >    , Html.meta
+-- >        [ Attr.name "author"
+-- >        , Attr.content "John Doe"
+-- >        ]
+-- >    , Html.meta
+-- >        [ Attr.name "viewport"
+-- >        , Attr.content "width=device-width, initial-scale=1.0"
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><head>
+-- >    <meta charset="UTF-8">
+-- >    <meta name="author" content="John Doe">
+-- >    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-- ></head>
 meta :: [Attribute] -> Html lng
 meta = LeafNode "<meta"
 {-# INLINE meta #-}
@@ -2259,11 +2337,19 @@ meta = LeafNode "<meta"
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Progress: "
+-- >    , Html.meter
+-- >        [ Attr.value "75"
+-- >        , Attr.min "0"
+-- >        , Attr.max "100"
+-- >        ]
+-- >        [ Html.text "75%" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Progress: <meter value="75" min="0" max="100">75%</meter></p>
 meter :: [Attribute] -> [Html lng] -> Html lng
 meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
@@ -2278,11 +2364,35 @@ meter = ParentNode "<meter" "</meter>"
 --
 -- __Input:__
 --
--- >
+-- >Html.nav []
+-- >    [ Html.ul []
+-- >        [ Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "home.html" ]
+-- >                [ Html.text "Home" ]
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "about.html" ]
+-- >                [ Html.text "About" ]
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "contact.html" ]
+-- >                [ Html.text "Contact" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><nav>
+-- >    <ul>
+-- >        <li><a href="home.html">Home</a></li>
+-- >        <li><a href="about.html">About</a></li>
+-- >        <li><a href="contact.html">Contact</a></li>
+-- >    </ul>
+-- ></nav>
 nav :: [Attribute] -> [Html lng] -> Html lng
 nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
@@ -2297,11 +2407,16 @@ nav = ParentNode "<nav" "</nav>"
 --
 -- __Input:__
 --
--- >
+-- >Html.noscript []
+-- >    [ Html.p []
+-- >        [ Html.text "This page requires JavaScript to function properly." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><noscript>
+-- >    <p>This page requires JavaScript to function properly.</p>
+-- ></noscript>
 noscript :: [Attribute] -> [Html lng] -> Html lng
 noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
@@ -2316,11 +2431,17 @@ noscript = ParentNode "<noscript" "</noscript>"
 --
 -- __Input:__
 --
--- >
+-- >Html.object
+-- >    [ Attr.data_ "video.mp4"
+-- >    , Attr.type_ "video/mp4"
+-- >    , Attr.width "300"
+-- >    , Attr.height "200"
+-- >    ]
+-- >    []
 --
 -- __Output:__
 --
--- >
+-- ><object data="video.mp4" type="video/mp4" width="300" height="200"></object>
 object :: [Attribute] -> [Html lng] -> Html lng
 object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
@@ -2335,11 +2456,19 @@ object = ParentNode "<object" "</object>"
 --
 -- __Input:__
 --
--- >
+-- >Html.ol []
+-- >    [ Html.li []
+-- >        [ Html.text "Item 1" ]
+-- >    , Html.li []
+-- >        [ Html.text "Item 2" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><ol>
+-- >    <li>Item 1</li>
+-- >    <li>Item 2</li>
+-- ></ol>
 ol :: [Attribute] -> [Html lng] -> Html lng
 ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
@@ -2354,11 +2483,35 @@ ol = ParentNode "<ol" "</ol>"
 --
 -- __Input:__
 --
--- >
+-- >Html.select []
+-- >    [ Html.optgroup
+-- >        [ Attr.label "Fruits" ]
+-- >        [ Html.option []
+-- >            [ Html.text "Apple" ]
+-- >        , Html.option []
+-- >            [ Html.text "Orange" ]
+-- >        ]
+-- >    , Html.optgroup
+-- >        [ Attr.label "Vegetables" ]
+-- >        [ Html.option []
+-- >            [ Html.text "Carrot" ]
+-- >        , Html.option []
+-- >            [ Html.text "Spinach" ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><select>
+-- >    <optgroup label="Fruits">
+-- >        <option>Apple</option>
+-- >        <option>Orange</option>
+-- >    </optgroup>
+-- >    <optgroup label="Vegetables">
+-- >        <option>Carrot</option>
+-- >        <option>Spinach</option>
+-- >    </optgroup>
+-- ></select>
 optgroup :: [Attribute] -> [Html lng] -> Html lng
 optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
@@ -2373,11 +2526,25 @@ optgroup = ParentNode "<optgroup" "</optgroup>"
 --
 -- __Input:__
 --
--- >
+-- >Html.select []
+-- >    [ Html.option
+-- >        [ Attr.value "apple" ]
+-- >        [ Html.text "Apple" ]
+-- >    , Html.option
+-- >        [ Attr.value "banana" ]
+-- >        [ Html.text "Banana" ]
+-- >    , Html.option
+-- >        [ Attr.value "orange" ]
+-- >        [ Html.text "Orange" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><select>
+-- >    <option value="apple">Apple</option>
+-- >    <option value="banana">Banana</option>
+-- >    <option value="orange">Orange</option>
+-- ></select>
 option :: [Attribute] -> [Html lng] -> Html lng
 option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
@@ -2392,11 +2559,24 @@ option = ParentNode "<option" "</option>"
 --
 -- __Input:__
 --
--- >
+-- >[ Html.p []
+-- >    [ Html.text "Total: "
+-- >    , Html.output
+-- >        [ Attr.name "result" ]
+-- >        [ Html.text "0" ]
+-- >    ]
+-- >, Html.input
+-- >    [ Attr.type_ "range"
+-- >    , Attr.min "0"
+-- >    , Attr.max "100"
+-- >    , Attr.oninput "result.value = this.value"
+-- >    ]
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><p>Total: <output name="result">0</output></p>
+-- ><input type="range" min="0" max="100" oninput="result.value = this.value">
 output :: [Attribute] -> [Html lng] -> Html lng
 output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
@@ -2411,11 +2591,12 @@ output = ParentNode "<output" "</output>"
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "This is a paragraph of text." ]
 --
 -- __Output:__
 --
--- >
+-- ><p>This is a paragraph of text.</p>
 p :: [Attribute] -> [Html lng] -> Html lng
 p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
@@ -2425,6 +2606,33 @@ p = ParentNode "<p" "</p>"
 --
 -- The /\<picture\>/ element provides multiple sources for an image, allowing the browser to select the most appropriate version based on
 -- factors such as device size or resolution.
+--
+-- ==== __Example__
+--
+-- __Input:__
+--
+-- >Html.picture []
+-- >    [ Html.source
+-- >        [ Attr.srcset "image-large.jpg"
+-- >        , Attr.media "(min-width: 800px)"
+-- >        ]
+-- >    , Html.source
+-- >        [ Attr.srcset "image-medium.jpg"
+-- >        , Attr.media "(min-width: 500px)"
+-- >        ]
+-- >    , Html.img
+-- >        [ Attr.src "image-small.jpg"
+-- >        , Attr.alt "An image"
+-- >        ]
+-- >    ]
+--
+-- __Output:__
+--
+-- ><picture>
+-- >    <source srcset="image-large.jpg" media="(min-width: 800px)">
+-- >    <source srcset="image-medium.jpg" media="(min-width: 500px)">
+-- >    <img src="image-small.jpg" alt="An image">
+-- ></picture>
 picture :: [Attribute] -> [Html lng] -> Html lng
 picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
@@ -2439,11 +2647,14 @@ picture = ParentNode "<picture" "</picture>"
 --
 -- __Input:__
 --
--- >
+-- >Html.pre []
+-- >    [ Html.text "console.log("Hello, world!");" ]
 --
 -- __Output:__
 --
--- >
+-- ><pre>
+-- >    console.log("Hello, world!");
+-- ></pre>
 pre :: [Attribute] -> [Html lng] -> Html lng
 pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
@@ -2458,11 +2669,18 @@ pre = ParentNode "<pre" "</pre>"
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Uploading: "
+-- >    , Html.progress
+-- >        [ Attr.value "70"
+-- >        , Attr.max "100"
+-- >        ]
+-- >        [ Html.text "70%" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Uploading: <progress value="70" max="100">70%</progress></p>
 progress :: [Attribute] -> [Html lng] -> Html lng
 progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
@@ -2470,17 +2688,22 @@ progress = ParentNode "<progress" "</progress>"
 
 -- | Generates an HTML /\<q\>/ element with the given attributes and contents.
 --
--- The /\<q\>/ element encloses a short inline quotation, typically surrounded by quotation marks or other formatting.
+-- The /\<q\>/ element represents a short inline quotation. It is used to indicate quoted content withing a paragraph or other block of
+-- text.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "He said, "
+-- >    , Html.q []
+-- >        [ Html.text "Life is either a daring adventure or nothing at all." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>He said, <q>Life is either a daring adventure or nothing at all.</q></p>
 q :: [Attribute] -> [Html lng] -> Html lng
 q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
@@ -2488,18 +2711,28 @@ q = ParentNode "<q" "</q>"
 
 -- | Generates an HTML /\<rp\>/ element with the given attributes and contents.
 --
--- The /\<rp\>/ element provides fallback parentheses for browsers that do not support the ruby annotation feature, often used in East Asian
--- typography.
+-- The /\<rp\>/ element is used to provide parentheses for browsers that do not support ruby annotations. It is used in conjunction with the
+-- /\<ruby\>/ element to surround the text that provides the pronunciation or meaning of characters in East Asian typography.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.ruby []
+-- >    [ Html.text "漢"
+-- >    , Html.rp []
+-- >        [ Html.text "(" ]
+-- >    , Html.rt []
+-- >        [ Html.text "Kan" ]
+-- >    , Html.rp []
+-- >        [ Html.text ")" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><ruby>
+-- >    漢<rp>(</rp><rt>Kan</rt><rp>)</rp>
+-- ></ruby>
 rp :: [Attribute] -> [Html lng] -> Html lng
 rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
@@ -2507,18 +2740,28 @@ rp = ParentNode "<rp" "</rp>"
 
 -- | Generates an HTML /\<rt\>/ element with the given attributes and contents.
 --
--- The /\<rt\>/ element defines the pronunciation of characters in a ruby annotation, commonly used to provide phonetic information for East
--- Asian languages.
+-- The /\<rt\>/ element encloses the text that provides the pronunciation or meaning of characters in East Asian typography when using ruby
+-- annotations.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.ruby []
+-- >    [ Html.text "漢"
+-- >    , Html.rp []
+-- >        [ Html.text "(" ]
+-- >    , Html.rt []
+-- >        [ Html.text "Kan" ]
+-- >    , Html.rp []
+-- >        [ Html.text ")" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><ruby>
+-- >    漢<rp>(</rp><rt>Kan</rt><rp>)</rp>
+-- ></ruby>
 rt :: [Attribute] -> [Html lng] -> Html lng
 rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
@@ -2526,514 +2769,1078 @@ rt = ParentNode "<rt" "</rt>"
 
 -- | Generates an HTML /\<ruby\>/ element with the given attributes and contents.
 --
--- The /\<ruby\>/ element represents a ruby annotation, used to provide additional pronunciation or translation information for East Asian
--- characters.
+-- The /\<ruby\>/ element represents a ruby annotation, which consists of one or more text elements along with an optional pronunciation
+-- guide. It is typically used in East Asian typography to indicate the pronunciation or meaning of characters.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.ruby []
+-- >    [ Html.text "漢"
+-- >    , Html.rp []
+-- >        [ Html.text "(" ]
+-- >    , Html.rt []
+-- >        [ Html.text "Kan" ]
+-- >    , Html.rp []
+-- >        [ Html.text ")" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><ruby>
+-- >    漢<rp>(</rp><rt>Kan</rt><rp>)</rp>
+-- ></ruby>
 ruby :: [Attribute] -> [Html lng] -> Html lng
 ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
 
 
--- | Generates an HTML __s__ element with the given attributes and contents.
+-- | Generates an HTML /\<s\>/ element with the given attributes and contents.
+--
+-- The /\<s\>/ element is used to represent text that is no longer accurate or relevant. It renders the enclosed text with a strikethrough
+-- style to indicate that it has been deleted or deprecated.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "This feature is "
+-- >    , Html.s []
+-- >        [ Html.text "no longer supported" ]
+-- >    , Html.text " deprecated."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>This feature is <s>no longer supported</s> deprecated.</p>
 s :: [Attribute] -> [Html lng] -> Html lng
 s = ParentNode "<s" "</s>"
 {-# INLINE s #-}
 
 
--- | Generates an HTML __samp__ element with the given attributes and contents.
+-- | Generates an HTML /\<samp\>/ element with the given attributes and contents.
+--
+-- The /\<samp\>/ element encloses text that represents sample output from a computer program or script. It typically renders the text in a
+-- monospace font to distinguish it from regular content.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "The program output is: "
+-- >    , Html.samp []
+-- >        [ Html.text "Hello, world!" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>The program output is: <samp>Hello, world!</samp></p>
 samp :: [Attribute] -> [Html lng] -> Html lng
 samp = ParentNode "<samp" "</samp>"
 {-# INLINE samp #-}
 
 
--- | Generates an HTML __script__ element with the given attributes and contents.
+-- | Generates an HTML /\<script\>/ element with the given attributes and contents.
+--
+-- The /\<script\>/ element is used to embed or reference external JavaScript code within an HTML document. It can be placed in the
+-- document\'s /\<head\>/ or /\<body\>/ section.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.script []
+-- >    [ Html.text "console.log("Hello, world!");" ]
 --
 -- __Output:__
 --
--- >
+-- ><script>
+-- >    console.log("Hello, world!");
+-- ></script>
 script :: [Attribute] -> [Html lng] -> Html lng
 script = ParentNode "<script" "</script>"
 {-# INLINE script #-}
 
 
--- | Generates an HTML __section__ element with the given attributes and contents.
+-- | Generates an HTML /\<section\>/ element with the given attributes and contents.
+--
+-- The /\<section\>/ element represents a thematic grouping of content within a document. It is used to structure the content into
+-- semantically meaningful sections.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.section []
+-- >    [ Html.h2 []
+-- >        [ Html.text "About Us" ]
+-- >    , Html.p []
+-- >        [ Html.text "We are a company dedicated to creating innovative solutions." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><section>
+-- >    <h2>About Us</h2>
+-- >    <p>We are a company dedicated to creating innovative solutions.</p>
+-- ></section>
 section :: [Attribute] -> [Html lng] -> Html lng
 section = ParentNode "<section" "</section>"
 {-# INLINE section #-}
 
 
--- | Generates an HTML __select__ element with the given attributes and contents.
+-- | Generates an HTML /\<select\>/ element with the given attributes and contents.
+--
+-- The /\<select\>/ element creates a dropdown list from which users can select one or more options. It is used for creating form controls
+-- to select choices from a predefined set.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >[ Html.label
+-- >    [ Attr.for "country" ]
+-- >    [ Html.text "Select your country:" ]
+-- >, Html.select
+-- >    [ Attr.id "country"
+-- >    , Attr.name "country"
+-- >    ]
+-- >    [ Html.option
+-- >        [ Attr.value "usa" ]
+-- >        [ Html.text "United States" ]
+-- >    , Html.option
+-- >        [ Attr.value "canada" ]
+-- >        [ Html.text "Canada" ]
+-- >    , Html.option
+-- >        [ Attr.value "uk" ]
+-- >        [ Html.text "United Kingdom" ]
+-- >    ]
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><label for="country">Select your country:</label>
+-- ><select id="country" name="country">
+-- >    <option value="usa">United States</option>
+-- >    <option value="canada">Canada</option>
+-- >    <option value="uk">United Kingdom</option>
+-- ></select>
 select :: [Attribute] -> [Html lng] -> Html lng
 select = ParentNode "<select" "</select>"
 {-# INLINE select #-}
 
 
--- | Generates an HTML __slot__ element with the given attributes and contents.
+-- | Generates an HTML /\<slot\>/ element with the given attributes and contents.
+--
+-- The /\<slot\>/ element is used within a shadow DOM to define placeholders for where specific content should be inserted from the light
+-- DOM. It enables custom elements to distribute content.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >[ Html.template
+-- >    [ Attr.id "my-template" ]
+-- >    [ Html.p []
+-- >        [ Html.slot
+-- >            [ Attr.name "content" ]
+-- >            []
+-- >        ]
+-- >    ]
+-- >, ParentNode "<my-element" "</my-element>" []
+-- >    [ Html.p
+-- >        [ Attr.slot "content" ]
+-- >        [ Html.text "This content goes inside the slot." ]
+-- >    ]
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><template id="my-template">
+-- >    <p><slot name="content"></slot></p>
+-- ></template>
+-- ><my-element>
+-- >    <p slot="content">This content goes inside the slot.</p>
+-- ></my-element>
 slot :: [Attribute] -> [Html lng] -> Html lng
 slot = ParentNode "<slot" "</slot>"
 {-# INLINE slot #-}
 
 
--- | Generates an HTML __small__ element with the given attributes and contents.
+-- | Generates an HTML /\<small\>/ element with the given attributes and contents.
+--
+-- The /\<small\>/ element is used to indicate that the enclosed text is smaller and has reduced importance, typically used for legal
+-- disclaimers, copyright notices, or fine print.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.small []
+-- >        [ Html.text "This information is subject to change without notice." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p><small>This information is subject to change without notice.</small></p>
 small :: [Attribute] -> [Html lng] -> Html lng
 small = ParentNode "<small" "</small>"
 {-# INLINE small #-}
 
 
--- | Generates an HTML __source__ element with the given attributes.
+-- | Generates an HTML /\<source\>/ element with the given attributes.
+--
+-- The /\<source\>/ element is used within the /\<video\>/ and /\<audio\>/ elements to specify multiple media sources for the same media,
+-- allowing the browser to choose the most suitable source based on its capabilities.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.video
+-- >    [ Attr.controls True ]
+-- >    [ Html.source
+-- >        [ Attr.src "video.mp4"
+-- >        , Attr.type_ "video/mp4"
+-- >        ]
+-- >    , Html.source
+-- >        [ Attr.src "video.webm"
+-- >        , Attr.type_ "video/webm"
+-- >        ]
+-- >    , Html.text "Your browser does not support the video tag."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><video controls>
+-- >    <source src="video.mp4" type="video/mp4">
+-- >    <source src="video.webm" type="video/webm">
+-- >    Your browser does not support the video tag.
+-- ></video>
 source :: [Attribute] -> Html lng
 source = LeafNode "<source"
 {-# INLINE source #-}
 
 
--- | Generates an HTML __span__ element with the given attributes and contents.
+-- | Generates an HTML /\<span\>/ element with the given attributes and contents.
+--
+-- The /\<span\>/ element is an inline container used to apply styles or scripting to a specific portion of text within a larger element,
+-- without affecting the overall layout.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Click "
+-- >    , Html.span
+-- >        [ Attr.class_ "highlight" ]
+-- >        [ Html.text "here" ]
+-- >    , Html.text " to learn more."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Click <span class="highlight">here</span> to learn more.</p>
 span :: [Attribute] -> [Html lng] -> Html lng
 span = ParentNode "<span" "</span>"
 {-# INLINE span #-}
 
 
--- | Generates an HTML __strong__ element with the given attributes and contents.
+-- | Generates an HTML /\<strong\>/ element with the given attributes and contents.
+--
+-- The /\<strong\>/ element is used to indicate that the enclosed text has strong importance or emphasis. It is typically rendered as bold
+-- text.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.strong []
+-- >        [ Html.text "Warning:" ]
+-- >    , Html.text " Do not proceed without proper safety gear."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p><strong>Warning:</strong> Do not proceed without proper safety gear.</p>
 strong :: [Attribute] -> [Html lng] -> Html lng
 strong = ParentNode "<strong" "</strong>"
 {-# INLINE strong #-}
 
 
--- | Generates an HTML __style__ element with the given attributes and contents.
+-- | Generates an HTML /\<style\>/ element with the given attributes and contents.
+--
+-- The /\<style\>/ element defines inline CSS within an HTML document. It allows you to apply specific styles to the content within the same
+-- document.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >[ Html.style []
+-- >    [ Html.text "p { color: blue; font-size: 16px; }" ]
+-- >, Html.p []
+-- >    [ Html.text "This is a styled paragraph." ]
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><style>
+-- >    p {
+-- >        color: blue;
+-- >        font-size: 16px;
+-- >    }
+-- ></style>
+-- ><p>This is a styled paragraph.</p>
 style :: [Attribute] -> [Html lng] -> Html lng
 style = ParentNode "<style" "</style>"
 {-# INLINE style #-}
 
 
--- | Generates an HTML __sub__ element with the given attributes and contents.
+-- | Generates an HTML /\<sub\>/ element with the given attributes and contents.
+--
+-- The /\<sub\>/ element renders text as subscript, which is often used for chemical formulas, mathematical subscripts, or annotations.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "H"
+-- >    , Html.sub []
+-- >        [ Html.text "2" ]
+-- >    , Html.text "O is the chemical formula for water."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>H<sub>2</sub>O is the chemical formula for water.</p>
 sub :: [Attribute] -> [Html lng] -> Html lng
 sub = ParentNode "<sub" "</sub>"
 {-# INLINE sub #-}
 
 
--- | Generates an HTML __summary__ element with the given attributes and contents.
+-- | Generates an HTML /\<summary\>/ element with the given attributes and contents.
+--
+-- The /\<summary\>/ element is used as a clickable summary for the content of a /\<details\>/ element, which provides a way to create
+-- collapsible sections of content with a visible summary.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.details []
+-- >    [ Html.summary []
+-- >        [ Html.text "Click to reveal more information" ]
+-- >    , Html.p []
+-- >        [ Html.text "Here is the additional content that was hidden." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><details>
+-- >    <summary>Click to reveal more information</summary>
+-- >    <p>Here is the additional content that was hidden.</p>
+-- ></details>
 summary :: [Attribute] -> [Html lng] -> Html lng
 summary = ParentNode "<summary" "</summary>"
 {-# INLINE summary #-}
 
 
--- | Generates an HTML __sup__ element with the given attributes and contents.
+-- | Generates an HTML /\<sup\>/ element with the given attributes and contents.
+--
+-- The /\<sup\>/ element is used to render text as superscript, which is typically used for mathematical exponents or footnotes.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Euler's identity: e"
+-- >    , Html.sup []
+-- >        [ Html.text "iπ" ]
+-- >    , Html.text " + 1 = 0"
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Euler's identity: e<sup>iπ</sup> + 1 = 0</p>
 sup :: [Attribute] -> [Html lng] -> Html lng
 sup = ParentNode "<sup" "</sup>"
 {-# INLINE sup #-}
 
 
--- | Generates an HTML __table__ element with the given attributes and contents.
+-- | Generates an HTML /\<table\>/ element with the given attributes and contents.
+--
+-- The /\<table\>/ element is used to create a table that organizes data into rows and columns. It contains various table-related elements
+-- like /\<thead\>/, /\<tbody\>/, and /\<tfoot\>/ for structuring the table.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- ></table>
 table :: [Attribute] -> [Html lng] -> Html lng
 table = ParentNode "<table" "</table>"
 {-# INLINE table #-}
 
 
--- | Generates an HTML __tbody__ element with the given attributes and contents.
+-- | Generates an HTML /\<tbody\>/ element with the given attributes and contents.
+--
+-- The /\<tbody\>/ element is used to group the body content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- rows of data within the table.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- ></table>
 tbody :: [Attribute] -> [Html lng] -> Html lng
 tbody = ParentNode "<tbody" "</tbody>"
 {-# INLINE tbody #-}
 
 
--- | Generates an HTML __td__ element with the given attributes and contents.
+-- | Generates an HTML /\<td\>/ element with the given attributes and contents.
+--
+-- The /\<td\>/ element represents a single data cell within a table row (/\<tr\>/). It is used to display data within the columns of a
+-- table.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.tr []
+-- >        [ Html.td []
+-- >            [ Html.text "Apple" ]
+-- >        , Html.td []
+-- >            [ Html.text "Red" ]
+-- >        , Html.td []
+-- >            [ Html.text "Fruit" ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <tr>
+-- >        <td>Apple</td>
+-- >        <td>Red</td>
+-- >        <td>Fruit</td>
+-- >    </tr>
+-- ></table>
 td :: [Attribute] -> [Html lng] -> Html lng
 td = ParentNode "<td" "</td>"
 {-# INLINE td #-}
 
 
--- | Generates an HTML __template__ element with the given attributes and contents.
+-- | Generates an HTML /\<template\>/ element with the given attributes and contents.
+--
+-- The /\<template\>/ element is used to declare content that is not rendered when the page loads but can be cloned and used later via
+-- JavaScript. It is useful for creating reusable content that can be instantiated programmatically.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.template
+-- >    [ Attr.id "my-template" ]
+-- >    [ Html.p []
+-- >        [ Html.text "This is a template." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><template id="my-template">
+-- >    <p>This is a template content.</p>
+-- ></template>
 template :: [Attribute] -> [Html lng] -> Html lng
 template = ParentNode "<template" "</template>"
 {-# INLINE template #-}
 
 
--- | Generates an HTML __textarea__ element with the given attributes and contents.
+-- | Generates an HTML /\<textarea\>/ element with the given attributes and contents.
+--
+-- The /\<textarea\>/ element creates a multiline text input field where users can enter longer pieces of text, such as comments or
+-- messages.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >[ Html.label
+-- >    [ Attr.for "comment" ]
+-- >    [ Html.text "Enter your comment:" ]
+-- >, Html.textarea
+-- >    [ Attr.id "comment"
+-- >    , Attr.name "comment"
+-- >    , Attr.rows "4"
+-- >    , Attr.cols "50"
+-- >    ]
+-- >    []
+-- >]
 --
 -- __Output:__
 --
--- >
+-- ><label for="comment">Enter your comment:</label>
+-- ><textarea id="comment" name="comment" rows="4" cols="50"></textarea>
 textarea :: [Attribute] -> [Html lng] -> Html lng
 textarea = ParentNode "<textarea" "</textarea>"
 {-# INLINE textarea #-}
 
 
--- | Generates an HTML __tfoot__ element with the given attributes and contents.
+-- | Generates an HTML /\<tfoot\>/ element with the given attributes and contents.
+--
+-- The /\<tfoot\>/ element is used to group the footer content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- footer rows that provide additional information about the table data.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tfoot []
+-- >        [ Html.tr []
+-- >            [ Html.td
+-- >                [ Attr.colspan "2" ]
+-- >                [ Html.text "Total: 2 persons" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- >    <tfoot>
+-- >        <tr>
+-- >            <td colspan="2">Total: 2 persons</td>
+-- >        </tr>
+-- >    </tfoot>
+-- ></table>
 tfoot :: [Attribute] -> [Html lng] -> Html lng
 tfoot = ParentNode "<tfoot" "</tfoot>"
 {-# INLINE tfoot #-}
 
 
--- | Generates an HTML __th__ element with the given attributes and contents.
+-- | Generates an HTML /\<th\>/ element with the given attributes and contents.
+--
+-- The /\<th\>/ element represents a header cell within a table row (/\<tr\>/). It is used to define header information for a column or row
+-- in a table. The content within a /\<th\>/ element is typically bold and centered by default.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- ></table>
 th :: [Attribute] -> [Html lng] -> Html lng
 th = ParentNode "<th" "</th>"
 {-# INLINE th #-}
 
 
--- | Generates an HTML __thead__ element with the given attributes and contents.
+-- | Generates an HTML /\<thead\>/ element with the given attributes and contents.
+--
+-- The /\<thead\>/ element is used to group the header content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- header rows that label the columns or rows in the table.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- ></table>
 thead :: [Attribute] -> [Html lng] -> Html lng
 thead = ParentNode "<thead" "</thead>"
 {-# INLINE thead #-}
 
 
--- | Generates an HTML __time__ element with the given attributes and contents.
+-- | Generates an HTML /\<time\>/ element with the given attributes and contents.
+--
+-- The /\<time\>/ element represents a specific time or date, either as machine-readable text or for user-friendly display. It can include a
+-- /datetime/ attribute for semantic and accessible purposes.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Meeting time: "
+-- >    , Html.time
+-- >        [ Attr.datetime "2023-09-15T10:00" ]
+-- >        [ Html.text "September 15, 10:00 AM" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Meeting time: <time datetime="2023-09-15T10:00">September 15, 10:00 AM</time></p>
 time :: [Attribute] -> [Html lng] -> Html lng
 time = ParentNode "<time" "</time>"
 {-# INLINE time #-}
 
 
--- | Generates an HTML __title__ element with the given attributes and contents.
+-- | Generates an HTML /\<title\>/ element with the given attributes and contents.
+--
+-- The /\<title\>/ element defines the title of the document, which is displayed in the browser\'s title bar or tab. It is also used by
+-- search engines and social media when sharing links.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.head []
+-- >    [ Html.title []
+-- >        [ Html.text "My Website" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><head>
+-- >    <title>My Website</title>
+-- ></head>
 title :: [Attribute] -> [Html lng] -> Html lng
 title = ParentNode "<title" "</title>"
 {-# INLINE title #-}
 
 
--- | Generates an HTML __tr__ element with the given attributes and contents.
+-- | Generates an HTML /\<tr\>/ element with the given attributes and contents.
+--
+-- The /\<tr\>/ element defines a row within a table. It contains a collection of table cells (/\<td\>/ or /\<th\>/) that represent data for
+-- that particular row.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.table []
+-- >    [ Html.thead []
+-- >        [ Html.tr []
+-- >            [ Html.th []
+-- >                [ Html.text "Name" ]
+-- >            , Html.th []
+-- >                [ Html.text "Age" ]
+-- >            ]
+-- >        ]
+-- >    , Html.tbody []
+-- >        [ Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "John" ]
+-- >            , Html.td []
+-- >                [ Html.text "30" ]
+-- >            ]
+-- >        , Html.tr []
+-- >            [ Html.td []
+-- >                [ Html.text "Alice" ]
+-- >            , Html.td []
+-- >                [ Html.text "25" ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><table>
+-- >    <thead>
+-- >        <tr>
+-- >            <th>Name</th>
+-- >            <th>Age</th>
+-- >        </tr>
+-- >    </thead>
+-- >    <tbody>
+-- >        <tr>
+-- >            <td>John</td>
+-- >            <td>30</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Alice</td>
+-- >            <td>25</td>
+-- >        </tr>
+-- >    </tbody>
+-- ></table>
 tr :: [Attribute] -> [Html lng] -> Html lng
 tr = ParentNode "<tr" "</tr>"
 {-# INLINE tr #-}
 
 
--- | Generates an HTML __track__ element with the given attributes.
+-- | Generates an HTML /\<track\>/ element with the given attributes.
+--
+-- The /\<track\>/ element specifies text tracks for media elements like /\<video\>/ and /\<audio\>/, such as subtitles, captions, or
+-- descriptions, to provide additional content for users.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.video
+-- >    [ Attr.controls True ]
+-- >    [ Html.source
+-- >        [ Attr.src "video.mp4"
+-- >        , Attr.type_ "video/mp4"
+-- >        ]
+-- >    , Html.track
+-- >        [ Attr.src "subtitles.vtt"
+-- >        , Attr.kind "subtitles"
+-- >        , Attr.label "English"
+-- >        , Attr.srclang "en"
+-- >        ]
+-- >    , Html.text "Your browser does not support the video tag."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><video controls>
+-- >    <source src="video.mp4" type="video/mp4">
+-- >    <track src="subtitles.vtt" kind="subtitles" label="English" srclang="en">
+-- >    Your browser does not support the video tag.
+-- ></video>
 track :: [Attribute] -> Html lng
 track = LeafNode "<track"
 {-# INLINE track #-}
 
 
--- | Generates an HTML __u__ element with the given attributes and contents.
+-- | Generates an HTML /\<u\>/ element with the given attributes and contents.
+--
+-- The /\<u\>/ element renders enclosed text with an underline, traditionally indicating that the text is meant to be a hyperlink. However,
+-- it is generally recommended to use CSS for styling, and /\<u\>/ is mostly avoided for indicating hyperlinks.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.u []
+-- >        [ Html.text "This text is underlined." ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p><u>This text is underlined.</u></p>
 u :: [Attribute] -> [Html lng] -> Html lng
 u = ParentNode "<u" "</u>"
 {-# INLINE u #-}
 
 
--- | Generates an HTML __ul__ element with the given attributes and contents.
+-- | Generates an HTML /\<ul\>/ element with the given attributes and contents.
+--
+-- The /\<ul\>/ element is used to create an unordered (bulleted) list. It contains one or more /\<li\>/ elements that represent individual
+-- list items.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.ul []
+-- >    [ Html.li []
+-- >        [ Html.text "Item 1" ]
+-- >    , Html.li []
+-- >        [ Html.text "Item 2" ]
+-- >    , Html.li []
+-- >        [ Html.text "Item 3" ]
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><ul>
+-- >    <li>Item 1</li>
+-- >    <li>Item 2</li>
+-- >    <li>Item 3</li>
+-- ></ul>
 ul :: [Attribute] -> [Html lng] -> Html lng
 ul = ParentNode "<ul" "</ul>"
 {-# INLINE ul #-}
 
 
--- | Generates an HTML __var__ element with the given attributes and contents.
+-- | Generates an HTML /\<var\>/ element with the given attributes and contents.
+--
+-- The /\<var\>/ element indicates that the enclosed text represents a variable or placeholder within a mathematical expression or
+-- programming context.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "The equation is "
+-- >        [ Html.var []
+-- >            [ Html.text "x = y + z" ]
+-- >        ]
+-- >    , Html.text "."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>The equation is <var>x = y + z</var>.</p>
 var :: [Attribute] -> [Html lng] -> Html lng
 var = ParentNode "<var" "</var>"
 {-# INLINE var #-}
 
 
--- | Generates an HTML __video__ element with the given attributes and contents.
+-- | Generates an HTML /\<video\>/ element with the given attributes and contents.
+--
+-- The /\<video\>/ element is used to embed video content in a web page. It provides a container for playing videos and allows for controls,
+-- source specifications, and various settings.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.video
+-- >    [ Attr.controls True ]
+-- >    [ Html.source
+-- >        [ Attr.src "video.mp4"
+-- >        , Attr.type_ "video/mp4"
+-- >        ]
+-- >    , Html.text "Your browser does not support the video tag."
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><video controls>
+-- >    <source src="video.mp4" type="video/mp4">
+-- >    Your browser does not support the video tag.
+-- ></video>
 video :: [Attribute] -> [Html lng] -> Html lng
 video = ParentNode "<video" "</video>"
 {-# INLINE video #-}
 
 
--- | Generates an HTML __wbr__ element with the given attributes.
+-- | Generates an HTML /\<wbr\>/ element with the given attributes.
+--
+-- The /\<wbr\>/ element suggests a point in text where a line break may occur when necessary, such as in long URLs or strings without
+-- spaces, helping to improve text layout and readability.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >
+-- >Html.p []
+-- >    [ Html.text "Thisisaverylongwordthatmightneed"
+-- >    , Html.wbr []
+-- >    , Html.text "to"
+-- >    , Html.br []
+-- >    , Html.text "break"
+-- >    ]
 --
 -- __Output:__
 --
--- >
+-- ><p>Thisisaverylongwordthatmightneed<wbr>to<br>break</p>
 wbr :: [Attribute] -> Html lng
 wbr = LeafNode "<wbr"
 {-# INLINE wbr #-}
