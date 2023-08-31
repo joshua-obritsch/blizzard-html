@@ -14,68 +14,97 @@
 --
 -- __Input:__
 --
--- @
--- Html.doctype []
---     [ Html.html []
---         [ Html.head []
---             [ Html.title []
---                 [ Html.text \"The Elder Scrolls: Skyrim Guide\" ]
---             ]
---         , Html.body []
---             [ Html.h1 []
---                 [ Html.text \"Mastering Skyrim: A Guide to Becoming the Dragonborn\" ]
---             , Html.article []
---                 [ Html.h2 []
---                     [ Html.text \"Alchemy for Beginners\" ]
---                 , Html.p []
---                     [ Html.text \"Learn the art of potion-making and uncover rare ingredients to enhance your adventures.\" ]
---                 ]
---             , Html.article []
---                 [ Html.h2 []
---                     [ Html.text \"Battling Dragons\" ]
---                 , Html.p []
---                     [ Html.text \"Equip yourself with strategies and weapons to conquer fearsome dragons.\" ]
---                 ]
---             , Html.article []
---                 [ Html.h2 []
---                     [ Html.text \"Thieves Guild Secrets\" ]
---                 , Html.p []
---                     [ Html.text \"Join the Thieves Guild and delve into the hidden world of stealth and thievery.\" ]
---                 ]
---             ]
---         ]
---     ]
--- @
+-- >Html.doctype
+-- >    [ Html.html []
+-- >        [ Html.head []
+-- >            [ Html.title []
+-- >                [ "My Website" ]
+-- >            ]
+-- >        , Html.body []
+-- >            [ Html.header []
+-- >                [ Html.h1 []
+-- >                    [ "Welcome to My Website" ]
+-- >                , Html.nav []
+-- >                    [ Html.ul []
+-- >                        [ Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/" ]
+-- >                                [ "Home" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/about" ]
+-- >                                [ "About" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/contact" ]
+-- >                                [ "Contact" ]
+-- >                            ]
+-- >                        ]
+-- >                    ]
+-- >                ]
+-- >            , Html.main []
+-- >                [ Html.section []
+-- >                    [ Html.h2 []
+-- >                        [ "About Me" ]
+-- >                    , Html.p []
+-- >                        [ "I'm a web developer who loves creating useful websites." ]
+-- >                    ]
+-- >                , Html.section []
+-- >                    [ Html.h2 []
+-- >                        [ "Contact Information" ]
+-- >                    , Html.p []
+-- >                        [ "Email: contact@example.com" ]
+-- >                    ]
+-- >                ]
+-- >            , Html.footer []
+-- >                [ Html.p []
+-- >                    [ "&copy; 2023 My Website. All rights reserved." ]
+-- >                ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- @
--- \<!DOCTYPE html\>
--- \<html\>
---     \<head\>
---         \<title\>The Elder Scrolls: Skyrim Guide\<\/title\>
---     \<\/head\>
---     \<body\>
---         \<h1\>Mastering Skyrim: A Guide to Becoming the Dragonborn\<\/h1\>
---         \<article\>
---             \<h2\>Alchemy for Beginners\<\/h2\>
---             \<p\>Learn the art of potion-making and uncover rare ingredients to enhance your adventures.\<\/p\>
---         \<\/article\>
---         \<article\>
---             \<h2\>Battling Dragons\<\/h2\>
---             \<p\>Equip yourself with strategies and weapons to conquer fearsome dragons.\<\/p\>
---         \<\/article\>
---         \<article\>
---             \<h2\>Thieves Guild Secrets\<\/h2\>
---             \<p\>Join the Thieves Guild and delve into the hidden world of stealth and thievery.\<\/p\>
---         \<\/article\>
---     \<\/body\>
--- \<\/html\>
--- @
+-- ><!DOCTYPE html>
+-- ><html>
+-- >    <head>
+-- >        <title>My Website</title>
+-- >    </head>
+-- >    <body>
+-- >        <header>
+-- >            <h1>Welcome to My Website</h1>
+-- >            <nav>
+-- >                <ul>
+-- >                    <li><a href="/">Home</a></li>
+-- >                    <li><a href="/about">About</a></li>
+-- >                    <li><a href="/contact">Contact</a></li>
+-- >                </ul>
+-- >            </nav>
+-- >        </header>
+-- >        <main>
+-- >            <section>
+-- >                <h2>About Me</h2>
+-- >                <p>I'm a web developer who loves creating useful websites.</p>
+-- >            </section>
+-- >            <section>
+-- >                <h2>Contact Information</h2>
+-- >                <p>Email: contact@example.com</p>
+-- >            </section>
+-- >        </main>
+-- >        <footer>
+-- >            <p>&copy; 2023 My Website. All rights reserved.</p>
+-- >        </footer>
+-- >    </body>
+-- ></html>
 --
 -- /Note: All examples in this module assume the following imports:/
 --
 -- @
+-- import Html (Html(..))
+--
 -- import qualified Html
 -- import qualified Html.Attributes as Attr
 -- @
@@ -83,142 +112,256 @@
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
 module Html
     ( -- * Types
+      -- ** Html
       Html(..)
+      -- ** Attribute
     , Attribute(..)
 
       -- * Classes
+      -- ** Buildable
     , Buildable(..)
+      -- ** Translatable
     , Translatable(..)
 
       -- * Declarations
+      -- ** \<!DOCTYPE\>
     , doctype
 
       -- * Elements
+      -- ** \<a\>
     , a
+      -- ** \<abbr\>
     , abbr
+      -- ** \<address\>
     , address
+      -- ** \<area\>
     , area
+      -- ** \<article\>
     , article
+      -- ** \<aside\>
     , aside
+      -- ** \<audio\>
     , audio
+      -- ** \<b\>
     , b
+      -- ** \<base\>
     , base
+      -- ** \<bdi\>
     , bdi
+      -- ** \<bdo\>
     , bdo
+      -- ** \<blockquote\>
     , blockquote
+      -- ** \<body\>
     , body
+      -- ** \<br\>
     , br
+      -- ** \<button\>
     , button
+      -- ** \<canvas\>
     , canvas
+      -- ** \<caption\>
     , caption
+      -- ** \<cite\>
     , cite
+      -- ** \<code\>
     , code
+      -- ** \<code\>
     , col
+      -- ** \<colgroup\>
     , colgroup
+      -- ** \<data\>
     , data_
+      -- ** \<datalist\>
     , datalist
+      -- ** \<dd\>
     , dd
+      -- ** \<del\>
     , del
+      -- ** \<details\>
     , details
+      -- ** \<dfn\>
     , dfn
+      -- ** \<dialog\>
     , dialog
+      -- ** \<div\>
     , div
+      -- ** \<dl\>
     , dl
+      -- ** \<dt\>
     , dt
+      -- ** \<em\>
     , em
+      -- ** \<embed\>
     , embed
+      -- ** \<fieldset\>
     , fieldset
+      -- ** \<figcaption\>
     , figcaption
+      -- ** \<figure\>
     , figure
+      -- ** \<footer\>
     , footer
+      -- ** \<form\>
     , form
+      -- ** \<h1\>
     , h1
+      -- ** \<h2\>
     , h2
+      -- ** \<h3\>
     , h3
+      -- ** \<h4\>
     , h4
+      -- ** \<h5\>
     , h5
+      -- ** \<h6\>
     , h6
+      -- ** \<head\>
     , head
+      -- ** \<header\>
     , header
+      -- ** \<hgroup\>
     , hgroup
+      -- ** \<hr\>
     , hr
+      -- ** \<html\>
     , html
+      -- ** \<i\>
     , i
+      -- ** \<iframe\>
     , iframe
+      -- ** \<img\>
     , img
+      -- ** \<input\>
     , input
+      -- ** \<ins\>
     , ins
+      -- ** \<kbd\>
     , kbd
+      -- ** \<label\>
     , label
+      -- ** \<legend\>
     , legend
+      -- ** \<li\>
     , li
+      -- ** \<link\>
     , link
+      -- ** \<main\>
     , main
+      -- ** \<map\>
     , map
+      -- ** \<mark\>
     , mark
+      -- ** \<menu\>
     , menu
+      -- ** \<meta\>
     , meta
+      -- ** \<meter\>
     , meter
+      -- ** \<nav\>
     , nav
+      -- ** \<noscript\>
     , noscript
+      -- ** \<object\>
     , object
+      -- ** \<ol\>
     , ol
+      -- ** \<optgroup\>
     , optgroup
+      -- ** \<option\>
     , option
+      -- ** \<output\>
     , output
+      -- ** \<p\>
     , p
+      -- ** \<picture\>
     , picture
+      -- ** \<pre\>
     , pre
+      -- ** \<progress\>
     , progress
+      -- ** \<q\>
     , q
+      -- ** \<rp\>
     , rp
+      -- ** \<rt\>
     , rt
+      -- ** \<ruby\>
     , ruby
+      -- ** \<s\>
     , s
+      -- ** \<samp\>
     , samp
+      -- ** \<script\>
     , script
+      -- ** \<section\>
     , section
+      -- ** \<select\>
     , select
+      -- ** \<slot\>
     , slot
+      -- ** \<small\>
     , small
+      -- ** \<source\>
     , source
+      -- ** \<span\>
     , span
+      -- ** \<strong\>
     , strong
+      -- ** \<style\>
     , style
+      -- ** \<sub\>
     , sub
+      -- ** \<summary\>
     , summary
+      -- ** \<sup\>
     , sup
+      -- ** \<table\>
     , table
+      -- ** \<tbody\>
     , tbody
+      -- ** \<td\>
     , td
+      -- ** \<template\>
     , template
+      -- ** \<textarea\>
     , textarea
+      -- ** \<tfoot\>
     , tfoot
+      -- ** \<th\>
     , th
+      -- ** \<thead\>
     , thead
+      -- ** \<time\>
     , time
+      -- ** \<title\>
     , title
+      -- ** \<tr\>
     , tr
+      -- ** \<track\>
     , track
+      -- ** \<u\>
     , u
+      -- ** \<ul\>
     , ul
+      -- ** \<var\>
     , var
+      -- ** \<video\>
     , video
+      -- ** \<wbr\>
     , wbr
-
-      -- * Text
-    , text
-    , empty
     ) where
 
 
-import Data.Bool (Bool(..))
+import Data.Bool (Bool(True, False))
 import Data.Foldable (foldr)
 import Data.Function (($), (.))
 import Data.Monoid ((<>), mempty)
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 import Text.Show (Show(..), showString)
+
+import Data.String (IsString(fromString))
 
 
 data Intl = Intl
@@ -257,9 +400,12 @@ data Html lng where
     IntlNode :: Translatable lng => lng -> Html lng
 
 
+instance IsString (Html lng) where
+    fromString = TextNode . fromString
+
+
 instance Show (Html lng) where
     show = unpack . toLazyText . build
-    {-# INLINE show #-}
 
 
 instance Buildable (Html lng) where
@@ -279,12 +425,10 @@ instance Buildable (Html lng) where
 
 instance {-# OVERLAPPING #-} Show [Html lng] where
     show = unpack . toLazyText . build
-    {-# INLINE show #-}
 
 
 instance Buildable [Html lng] where
     build = foldr ((<>) . build) mempty
-    {-# INLINE build #-}
 
 
 -- | Represents an HTML attribute.
@@ -301,7 +445,6 @@ data Attribute
 
 instance Show Attribute where
     show = unpack . toLazyText . build
-    {-# INLINE show #-}
 
 
 instance Buildable Attribute where
@@ -314,12 +457,10 @@ instance Buildable Attribute where
 
 instance {-# OVERLAPPING #-} Show [Attribute] where
     show = unpack . toLazyText . build
-    {-# INLINE show #-}
 
 
 instance Buildable [Attribute] where
     build = foldr ((<>) . build) mempty
-    {-# INLINE build #-}
 
 
 -- CLASSES
@@ -352,37 +493,33 @@ class Translatable a where
 --
 -- __Input:__
 --
--- @
--- Html.doctype
---     [ Html.html []
---         [ Html.head []
---             [ Html.title []
---                 [ Html.text \"Gigatron\" ]
---             ]
---         , Html.body []
---             [ Html.h1 []
---                 [ Html.text \"About\" ]
---             , Html.p []
---                 [ Html.text \"Gigatron is an 8-bit microcomputer built from TTL chips.\" ]
---             ]
---         ]
---     ]
--- @
+-- >Html.doctype
+-- >    [ Html.html []
+-- >        [ Html.head []
+-- >            [ Html.title []
+-- >                [ "My Website" ]
+-- >            ]
+-- >        , Html.body []
+-- >            [ Html.h1 []
+-- >                [ "Hello, world!" ]
+-- >            , Html.p []
+-- >                [ "This is a sample website." ]
+-- >            ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- @
--- \<!DOCTYPE html\>
--- \<html\>
---     \<head\>
---         \<title\>Gigatron\<\/title\>
---     \<\/head\>
---     \<body\>
---         \<h1\>About\<\/h1\>
---         \<p\>Gigatron is an 8-bit microcomputer built from TTL chips.\<\/p\>
---     \<\/body\>
--- \<\/html\>
--- @
+-- ><!DOCTYPE html>
+-- ><html>
+-- >    <head>
+-- >        <title>My Website</title>
+-- >    </head>
+-- >    <body>
+-- >        <h1>Hello, World!</h1>
+-- >        <p>This is a sample website.</p>
+-- >    </body>
+-- ></html>
 doctype :: [Html lng] -> Html lng
 doctype = RootNode "<!DOCTYPE html>\n"
 {-# INLINE doctype #-}
@@ -401,11 +538,11 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Visit our "
+-- >    [ "Visit our "
 -- >    , Html.a
 -- >        [ Attr.href "https://www.example.com" ]
--- >        [ Html.text "website" ]
--- >    , Html.text " for more information."
+-- >        [ "website" ]
+-- >    , " for more information."
 -- >    ]
 --
 -- __Output:__
@@ -426,11 +563,11 @@ a = ParentNode "<a" "</a>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "The "
+-- >    [ "The "
 -- >    , Html.abbr
 -- >        [ Attr.title "Hypertext Markup Language" ]
--- >        [ Html.text "HTML" ]
--- >    , Html.text " standard revolutionized web development."
+-- >        [ "HTML" ]
+-- >    , " standard revolutionized web development."
 -- >    ]
 --
 -- __Output:__
@@ -452,13 +589,13 @@ abbr = ParentNode "<abbr" "</abbr>"
 --
 -- >Html.address []
 -- >    [ Html.p []
--- >        [ Html.text "Contact us at "
+-- >        [ "Contact us at "
 -- >        , Html.a
 -- >            [ Attr.href "mailto:info@example.com" ]
--- >            [ Html.text "info@example.com" ]
+-- >            [ "info@example.com" ]
 -- >        ]
 -- >    , Html.p []
--- >        [ Html.text "123 Main Street, Cityville" ]
+-- >        [ "123 Main Street, Cityville" ]
 -- >    ]
 --
 -- __Output:__
@@ -526,14 +663,14 @@ area = LeafNode "<area"
 --
 -- >Html.article []
 -- >    [ Html.h2 []
--- >        [ Html.text "Introduction to AI in Healthcare" ]
+-- >        [ "Introduction to AI in Healthcare" ]
 -- >    , Html.p []
--- >        [ Html.text "Learn how AI is transforming healthcare..." ]
+-- >        [ "Learn how AI is transforming healthcare..." ]
 -- >    , Html.p []
--- >        [ Html.text "By "
+-- >        [ "By "
 -- >        , Html.a
 -- >            [ Attr.href "author.html" ]
--- >            [ Html.text "Dr. Smith" ]
+-- >            [ "Dr. Smith" ]
 -- >        ]
 -- >    ]
 --
@@ -560,14 +697,14 @@ article = ParentNode "<article" "</article>"
 --
 -- >Html.article []
 -- >    [ Html.h2 []
--- >        [ Html.text "Exploring National Parks" ]
+-- >        [ "Exploring National Parks" ]
 -- >    , Html.p []
--- >        [ Html.text "Visit these amazing parks..." ]
+-- >        [ "Visit these amazing parks..." ]
 -- >    , Html.aside []
 -- >        [ Html.h3 []
--- >            [ Html.text "Did You Know?" ]
+-- >            [ "Did You Know?" ]
 -- >        , Html.p []
--- >            [ Html.text "Yellowstone was the first national park established in 1872." ]
+-- >            [ "Yellowstone was the first national park established in 1872." ]
 -- >        ]
 -- >    ]
 --
@@ -601,7 +738,7 @@ aside = ParentNode "<aside" "</aside>"
 -- >        [ Attr.source "music.mp3"
 -- >        , Attr.type_ "audio/mpeg"
 -- >        ]
--- >    , Html.text "Your browser does not support the audio element."
+-- >    , "Your browser does not support the audio element."
 -- >    ]
 --
 -- __Output:__
@@ -625,10 +762,10 @@ audio = ParentNode "<audio" "</audio>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "This is "
+-- >    [ "This is "
 -- >    , Html.b []
--- >        [ Html.text "important" ]
--- >    , Html.text " information."
+-- >        [ "important" ]
+-- >    , " information."
 -- >    ]
 --
 -- __Output:__
@@ -655,7 +792,7 @@ b = ParentNode "<b" "</b>"
 -- >, Html.body []
 -- >    [ Html.a
 -- >        [ Attr.href "page.html" ]
--- >        [ Html.text "Visit Page" ]
+-- >        [ "Visit Page" ]
 -- >    ]
 -- >]
 --
@@ -682,9 +819,9 @@ base = LeafNode "<base"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Read in Arabic: "
+-- >    [ "Read in Arabic: "
 -- >    , Html.bdi []
--- >        [ Html.text "مرحبا" ]
+-- >        [ "مرحبا" ]
 -- >    ]
 --
 -- __Output:__
@@ -707,12 +844,12 @@ bdi = ParentNode "<bdi" "</bdi>"
 -- >[ Html.p []
 -- >    [ Html.bdo
 -- >        [ Attr.dir "rtl" ]
--- >        [ Html.text "This text is right-to-left." ]
+-- >        [ "This text is right-to-left." ]
 -- >    ]
 -- >, Html.p []
 -- >    [ Html.bdo
 -- >        [ Attr.dir "ltr" ]
--- >        [ Html.text "This text is left-to-right." ]
+-- >        [ "This text is left-to-right." ]
 -- >    ]
 -- >]
 --
@@ -736,9 +873,9 @@ bdo = ParentNode "<bdo" "</bdo>"
 --
 -- >Html.blockquote []
 -- >    [ Html.p []
--- >        [ Html.text "To be or not to be, that is the question." ]
+-- >        [ "To be or not to be, that is the question." ]
 -- >    , Html.footer []
--- >        [ Html.text "— William Shakespeare" ]
+-- >        [ "— William Shakespeare" ]
 -- >    ]
 --
 -- __Output:__
@@ -765,13 +902,13 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- >    [ Html.html []
 -- >        [ Html.head []
 -- >            [ Html.title []
--- >                [ Html.text "My Webpage" ]
+-- >                [ "My Website" ]
 -- >            ]
 -- >        , Html.body []
 -- >            [ Html.h1 []
--- >                [ Html.text "Welcome to my webpage" ]
+-- >                [ "Welcome to My Website" ]
 -- >            , Html.p []
--- >                [ Html.text "This is the main content of the page." ]
+-- >                [ "This is the main content of the page." ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -781,10 +918,10 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- ><!DOCTYPE html>
 -- ><html>
 -- >    <head>
--- >        <title>My Webpage</title>
+-- >        <title>My Website</title>
 -- >    </head>
 -- >    <body>
--- >        <h1>Welcome to my webpage</h1>
+-- >        <h1>Welcome to My Website</h1>
 -- >        <p>This is the main content of the page.</p>
 -- >    </body>
 -- ></html>
@@ -803,9 +940,9 @@ body = ParentNode "<body" "</body>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "This is some text."
+-- >    [ "This is some text."
 -- >    , Html.br []
--- >    , Html.text "And this is on a new line."
+-- >    , "And this is on a new line."
 -- >    ]
 --
 -- __Output:__
@@ -827,7 +964,7 @@ br = LeafNode "<br"
 --
 -- >Html.button
 -- >    [ Attr.type_ "button" ]
--- >    [ Html.text "Click me" ]
+-- >    [ "Click me" ]
 --
 -- __Output:__
 --
@@ -872,18 +1009,18 @@ canvas = ParentNode "<canvas" "</canvas>"
 --
 -- >Html.table []
 -- >    [ Html.caption []
--- >        [ Html.text "Monthly Sales Report" ]
+-- >        [ "Monthly Sales Report" ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ Html.text "Month" ]
+-- >            [ "Month" ]
 -- >        , Html.th []
--- >            [ Html.text "Sales" ]
+-- >            [ "Sales" ]
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.td []
--- >            [ Html.text "January" ]
+-- >            [ "January" ]
 -- >        , Html.td []
--- >            [ Html.text "$10,000" ]
+-- >            [ "$10,000" ]
 -- >        ]
 -- >    ]
 --
@@ -916,8 +1053,8 @@ caption = ParentNode "<caption" "</caption>"
 --
 -- >Html.p []
 -- >    [ Html.cite []
--- >        [ Html.text "The Great Gatsby" ]
--- >    , Html.text " by F. Scott Fitzgerald is a classic novel."
+-- >        [ "The Great Gatsby" ]
+-- >    , " by F. Scott Fitzgerald is a classic novel."
 -- >    ]
 --
 -- __Output:__
@@ -938,10 +1075,10 @@ cite = ParentNode "<cite" "</cite>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "To display a message in Python, use the "
+-- >    [ "To display a message in Python, use the "
 -- >    , Html.code []
--- >        [ Html.text "print()" ]
--- >    , Html.text " function."
+-- >        [ "print()" ]
+-- >    , " function."
 -- >    ]
 --
 -- __Output:__
@@ -970,9 +1107,9 @@ code = ParentNode "<code" "</code>"
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ Html.text "Column 1" ]
+-- >            [ "Column 1" ]
 -- >        , Html.th []
--- >            [ Html.text "Column 2" ]
+-- >            [ "Column 2" ]
 -- >        ]
 -- >    ]
 --
@@ -1011,9 +1148,9 @@ col = LeafNode "<col"
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ Html.text "Column 1" ]
+-- >            [ "Column 1" ]
 -- >        , Html.th []
--- >            [ Html.text "Column 2" ]
+-- >            [ "Column 2" ]
 -- >        ]
 -- >    ]
 --
@@ -1044,11 +1181,11 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "The temperature is "
+-- >    [ "The temperature is "
 -- >    , Html.data_
 -- >        [ Attr.value "25" ]
--- >        [ Html.text "25°C" ]
--- >    , Html.text " today."
+-- >        [ "25°C" ]
+-- >    , " today."
 -- >    ]
 --
 -- __Output:__
@@ -1070,7 +1207,7 @@ data_ = ParentNode "<data" "</data>"
 --
 -- >[ Html.label
 -- >    [ Attr.for "browser" ]
--- >    [ Html.text "Choose a browser:" ]
+-- >    [ "Choose a browser:" ]
 -- >, Html.input
 -- >    [ Attr.list "browsers"
 -- >    , Attr.id "browser"
@@ -1115,13 +1252,13 @@ datalist = ParentNode "<datalist" "</datalist>"
 --
 -- >Html.dl []
 -- >    [ Html.dt []
--- >        [ Html.text "HTML" ]
+-- >        [ "HTML" ]
 -- >    , Html.dd []
--- >        [ Html.text "HyperText Markup Language" ]
+-- >        [ "HyperText Markup Language" ]
 -- >    , Html.dt []
--- >        [ Html.text "CSS" ]
+-- >        [ "CSS" ]
 -- >    , Html.dd []
--- >        [ Html.text "Cascading Style Sheets" ]
+-- >        [ "Cascading Style Sheets" ]
 -- >    ]
 --
 -- __Output:__
@@ -1147,12 +1284,12 @@ dd = ParentNode "<dd" "</dd>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Original price: "
+-- >    [ "Original price: "
 -- >    , Html.del []
--- >        [ Html.text "$100" ]
--- >    , Html.text " "
+-- >        [ "$100" ]
+-- >    , " "
 -- >    , Html.ins []
--- >        [ Html.text "$80" ]
+-- >        [ "$80" ]
 -- >    ]
 --
 -- __Output:__
@@ -1174,9 +1311,9 @@ del = ParentNode "<del" "</del>"
 --
 -- >Html.details []
 -- >    [ Html.summary []
--- >        [ Html.text "Click to reveal more information" ]
+-- >        [ "Click to reveal more information" ]
 -- >    , Html.p []
--- >        [ Html.text "This is additional content that can be shown or hidden." ]
+-- >        [ "This is additional content that can be shown or hidden." ]
 -- >    ]
 --
 -- __Output:__
@@ -1200,8 +1337,8 @@ details = ParentNode "<details" "</details>"
 --
 -- >Html.p []
 -- >    [ Html.dfn []
--- >        [ Html.text "AI" ]
--- >    , Html.text " refers to the simulation of human intelligence in computers."
+-- >        [ "AI" ]
+-- >    , " refers to the simulation of human intelligence in computers."
 -- >    ]
 --
 -- __Output:__
@@ -1224,9 +1361,9 @@ dfn = ParentNode "<dfn" "</dfn>"
 -- >Html.dialog
 -- >    [ Attr.open True ]
 -- >    [ Html.p []
--- >        [ Html.text "This is a dialog box." ]
+-- >        [ "This is a dialog box." ]
 -- >    , Html.button []
--- >        [ Html.text "Close" ]
+-- >        [ "Close" ]
 -- >    ]
 --
 -- __Output:__
@@ -1252,9 +1389,9 @@ dialog = ParentNode "<dialog" "</dialog>"
 -- >Html.div
 -- >    [ Attr.class_ "container" ]
 -- >    [ Html.h1 []
--- >        [ Html.text "Welcome" ]
+-- >        [ "Welcome" ]
 -- >    , Html.p []
--- >        [ Html.text "This is a paragraph within a div." ]
+-- >        [ "This is a paragraph within a div." ]
 -- >    ]
 --
 -- __Output:__
@@ -1279,13 +1416,13 @@ div = ParentNode "<div" "</div>"
 --
 -- >Html.dl []
 -- >    [ Html.dt []
--- >        [ Html.text "HTML" ]
+-- >        [ "HTML" ]
 -- >    , Html.dd []
--- >        [ Html.text "HyperText Markup Language" ]
+-- >        [ "HyperText Markup Language" ]
 -- >    , Html.dt []
--- >        [ Html.text "CSS" ]
+-- >        [ "CSS" ]
 -- >    , Html.dd []
--- >        [ Html.text "Cascading Style Sheets" ]
+-- >        [ "Cascading Style Sheets" ]
 -- >    ]
 --
 -- __Output:__
@@ -1312,13 +1449,13 @@ dl = ParentNode "<dl" "</dl>"
 --
 -- >Html.dl []
 -- >    [ Html.dt []
--- >        [ Html.text "HTML" ]
+-- >        [ "HTML" ]
 -- >    , Html.dd []
--- >        [ Html.text "HyperText Markup Language" ]
+-- >        [ "HyperText Markup Language" ]
 -- >    , Html.dt []
--- >        [ Html.text "CSS" ]
+-- >        [ "CSS" ]
 -- >    , Html.dd []
--- >        [ Html.text "Cascading Style Sheets" ]
+-- >        [ "Cascading Style Sheets" ]
 -- >    ]
 --
 -- __Output:__
@@ -1345,8 +1482,8 @@ dt = ParentNode "<dt" "</dt>"
 --
 -- >Html.p []
 -- >    [ Html.em []
--- >        [ Html.text "Important" ]
--- >    , Html.text " information should not be overlooked."
+-- >        [ "Important" ]
+-- >    , " information should not be overlooked."
 -- >    ]
 --
 -- __Output:__
@@ -1392,10 +1529,10 @@ embed = LeafNode "<embed"
 --
 -- >Html.fieldset []
 -- >    [ Html.legend []
--- >        [ Html.text "Contact Information" ]
+-- >        [ "Contact Information" ]
 -- >    , Html.label
 -- >        [ Attr.for "name" ]
--- >        [ Html.text "Name:" ]
+-- >        [ "Name:" ]
 -- >    , Html.input
 -- >        [ Attr.type_ "text"
 -- >        , Attr.id "name"
@@ -1437,7 +1574,7 @@ fieldset = ParentNode "<fieldset" "</fieldset>"
 -- >        , Attr.alt "A beautiful landscape"
 -- >        ]
 -- >    , Html.figcaption []
--- >        [ Html.text "A breathtaking landscape." ]
+-- >        [ "A breathtaking landscape." ]
 -- >    ]
 --
 -- __Output:__
@@ -1466,7 +1603,7 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 -- >        , Attr.alt "An illustration of a city"
 -- >        ]
 -- >    , Html.figcaption []
--- >        [ Html.text "An artistic representation of a city skyline." ]
+-- >        [ "An artistic representation of a city skyline." ]
 -- >    ]
 --
 -- __Output:__
@@ -1491,25 +1628,13 @@ figure = ParentNode "<figure" "</figure>"
 --
 -- >Html.footer []
 -- >    [ Html.p []
--- >        [ Html.text "&copy; 2023 My Website. All rights reserved." ]
--- >    , Html.nav []
--- >        [ Html.a
--- >            [ Attr.href "about.html" ]
--- >            [ Html.text "About" ]
--- >        , Html.a
--- >            [ Attr.href "contact.html" ]
--- >            [ Html.text "Contact" ]
--- >        ]
+-- >        [ "&copy; 2023 My Website. All rights reserved." ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><footer>
 -- >    <p>&copy; 2023 My Website. All rights reserved.</p>
--- >    <nav>
--- >        <a href="about.html">About</a>
--- >        <a href="contact.html">Contact</a>
--- >    </nav>
 -- ></footer>
 footer :: [Attribute] -> [Html lng] -> Html lng
 footer = ParentNode "<footer" "</footer>"
@@ -1531,7 +1656,7 @@ footer = ParentNode "<footer" "</footer>"
 -- >    ]
 -- >    [ Html.label
 -- >        [ Attr.for "name" ]
--- >        [ Html.text "Name:" ]
+-- >        [ "Name:" ]
 -- >    , Html.input
 -- >        [ Attr.type_ "text"
 -- >        , Attr.id "name"
@@ -1540,7 +1665,7 @@ footer = ParentNode "<footer" "</footer>"
 -- >        ]
 -- >    , Html.label
 -- >        [ Attr.for "email" ]
--- >        [ Html.text "Email:" ]
+-- >        [ "Email:" ]
 -- >    , Html.input
 -- >        [ Attr.type_ "email"
 -- >        , Attr.id "email"
@@ -1549,7 +1674,7 @@ footer = ParentNode "<footer" "</footer>"
 -- >        ]
 -- >    , Html.button
 -- >        [ Attr.type_ "submit" ]
--- >        [ Html.text "Submit" ]
+-- >        [ "Submit" ]
 -- >    ]
 --
 -- __Output:__
@@ -1575,7 +1700,7 @@ form = ParentNode "<form" "</form>"
 -- __Input:__
 --
 -- >Html.h1 []
--- >    [ Html.text "Welcome to Our Website" ]
+-- >    [ "Welcome to Our Website" ]
 --
 -- __Output:__
 --
@@ -1595,9 +1720,9 @@ h1 = ParentNode "<h1" "</h1>"
 -- __Input:__
 --
 -- >[ Html.h2 []
--- >    [ Html.text "About Us" ]
+-- >    [ "About Us" ]
 -- >, Html.p []
--- >    [ Html.text "Learn more about our company's history and mission." ]
+-- >    [ "Learn more about our company's history and mission." ]
 -- >]
 --
 -- __Output:__
@@ -1619,14 +1744,14 @@ h2 = ParentNode "<h2" "</h2>"
 -- __Input:__
 --
 -- >[ Html.h3 []
--- >    [ Html.text "Services" ]
+-- >    [ "Services" ]
 -- >, Html.ul []
 -- >    [ Html.li []
--- >        [ Html.text "Web Design" ]
+-- >        [ "Web Design" ]
 -- >    , Html.li []
--- >        [ Html.text "Graphic Design" ]
+-- >        [ "Graphic Design" ]
 -- >    , Html.li []
--- >        [ Html.text "Content Writing" ]
+-- >        [ "Content Writing" ]
 -- >    ]
 -- >]
 --
@@ -1653,9 +1778,9 @@ h3 = ParentNode "<h3" "</h3>"
 -- __Input:__
 --
 -- >[ Html.h4 []
--- >    [ Html.text "Web Design Packages" ]
+-- >    [ "Web Design Packages" ]
 -- >, Html.p []
--- >    [ Html.text "Choose from a variety of web design packages." ]
+-- >    [ "Choose from a variety of web design packages." ]
 -- >]
 --
 -- __Output:__
@@ -1677,12 +1802,12 @@ h4 = ParentNode "<h4" "</h4>"
 -- __Input:__
 --
 -- >[ Html.h5 []
--- >    [ Html.text "Package Features" ]
+-- >    [ "Package Features" ]
 -- >, Html.ul []
 -- >    [ Html.li []
--- >        [ Html.text "Responsive Design" ]
+-- >        [ "Responsive Design" ]
 -- >    , Html.li []
--- >        [ Html.text "Customization Options" ]
+-- >        [ "Customization Options" ]
 -- >    ]
 -- >]
 --
@@ -1708,9 +1833,9 @@ h5 = ParentNode "<h5" "</h5>"
 -- __Input:__
 --
 -- >[ Html.h6 []
--- >    [ Html.text "Customization Options" ]
+-- >    [ "Customization Options" ]
 -- >, Html.p []
--- >    [ Html.text "Choose colors, fonts, and layouts for your website." ]
+-- >    [ "Choose colors, fonts, and layouts for your website." ]
 -- >]
 --
 -- __Output:__
@@ -1737,7 +1862,7 @@ h6 = ParentNode "<h6" "</h6>"
 -- >            [ Html.meta
 -- >                [ Attr.charset "UTF-8" ]
 -- >            , Html.title []
--- >                [ Html.text "My Webpage" ]
+-- >                [ "My Website" ]
 -- >            , Html.link
 -- >                [ Attr.rel "stylesheet"
 -- >                , Attr.href "styles.css"
@@ -1745,9 +1870,9 @@ h6 = ParentNode "<h6" "</h6>"
 -- >            ]
 -- >        , Html.body []
 -- >            [ Html.h1 []
--- >                [ Html.text "Welcome" ]
+-- >                [ "Welcome" ]
 -- >            , Html.p []
--- >                [ Html.text "This is the main content." ]
+-- >                [ "This is the main content." ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -1758,7 +1883,7 @@ h6 = ParentNode "<h6" "</h6>"
 -- ><html>
 -- >    <head>
 -- >        <meta charset="UTF-8">
--- >        <title>My Webpage</title>
+-- >        <title>My Website</title>
 -- >        <link rel="stylesheet" href="styles.css">
 -- >    </head>
 -- >    <body>
@@ -1782,17 +1907,17 @@ head = ParentNode "<head" "</head>"
 --
 -- >Html.header []
 -- >    [ Html.h1 []
--- >        [ Html.text "My Website" ]
+-- >        [ "My Website" ]
 -- >    , Html.nav []
 -- >        [ Html.a
 -- >            [ Attr.href "home.html" ]
--- >            [ Html.text "Home" ]
+-- >            [ "Home" ]
 -- >        , Html.a
 -- >            [ Attr.href "about.html" ]
--- >            [ Html.text "About" ]
+-- >            [ "About" ]
 -- >        , Html.a
 -- >            [ Attr.href "contact.html" ]
--- >            [ Html.text "Contact" ]
+-- >            [ "Contact" ]
 -- >        ]
 -- >    ]
 --
@@ -1822,9 +1947,9 @@ header = ParentNode "<header" "</header>"
 --
 -- >Html.hgroup []
 -- >    [ Html.h1 []
--- >        [ Html.text "Web Design Services" ]
+-- >        [ "Web Design Services" ]
 -- >    , Html.h2 []
--- >        [ Html.text "Creating Stunning Websites" ]
+-- >        [ "Creating Stunning Websites" ]
 -- >    ]
 --
 -- __Output:__
@@ -1848,10 +1973,10 @@ hgroup = ParentNode "<hgroup" "</hgroup>"
 -- __Input:__
 --
 -- >[ Html.p []
--- >    [ Html.text "This is some text." ]
+-- >    [ "This is some text." ]
 -- >, Html.hr []
 -- >, Html.p []
--- >    [ Html.text "This is more text after the horizontal rule." ]
+-- >    [ "This is more text after the horizontal rule." ]
 -- >]
 --
 -- __Output:__
@@ -1879,13 +2004,13 @@ hr = LeafNode "<hr"
 -- >            [ Html.meta
 -- >                [ Attr.charset "UTF-8" ]
 -- >            , Html.title []
--- >                [ Html.text "My Webpage" ]
+-- >                [ "My Website" ]
 -- >            ]
 -- >        , Html.body []
 -- >            [ Html.h1 []
--- >                [ Html.text "Welcome" ]
+-- >                [ "Welcome" ]
 -- >            , Html.p []
--- >                [ Html.text "This is the main content." ]
+-- >                [ "This is the main content." ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -1896,7 +2021,7 @@ hr = LeafNode "<hr"
 -- ><html>
 -- >    <head>
 -- >        <meta charset="UTF-8">
--- >        <title>My Webpage</title>
+-- >        <title>My Website</title>
 -- >    </head>
 -- >    <body>
 -- >        <h1>Welcome</h1>
@@ -1917,10 +2042,10 @@ html = ParentNode "<html" "</html>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "This is "
+-- >    [ "This is "
 -- >    , Html.i []
--- >        [ Html.text "italicized" ]
--- >    , Html.text " text."
+-- >        [ "italicized" ]
+-- >    , " text."
 -- >    ]
 --
 -- __Output:__
@@ -2007,10 +2132,10 @@ input = LeafNode "<input"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Check out our "
+-- >    [ "Check out our "
 -- >    , Html.ins []
--- >        [ Html.text "new" ]
--- >    , Html.text " collection of products."
+-- >        [ "new" ]
+-- >    , " collection of products."
 -- >    ]
 --
 -- __Output:__
@@ -2031,13 +2156,13 @@ ins = ParentNode "<ins" "</ins>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "To save, press "
+-- >    [ "To save, press "
 -- >    , Html.kbd []
--- >        [ Html.text "Ctrl" ]
--- >    , Html.text " + "
+-- >        [ "Ctrl" ]
+-- >    , " + "
 -- >    , Html.kbd []
--- >        [ Html.text "S" ]
--- >    , Html.text "."
+-- >        [ "S" ]
+-- >    , "."
 -- >    ]
 --
 -- __Output:__
@@ -2059,7 +2184,7 @@ kbd = ParentNode "<kbd" "</kbd>"
 --
 -- >[ Html.label
 -- >    [ Attr.for "username" ]
--- >    [ Html.text "Username:" ]
+-- >    [ "Username:" ]
 -- >, Html.input
 -- >    [ Attr.type_ "text"
 -- >    , Attr.id "username"
@@ -2087,10 +2212,10 @@ label = ParentNode "<label" "</label>"
 --
 -- >Html.fieldset []
 -- >    [ Html.legend []
--- >        [ Html.text "Contact Information" ]
+-- >        [ "Contact Information" ]
 -- >    , Html.label
 -- >        [ Attr.for "name" ]
--- >        [ Html.text "Name:" ]
+-- >        [ "Name:" ]
 -- >    , Html.input
 -- >        [ Attr.type_ "text"
 -- >        , Attr.id "name"
@@ -2121,9 +2246,9 @@ legend = ParentNode "<legend" "</legend>"
 --
 -- >Html.ul []
 -- >    [ Html.li []
--- >        [ Html.text "Item 1" ]
+-- >        [ "Item 1" ]
 -- >    , Html.li []
--- >        [ Html.text "Item 2" ]
+-- >        [ "Item 2" ]
 -- >    ]
 --
 -- __Output:__
@@ -2174,9 +2299,9 @@ link = LeafNode "<link"
 --
 -- >Html.main []
 -- >    [ Html.h1 []
--- >        [ Html.text "Welcome to Our Website" ]
+-- >        [ "Welcome to Our Website" ]
 -- >    , Html.p []
--- >        [ Html.text "This is the main content of the page." ]
+-- >        [ "This is the main content of the page." ]
 -- >    ]
 --
 -- __Output:__
@@ -2242,10 +2367,10 @@ map = ParentNode "<map" "</map>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Make sure to "
+-- >    [ "Make sure to "
 -- >    , Html.mark []
--- >        [ Html.text "complete" ]
--- >    , Html.text " the assignment by Friday."
+-- >        [ "complete" ]
+-- >    , " the assignment by Friday."
 -- >    ]
 --
 -- __Output:__
@@ -2269,16 +2394,16 @@ mark = ParentNode "<mark" "</mark>"
 -- >    [ Html.li []
 -- >        [ Html.a
 -- >            [ Attr.href "profile.html" ]
--- >            [ Html.text "Profile" ]
+-- >            [ "Profile" ]
 -- >        ]
 -- >    , Html.li []
 -- >        [ Html.a
 -- >            [ Attr.href "settings.html" ]
--- >            [ Html.text "Settings" ]
+-- >            [ "Settings" ]
 -- >    , Html.li []
 -- >        [ Html.a
 -- >            [ Attr.href "logout.html" ]
--- >            [ Html.text "Logout" ]
+-- >            [ "Logout" ]
 -- >        ]
 -- >    ]
 --
@@ -2338,13 +2463,13 @@ meta = LeafNode "<meta"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Progress: "
+-- >    [ "Progress: "
 -- >    , Html.meter
 -- >        [ Attr.value "75"
 -- >        , Attr.min "0"
 -- >        , Attr.max "100"
 -- >        ]
--- >        [ Html.text "75%" ]
+-- >        [ "75%" ]
 -- >    ]
 --
 -- __Output:__
@@ -2369,17 +2494,17 @@ meter = ParentNode "<meter" "</meter>"
 -- >        [ Html.li []
 -- >            [ Html.a
 -- >                [ Attr.href "home.html" ]
--- >                [ Html.text "Home" ]
+-- >                [ "Home" ]
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
 -- >                [ Attr.href "about.html" ]
--- >                [ Html.text "About" ]
+-- >                [ "About" ]
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
 -- >                [ Attr.href "contact.html" ]
--- >                [ Html.text "Contact" ]
+-- >                [ "Contact" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -2409,7 +2534,7 @@ nav = ParentNode "<nav" "</nav>"
 --
 -- >Html.noscript []
 -- >    [ Html.p []
--- >        [ Html.text "This page requires JavaScript to function properly." ]
+-- >        [ "This page requires JavaScript to function properly." ]
 -- >    ]
 --
 -- __Output:__
@@ -2458,9 +2583,9 @@ object = ParentNode "<object" "</object>"
 --
 -- >Html.ol []
 -- >    [ Html.li []
--- >        [ Html.text "Item 1" ]
+-- >        [ "Item 1" ]
 -- >    , Html.li []
--- >        [ Html.text "Item 2" ]
+-- >        [ "Item 2" ]
 -- >    ]
 --
 -- __Output:__
@@ -2487,16 +2612,16 @@ ol = ParentNode "<ol" "</ol>"
 -- >    [ Html.optgroup
 -- >        [ Attr.label "Fruits" ]
 -- >        [ Html.option []
--- >            [ Html.text "Apple" ]
+-- >            [ "Apple" ]
 -- >        , Html.option []
--- >            [ Html.text "Orange" ]
+-- >            [ "Orange" ]
 -- >        ]
 -- >    , Html.optgroup
 -- >        [ Attr.label "Vegetables" ]
 -- >        [ Html.option []
--- >            [ Html.text "Carrot" ]
+-- >            [ "Carrot" ]
 -- >        , Html.option []
--- >            [ Html.text "Spinach" ]
+-- >            [ "Spinach" ]
 -- >        ]
 -- >    ]
 --
@@ -2529,13 +2654,13 @@ optgroup = ParentNode "<optgroup" "</optgroup>"
 -- >Html.select []
 -- >    [ Html.option
 -- >        [ Attr.value "apple" ]
--- >        [ Html.text "Apple" ]
+-- >        [ "Apple" ]
 -- >    , Html.option
 -- >        [ Attr.value "banana" ]
--- >        [ Html.text "Banana" ]
+-- >        [ "Banana" ]
 -- >    , Html.option
 -- >        [ Attr.value "orange" ]
--- >        [ Html.text "Orange" ]
+-- >        [ "Orange" ]
 -- >    ]
 --
 -- __Output:__
@@ -2560,10 +2685,10 @@ option = ParentNode "<option" "</option>"
 -- __Input:__
 --
 -- >[ Html.p []
--- >    [ Html.text "Total: "
+-- >    [ "Total: "
 -- >    , Html.output
 -- >        [ Attr.name "result" ]
--- >        [ Html.text "0" ]
+-- >        [ "0" ]
 -- >    ]
 -- >, Html.input
 -- >    [ Attr.type_ "range"
@@ -2592,7 +2717,7 @@ output = ParentNode "<output" "</output>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "This is a paragraph of text." ]
+-- >    [ "This is a paragraph of text." ]
 --
 -- __Output:__
 --
@@ -2648,7 +2773,7 @@ picture = ParentNode "<picture" "</picture>"
 -- __Input:__
 --
 -- >Html.pre []
--- >    [ Html.text "console.log("Hello, world!");" ]
+-- >    [ "console.log("Hello, world!");" ]
 --
 -- __Output:__
 --
@@ -2670,12 +2795,12 @@ pre = ParentNode "<pre" "</pre>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Uploading: "
+-- >    [ "Uploading: "
 -- >    , Html.progress
 -- >        [ Attr.value "70"
 -- >        , Attr.max "100"
 -- >        ]
--- >        [ Html.text "70%" ]
+-- >        [ "70%" ]
 -- >    ]
 --
 -- __Output:__
@@ -2696,9 +2821,9 @@ progress = ParentNode "<progress" "</progress>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "He said, "
+-- >    [ "He said, "
 -- >    , Html.q []
--- >        [ Html.text "Life is either a daring adventure or nothing at all." ]
+-- >        [ "Life is either a daring adventure or nothing at all." ]
 -- >    ]
 --
 -- __Output:__
@@ -2719,13 +2844,13 @@ q = ParentNode "<q" "</q>"
 -- __Input:__
 --
 -- >Html.ruby []
--- >    [ Html.text "漢"
+-- >    [ "漢"
 -- >    , Html.rp []
--- >        [ Html.text "(" ]
+-- >        [ "(" ]
 -- >    , Html.rt []
--- >        [ Html.text "Kan" ]
+-- >        [ "Kan" ]
 -- >    , Html.rp []
--- >        [ Html.text ")" ]
+-- >        [ ")" ]
 -- >    ]
 --
 -- __Output:__
@@ -2748,13 +2873,13 @@ rp = ParentNode "<rp" "</rp>"
 -- __Input:__
 --
 -- >Html.ruby []
--- >    [ Html.text "漢"
+-- >    [ "漢"
 -- >    , Html.rp []
--- >        [ Html.text "(" ]
+-- >        [ "(" ]
 -- >    , Html.rt []
--- >        [ Html.text "Kan" ]
+-- >        [ "Kan" ]
 -- >    , Html.rp []
--- >        [ Html.text ")" ]
+-- >        [ ")" ]
 -- >    ]
 --
 -- __Output:__
@@ -2777,13 +2902,13 @@ rt = ParentNode "<rt" "</rt>"
 -- __Input:__
 --
 -- >Html.ruby []
--- >    [ Html.text "漢"
+-- >    [ "漢"
 -- >    , Html.rp []
--- >        [ Html.text "(" ]
+-- >        [ "(" ]
 -- >    , Html.rt []
--- >        [ Html.text "Kan" ]
+-- >        [ "Kan" ]
 -- >    , Html.rp []
--- >        [ Html.text ")" ]
+-- >        [ ")" ]
 -- >    ]
 --
 -- __Output:__
@@ -2806,10 +2931,10 @@ ruby = ParentNode "<ruby" "</ruby>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "This feature is "
+-- >    [ "This feature is "
 -- >    , Html.s []
--- >        [ Html.text "no longer supported" ]
--- >    , Html.text " deprecated."
+-- >        [ "no longer supported" ]
+-- >    , " deprecated."
 -- >    ]
 --
 -- __Output:__
@@ -2830,9 +2955,9 @@ s = ParentNode "<s" "</s>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "The program output is: "
+-- >    [ "The program output is: "
 -- >    , Html.samp []
--- >        [ Html.text "Hello, world!" ]
+-- >        [ "Hello, world!" ]
 -- >    ]
 --
 -- __Output:__
@@ -2853,7 +2978,7 @@ samp = ParentNode "<samp" "</samp>"
 -- __Input:__
 --
 -- >Html.script []
--- >    [ Html.text "console.log("Hello, world!");" ]
+-- >    [ "console.log("Hello, world!");" ]
 --
 -- __Output:__
 --
@@ -2876,9 +3001,9 @@ script = ParentNode "<script" "</script>"
 --
 -- >Html.section []
 -- >    [ Html.h2 []
--- >        [ Html.text "About Us" ]
+-- >        [ "About Us" ]
 -- >    , Html.p []
--- >        [ Html.text "We are a company dedicated to creating innovative solutions." ]
+-- >        [ "We are a company dedicated to creating innovative solutions." ]
 -- >    ]
 --
 -- __Output:__
@@ -2903,20 +3028,20 @@ section = ParentNode "<section" "</section>"
 --
 -- >[ Html.label
 -- >    [ Attr.for "country" ]
--- >    [ Html.text "Select your country:" ]
+-- >    [ "Select your country:" ]
 -- >, Html.select
 -- >    [ Attr.id "country"
 -- >    , Attr.name "country"
 -- >    ]
 -- >    [ Html.option
 -- >        [ Attr.value "usa" ]
--- >        [ Html.text "United States" ]
+-- >        [ "United States" ]
 -- >    , Html.option
 -- >        [ Attr.value "canada" ]
--- >        [ Html.text "Canada" ]
+-- >        [ "Canada" ]
 -- >    , Html.option
 -- >        [ Attr.value "uk" ]
--- >        [ Html.text "United Kingdom" ]
+-- >        [ "United Kingdom" ]
 -- >    ]
 -- >]
 --
@@ -2953,7 +3078,7 @@ select = ParentNode "<select" "</select>"
 -- >, ParentNode "<my-element" "</my-element>" []
 -- >    [ Html.p
 -- >        [ Attr.slot "content" ]
--- >        [ Html.text "This content goes inside the slot." ]
+-- >        [ "This content goes inside the slot." ]
 -- >    ]
 -- >]
 --
@@ -2981,7 +3106,7 @@ slot = ParentNode "<slot" "</slot>"
 --
 -- >Html.p []
 -- >    [ Html.small []
--- >        [ Html.text "This information is subject to change without notice." ]
+-- >        [ "This information is subject to change without notice." ]
 -- >    ]
 --
 -- __Output:__
@@ -3011,7 +3136,7 @@ small = ParentNode "<small" "</small>"
 -- >        [ Attr.src "video.webm"
 -- >        , Attr.type_ "video/webm"
 -- >        ]
--- >    , Html.text "Your browser does not support the video tag."
+-- >    , "Your browser does not support the video tag."
 -- >    ]
 --
 -- __Output:__
@@ -3036,11 +3161,11 @@ source = LeafNode "<source"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Click "
+-- >    [ "Click "
 -- >    , Html.span
 -- >        [ Attr.class_ "highlight" ]
--- >        [ Html.text "here" ]
--- >    , Html.text " to learn more."
+-- >        [ "here" ]
+-- >    , " to learn more."
 -- >    ]
 --
 -- __Output:__
@@ -3062,8 +3187,8 @@ span = ParentNode "<span" "</span>"
 --
 -- >Html.p []
 -- >    [ Html.strong []
--- >        [ Html.text "Warning:" ]
--- >    , Html.text " Do not proceed without proper safety gear."
+-- >        [ "Warning:" ]
+-- >    , " Do not proceed without proper safety gear."
 -- >    ]
 --
 -- __Output:__
@@ -3084,9 +3209,9 @@ strong = ParentNode "<strong" "</strong>"
 -- __Input:__
 --
 -- >[ Html.style []
--- >    [ Html.text "p { color: blue; font-size: 16px; }" ]
+-- >    [ "p { color: blue; font-size: 16px; }" ]
 -- >, Html.p []
--- >    [ Html.text "This is a styled paragraph." ]
+-- >    [ "This is a styled paragraph." ]
 -- >]
 --
 -- __Output:__
@@ -3112,10 +3237,10 @@ style = ParentNode "<style" "</style>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "H"
+-- >    [ "H"
 -- >    , Html.sub []
--- >        [ Html.text "2" ]
--- >    , Html.text "O is the chemical formula for water."
+-- >        [ "2" ]
+-- >    , "O is the chemical formula for water."
 -- >    ]
 --
 -- __Output:__
@@ -3137,9 +3262,9 @@ sub = ParentNode "<sub" "</sub>"
 --
 -- >Html.details []
 -- >    [ Html.summary []
--- >        [ Html.text "Click to reveal more information" ]
+-- >        [ "Click to reveal more information" ]
 -- >    , Html.p []
--- >        [ Html.text "Here is the additional content that was hidden." ]
+-- >        [ "Here is the additional content that was hidden." ]
 -- >    ]
 --
 -- __Output:__
@@ -3162,10 +3287,10 @@ summary = ParentNode "<summary" "</summary>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Euler's identity: e"
+-- >    [ "Euler's identity: e"
 -- >    , Html.sup []
--- >        [ Html.text "iπ" ]
--- >    , Html.text " + 1 = 0"
+-- >        [ "iπ" ]
+-- >    , " + 1 = 0"
 -- >    ]
 --
 -- __Output:__
@@ -3189,23 +3314,23 @@ sup = ParentNode "<sup" "</sup>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3248,23 +3373,23 @@ table = ParentNode "<table" "</table>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3306,11 +3431,11 @@ tbody = ParentNode "<tbody" "</tbody>"
 -- >Html.table []
 -- >    [ Html.tr []
 -- >        [ Html.td []
--- >            [ Html.text "Apple" ]
+-- >            [ "Apple" ]
 -- >        , Html.td []
--- >            [ Html.text "Red" ]
+-- >            [ "Red" ]
 -- >        , Html.td []
--- >            [ Html.text "Fruit" ]
+-- >            [ "Fruit" ]
 -- >        ]
 -- >    ]
 --
@@ -3340,7 +3465,7 @@ td = ParentNode "<td" "</td>"
 -- >Html.template
 -- >    [ Attr.id "my-template" ]
 -- >    [ Html.p []
--- >        [ Html.text "This is a template." ]
+-- >        [ "This is a template." ]
 -- >    ]
 --
 -- __Output:__
@@ -3364,7 +3489,7 @@ template = ParentNode "<template" "</template>"
 --
 -- >[ Html.label
 -- >    [ Attr.for "comment" ]
--- >    [ Html.text "Enter your comment:" ]
+-- >    [ "Enter your comment:" ]
 -- >, Html.textarea
 -- >    [ Attr.id "comment"
 -- >    , Attr.name "comment"
@@ -3396,30 +3521,30 @@ textarea = ParentNode "<textarea" "</textarea>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tfoot []
 -- >        [ Html.tr []
 -- >            [ Html.td
 -- >                [ Attr.colspan "2" ]
--- >                [ Html.text "Total: 2 persons" ]
+-- >                [ "Total: 2 persons" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3467,23 +3592,23 @@ tfoot = ParentNode "<tfoot" "</tfoot>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3526,23 +3651,23 @@ th = ParentNode "<th" "</th>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3582,10 +3707,10 @@ thead = ParentNode "<thead" "</thead>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Meeting time: "
+-- >    [ "Meeting time: "
 -- >    , Html.time
 -- >        [ Attr.datetime "2023-09-15T10:00" ]
--- >        [ Html.text "September 15, 10:00 AM" ]
+-- >        [ "September 15, 10:00 AM" ]
 -- >    ]
 --
 -- __Output:__
@@ -3607,7 +3732,7 @@ time = ParentNode "<time" "</time>"
 --
 -- >Html.head []
 -- >    [ Html.title []
--- >        [ Html.text "My Website" ]
+-- >        [ "My Website" ]
 -- >    ]
 --
 -- __Output:__
@@ -3633,23 +3758,23 @@ title = ParentNode "<title" "</title>"
 -- >    [ Html.thead []
 -- >        [ Html.tr []
 -- >            [ Html.th []
--- >                [ Html.text "Name" ]
+-- >                [ "Name" ]
 -- >            , Html.th []
--- >                [ Html.text "Age" ]
+-- >                [ "Age" ]
 -- >            ]
 -- >        ]
 -- >    , Html.tbody []
 -- >        [ Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "John" ]
+-- >                [ "John" ]
 -- >            , Html.td []
--- >                [ Html.text "30" ]
+-- >                [ "30" ]
 -- >            ]
 -- >        , Html.tr []
 -- >            [ Html.td []
--- >                [ Html.text "Alice" ]
+-- >                [ "Alice" ]
 -- >            , Html.td []
--- >                [ Html.text "25" ]
+-- >                [ "25" ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -3700,7 +3825,7 @@ tr = ParentNode "<tr" "</tr>"
 -- >        , Attr.label "English"
 -- >        , Attr.srclang "en"
 -- >        ]
--- >    , Html.text "Your browser does not support the video tag."
+-- >    , "Your browser does not support the video tag."
 -- >    ]
 --
 -- __Output:__
@@ -3726,7 +3851,7 @@ track = LeafNode "<track"
 --
 -- >Html.p []
 -- >    [ Html.u []
--- >        [ Html.text "This text is underlined." ]
+-- >        [ "This text is underlined." ]
 -- >    ]
 --
 -- __Output:__
@@ -3748,11 +3873,11 @@ u = ParentNode "<u" "</u>"
 --
 -- >Html.ul []
 -- >    [ Html.li []
--- >        [ Html.text "Item 1" ]
+-- >        [ "Item 1" ]
 -- >    , Html.li []
--- >        [ Html.text "Item 2" ]
+-- >        [ "Item 2" ]
 -- >    , Html.li []
--- >        [ Html.text "Item 3" ]
+-- >        [ "Item 3" ]
 -- >    ]
 --
 -- __Output:__
@@ -3777,11 +3902,11 @@ ul = ParentNode "<ul" "</ul>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "The equation is "
+-- >    [ "The equation is "
 -- >        [ Html.var []
--- >            [ Html.text "x = y + z" ]
+-- >            [ "x = y + z" ]
 -- >        ]
--- >    , Html.text "."
+-- >    , "."
 -- >    ]
 --
 -- __Output:__
@@ -3807,7 +3932,7 @@ var = ParentNode "<var" "</var>"
 -- >        [ Attr.src "video.mp4"
 -- >        , Attr.type_ "video/mp4"
 -- >        ]
--- >    , Html.text "Your browser does not support the video tag."
+-- >    , "Your browser does not support the video tag."
 -- >    ]
 --
 -- __Output:__
@@ -3831,11 +3956,11 @@ video = ParentNode "<video" "</video>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ Html.text "Thisisaverylongwordthatmightneed"
+-- >    [ "Thisisaverylongwordthatmightneed"
 -- >    , Html.wbr []
--- >    , Html.text "to"
+-- >    , "to"
 -- >    , Html.br []
--- >    , Html.text "break"
+-- >    , "break"
 -- >    ]
 --
 -- __Output:__
@@ -3844,80 +3969,3 @@ video = ParentNode "<video" "</video>"
 wbr :: [Attribute] -> Html lng
 wbr = LeafNode "<wbr"
 {-# INLINE wbr #-}
-
-
--- TEXT
-
-
--- | Generates a monolingual HTML text node with the given contents.
---
--- See 'Html.Intl.intl' for multilingual text nodes.
-text :: Builder -> Html lng
-text = TextNode
-{-# INLINE text #-}
-
-
--- | Generates an empty HTML text node.
---
--- Intended to be used in /if-else expressions/ to generate nothing when the given condition is met.
---
--- ==== __Example__
---
--- __Input:__
---
--- @
--- Html.nav []
---     Html.ul []
---         [ Html.li []
---             [ Html.a
---                 [ Attr.href \"\/\" ]
---                 [ Html.text \"Home\" ]
---             , Html.a
---                 [ Attr.href \"\/about\" ]
---                 [ Html.text \"About\" ]
---             , if isLoggedIn then
---                 Html.a
---                     [ Attr.href \"\/profile\" ]
---                     [ Html.text \"Profile\" ]
---               else
---                 Html.empty
---             , if isLoggedIn then
---                 Html.a
---                     [ Attr.href \"\/log-out\" ]
---                     [ Html.text \"Log out\" ]
---               else
---                 Html.a
---                     [ Attr.href \"\/log-in\" ]
---                     [ Html.text \"Log in\" ]
---             ]
---         ]
---     ]
--- @
---
--- __Output__ (when /isLoggedIn/ is /True/)__:__
---
--- @
--- \<nav\>
---     \<ul\>
---         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/about\"\>About\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/profile\"\>Profile\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/log-out\"\>Log out\<\/a\>\<\/li\>
---     \<\/ul\>
--- \<\/nav\>
--- @
---
--- __Output__ (when /isLoggedIn/ is /False/)__:__
---
--- @
--- \<nav\>
---     \<ul\>
---         \<li\>\<a href=\"\/\"\>Home\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/about\"\>About\<\/a\>\<\/li\>
---         \<li\>\<a href=\"\/log-in\"\>Log in\<\/a\>\<\/li\>
---     \<\/ul\>
--- \<\/nav\>
--- @
-empty :: Html lng
-empty = TextNode ""
-{-# INLINE empty #-}
