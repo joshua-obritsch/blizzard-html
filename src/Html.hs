@@ -107,6 +107,7 @@
 --
 -- import qualified Html
 -- import qualified Html.Attributes as Attr
+-- import qualified Html.Events as Events
 -- @
 --
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
@@ -166,7 +167,7 @@ module Html
     , cite
       -- ** \<code\>
     , code
-      -- ** \<code\>
+      -- ** \<col\>
     , col
       -- ** \<colgroup\>
     , colgroup
@@ -353,15 +354,16 @@ module Html
     ) where
 
 
-import Data.Bool (Bool(True, False))
+import Data.Bool (Bool(..))
 import Data.Foldable (foldr)
 import Data.Function (($), (.))
 import Data.Monoid ((<>), mempty)
+import Data.Semigroup (Semigroup(..))
 import Data.Text.Lazy (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 import Text.Show (Show(..), showString)
 
-import Data.String (IsString(fromString))
+import Data.String (IsString(..))
 
 
 data Intl = Intl
@@ -516,7 +518,7 @@ class Translatable a where
 -- >        <title>My Website</title>
 -- >    </head>
 -- >    <body>
--- >        <h1>Hello, World!</h1>
+-- >        <h1>Hello, world!</h1>
 -- >        <p>This is a sample website.</p>
 -- >    </body>
 -- ></html>
@@ -735,7 +737,7 @@ aside = ParentNode "<aside" "</aside>"
 -- >Html.audio
 -- >    [ Attr.controls True ]
 -- >    [ Html.source
--- >        [ Attr.source "music.mp3"
+-- >        [ Attr.src "music.mp3"
 -- >        , Attr.type_ "audio/mpeg"
 -- >        ]
 -- >    , "Your browser does not support the audio element."
@@ -1216,13 +1218,13 @@ data_ = ParentNode "<data" "</data>"
 -- >, Html.datalist
 -- >    [ Attr.id "browsers" ]
 -- >    [ Html.option
--- >        [ Attr.value "Chrome" ]
+-- >        [ Attr.value "Chrome" ] []
 -- >    , Html.option
--- >        [ Attr.value "Firefox" ]
+-- >        [ Attr.value "Firefox" ] []
 -- >    , Html.option
--- >        [ Attr.value "Edge" ]
+-- >        [ Attr.value "Edge" ] []
 -- >    , Html.option
--- >        [ Attr.value "Safari" ]
+-- >        [ Attr.value "Safari" ] []
 -- >    ]
 -- >]
 --
@@ -1231,10 +1233,10 @@ data_ = ParentNode "<data" "</data>"
 -- ><label for="browser">Choose a browser:</label>
 -- ><input list="browsers" id="browser" name="browser">
 -- ><datalist id="browsers">
--- >    <option value="Chrome">
--- >    <option value="Firefox">
--- >    <option value="Edge">
--- >    <option value="Safari">
+-- >    <option value="Chrome"></option>
+-- >    <option value="Firefox"></option>
+-- >    <option value="Edge"></option>
+-- >    <option value="Safari"></option>
 -- ></datalist>
 datalist :: [Attribute] -> [Html lng] -> Html lng
 datalist = ParentNode "<datalist" "</datalist>"
@@ -1539,6 +1541,7 @@ embed = LeafNode "<embed"
 -- >        ]
 -- >    , Html.label
 -- >        [ Attr.for "email" ]
+-- >        [ "Email:" ]
 -- >    , Html.input
 -- >        [ Attr.type_ "email"
 -- >        , Attr.id "email"
@@ -2400,6 +2403,7 @@ mark = ParentNode "<mark" "</mark>"
 -- >        [ Html.a
 -- >            [ Attr.href "settings.html" ]
 -- >            [ "Settings" ]
+-- >        ]
 -- >    , Html.li []
 -- >        [ Html.a
 -- >            [ Attr.href "logout.html" ]
@@ -2694,7 +2698,7 @@ option = ParentNode "<option" "</option>"
 -- >    [ Attr.type_ "range"
 -- >    , Attr.min "0"
 -- >    , Attr.max "100"
--- >    , Attr.oninput "result.value = this.value"
+-- >    , Events.oninput "result.value = this.value"
 -- >    ]
 -- >]
 --
@@ -3903,9 +3907,8 @@ ul = ParentNode "<ul" "</ul>"
 --
 -- >Html.p []
 -- >    [ "The equation is "
--- >        [ Html.var []
--- >            [ "x = y + z" ]
--- >        ]
+-- >    , Html.var []
+-- >        [ "x = y + z" ]
 -- >    , "."
 -- >    ]
 --
