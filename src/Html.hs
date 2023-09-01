@@ -107,7 +107,7 @@
 --
 -- import qualified Html
 -- import qualified Html.Attributes as Attr
--- import qualified Html.Events as Events
+-- import qualified Html.Events as Evnt
 -- @
 --
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
@@ -533,23 +533,41 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- | Generates an HTML /\<a\>/ element with the given attributes and contents.
 --
 -- The /\<a\>/ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
--- content that, when clicked, navigates to the specified URL.
+-- content that, when clicked, navigates to the URL specified by the /href/ attribute.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >Html.p []
--- >    [ "Visit our "
--- >    , Html.a
--- >        [ Attr.href "https://www.example.com" ]
--- >        [ "website" ]
--- >    , " for more information."
+-- >Html.nav []
+-- >    [ Html.ul []
+-- >        [ Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "/" ]
+-- >                [ "Home" ]
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "/about" ]
+-- >                [ "About" ]
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.a
+-- >                [ Attr.href "/contact" ]
+-- >                [ "Contact" ]
+-- >            ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><p>Visit our <a href="https://www.example.com">website</a> for more information.</p>
+-- ><nav>
+-- >    <ul>
+-- >        <li><a href="/">Home</a></li>
+-- >        <li><a href="/about">About</a></li>
+-- >        <li><a href="/contact">Contact</a></li>
+-- >    </ul>
+-- ></nav>
 a :: [Attribute] -> [Html lng] -> Html lng
 a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
@@ -557,8 +575,8 @@ a = ParentNode "<a" "</a>"
 
 -- | Generates an HTML /\<abbr\>/ element with the given attributes and contents.
 --
--- The /\<abbr\>/ element is used to mark up an abbreviation or acronym in the text. It can include a title attribute to provide the full or
--- expanded form of the abbreviation when hovered over.
+-- The /\<abbr\>/ element, or abbreviation element, is used to mark up an abbreviation or acronym in the text. It can include a /title/
+-- attribute to provide the full or expanded form of the abbreviation when hovered over.
 --
 -- ==== __Example__
 --
@@ -589,23 +607,26 @@ abbr = ParentNode "<abbr" "</abbr>"
 --
 -- __Input:__
 --
--- >Html.address []
--- >    [ Html.p []
--- >        [ "Contact us at "
+-- >Html.footer []
+-- >    [ Html.address []
+-- >        [ "For inquiries, please contact "
 -- >        , Html.a
 -- >            [ Attr.href "mailto:info@example.com" ]
 -- >            [ "info@example.com" ]
+-- >        , "."
 -- >        ]
--- >    , Html.p []
--- >        [ "123 Main Street, Cityville" ]
+-- >    , Html.small []
+-- >        [ "&copy; 2023 Example Solutions. All rights reserved." ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><address>
--- >    <p>Contact us at <a href="mailto:info@example.com">info@example.com</a></p>
--- >    <p>123 Main Street, Cityville</p>
--- ></address>
+-- ><footer>
+-- >    <address>
+-- >        For inquiries, please contact <a href="mailto:contact@example.com">Customer Support</a>.
+-- >    </address>
+-- >    <p><small>&copy; 2023 Example Solutions. All rights reserved.</small></p>
+-- ></footer>
 address :: [Attribute] -> [Html lng] -> Html lng
 address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
@@ -620,35 +641,47 @@ address = ParentNode "<address" "</address>"
 --
 -- __Input:__
 --
--- >[ Html.img
--- >    [ Attr.src "planets.jpg"
--- >    , Attr.alt "Planets"
--- >    , Attr.usemap "#planetmap"
--- >    ]
--- >, Html.map
--- >    [ Attr.name "planetmap" ]
--- >    [ Html.area
--- >        [ Attr.shape "circle"
--- >        , Attr.coords "100,100,50"
--- >        , Attr.alt "Sun"
--- >        , Attr.href "sun.html"
+-- >Html.p []
+-- >    [ "Select one of the following planets to learn more:"
+-- >    , Html.img
+-- >        [ Attr.src "planets.jpg"
+-- >        , Attr.alt "Planets"
+-- >        , Attr.usemap "#planetmap"
 -- >        ]
--- >    , Html.area
--- >        [ Attr.shape "circle"
--- >        , Attr.coords "200,200,50"
--- >        , Attr.alt "Earth"
--- >        , Attr.href "earth.html"
+-- >    , Html.map
+-- >        [ Attr.name "planetmap" ]
+-- >        [ Html.area
+-- >            [ Attr.shape "circle"
+-- >            , Attr.coords "100,100,50"
+-- >            , Attr.alt "Mercury"
+-- >            , Attr.href "mercury.html"
+-- >            ]
+-- >        , Html.area
+-- >            [ Attr.shape "circle"
+-- >            , Attr.coords "200,200,50"
+-- >            , Attr.alt "Venus"
+-- >            , Attr.href "venus.html"
+-- >            ]
+-- >        , Html.area
+-- >            [ Attr.shape "circle"
+-- >            , Attr.coords "300,300,50"
+-- >            , Attr.alt "Earth"
+-- >            , Attr.href "earth.html"
+-- >            ]
 -- >        ]
 -- >    ]
--- >]
 --
 -- __Output:__
 --
--- ><img src="planets.jpg" alt="Planets" usemap="#planetmap">
--- ><map name="planetmap">
--- >    <area shape="circle" coords="100,100,50" alt="Sun" href="sun.html">
--- >    <area shape="circle" coords="200,200,50" alt="Earth" href="earth.html">
--- ></map>
+-- ><p>
+-- >    Select one of the following planets to learn more:
+-- >    <img src="planets.jpg" alt="Planets" usemap="#planetmap">
+-- >    <map name="planetmap">
+-- >        <area shape="circle" coords="100,100,50" alt="Mercury" href="mercury.html">
+-- >        <area shape="circle" coords="200,200,50" alt="Venus" href="venus.html">
+-- >        <area shape="circle" coords="300,300,50" alt="Earth" href="earth.html">
+-- >    </map>
+-- ></p>
 area :: [Attribute] -> Html lng
 area = LeafNode "<area"
 {-# INLINE area #-}
@@ -663,26 +696,75 @@ area = LeafNode "<area"
 --
 -- __Input:__
 --
--- >Html.article []
--- >    [ Html.h2 []
--- >        [ "Introduction to AI in Healthcare" ]
--- >    , Html.p []
--- >        [ "Learn how AI is transforming healthcare..." ]
--- >    , Html.p []
--- >        [ "By "
--- >        , Html.a
--- >            [ Attr.href "author.html" ]
--- >            [ "Dr. Smith" ]
+-- >Html.body []
+-- >    [ Html.header []
+-- >        [ Html.h1 []
+-- >            [ "Example Blog" ]
+-- >        ]
+-- >    , Html.article []
+-- >        [ Html.header []
+-- >            [ Html.h1 []
+-- >                [ "How to Start Your Own Garden" ]
+-- >            , Html.p []
+-- >                [ "Published on "
+-- >                , Html.time
+-- >                    [ Attr.datetime "2023-09-10" ]
+-- >                    [ "September 10, 2023" ]
+-- >                , " by Jane Gardener"
+-- >                ]
+-- >            ]
+-- >        , Html.p []
+-- >            [ "If you've ever dreamed of having your own garden, follow these simple steps to get started." ]
+-- >        , Html.ol []
+-- >            [ Html.li []
+-- >                [ "Choose a sunny spot in your backyard." ]
+-- >            , Html.li []
+-- >                [ "Prepare the soil." ]
+-- >            , Html.li []
+-- >                [ "Plant your favorite flowers and vegetables." ]
+-- >            , Html.li []
+-- >                [ "Water them regularly." ]
+-- >            , Html.li []
+-- >                [ "Watch your garden thrive!" ]
+-- >            ]
+-- >        , Html.footer []
+-- >            [ Html.p []
+-- >                [ "&copy; 2023 GreenThumb Gardening. All rights reserved." ]
+-- >            ]
+-- >        ]
+-- >    , Html.footer []
+-- >        [ Html.p []
+-- >            [ "&copy; 2023 Example Blog. All rights reserved." ]
 -- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><article>
--- >    <h2>Introduction to AI in Healthcare</h2>
--- >    <p>Learn how AI is transforming healthcare...</p>
--- >    <p>By <a href="author.html">Dr. Smith</a></p>
--- ></article>
+-- ><body>
+-- >    <header>
+-- >        <h1>Example Blog</h1>
+-- >    </header>
+-- >    <article>
+-- >        <header>
+-- >            <h2>How to Start Your Own Garden</h2>
+-- >            <p>Published on <time datetime="2023-09-10">September 10, 2023</time> by Jane Gardener</p>
+-- >        </header>
+-- >        <p>If you've ever dreamed of having your own garden, follow these simple steps to get started.</p>
+-- >        <ol>
+-- >            <li>Choose a sunny spot in your backyard.</li>
+-- >            <li>Prepare the soil.</li>
+-- >            <li>Plant your favorite flowers and vegetables.</li>
+-- >            <li>Water them regularly.</li>
+-- >            <li>Watch your garden thrive!</li>
+-- >        </ol>
+-- >        <footer>
+-- >            <p>&copy; 2023 GreenThumb Gardening. All rights reserved.</p>
+-- >        </footer>
+-- >    </article>
+-- >    <footer>
+-- >        <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >    </footer>
+-- ></body>
 article :: [Attribute] -> [Html lng] -> Html lng
 article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
@@ -697,29 +779,84 @@ article = ParentNode "<article" "</article>"
 --
 -- __Input:__
 --
--- >Html.article []
--- >    [ Html.h2 []
--- >        [ "Exploring National Parks" ]
--- >    , Html.p []
--- >        [ "Visit these amazing parks..." ]
+-- >Html.body []
+-- >    [ Html.header []
+-- >        [ Html.h1 []
+-- >            [ "Example Blog" ]
+-- >        ]
+-- >    , Html.article []
+-- >        [ Html.header []
+-- >            [ Html.h2 []
+-- >                [ "10 Tips for Healthy Eating" ]
+-- >            , Html.p []
+-- >                [ "Published on "
+-- >                , Html.time
+-- >                    [ Attr.datetime "2023-09-15" ]
+-- >                    [ "September 15, 2023" ]
+-- >                , " by Alice Nutritionist"
+-- >                ]
+-- >            ]
+-- >        , Html.p []
+-- >            [ "Healthy eating is essential for a balanced lifestyle. Here are ten tips to help you make nutritious choices:" ]
+-- >        , Html.ol []
+-- >            [ Html.li []
+-- >                [ "Include a variety of fruits and vegetables in your diet." ]
+-- >            , Html.li []
+-- >                [ "Limit your intake of processed foods and sugary drinks." ]
+-- >            , Html.li []
+-- >                [ "Drink plenty of water throughout the day." ]
+-- >            ]
+-- >        , Html.footer []
+-- >            [ Html.p []
+-- >                [ "&copy; 2023 HealthFusion. All rights reserved." ]
+-- >            ]
+-- >        ]
 -- >    , Html.aside []
 -- >        [ Html.h3 []
--- >            [ "Did You Know?" ]
+-- >            [ "Advertisement" ]
 -- >        , Html.p []
--- >            [ "Yellowstone was the first national park established in 1872." ]
+-- >            [ "Looking for healthy meal delivery options? Check out "
+-- >            , Html.a
+-- >                [ Attr.href "delivery@example.com" ]
+-- >                [ "Example Delivery Service" ]
+-- >            , "."
+-- >            ]
+-- >        ]
+-- >    , Html.footer []
+-- >        [ Html.p []
+-- >            [ "&copy; 2023 Example Blog. All rights reserved." ]
 -- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><article>
--- >    <h2>Exploring National Parks</h2>
--- >    <p>Visit these amazing parks...</p>
+-- ><body>
+-- >    <header>
+-- >        <h1>Example Blog</h1>
+-- >    </header>
+-- >    <article>
+-- >        <header>
+-- >            <h2>10 Tips for Healthy Eating</h2>
+-- >            <p>Published on <time datetime="2023-09-15">September 15, 2023</time> by Alice Nutritionist</p>
+-- >        </header>
+-- >        <p>Healthy eating is essential for a balanced lifestyle. Here are ten tips to help you make nutritious choices:</p>
+-- >        <ol>
+-- >            <li>Include a variety of fruits and vegetables in your diet.</li>
+-- >            <li>Limit your intake of processed foods and sugary drinks.</li>
+-- >            <li>Drink plenty of water throughout the day.</li>
+-- >        </ol>
+-- >        <footer>
+-- >            <p>&copy; 2023 HealthFusion. All rights reserved.</p>
+-- >        </footer>
+-- >    </article>
 -- >    <aside>
--- >        <h3>Did You Know?</h3>
--- >        <p>Yellowstone was the first national park established in 1872.</p>
+-- >        <h3>Advertisement</h3>
+-- >        <p>Looking for healthy meal delivery options? Check out <a href="delivery@example.com">Example Delivery Service</a>.</p>
 -- >    </aside>
--- ></article>
+-- >    <footer>
+-- >        <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >    </footer>
+-- ></body>
 aside :: [Attribute] -> [Html lng] -> Html lng
 aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
@@ -737,7 +874,7 @@ aside = ParentNode "<aside" "</aside>"
 -- >Html.audio
 -- >    [ Attr.controls True ]
 -- >    [ Html.source
--- >        [ Attr.src "music.mp3"
+-- >        [ Attr.src "ocean-waves.mp3"
 -- >        , Attr.type_ "audio/mpeg"
 -- >        ]
 -- >    , "Your browser does not support the audio element."
@@ -746,7 +883,7 @@ aside = ParentNode "<aside" "</aside>"
 -- __Output:__
 --
 -- ><audio controls>
--- >    <source src="music.mp3" type="audio/mpeg">
+-- >    <source src="ocean-waves.mp3" type="audio/mpeg">
 -- >    Your browser does not support the audio element.
 -- ></audio>
 audio :: [Attribute] -> [Html lng] -> Html lng
@@ -764,15 +901,17 @@ audio = ParentNode "<audio" "</audio>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ "This is "
+-- >    [ Html.b []
+-- >        [ "Chocolate" ]
+-- >    , " and "
 -- >    , Html.b []
--- >        [ "important" ]
--- >    , " information."
+-- >        [ "vanilla" ]
+-- >    , " ice cream flavors are always a hit at our summer parties."
 -- >    ]
 --
 -- __Output:__
 --
--- ><p>This is <b>important</b> information.</p>
+-- ><p><b>Chocolate</b> and <b>vanilla</b> ice cream flavors are always a hit at our summer parties.</p>
 b :: [Attribute] -> [Html lng] -> Html lng
 b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
@@ -787,25 +926,38 @@ b = ParentNode "<b" "</b>"
 --
 -- __Input:__
 --
--- >[ Html.head []
--- >    [ Html.base
--- >        [ Attr.href "https://www.example.com/" ]
+-- >Html.doctype
+-- >    [ Html.html []
+-- >        [ Html.title []
+-- >            [ "Example Blog" ]
+-- >        , Html.head []
+-- >            [ Html.base
+-- >                [ Attr.href "https://www.example.com/posts/index.html" ]
+-- >            ]
+-- >        , Html.body []
+-- >            [ Html.p []
+-- >                [ "Discover the latest posts in our "
+-- >                , Html.a
+-- >                    [ Attr.href "archives.html" ]
+-- >                    [ "archives" ]
+-- >                , "."
+-- >                ]
+-- >            ]
+-- >        ]
 -- >    ]
--- >, Html.body []
--- >    [ Html.a
--- >        [ Attr.href "page.html" ]
--- >        [ "Visit Page" ]
--- >    ]
--- >]
 --
 -- __Output:__
 --
--- ><head>
--- >    <base href="https://www.example.com/">
--- ></head>
--- ><body>
--- >    <a href="page.html">Visit Page</a>
--- ></body>
+-- ><!DOCTYPE html>
+-- ><html>
+-- >    <head>
+-- >        <title></title>
+-- >        <base href="https://www.example.com/">
+-- >    </head>
+-- >    <body>
+-- >        <p><a href="page.html">Visit Page</a></p>
+-- >    </body>
+-- ></html>
 base :: [Attribute] -> Html lng
 base = LeafNode "<base"
 {-# INLINE base #-}
@@ -2698,7 +2850,7 @@ option = ParentNode "<option" "</option>"
 -- >    [ Attr.type_ "range"
 -- >    , Attr.min "0"
 -- >    , Attr.max "100"
--- >    , Events.oninput "result.value = this.value"
+-- >    , Evnt.oninput "result.value = this.value"
 -- >    ]
 -- >]
 --
