@@ -548,12 +548,12 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
--- >                [ Attr.href "/about" ]
+-- >                [ Attr.href "/about.html" ]
 -- >                [ "About" ]
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
--- >                [ Attr.href "/contact" ]
+-- >                [ Attr.href "/contact.html" ]
 -- >                [ "Contact" ]
 -- >            ]
 -- >        ]
@@ -564,8 +564,8 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ><nav>
 -- >    <ul>
 -- >        <li><a href="/">Home</a></li>
--- >        <li><a href="/about">About</a></li>
--- >        <li><a href="/contact">Contact</a></li>
+-- >        <li><a href="/about.html">About</a></li>
+-- >        <li><a href="/contact.html">Contact</a></li>
 -- >    </ul>
 -- ></nav>
 a :: [Attribute] -> [Html lng] -> Html lng
@@ -616,16 +616,16 @@ abbr = ParentNode "<abbr" "</abbr>"
 -- >        , "."
 -- >        ]
 -- >    , Html.small []
--- >        [ "&copy; 2023 Example Solutions. All rights reserved." ]
+-- >        [ "&copy; 2023 Example Company. All rights reserved." ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><footer>
 -- >    <address>
--- >        For inquiries, please contact <a href="mailto:contact@example.com">Customer Support</a>.
+-- >        For inquiries, please contact <a href="mailto:contact@example.com">info@example.com</a>.
 -- >    </address>
--- >    <p><small>&copy; 2023 Example Solutions. All rights reserved.</small></p>
+-- >    <p><small>&copy; 2023 Example Company. All rights reserved.</small></p>
 -- ></footer>
 address :: [Attribute] -> [Html lng] -> Html lng
 address = ParentNode "<address" "</address>"
@@ -729,7 +729,7 @@ area = LeafNode "<area"
 -- >            ]
 -- >        , Html.footer []
 -- >            [ Html.p []
--- >                [ "&copy; 2023 GreenThumb Gardening. All rights reserved." ]
+-- >                [ "&copy; 2023 Example Company. All rights reserved." ]
 -- >            ]
 -- >        ]
 -- >    , Html.footer []
@@ -758,7 +758,7 @@ area = LeafNode "<area"
 -- >            <li>Watch your garden thrive!</li>
 -- >        </ol>
 -- >        <footer>
--- >            <p>&copy; 2023 GreenThumb Gardening. All rights reserved.</p>
+-- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
 -- >        </footer>
 -- >    </article>
 -- >    <footer>
@@ -808,7 +808,7 @@ article = ParentNode "<article" "</article>"
 -- >            ]
 -- >        , Html.footer []
 -- >            [ Html.p []
--- >                [ "&copy; 2023 HealthFusion. All rights reserved." ]
+-- >                [ "&copy; 2023 Example Company. All rights reserved." ]
 -- >            ]
 -- >        ]
 -- >    , Html.aside []
@@ -846,7 +846,7 @@ article = ParentNode "<article" "</article>"
 -- >            <li>Drink plenty of water throughout the day.</li>
 -- >        </ol>
 -- >        <footer>
--- >            <p>&copy; 2023 HealthFusion. All rights reserved.</p>
+-- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
 -- >        </footer>
 -- >    </article>
 -- >    <aside>
@@ -893,8 +893,8 @@ audio = ParentNode "<audio" "</audio>"
 
 -- | Generates an HTML /\<b\>/ element with the given attributes and contents.
 --
--- The /\<b\>/ element is used to apply bold formatting to the enclosed text, indicating that the content should be presented in a stronger
--- or more prominent manner, without implying any specific semantic importance.
+-- The /\<b\>/ element, or bold element, is used to apply bold formatting to the enclosed text, indicating that the content should be
+-- presented in a stronger or more prominent manner, without implying any specific semantic importance.
 --
 -- ==== __Example__
 --
@@ -928,19 +928,19 @@ b = ParentNode "<b" "</b>"
 --
 -- >Html.doctype
 -- >    [ Html.html []
--- >        [ Html.title []
--- >            [ "Example Blog" ]
--- >        , Html.head []
--- >            [ Html.base
--- >                [ Attr.href "https://www.example.com/posts/index.html" ]
+-- >        [ Html.head []
+-- >            [ Html.title []
+-- >                [ "Example Newsletter" ]
+-- >            , Html.base
+-- >                [ Attr.href "https://www.example.com/newsletter/index.html" ]
 -- >            ]
 -- >        , Html.body []
 -- >            [ Html.p []
--- >                [ "Discover the latest posts in our "
+-- >                [ "Browse the "
 -- >                , Html.a
 -- >                    [ Attr.href "archives.html" ]
 -- >                    [ "archives" ]
--- >                , "."
+-- >                , " for older issues."
 -- >                ]
 -- >            ]
 -- >        ]
@@ -951,11 +951,11 @@ b = ParentNode "<b" "</b>"
 -- ><!DOCTYPE html>
 -- ><html>
 -- >    <head>
--- >        <title></title>
--- >        <base href="https://www.example.com/">
+-- >        <title>Example Newsletter</title>
+-- >        <base href="https://www.example.com/newsletter/index.html">
 -- >    </head>
 -- >    <body>
--- >        <p><a href="page.html">Visit Page</a></p>
+-- >        <p>Browse the <a href="archives.html">archives</a> for older issues.</p>
 -- >    </body>
 -- ></html>
 base :: [Attribute] -> Html lng
@@ -965,22 +965,38 @@ base = LeafNode "<base"
 
 -- | Generates an HTML /\<bdi\>/ element with the given attributes and contents.
 --
--- The /\<bdi\>/ element isolates a span of text that needs to be formatted in a specific direction for languages that are written
--- right-to-left, like Arabic or Hebrew, within a predominantly left-to-right text.
+-- The /\<bdi\>/ element, or bidirectional isolation element, isolates a span of text that needs to be formatted in a specific direction for
+-- languages that are written right-to-left, like Arabic or Hebrew, within a predominantly left-to-right text.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >Html.p []
--- >    [ "Read in Arabic: "
--- >    , Html.bdi []
--- >        [ "مرحبا" ]
+-- >Html.ul []
+-- >    [ Html.li []
+-- >        [ Html.bdi []
+-- >            [ "Alice" ]
+-- >        , ": 30 reviews."
+-- >        ]
+-- >    , Html.li []
+-- >        [ Html.bdi []
+-- >            [ "David" ]
+-- >        , ": 15 reviews."
+-- >        ]
+-- >    , Html.li []
+-- >        [ Html.bdi []
+-- >            [ "محمد" ]
+-- >        , ": 8 reviews."
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><p>Read in Arabic: <bdi>مرحبا</bdi></p>
+-- ><ul>
+-- >    <li><bdi>Alice</bdi>: 30 reviews.</li>
+-- >    <li><bdi>David</bdi>: 15 reviews.</li>
+-- >    <li><bdi>محمد</bdi>: 8 reviews.</li>
+-- ></ul>
 bdi :: [Attribute] -> [Html lng] -> Html lng
 bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
@@ -988,29 +1004,30 @@ bdi = ParentNode "<bdi" "</bdi>"
 
 -- | Generates an HTML /\<bdo\>/ element with the given attributes and contents.
 --
--- The /\<bdo\>/ element overrides the bidirectional algorithm setting of the surrounding text. It is used to explicitly define the text
--- direction, either left-to-right or right-to-left, for languages with different writing directions.
+-- The /\<bdo\>/ element, or bidirectional override element, overrides the bidirectional algorithm setting of the surrounding text. It is
+-- used to explicitly define the text direction, either left-to-right or right-to-left, for languages with different writing directions.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >[ Html.p []
--- >    [ Html.bdo
--- >        [ Attr.dir "rtl" ]
--- >        [ "This text is right-to-left." ]
+-- >Html.div
+-- >    [ Attr.class_ "comment" ]
+-- >    [ Html.p []
+-- >        [ Html.bdo
+-- >            [ Attr.dir "rtl" ]
+-- >            [ "مرحبًا، أنا أعلق على هذا المقال المثير." ]
+-- >        ]
+-- >    , Html.p []
+-- >        [ "Hello, I'm commenting on this exciting article." ]
 -- >    ]
--- >, Html.p []
--- >    [ Html.bdo
--- >        [ Attr.dir "ltr" ]
--- >        [ "This text is left-to-right." ]
--- >    ]
--- >]
 --
 -- __Output:__
 --
--- ><p><bdo dir="rtl">This text is right-to-left.</bdo></p>
--- ><p><bdo dir="ltr">This text is left-to-right.</bdo></p>
+-- ><div class="comment">
+-- >    <p><bdo dir="rtl">مرحبًا، أنا أعلق على هذا المقال المثير.</bdo></p>
+-- >    <p>Hello, I'm commenting on this exciting article.</p>
+-- ></div>
 bdo :: [Attribute] -> [Html lng] -> Html lng
 bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
@@ -1025,19 +1042,23 @@ bdo = ParentNode "<bdo" "</bdo>"
 --
 -- __Input:__
 --
--- >Html.blockquote []
--- >    [ Html.p []
--- >        [ "To be or not to be, that is the question." ]
--- >    , Html.footer []
--- >        [ "— William Shakespeare" ]
+-- >Html.figure []
+-- >    [ Html.blockquote []
+-- >        [ Html.p []
+-- >            [ "To be or not to be, that is the question." ]
+-- >        ]
+-- >    , Html.figcaption []
+-- >        [ "William Shakespeare" ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><blockquote>
--- >    <p>"To be or not to be, that is the question."</p>
--- >    <footer>— William Shakespeare</footer>
--- ></blockquote>
+-- ><figure>
+-- >    <blockquote>
+-- >        <p>To be or not to be, that is the question.</p>
+-- >    </blockquote>
+-- >    <figcaption>William Shakespeare</figcaption>
+-- ></figure>
 blockquote :: [Attribute] -> [Html lng] -> Html lng
 blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
