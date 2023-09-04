@@ -1,11 +1,12 @@
 :set -w
 :set -isrc
 :set -XOverloadedStrings
-:load Html Html.Attributes Html.Intl
+:load Html Html.Attributes Html.Events Html.Intl
 
 import Prelude
 import Html.Intl (translate)
 
 import qualified Html as Html
 import qualified Html.Attributes as Attr
+import qualified Html.Events as Events
 import qualified Html.Intl as Html
