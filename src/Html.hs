@@ -5,8 +5,9 @@
 
 -- | The "Html" module provides a set of types, classes and functions for generating HTML elements.
 --
--- These elements along with their attributes in the "Html.Attributes" module can be used to dynamically compose HTML documents natively in
--- Haskell, without relying on templating engines or other techniques that can be error-prone and difficult to maintain.
+-- These elements along with their attributes and event handlers, found in the "Html.Attributes" and "Html.Events" modules respectively, can
+-- be used to dynamically compose HTML documents natively in Haskell, without relying on templating engines or other techniques that can be
+-- error-prone and difficult to maintain.
 --
 -- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
 --
@@ -17,13 +18,23 @@
 -- >Html.doctype
 -- >    [ Html.html []
 -- >        [ Html.head []
--- >            [ Html.title []
--- >                [ "My Website" ]
+-- >            [ Html.meta
+-- >                [ Attr.charset "UTF-8" ]
+-- >            , Html.meta
+-- >                [ Attr.name "viewport"
+-- >                , Attr.content "width=device-width, initial-scale=1.0"
+-- >                ]
+-- >            , Html.title []
+-- >                [ "Example Blog" ]
+-- >            , Html.meta
+-- >                [ Attr.rel "stylesheet"
+-- >                , Attr.href "styles.css"
+-- >                ]
 -- >            ]
 -- >        , Html.body []
 -- >            [ Html.header []
 -- >                [ Html.h1 []
--- >                    [ "Welcome to My Website" ]
+-- >                    [ "Example Blog" ]
 -- >                , Html.nav []
 -- >                    [ Html.ul []
 -- >                        [ Html.li []
@@ -38,6 +49,11 @@
 -- >                            ]
 -- >                        , Html.li []
 -- >                            [ Html.a
+-- >                                [ Attr.href "/posts" ]
+-- >                                [ "Posts" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
 -- >                                [ Attr.href "/contact" ]
 -- >                                [ "Contact" ]
 -- >                            ]
@@ -45,22 +61,40 @@
 -- >                    ]
 -- >                ]
 -- >            , Html.main []
--- >                [ Html.section []
--- >                    [ Html.h2 []
--- >                        [ "About Me" ]
+-- >                [ Html.article []
+-- >                    [ Html.header []
+-- >                        [ Html.h2 []
+-- >                            [ "Exploring the Great Outdoors" ]
+-- >                        , Html.p []
+-- >                            [ "Published on "
+-- >                            , Html.time
+-- >                                [ Attr.datetime "2023-09-05" ]
+-- >                                [ "September 5, 2023" ]
+-- >                            , " by John Doe"
+-- >                            ]
+-- >                        ]
 -- >                    , Html.p []
--- >                        [ "I'm a web developer who loves creating useful websites." ]
+-- >                        [ "Yesterday, I embarked on a thrilling hiking adventure in the heart of the Rocky Mountains..." ]
 -- >                    ]
--- >                , Html.section []
--- >                    [ Html.h2 []
--- >                        [ "Contact Information" ]
+-- >                , Html.article []
+-- >                    [ Html.header []
+-- >                        [ Html.h2 []
+-- >                            [ "A Culinary Journey Through Italy" ]
+-- >                        , Html.p []
+-- >                            [ "Published on "
+-- >                            , Html.time
+-- >                                [ Attr.datetime "2023-09-10" ]
+-- >                                [ "September 10, 2023" ]
+-- >                            , " by John Doe"
+-- >                            ]
+-- >                        ]
 -- >                    , Html.p []
--- >                        [ "Email: contact@example.com" ]
+-- >                        [ "I recently had the chance to explore Italy's culinary delights..." ]
 -- >                    ]
 -- >                ]
 -- >            , Html.footer []
 -- >                [ Html.p []
--- >                    [ "&copy; 2023 My Website. All rights reserved." ]
+-- >                    [ "&copy; 2023 Example Blog. All rights reserved." ]
 -- >                ]
 -- >            ]
 -- >        ]
@@ -71,31 +105,41 @@
 -- ><!DOCTYPE html>
 -- ><html>
 -- >    <head>
--- >        <title>My Website</title>
+-- >        <meta charset="UTF-8">
+-- >        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-- >        <title>Example Blog</title>
+-- >        <meta rel="stylesheet" href="styles.css">
 -- >    </head>
 -- >    <body>
 -- >        <header>
--- >            <h1>Welcome to My Website</h1>
+-- >            <h1>Example Blog</h1>
 -- >            <nav>
 -- >                <ul>
 -- >                    <li><a href="/">Home</a></li>
 -- >                    <li><a href="/about">About</a></li>
+-- >                    <li><a href="/posts">Posts</a></li>
 -- >                    <li><a href="/contact">Contact</a></li>
 -- >                </ul>
 -- >            </nav>
 -- >        </header>
 -- >        <main>
--- >            <section>
--- >                <h2>About Me</h2>
--- >                <p>I'm a web developer who loves creating useful websites.</p>
--- >            </section>
--- >            <section>
--- >                <h2>Contact Information</h2>
--- >                <p>Email: contact@example.com</p>
--- >            </section>
+-- >            <article>
+-- >                <header>
+-- >                    <h2>Exploring the Great Outdoors</h2>
+-- >                    <p>Published on <time datetime="2023-09-05">September 5, 2023</time> by John Doe</p>
+-- >                </header>
+-- >                <p>Yesterday, I embarked on a thrilling hiking adventure in the heart of the Rocky Mountains...</p>
+-- >            </article>
+-- >            <article>
+-- >                <header>
+-- >                    <h2>A Culinary Journey Through Italy</h2>
+-- >                    <p>Published on <time datetime="2023-09-10">September 10, 2023</time> by John Doe</p>
+-- >                </header>
+-- >                <p>I recently had the chance to explore Italy's culinary delights...</p>
+-- >            </article>
 -- >        </main>
 -- >        <footer>
--- >            <p>&copy; 2023 My Website. All rights reserved.</p>
+-- >            <p>&copy; 2023 Example Blog. All rights reserved.</p>
 -- >        </footer>
 -- >    </body>
 -- ></html>
@@ -470,6 +514,7 @@ instance Buildable [Attribute] where
 
 -- | Enables conversion to 'Data.Text.Lazy.Builder.Builder'.
 class Buildable a where
+
     -- | Converts to 'Data.Text.Lazy.Builder.Builder'.
     build :: a -> Builder
 
@@ -479,6 +524,7 @@ class Buildable a where
 -- A default language must be set to ensure proper conversion of 'Html.Html' to 'Data.Text.Lazy.Builder.Builder' and 'Data.String.String'
 -- when generated without the use of 'Html.Intl.translate'.
 class Translatable a where
+
     -- | Sets the default language to use for internationalization with 'Html.Html'.
     defaultLanguage :: a -> Builder
 
@@ -496,16 +542,99 @@ class Translatable a where
 -- __Input:__
 --
 -- >Html.doctype
--- >    [ Html.html []
+-- >    [ Html.html
+-- >        [ Attr.lang "en" ]
 -- >        [ Html.head []
--- >            [ Html.title []
--- >                [ "My Website" ]
+-- >            [ Html.meta
+-- >                [ Attr.charset "UTF-8" ]
+-- >            , Html.meta
+-- >                [ Attr.name "viewport"
+-- >                , Attr.content "width=device-width, initial-scale=1.0"
+-- >                ]
+-- >            , Html.title []
+-- >                [ "Example Company" ]
+-- >            , Html.meta
+-- >                [ Attr.rel "stylesheet"
+-- >                , Attr.href "styles.css"
+-- >                ]
 -- >            ]
 -- >        , Html.body []
--- >            [ Html.h1 []
--- >                [ "Hello, world!" ]
--- >            , Html.p []
--- >                [ "This is a sample website." ]
+-- >            [ Html.header []
+-- >                [ Html.h1 []
+-- >                    [ "Example Company" ]
+-- >                , Html.nav []
+-- >                    [ Html.ul []
+-- >                        [ Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/" ]
+-- >                                [ "Home" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/about" ]
+-- >                                [ "About" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/shop" ]
+-- >                                [ "Shop" ]
+-- >                            ]
+-- >                        , Html.li []
+-- >                            [ Html.a
+-- >                                [ Attr.href "/contact" ]
+-- >                                [ "Contact" ]
+-- >                            ]
+-- >                        ]
+-- >                    ]
+-- >                ]
+-- >            , Html.main []
+-- >                [ Html.section
+-- >                    [ Attr.class_ "featured-products" ]
+-- >                    [ Html.h2 []
+-- >                        [ "Featured Products" ]
+-- >                    , Html.div
+-- >                        [ Attr.class_ "product" ]
+-- >                        [ Html.img
+-- >                            [ Attr.src "product1.jpg"
+-- >                            , Attr.alt "Handcrafted Silver Necklace"
+-- >                            ]
+-- >                        , Html.h3 []
+-- >                            [ "Silver Leaf Necklace" ]
+-- >                        , Html.p
+-- >                            [ Attr.class_ "price" ]
+-- >                            [ "$75.00" ]
+-- >                        , Html.a
+-- >                            [ Attr.href "/shop/product1" ]
+-- >                            [ "View Details" ]
+-- >                        ]
+-- >                    , Html.div
+-- >                        [ Attr.class_ "product" ]
+-- >                        [ Html.img
+-- >                            [ Attr.src "product2.jpg"
+-- >                            , Attr.alt "Gemstone Bracelet"
+-- >                            ]
+-- >                        , Html.h3 []
+-- >                            [ "Gemstone Beaded Bracelet" ]
+-- >                        , Html.p
+-- >                            [ Attr.class_ "price" ]
+-- >                            [ "$55.00" ]
+-- >                        , Html.a
+-- >                            [ Attr.href "/shop/product2" ]
+-- >                            [ "View Details" ]
+-- >                        ]
+-- >                    ]
+-- >                , Html.section
+-- >                    [ Attr.class_ "about-us" ]
+-- >                    [ Html.h2 []
+-- >                        [ "About Us" ]
+-- >                    , Html.p []
+-- >                        [ "We are passionate about creating unique, handcrafted jewelry pieces..." ]
+-- >                    ]
+-- >                ]
+-- >            , Html.footer []
+-- >                [ Html.p []
+-- >                    [ "&copy; 2023 Example Company. All rights reserved." ]
+-- >                ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -513,13 +642,49 @@ class Translatable a where
 -- __Output:__
 --
 -- ><!DOCTYPE html>
--- ><html>
+-- ><html lang="en">
 -- >    <head>
--- >        <title>My Website</title>
+-- >        <meta charset="UTF-8">
+-- >        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-- >        <title>Example Company</title>
+-- >        <link rel="stylesheet" href="styles.css">
 -- >    </head>
 -- >    <body>
--- >        <h1>Hello, world!</h1>
--- >        <p>This is a sample website.</p>
+-- >        <header>
+-- >            <h1>Example Company</h1>
+-- >            <nav>
+-- >                <ul>
+-- >                    <li><a href="/">Home</a></li>
+-- >                    <li><a href="/about">About</a></li>
+-- >                    <li><a href="/shop">Shop</a></li>
+-- >                    <li><a href="/contact">Contact</a></li>
+-- >                </ul>
+-- >            </nav>
+-- >        </header>
+-- >        <main>
+-- >            <section class="featured-products">
+-- >                <h2>Featured Products</h2>
+-- >                <div class="product">
+-- >                    <img src="product1.jpg" alt="Handcrafted Silver Necklace">
+-- >                    <h3>Silver Leaf Necklace</h3>
+-- >                    <p class="price">$75.00</p>
+-- >                    <a href="/shop/product1">View Details</a>
+-- >                </div>
+-- >                <div class="product">
+-- >                    <img src="product2.jpg" alt="Gemstone Bracelet">
+-- >                    <h3>Gemstone Beaded Bracelet</h3>
+-- >                    <p class="price">$55.00</p>
+-- >                    <a href="/shop/product2">View Details</a>
+-- >                </div>
+-- >            </section>
+-- >            <section class="about-us">
+-- >                <h2>About Us</h2>
+-- >                <p>We are passionate about creating unique, handcrafted jewelry pieces...</p>
+-- >            </section>
+-- >        </main>
+-- >        <footer>
+-- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
+-- >        </footer>
 -- >    </body>
 -- ></html>
 doctype :: [Html lng] -> Html lng
@@ -710,7 +875,7 @@ area = LeafNode "<area"
 -- >                , Html.time
 -- >                    [ Attr.datetime "2023-09-10" ]
 -- >                    [ "September 10, 2023" ]
--- >                , " by Jane Gardener"
+-- >                , " by Jane Doe"
 -- >                ]
 -- >            ]
 -- >        , Html.p []
@@ -747,7 +912,7 @@ area = LeafNode "<area"
 -- >    <article>
 -- >        <header>
 -- >            <h2>How to Start Your Own Garden</h2>
--- >            <p>Published on <time datetime="2023-09-10">September 10, 2023</time> by Jane Gardener</p>
+-- >            <p>Published on <time datetime="2023-09-10">September 10, 2023</time> by Jane Doe</p>
 -- >        </header>
 -- >        <p>If you've ever dreamed of having your own garden, follow these simple steps to get started.</p>
 -- >        <ol>
@@ -793,7 +958,7 @@ article = ParentNode "<article" "</article>"
 -- >                , Html.time
 -- >                    [ Attr.datetime "2023-09-15" ]
 -- >                    [ "September 15, 2023" ]
--- >                , " by Alice Nutritionist"
+-- >                , " by Jane Doe"
 -- >                ]
 -- >            ]
 -- >        , Html.p []
@@ -837,7 +1002,7 @@ article = ParentNode "<article" "</article>"
 -- >    <article>
 -- >        <header>
 -- >            <h2>10 Tips for Healthy Eating</h2>
--- >            <p>Published on <time datetime="2023-09-15">September 15, 2023</time> by Alice Nutritionist</p>
+-- >            <p>Published on <time datetime="2023-09-15">September 15, 2023</time> by Jane Doe</p>
 -- >        </header>
 -- >        <p>Healthy eating is essential for a balanced lifestyle. Here are ten tips to help you make nutritious choices:</p>
 -- >        <ol>
@@ -1011,23 +1176,44 @@ bdi = ParentNode "<bdi" "</bdi>"
 --
 -- __Input:__
 --
--- >Html.div
--- >    [ Attr.class_ "comment" ]
--- >    [ Html.p []
--- >        [ Html.bdo
--- >            [ Attr.dir "rtl" ]
--- >            [ "مرحبًا، أنا أعلق على هذا المقال المثير." ]
+-- >Html.section []
+-- >    [ Html.h3 []
+-- >        [ "Comments" ]
+-- >    , Html.div
+-- >        [ Attr.class_ "comment" ]
+-- >        [ Html.p []
+-- >            [ Html.bdo
+-- >                [ Attr.dir "rtl" ]
+-- >                [ "مشكورين على هذا الموقع الرائع!" ]
+-- >            ]
+-- >        , Html.p []
+-- >            [ "Thank you for this wonderful website!" ]
 -- >        ]
--- >    , Html.p []
--- >        [ "Hello, I'm commenting on this exciting article." ]
+-- >    , Html.div
+-- >        [ Attr.class_ "comment" ]
+-- >        [ Html.p []
+-- >            [ Html.bdo
+-- >                [ Attr.dir "rtl" ]
+-- >                [ "أنا ممتن جداً للمعلومات القيمة التي وفرتموها." ]
+-- >            ]
+-- >        , Html.p []
+-- >            [ "I'm very grateful for the valuable information you've provided." ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><div class="comment">
--- >    <p><bdo dir="rtl">مرحبًا، أنا أعلق على هذا المقال المثير.</bdo></p>
--- >    <p>Hello, I'm commenting on this exciting article.</p>
--- ></div>
+-- ><section>
+-- >    <h3>Comments</h3>
+-- >    <div class="comment">
+-- >        <p><bdo dir="rtl">مشكورين على هذا الموقع الرائع!</bdo></p>
+-- >        <p>Thank you for this wonderful website!</p>
+-- >    </div>
+-- >    <div class="comment">
+-- >        <p><bdo dir="rtl">أنا ممتن جداً للمعلومات القيمة التي وفرتموها.</bdo></p>
+-- >        <p>I'm very grateful for the valuable information you've provided.</p>
+-- >    </div>
+-- ></section>
 bdo :: [Attribute] -> [Html lng] -> Html lng
 bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
@@ -1077,13 +1263,49 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- >    [ Html.html []
 -- >        [ Html.head []
 -- >            [ Html.title []
--- >                [ "My Website" ]
+-- >                [ "Example Blog" ]
 -- >            ]
 -- >        , Html.body []
--- >            [ Html.h1 []
--- >                [ "Welcome to My Website" ]
--- >            , Html.p []
--- >                [ "This is the main content of the page." ]
+-- >            [ Html.header []
+-- >                [ Html.h1 []
+-- >                    [ "Macro Photography Tips" ]
+-- >                ]
+-- >            , Html.main []
+-- >                [ Html.article []
+-- >                    [ Html.h2 []
+-- >                        [ "Introduction to Macro Photography" ]
+-- >                    , Html.p []
+-- >                        [ "Unlock the world of close-up photography with these valuable tips." ]
+-- >                    ]
+-- >                , Html.article []
+-- >                    [ Html.h2 []
+-- >                        [ "Choosing the Right Equipment" ]
+-- >                    , Html.p []
+-- >                        [ "Invest in a good macro lens and use a tripod for stability." ]
+-- >                    ]
+-- >                , Html.article []
+-- >                    [ Html.h2 []
+-- >                        [ "Lighting Techniques" ]
+-- >                    , Html.p []
+-- >                        [ "Experiment with natural light, diffusers, and reflectors." ]
+-- >                    ]
+-- >                , Html.article []
+-- >                    [ Html.h2 []
+-- >                        [ "Composition and Framing" ]
+-- >                    , Html.p []
+-- >                        [ "Learn how to compose your shots effectively." ]
+-- >                    ]
+-- >                , Html.article []
+-- >                    [ Html.h2 []
+-- >                        [ "Post-Processing Tips" ]
+-- >                    , Html.p []
+-- >                        [ "Enhance your macro photos using post-processing software." ]
+-- >                    ]
+-- >                ]
+-- >            , Html.footer []
+-- >                [ Html.p []
+-- >                    [ "&copy; 2023 Example Blog. All rights reserved." ]
+-- >                ]
 -- >            ]
 -- >        ]
 -- >    ]
@@ -1093,11 +1315,37 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- ><!DOCTYPE html>
 -- ><html>
 -- >    <head>
--- >        <title>My Website</title>
+-- >        <title>Example Blog</title>
 -- >    </head>
 -- >    <body>
--- >        <h1>Welcome to My Website</h1>
--- >        <p>This is the main content of the page.</p>
+-- >        <header>
+-- >            <h1>Macro Photography Tips</h1>
+-- >        </header>
+-- >        <main>
+-- >            <article>
+-- >                <h2>Introduction to Macro Photography</h2>
+-- >                <p>Unlock the world of close-up photography with these valuable tips.</p>
+-- >            </article>
+-- >            <article>
+-- >                <h2>Choosing the Right Equipment</h2>
+-- >                <p>Invest in a good macro lens and use a tripod for stability.</p>
+-- >            </article>
+-- >            <article>
+-- >                <h2>Lighting Techniques</h2>
+-- >                <p>Experiment with natural light, diffusers, and reflectors.</p>
+-- >            </article>
+-- >            <article>
+-- >                <h2>Composition and Framing</h2>
+-- >                <p>Learn how to compose your shots effectively.</p>
+-- >            </article>
+-- >            <article>
+-- >                <h2>Post-Processing Tips</h2>
+-- >                <p>Enhance your macro photos using post-processing software.</p>
+-- >            </article>
+-- >        </main>
+-- >        <footer>
+-- >            <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >        </footer>
 -- >    </body>
 -- ></html>
 body :: [Attribute] -> [Html lng] -> Html lng
@@ -1107,22 +1355,25 @@ body = ParentNode "<body" "</body>"
 
 -- | Generates an HTML /\<br\>/ element with the given attributes.
 --
--- The /\<br\>/ element represents a line break, indicating that the content following it should appear on the next line. It is used to
--- create single-line breaks within text.
+-- The /\<br\>/ element, or break element, represents a line break, indicating that the content following it should appear on the next line.
+-- It is used to create single-line breaks within text.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
 -- >Html.p []
--- >    [ "This is some text."
+-- >    [ "We're a cozy coffee shop in the heart of the city."
 -- >    , Html.br []
--- >    , "And this is on a new line."
+-- >    , "Serving great coffee and homemade treats since 2005."
 -- >    ]
 --
 -- __Output:__
 --
--- ><p>This is some text.<br>And this is on a new line.</p>
+-- ><p>
+-- >    We're a cozy coffee shop in the heart of the city.<br>
+-- >    Serving great coffee and homemade treats since 2005.
+-- ></p>
 br :: [Attribute] -> Html lng
 br = LeafNode "<br"
 {-# INLINE br #-}
@@ -1137,13 +1388,53 @@ br = LeafNode "<br"
 --
 -- __Input:__
 --
--- >Html.button
--- >    [ Attr.type_ "button" ]
--- >    [ "Click me" ]
+-- >Html.form
+-- >    [ Attr.action "contact.php"
+-- >    , Attr.method "post"
+-- >    ]
+-- >    [ Html.label
+-- >        [ Attr.for "name" ]
+-- >        [ "Name:" ]
+-- >    , Html.input
+-- >        [ Attr.type_ "text"
+-- >        , Attr.id "name"
+-- >        , Attr.name "name"
+-- >        , Attr.required True
+-- >        ]
+-- >    , Html.label
+-- >        [ Attr.for "email" ]
+-- >        [ "Email:" ]
+-- >    , Html.input
+-- >        [ Attr.type_ "email"
+-- >        , Attr.id "email"
+-- >        , Attr.name "email"
+-- >        , Attr.required True
+-- >        ]
+-- >    , Html.label
+-- >        [ Attr.for "message" ]
+-- >        [ "Message:" ]
+-- >    , Html.input
+-- >        [ Attr.type_ "text"
+-- >        , Attr.id "message"
+-- >        , Attr.name "message"
+-- >        , Attr.required True
+-- >        ]
+-- >    , Html.button
+-- >        [ Attr.type_ "submit" ]
+-- >        [ "Submit" ]
+-- >    ]
 --
 -- __Output:__
 --
--- ><button type="button">Click me</button>
+-- ><form action="contact.php" method="post">
+-- >    <label for="name">Name:</label>
+-- >    <input type="text" id="name" name="name" required>
+-- >    <label for="email">Email:</label>
+-- >    <input type="email" id="email" name="email" required>
+-- >    <label for="message">Message:</label>
+-- >    <input type="text" id="message" name="message" required>
+-- >    <button type="submit">Submit</button>
+-- ></form>
 button :: [Attribute] -> [Html lng] -> Html lng
 button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
