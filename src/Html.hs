@@ -11,7 +11,7 @@
 --
 -- Additionally, the functions provided in the "Html.Intl" module can be used to facilitate internationalization.
 --
--- === Example
+-- ==== Example
 --
 -- __Input:__
 --
@@ -1363,16 +1363,19 @@ body = ParentNode "<body" "</body>"
 -- __Input:__
 --
 -- >Html.p []
--- >    [ "We're a cozy coffee shop in the heart of the city."
+-- >    [ "John Doe"
 -- >    , Html.br []
--- >    , "Serving great coffee and homemade treats since 2005."
+-- >    , "123 Main Street"
+-- >    , Html.br []
+-- >    , "Seattle"
 -- >    ]
 --
 -- __Output:__
 --
 -- ><p>
--- >    We're a cozy coffee shop in the heart of the city.<br>
--- >    Serving great coffee and homemade treats since 2005.
+-- >    John Doe<br>
+-- >    123 Main Street<br>
+-- >    Seattle
 -- ></p>
 br :: [Attribute] -> Html lng
 br = LeafNode "<br"
@@ -1413,12 +1416,12 @@ br = LeafNode "<br"
 -- >    , Html.label
 -- >        [ Attr.for "message" ]
 -- >        [ "Message:" ]
--- >    , Html.input
--- >        [ Attr.type_ "text"
--- >        , Attr.id "message"
+-- >    , Html.textarea
+-- >        [ Attr.id "message"
 -- >        , Attr.name "message"
 -- >        , Attr.required True
 -- >        ]
+-- >        []
 -- >    , Html.button
 -- >        [ Attr.type_ "submit" ]
 -- >        [ "Submit" ]
@@ -1432,7 +1435,7 @@ br = LeafNode "<br"
 -- >    <label for="email">Email:</label>
 -- >    <input type="email" id="email" name="email" required>
 -- >    <label for="message">Message:</label>
--- >    <input type="text" id="message" name="message" required>
+-- >    <textarea id="message" name="message" required></textarea>
 -- >    <button type="submit">Submit</button>
 -- ></form>
 button :: [Attribute] -> [Html lng] -> Html lng
@@ -1475,32 +1478,64 @@ canvas = ParentNode "<canvas" "</canvas>"
 --
 -- >Html.table []
 -- >    [ Html.caption []
--- >        [ "Monthly Sales Report" ]
+-- >        [ "Employee Information" ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ "Month" ]
+-- >            [ "Name" ]
 -- >        , Html.th []
--- >            [ "Sales" ]
+-- >            [ "Position" ]
+-- >        , Html.th []
+-- >            [ "Salary" ]
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.td []
--- >            [ "January" ]
+-- >            [ "John Doe" ]
 -- >        , Html.td []
--- >            [ "$10,000" ]
+-- >            [ "Web Developer" ]
+-- >        , Html.td []
+-- >            [ "$60,000" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Jane Smith" ]
+-- >        , Html.td []
+-- >            [ "Graphic Designer" ]
+-- >        , Html.td []
+-- >            [ "$55,000" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Mike Johnson" ]
+-- >        , Html.td []
+-- >            [ "Project Manager" ]
+-- >        , Html.td []
+-- >            [ "$75,000" ]
 -- >        ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><table>
--- >    <caption>Monthly Sales Report</caption>
+-- >    <caption>Employee Information</caption>
 -- >    <tr>
--- >        <th>Month</th>
--- >        <th>Sales</th>
+-- >        <th>Name</th>
+-- >        <th>Position</th>
+-- >        <th>Salary</th>
 -- >    </tr>
 -- >    <tr>
--- >        <td>January</td>
--- >        <td>$10,000</td>
+-- >        <td>John Doe</td>
+-- >        <td>Web Developer</td>
+-- >        <td>$60,000</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Jane Smith</td>
+-- >        <td>Graphic Designer</td>
+-- >        <td>$55,000</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Mike Johnson</td>
+-- >        <td>Project Manager</td>
+-- >        <td>$75,000</td>
 -- >    </tr>
 -- ></table>
 caption :: [Attribute] -> [Html lng] -> Html lng
@@ -1570,12 +1605,40 @@ code = ParentNode "<code" "</code>"
 -- >            [ Attr.style "background-color: red;" ]
 -- >        , Html.col
 -- >            [ Attr.style "background-color: blue;" ]
+-- >        , Html.col
+-- >            [ Attr.style "background-color: orange;" ]
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ "Column 1" ]
+-- >            [ "Name" ]
 -- >        , Html.th []
--- >            [ "Column 2" ]
+-- >            [ "Age" ]
+-- >        , Html.th []
+-- >            [ "City" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "John Doe" ]
+-- >        , Html.td []
+-- >            [ "30" ]
+-- >        , Html.td []
+-- >            [ "New York" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Jane Smith" ]
+-- >        , Html.td []
+-- >            [ "25" ]
+-- >        , Html.td []
+-- >            [ "Los Angeles" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Mike Johnson" ]
+-- >        , Html.td []
+-- >            [ "35" ]
+-- >        , Html.td []
+-- >            [ "Chicago" ]
 -- >        ]
 -- >    ]
 --
@@ -1583,12 +1646,29 @@ code = ParentNode "<code" "</code>"
 --
 -- ><table>
 -- >    <colgroup>
--- >        <col style="background-color: lightblue;">
--- >        <col style="background-color: lightgreen;">
+-- >        <col style="background-color: red;">
+-- >        <col style="background-color: blue;">
+-- >        <col style="background-color: orange;">
 -- >    </colgroup>
 -- >    <tr>
--- >        <td>Column 1</td>
--- >        <td>Column 2</td>
+-- >        <th>Name</th>
+-- >        <th>Age</th>
+-- >        <th>City</th>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>John Doe</td>
+-- >        <td>30</td>
+-- >        <td>New York</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Jane Smith</td>
+-- >        <td>25</td>
+-- >        <td>Los Angeles</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Mike Johnson</td>
+-- >        <td>35</td>
+-- >        <td>Chicago</td>
 -- >    </tr>
 -- ></table>
 col :: [Attribute] -> Html lng
@@ -1608,15 +1688,43 @@ col = LeafNode "<col"
 -- >Html.table []
 -- >    [ Html.colgroup []
 -- >        [ Html.col
--- >            [ Attr.style "background-color: red;" ]
+-- >            [ Attr.style "background-color: brown;" ]
 -- >        , Html.col
--- >            [ Attr.style "background-color: blue;" ]
+-- >            [ Attr.style "background-color: yellow;" ]
+-- >        , Html.col
+-- >            [ Attr.style "background-color: green;" ]
 -- >        ]
 -- >    , Html.tr []
 -- >        [ Html.th []
--- >            [ "Column 1" ]
+-- >            [ "Product" ]
 -- >        , Html.th []
--- >            [ "Column 2" ]
+-- >            [ "Price" ]
+-- >        , Html.th []
+-- >            [ "Availability" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Laptop" ]
+-- >        , Html.td []
+-- >            [ "$800" ]
+-- >        , Html.td []
+-- >            [ "In Stock" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Smartphone" ]
+-- >        , Html.td []
+-- >            [ "$400" ]
+-- >        , Html.td []
+-- >            [ "Out of Stock" ]
+-- >        ]
+-- >    , Html.tr []
+-- >        [ Html.td []
+-- >            [ "Tablet" ]
+-- >        , Html.td []
+-- >            [ "$300" ]
+-- >        , Html.td []
+-- >            [ "In Stock" ]
 -- >        ]
 -- >    ]
 --
@@ -1624,12 +1732,29 @@ col = LeafNode "<col"
 --
 -- ><table>
 -- >    <colgroup>
--- >        <col style="background-color: lightblue;">
--- >        <col style="background-color: lightgreen;">
+-- >        <col style="background-color: brown;">
+-- >        <col style="background-color: yellow;">
+-- >        <col style="background-color: green;">
 -- >    </colgroup>
 -- >    <tr>
--- >        <td>Column 1</td>
--- >        <td>Column 2</td>
+-- >        <th>Product</th>
+-- >        <th>Price</th>
+-- >        <th>Availability</th>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Laptop</td>
+-- >        <td>$800</td>
+-- >        <td>In Stock</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Smartphone</td>
+-- >        <td>$400</td>
+-- >        <td>Out of Stock</td>
+-- >    </tr>
+-- >    <tr>
+-- >        <td>Tablet</td>
+-- >        <td>$300</td>
+-- >        <td>In Stock</td>
 -- >    </tr>
 -- ></table>
 colgroup :: [Attribute] -> [Html lng] -> Html lng
