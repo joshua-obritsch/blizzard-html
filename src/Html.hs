@@ -695,10 +695,10 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ELEMENTS
 
 
--- | Generates an HTML /\<a\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<a\>@ element with the given attributes and contents.
 --
--- The /\<a\>/ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
--- content that, when clicked, navigates to the URL specified by the /href/ attribute.
+-- The @\<a\>@ element, or anchor element, is used to create hyperlinks that link to other web pages or resources. It defines the clickable
+-- content that, when clicked, navigates to the URL specified by the @href@ attribute.
 --
 -- ==== __Example__
 --
@@ -713,12 +713,12 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
--- >                [ Attr.href "/about.html" ]
+-- >                [ Attr.href "/about" ]
 -- >                [ "About" ]
 -- >            ]
 -- >        , Html.li []
 -- >            [ Html.a
--- >                [ Attr.href "/contact.html" ]
+-- >                [ Attr.href "/contact" ]
 -- >                [ "Contact" ]
 -- >            ]
 -- >        ]
@@ -729,8 +729,8 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ><nav>
 -- >    <ul>
 -- >        <li><a href="/">Home</a></li>
--- >        <li><a href="/about.html">About</a></li>
--- >        <li><a href="/contact.html">Contact</a></li>
+-- >        <li><a href="/about">About</a></li>
+-- >        <li><a href="/contact">Contact</a></li>
 -- >    </ul>
 -- ></nav>
 a :: [Attribute] -> [Html lng] -> Html lng
@@ -738,9 +738,9 @@ a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
--- | Generates an HTML /\<abbr\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<abbr\>@ element with the given attributes and contents.
 --
--- The /\<abbr\>/ element, or abbreviation element, is used to mark up an abbreviation or acronym in the text. It can include a /title/
+-- The @\<abbr\>@ element, or abbreviation element, is used to mark up an abbreviation or acronym in the text. It can include a @title@
 -- attribute to provide the full or expanded form of the abbreviation when hovered over.
 --
 -- ==== __Example__
@@ -763,10 +763,10 @@ abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
 
--- | Generates an HTML /\<address\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<address\>@ element with the given attributes and contents.
 --
--- The /\<address\>/ element is used to provide contact information or author details for the nearest /\<article\>/ or /\<body\>/ ancestor.
--- It typically includes information such as names, addresses, emails, or phone numbers.
+-- The @\<address\>@ element, or contact address element, is used to provide contact information or author details for the nearest
+-- @\<article\>@ or @\<body\>@ ancestor. It typically includes information such as names, addresses, emails, or phone numbers.
 --
 -- ==== __Example__
 --
@@ -797,10 +797,10 @@ address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
 
--- | Generates an HTML /\<area\>/ element with the given attributes.
+-- | Generates an HTML @\<area\>@ element with the given attributes.
 --
--- The /\<area\>/ element is used within a /\<map\>/ element to define clickable areas within an image map. Each /\<area\>/ defines a
--- clickable region that links to a specific URL or performs an action when clicked.
+-- The @\<area\>@ element, or image map area element, is used within a @\<map\>@ element to define clickable areas within an image map. Each
+-- @\<area\>@ defines a clickable region that links to a specific URL or performs an action when clicked.
 --
 -- ==== __Example__
 --
@@ -819,19 +819,19 @@ address = ParentNode "<address" "</address>"
 -- >            [ Attr.shape "circle"
 -- >            , Attr.coords "100,100,50"
 -- >            , Attr.alt "Mercury"
--- >            , Attr.href "mercury.html"
+-- >            , Attr.href "/planets/mercury"
 -- >            ]
 -- >        , Html.area
 -- >            [ Attr.shape "circle"
 -- >            , Attr.coords "200,200,50"
 -- >            , Attr.alt "Venus"
--- >            , Attr.href "venus.html"
+-- >            , Attr.href "/planets/venus"
 -- >            ]
 -- >        , Html.area
 -- >            [ Attr.shape "circle"
 -- >            , Attr.coords "300,300,50"
 -- >            , Attr.alt "Earth"
--- >            , Attr.href "earth.html"
+-- >            , Attr.href "/planets/earth"
 -- >            ]
 -- >        ]
 -- >    ]
@@ -842,9 +842,9 @@ address = ParentNode "<address" "</address>"
 -- >    Select one of the following planets to learn more:
 -- >    <img src="planets.jpg" alt="Planets" usemap="#planetmap">
 -- >    <map name="planetmap">
--- >        <area shape="circle" coords="100,100,50" alt="Mercury" href="mercury.html">
--- >        <area shape="circle" coords="200,200,50" alt="Venus" href="venus.html">
--- >        <area shape="circle" coords="300,300,50" alt="Earth" href="earth.html">
+-- >        <area shape="circle" coords="100,100,50" alt="Mercury" href="/planets/mercury">
+-- >        <area shape="circle" coords="200,200,50" alt="Venus" href="/planets/venus">
+-- >        <area shape="circle" coords="300,300,50" alt="Earth" href="/planets/earth">
 -- >    </map>
 -- ></p>
 area :: [Attribute] -> Html lng
@@ -852,10 +852,10 @@ area = LeafNode "<area"
 {-# INLINE area #-}
 
 
--- | Generates an HTML /\<article\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<article\>@ element with the given attributes and contents.
 --
--- The /\<article\>/ element represents a self-contained composition within a document. It encapsulates content that can be distributed or
--- reused independently, such as news articles, blog posts, or forum entries.
+-- The @\<article\>@ element, or article contents element, represents a self-contained composition within a document. It encapsulates
+-- content that can be distributed or reused independently, such as news articles, blog posts, or forum entries.
 --
 -- ==== __Example__
 --
@@ -935,9 +935,9 @@ article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
 
--- | Generates an HTML /\<aside\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<aside\>@ element with the given attributes and contents.
 --
--- The /\<aside\>/ element represents content that is tangentially related to the main content of a page. It is often used for sidebars,
+-- The @\<aside\>@ element represents content that is tangentially related to the main content of a page. It is often used for sidebars,
 -- pull quotes, or advertisements.
 --
 -- ==== __Example__
@@ -1027,10 +1027,10 @@ aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
 
--- | Generates an HTML /\<audio\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<audio\>@ element with the given attributes and contents.
 --
--- The /\<audio\>/ element embeds audio content in a web page. It allows you to include audio files like music, podcasts, or sound effects
--- that users can play directly in their browsers.
+-- The @\<audio\>@ element, or embed audio element, embeds audio content in a web page. It allows you to include audio files like music,
+-- podcasts, or sound effects that users can play directly in their browsers.
 --
 -- ==== __Example__
 --
@@ -1056,10 +1056,10 @@ audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
 
--- | Generates an HTML /\<b\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<b\>@ element with the given attributes and contents.
 --
--- The /\<b\>/ element, or bold element, is used to apply bold formatting to the enclosed text, indicating that the content should be
--- presented in a stronger or more prominent manner, without implying any specific semantic importance.
+-- The @\<b\>@ element, or bring attention to element, is used to apply bold formatting to the enclosed text, indicating that the content
+-- should be presented in a stronger or more prominent manner, without implying any specific semantic importance.
 --
 -- ==== __Example__
 --
@@ -1082,10 +1082,10 @@ b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
 
--- | Generates an HTML /\<base\>/ element with the given attributes.
+-- | Generates an HTML @\<base\>@ element with the given attributes.
 --
--- The /\<base\>/ element specifies a base URL for relative URLs in a document. It helps browsers resolve relative URLs for assets like
--- images, stylesheets, and scripts.
+-- The @\<base\>@ element, or document base URL element, specifies a base URL for relative URLs in a document. It helps browsers resolve
+-- relative URLs for assets like images, stylesheets, and scripts.
 --
 -- ==== __Example__
 --
@@ -1128,9 +1128,9 @@ base = LeafNode "<base"
 {-# INLINE base #-}
 
 
--- | Generates an HTML /\<bdi\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<bdi\>@ element with the given attributes and contents.
 --
--- The /\<bdi\>/ element, or bidirectional isolation element, isolates a span of text that needs to be formatted in a specific direction for
+-- The @\<bdi\>@ element, or bidirectional isolate element, isolates a span of text that needs to be formatted in a specific direction for
 -- languages that are written right-to-left, like Arabic or Hebrew, within a predominantly left-to-right text.
 --
 -- ==== __Example__
@@ -1167,10 +1167,10 @@ bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
 
--- | Generates an HTML /\<bdo\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<bdo\>@ element with the given attributes and contents.
 --
--- The /\<bdo\>/ element, or bidirectional override element, overrides the bidirectional algorithm setting of the surrounding text. It is
--- used to explicitly define the text direction, either left-to-right or right-to-left, for languages with different writing directions.
+-- The @\<bdo\>@ element, or bidirectional text override element, overrides the bidirectional algorithm setting of the surrounding text. It
+-- is used to explicitly define the text direction, either left-to-right or right-to-left, for languages with different writing directions.
 --
 -- ==== __Example__
 --
@@ -1219,10 +1219,10 @@ bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
 
--- | Generates an HTML /\<blockquote\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<blockquote\>@ element with the given attributes and contents.
 --
--- The /\<blockquote\>/ element is used to indicate a block of quoted text from another source. It is often used to provide attributions
--- for cited content.
+-- The @\<blockquote\>@ element, or block quotation element, is used to indicate a block of quoted text from another source. It is often
+-- used to provide attributions for cited content.
 --
 -- ==== __Example__
 --
@@ -1250,10 +1250,10 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
 
--- | Generates an HTML /\<body\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<body\>@ element with the given attributes and contents.
 --
--- The /\<body\>/ element represents the main content of an HTML document. It contains the visible content that is displayed in the browser
--- window.
+-- The @\<body\>@ element, or document body element, represents the main content of an HTML document. It contains the visible content that
+-- is displayed in the browser window.
 --
 -- ==== __Example__
 --
@@ -1353,10 +1353,10 @@ body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
 
--- | Generates an HTML /\<br\>/ element with the given attributes.
+-- | Generates an HTML @\<br\>@ element with the given attributes.
 --
--- The /\<br\>/ element, or break element, represents a line break, indicating that the content following it should appear on the next line.
--- It is used to create single-line breaks within text.
+-- The @\<br\>@ element, or line break element, represents a line break, indicating that the content following it should appear on the next
+-- line. It is used to create single-line breaks within text.
 --
 -- ==== __Example__
 --
@@ -1382,9 +1382,9 @@ br = LeafNode "<br"
 {-# INLINE br #-}
 
 
--- | Generates an HTML /\<button\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<button\>@ element with the given attributes and contents.
 --
--- The /\<button\>/ element represents a clickable button that can trigger actions or events when clicked by the user. It can be used for
+-- The @\<button\>@ element represents a clickable button that can trigger actions or events when clicked by the user. It can be used for
 -- various interactive purposes on a web page.
 --
 -- ==== __Example__
@@ -1443,10 +1443,10 @@ button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
 
--- | Generates an HTML /\<canvas\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<canvas\>@ element with the given attributes and contents.
 --
--- The /\<canvas\>/ element provides a space within which graphics, animations, and drawings can be rendered using JavaScript. It offers a
--- versatile way to create dynamic visual content on a web page.
+-- The @\<canvas\>@ element, or graphics canvas element, provides a space within which graphics, animations, and drawings can be rendered
+-- using JavaScript. It offers a versatile way to create dynamic visual content on a web page.
 --
 -- ==== __Example__
 --
@@ -1467,10 +1467,10 @@ canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
 
--- | Generates an HTML /\<caption\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<caption\>@ element with the given attributes and contents.
 --
--- The /\<caption\>/ element is used to provide a title or description for a /\<table\>/ element. It is typically placed as the first child
--- within the /\<table\>/ element to provide context for the table\'s content.
+-- The @\<caption\>@ element, or table caption element, is used to provide a title or description for a @\<table\>@ element. It is typically
+-- placed as the first child within the @\<table\>@ element to provide context for the table\'s content.
 --
 -- ==== __Example__
 --
@@ -1543,10 +1543,10 @@ caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
 
--- | Generates an HTML /\<cite\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<cite\>@ element with the given attributes and contents.
 --
--- The /\<cite\>/ element is used to mark a reference to a creative work, such as a book, movie, or song, within a text. It indicates the
--- title of the work and can be used for citations.
+-- The @\<cite\>@ element, or citation element, is used to mark a reference to a creative work, such as a book, movie, or song, within a
+-- text. It indicates the title of the work and can be used for citations.
 --
 -- ==== __Example__
 --
@@ -1566,10 +1566,10 @@ cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
 
--- | Generates an HTML /\<code\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<code\>@ element with the given attributes and contents.
 --
--- The /\<code\>/ element is used to represent a fragment of computer code within a document. It is typically used to display code examples,
--- snippets, or programming instructions.
+-- The @\<code\>@ element, or inline code element, is used to represent a fragment of computer code within a document. It is typically used
+-- to display code examples, snippets, or programming instructions.
 --
 -- ==== __Example__
 --
@@ -1590,10 +1590,10 @@ code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
 
--- | Generates an HTML /\<col\>/ element with the given attributes.
+-- | Generates an HTML @\<col\>@ element with the given attributes.
 --
--- The /\<col\>/ element is used to define properties for a group of columns within a /\<table\>/ element. It allows you to apply styling or
--- attributes to multiple columns at once.
+-- The @\<col\>@ element, or table column element, is used to define properties for a group of columns within a @\<table\>@ element. It
+-- allows you to apply styling or attributes to multiple columns at once.
 --
 -- ==== __Example__
 --
@@ -1676,10 +1676,10 @@ col = LeafNode "<col"
 {-# INLINE col #-}
 
 
--- | Generates an HTML /\<colgroup\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<colgroup\>@ element with the given attributes and contents.
 --
--- The /\<colgroup\>/ element is used to group and define properties for one or more columns within a /\<table\>/ element. It is typically
--- used in conjunction with the /\<col\>/ element to apply styling or attributes to columns collectively.
+-- The @\<colgroup\>@ element, or table column group element, is used to group and define properties for one or more columns within a
+-- @\<table\>@ element. It is typically used with the @\<col\>@ element to apply styling or attributes to columns collectively.
 --
 -- ==== __Example__
 --
@@ -1762,9 +1762,9 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
 
--- | Generates an HTML /\<data\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<data\>@ element with the given attributes and contents.
 --
--- The /\<data\>/ element represents machine-readable data within the content, typically used to provide additional information that is not
+-- The @\<data\>@ element represents machine-readable data within the content, typically used to provide additional information that is not
 -- meant for display but can be processed by scripts or applications.
 --
 -- ==== __Example__
@@ -1787,55 +1787,56 @@ data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
 
--- | Generates an HTML /\<datalist\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<datalist\>@ element with the given attributes and contents.
 --
--- The /\<datalist\>/ element provides a predefined list of options that can be associated with an /\<input\>/ element\'s autocomplete
--- feature, making it easier for users to enter data.
+-- The @\<datalist\>@ element, or data list element, provides a predefined list of options that can be associated with an @\<input\>@
+-- element\'s autocomplete feature, making it easier for users to enter data.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >[ Html.label
--- >    [ Attr.for "browser" ]
--- >    [ "Choose a browser:" ]
--- >, Html.input
--- >    [ Attr.list "browsers"
--- >    , Attr.id "browser"
--- >    , Attr.name "browser"
+-- >Html.label
+-- >    [ Attr.for "fruits" ]
+-- >    [ "Choose a fruit:"
+-- >    , Html.input
+-- >        [ Attr.list "fruits"
+-- >        , Attr.name "fruits"
+-- >        ]
+-- >    , Html.datalist
+-- >        [ Attr.id "fruits" ]
+-- >        [ Html.option
+-- >            [ Attr.value "Apple" ] []
+-- >        , Html.option
+-- >            [ Attr.value "Banana" ] []
+-- >        , Html.option
+-- >            [ Attr.value "Cherry" ] []
+-- >        , Html.option
+-- >            [ Attr.value "Grape" ] []
+-- >        ]
 -- >    ]
--- >, Html.datalist
--- >    [ Attr.id "browsers" ]
--- >    [ Html.option
--- >        [ Attr.value "Chrome" ] []
--- >    , Html.option
--- >        [ Attr.value "Firefox" ] []
--- >    , Html.option
--- >        [ Attr.value "Edge" ] []
--- >    , Html.option
--- >        [ Attr.value "Safari" ] []
--- >    ]
--- >]
 --
 -- __Output:__
 --
--- ><label for="browser">Choose a browser:</label>
--- ><input list="browsers" id="browser" name="browser">
--- ><datalist id="browsers">
--- >    <option value="Chrome"></option>
--- >    <option value="Firefox"></option>
--- >    <option value="Edge"></option>
--- >    <option value="Safari"></option>
--- ></datalist>
+-- ><label for="fruits">
+-- >    Choose a fruit:
+-- >    <input list="fruits" name="fruits">
+-- >    <datalist id="fruits">
+-- >        <option value="Apple"></option>
+-- >        <option value="Banana"></option>
+-- >        <option value="Cherry"></option>
+-- >        <option value="Grape"></option>
+-- >    </datalist>
+-- ></label>
 datalist :: [Attribute] -> [Html lng] -> Html lng
 datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
 
--- | Generates an HTML /\<dd\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<dd\>@ element with the given attributes and contents.
 --
--- The /\<dd\>/ element is used within a definition list (/\<dl\>/) to provide the description of definition of a term (/\<dt\>/). It is
--- commonly used to pair terms with their corresponding explanations.
+-- The @\<dd\>@ element, or description details element, is used within a definition list (@\<dl\>@) to provide the description or
+-- definition of a term (@\<dt\>@). It is commonly used to pair terms with their corresponding explanations.
 --
 -- ==== __Example__
 --
@@ -1865,10 +1866,10 @@ dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
 
--- | Generates an HTML /\<del\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<del\>@ element with the given attributes and contents.
 --
--- The /\<del\>/ element represents text that has been deleted or removed from a document. It is often used to show changes in revisions or
--- edits.
+-- The @\<del\>@ element, or deleted text element, represents text that has been deleted or removed from a document. It is often used to
+-- show changes in revisions or edits.
 --
 -- ==== __Example__
 --
@@ -1891,10 +1892,10 @@ del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
 
--- | Generates an HTML /\<details\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<details\>@ element with the given attributes and contents.
 --
--- The /\<details\>/ element represents a disclosure widget that allows users to view or hide additional content. It is often used to create
--- collapsible sections of information.
+-- The @\<details\>@ element, or details disclosure element, represents a disclosure widget that allows users to view or hide additional
+-- content. It is often used to create collapsible sections of information.
 --
 -- ==== __Example__
 --
@@ -1902,47 +1903,126 @@ del = ParentNode "<del" "</del>"
 --
 -- >Html.details []
 -- >    [ Html.summary []
--- >        [ "Click to reveal more information" ]
--- >    , Html.p []
--- >        [ "This is additional content that can be shown or hidden." ]
+-- >        [ "Product Specifications" ]
+-- >    , Html.table []
+-- >        [ Html.table []
+-- >            [ Html.tr []
+-- >                [ Html.th []
+-- >                    [ "Feature" ]
+-- >                , Html.th []
+-- >                    [ "Specification" ]
+-- >                ]
+-- >            , Html.tr []
+-- >                [ Html.td []
+-- >                    [ "Size" ]
+-- >                , Html.td []
+-- >                    [ "10 cm x 5 cm x 2 cm" ]
+-- >                ]
+-- >            , Html.tr []
+-- >                [ Html.td []
+-- >                    [ "Weight" ]
+-- >                , Html.td []
+-- >                    [ "200 grams" ]
+-- >                ]
+-- >            , Html.tr []
+-- >                [ Html.td []
+-- >                    [ "Color" ]
+-- >                , Html.td []
+-- >                    [ "Black" ]
+-- >                ]
+-- >            ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><details>
--- >    <summary>Click to reveal more information</summary>
--- >    <p>This is additional content that can be shown or hidden.</p>
+-- >    <summary>Product Specifications</summary>
+-- >    <table>
+-- >        <tr>
+-- >            <th>Feature</th>
+-- >            <th>Specification</th>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Size</td>
+-- >            <td>10 cm x 5 cm x 2 cm</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Weight</td>
+-- >            <td>200 grams</td>
+-- >        </tr>
+-- >        <tr>
+-- >            <td>Color</td>
+-- >            <td>Black</td>
+-- >        </tr>
+-- >    </table>
 -- ></details>
 details :: [Attribute] -> [Html lng] -> Html lng
 details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
 
--- | Generates an HTML /\<dfn\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<dfn\>@ element with the given attributes and contents.
 --
--- The /\<dfn\>/ element marks text that is being defined within a document, often indicating terms that are being introduced or explained.
+-- The @\<dfn\>@ element, or definition element, marks text that is being defined within a document, often indicating terms that are being
+-- introduced or explained.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >Html.p []
--- >    [ Html.dfn []
--- >        [ "AI" ]
--- >    , " refers to the simulation of human intelligence in computers."
+-- >Html.body []
+-- >    [ Html.h1 []
+-- >        [ "Botanical Terms" ]
+-- >    , Html.ul []
+-- >        [ Html.li []
+-- >            [ Html.dfn []
+-- >                [ "Photosynthesis" ]
+-- >            , ": The process of plants using sunlight to make food."
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.dfn []
+-- >                [ "Stamen" ]
+-- >            , ": A flower's male reproductive part."
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.dfn []
+-- >                [ "Deciduous" ]
+-- >            , ": Trees that shed leaves each year."
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.dfn []
+-- >                [ "Germination" ]
+-- >            , ": Seed sprouting and growth."
+-- >            ]
+-- >        , Html.li []
+-- >            [ Html.dfn []
+-- >                [ "Botany" ]
+-- >            , ": Scientific study of plants."
+-- >            ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><p><dfn>AI</dfn> refers to the simulation of human intelligence in computers.</p>
+-- ><body>
+-- >    <h1>Botanical Terms</h1>
+-- >    <ul>
+-- >        <li><dfn>Photosynthesis</dfn>: The process of plants using sunlight to make food.</li>
+-- >        <li><dfn>Stamen</dfn>: A flower's male reproductive part.</li>
+-- >        <li><dfn>Deciduous</dfn>: Trees that shed leaves each year.</li>
+-- >        <li><dfn>Germination</dfn>: Seed sprouting and growth.</li>
+-- >        <li><dfn>Botany</dfn>: Scientific study of plants.</li>
+-- >    </ul>
+-- ></body>
 dfn :: [Attribute] -> [Html lng] -> Html lng
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
 
--- | Generates an HTML /\<dialog\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<dialog\>@ element with the given attributes and contents.
 --
--- The /\<dialog\>/ element represents a dialog box or modal window that can be used for interactive communication with the user. It is
+-- The @\<dialog\>@ element represents a dialog box or modal window that can be used for interactive communication with the user. It is
 -- often used for displaying alerts, messages, or user prompts.
 --
 -- ==== __Example__
@@ -1968,10 +2048,10 @@ dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
--- | Generates an HTML /\<div\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<div\>@ element with the given attributes and contents.
 --
--- The /\<div\>/ element is a generic container that is often used to group and structure content for styling or scripting purposes. It does
--- not inherently carry any specific meaning on its own.
+-- The @\<div\>@ element, or content division element, is a generic container that is often used to group and structure content for styling
+-- or scripting purposes. It does not inherently carry any specific meaning on its own.
 --
 -- ==== __Example__
 --
