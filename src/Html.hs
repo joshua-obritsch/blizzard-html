@@ -2031,17 +2031,45 @@ dfn = ParentNode "<dfn" "</dfn>"
 --
 -- >Html.dialog
 -- >    [ Attr.open True ]
--- >    [ Html.p []
--- >        [ "This is a dialog box." ]
--- >    , Html.button []
--- >        [ "Close" ]
+-- >    [ Html.h2 []
+-- >        [ "Welcome to Our Newsletter" ]
+-- >    , Html.p []
+-- >        [ "Stay up-to-date with the latest news, offers, and updates by subscribing to our newsletter!" ]
+-- >    , Html.form
+-- >        [ Attr.method "dialog" ]
+-- >        [ Html.label
+-- >            [ Attr.for "email" ]
+-- >            [ "Enter your email:" ]
+-- >        , Html.input
+-- >            [ Attr.type_ "email"
+-- >            , Attr.id "email"
+-- >            , Attr.name "email"
+-- >            , Attr.required True
+-- >            ]
+-- >        , Html.br []
+-- >        , Html.button
+-- >            [ Attr.type_ "submit" ]
+-- >            [ "Subscribe" ]
+-- >        , Html.button
+-- >            [ Attr.type_ "button"
+-- >            , Attr.id "closeDialog"
+-- >            ]
+-- >            [ "No, thanks" ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><dialog open>
--- >    <p>This is a dialog box.</p>
--- >    <button>Close</button>
+-- >    <h2>Welcome to Our Newsletter</h2>
+-- >    <p>Stay up-to-date with the latest news, offers, and updates by subscribing to our newsletter!</p>
+-- >    <form method="dialog">
+-- >        <label for="email">Enter your email:</label>
+-- >        <input type="email" id="email" name="email" required>
+-- >        <br>
+-- >        <button type="submit">Subscribe</button>
+-- >        <button type="button" id="closeDialog">No, thanks</button>
+-- >    </form>
 -- ></dialog>
 dialog :: [Attribute] -> [Html lng] -> Html lng
 dialog = ParentNode "<dialog" "</dialog>"
@@ -2057,29 +2085,98 @@ dialog = ParentNode "<dialog" "</dialog>"
 --
 -- __Input:__
 --
--- >Html.div
--- >    [ Attr.class_ "container" ]
--- >    [ Html.h1 []
--- >        [ "Welcome" ]
--- >    , Html.p []
--- >        [ "This is a paragraph within a div." ]
+-- >Html.doctype
+-- >    [ Html.html
+-- >        [ Attr.lang "en-US" ]
+-- >        [ Html.head []
+-- >            [ Html.meta
+-- >                [ Attr.charset "UTF-8" ]
+-- >            , Html.meta
+-- >                [ Attr.name "viewport"
+-- >                , Attr.content "width=device-width, initial-scale=1.0"
+-- >                ]
+-- >            , Html.title []
+-- >                [ "Example Language School" ]
+-- >            ]
+-- >        , Html.body []
+-- >            [ Html.header []
+-- >                [ Html.h1 []
+-- >                    [ "Welcome to Example Language School" ]
+-- >                , Html.p []
+-- >                    [ "Learn a new language and broaden your horizons with us!" ]
+-- >                ]
+-- >            , Html.section []
+-- >                [ Html.h2 []
+-- >                    [ "Announcements" ]
+-- >                , Html.p []
+-- >                    [ "Due to a pipe break in the school, the German test on October 15th has been postponed." ]
+-- >                , Html.p []
+-- >                    [ "Thank you for your understanding." ]
+-- >                , Html.div
+-- >                    [ Attr.lang "de-DE" ]
+-- >                    [ Html.p []
+-- >                        [ "Aufgrund eines Rohrbruchs in der Schule wurde der Deutschtest am 15. Oktober verschoben." ]
+-- >                    , Html.p []
+-- >                        [ "Vielen Dank für Ihr Verständnis." ]
+-- >                    ]
+-- >                ]
+-- >            , Html.footer []
+-- >                [ Html.h2 []
+-- >                    [ "Contact" ]
+-- >                , Html.address []
+-- >                    [ "Email: "
+-- >                    , Html.a
+-- >                        [ Attr.href "mailto:info@examplelanguageschool.com" ]
+-- >                        [ "info@examplelanguageschool.com" ]
+-- >                    , Html.br []
+-- >                    , "Phone: +1 (123) 456-7890"
+-- >                    ]
+-- >                ]
+-- >            ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><div class="container">
--- >  <h1>Welcome</h1>
--- >  <p>This is a paragraph within a div.</p>
--- ></div>
+-- ><!DOCTYPE html>
+-- ><html lang="en-US">
+-- >    <head>
+-- >        <meta charset="UTF-8">
+-- >        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-- >        <title>Example Language School</title>
+-- >    </head>
+-- >    <body>
+-- >        <header>
+-- >            <h1>Welcome to Example Language School</h1>
+-- >            <p>Learn a new language and broaden your horizons with us!</p>
+-- >        </header>
+-- >        <section>
+-- >            <h2>Announcements</h2>
+-- >            <p>Due to a pipe break in the school, the German test on October 15th has been postponed.</p>
+-- >            <p>Thank you for your understanding.</p>
+-- >            <div lang="de-DE">
+-- >                <p>Aufgrund eines Rohrbruchs in der Schule wurde der Deutschtest am 15. Oktober verschoben.</p>
+-- >                <p>Vielen Dank für Ihr Verständnis.</p>
+-- >            </div>
+-- >        </section>
+-- >        <footer>
+-- >            <h2>Contact</h2>
+-- >            <address>
+-- >                Email: <a href="mailto:info@examplelanguageschool.com">info@examplelanguageschool.com</a><br>
+-- >                Phone: +1 (123) 456-7890
+-- >            </address>
+-- >        </footer>
+-- >    </body>
+-- ></html>
 div :: [Attribute] -> [Html lng] -> Html lng
 div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
--- | Generates an HTML /\<dl\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<dl\>@ element with the given attributes and contents.
 --
--- The /\<dl\>/ element represents a description list, consisting of terms (/\<dt\>/) and their corresponding descriptions (/\<dd\>/).
--- It is commonly used to present glossaries or sets of definitions.
+-- The @\<dl\>@ element, or description list element, represents a description list, consisting of terms (@\<dt\>@) and their corresponding
+-- descriptions (@\<dd\>@). It is commonly used to present glossaries or sets of definitions.
 --
 -- ==== __Example__
 --
@@ -2087,32 +2184,38 @@ div = ParentNode "<div" "</div>"
 --
 -- >Html.dl []
 -- >    [ Html.dt []
--- >        [ "HTML" ]
+-- >        [ "The Eiffel Tower" ]
 -- >    , Html.dd []
--- >        [ "HyperText Markup Language" ]
+-- >        [ "An iconic Parisian landmark and one of the most recognizable structures in the world." ]
 -- >    , Html.dt []
--- >        [ "CSS" ]
+-- >        [ "The Louvre Museum" ]
 -- >    , Html.dd []
--- >        [ "Cascading Style Sheets" ]
+-- >        [ "One of the world's largest and most famous art museums, located in Paris, France." ]
+-- >    , Html.dt []
+-- >        [ "The Colosseum" ]
+-- >    , Html.dd []
+-- >        [ "An ancient Roman amphitheater known for its historical and architectural significance." ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><dl>
--- >    <dt>HTML</dt>
--- >    <dd>HyperText Markup Language</dd>
--- >    <dt>CSS</dt>
--- >    <dd>Cascading Style Sheets</dd>
+-- >    <dt>The Eiffel Tower</dt>
+-- >    <dd>An iconic Parisian landmark and one of the most recognizable structures in the world.</dd>
+-- >    <dt>The Louvre Museum</dt>
+-- >    <dd>One of the world's largest and most famous art museums, located in Paris, France.</dd>
+-- >    <dt>The Colosseum</dt>
+-- >    <dd>An ancient Roman amphitheater known for its historical and architectural significance.</dd>
 -- ></dl>
 dl :: [Attribute] -> [Html lng] -> Html lng
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
--- | Generates an HTML /\<dt\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<dt\>@ element with the given attributes and contents.
 --
--- The /\<dt\>/ element is used withing a description list (/\<dl\>/) to define a term or name that is followed by its corresponding
--- description (/\<dd\>/).
+-- The @\<dt\>@ element, or description term element, is used withing a description list (@\<dl\>@) to define a term or name that is
+-- followed by its corresponding description (@\<dd\>@).
 --
 -- ==== __Example__
 --
@@ -2120,32 +2223,38 @@ dl = ParentNode "<dl" "</dl>"
 --
 -- >Html.dl []
 -- >    [ Html.dt []
--- >        [ "HTML" ]
+-- >        [ "Mount Everest" ]
 -- >    , Html.dd []
--- >        [ "HyperText Markup Language" ]
+-- >        [ "The highest mountain on Earth, located in the Himalayas." ]
 -- >    , Html.dt []
--- >        [ "CSS" ]
+-- >        [ "Amazon Rainforest" ]
 -- >    , Html.dd []
--- >        [ "Cascading Style Sheets" ]
+-- >        [ "The world's largest tropical rainforest, home to a diverse range of species." ]
+-- >    , Html.dt []
+-- >        [ "Nile River" ]
+-- >    , Html.dd []
+-- >        [ "The longest river in the world, flowing through northeastern Africa." ]
 -- >    ]
 --
 -- __Output:__
 --
 -- ><dl>
--- >    <dt>HTML</dt>
--- >    <dd>HyperText Markup Language</dd>
--- >    <dt>CSS</dt>
--- >    <dd>Cascading Style Sheets</dd>
+-- >    <dt>Mount Everest</dt>
+-- >    <dd>The highest mountain on Earth, located in the Himalayas.</dd>
+-- >    <dt>Amazon Rainforest</dt>
+-- >    <dd>The world's largest tropical rainforest, home to a diverse range of species.</dd>
+-- >    <dt>Nile River</dt>
+-- >    <dd>The longest river in the world, flowing through northeastern Africa.</dd>
 -- ></dl>
 dt :: [Attribute] -> [Html lng] -> Html lng
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
--- | Generates an HTML /\<em\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<em\>@ element with the given attributes and contents.
 --
--- The /\<em\>/ element is used to indicate text that should be emphasized, typically displayed in italic style. It carries semantic
--- meaning, implying that the enclosed content is of particular importance or should be stressed.
+-- The @\<em\>@ element, or emphasis element, is used to indicate text that should be emphasized, typically displayed in italic style. It
+-- carries semantic meaning, implying that the enclosed content is of particular importance or should be stressed.
 --
 -- ==== __Example__
 --
@@ -2153,37 +2262,37 @@ dt = ParentNode "<dt" "</dt>"
 --
 -- >Html.p []
 -- >    [ Html.em []
--- >        [ "Important" ]
--- >    , " information should not be overlooked."
+-- >        [ "Note:" ]
+-- >    , " All fields marked with an asterisk (*) are required."
 -- >    ]
 --
 -- __Output:__
 --
--- ><p><em>Important</em> information should not be overlooked.</p>
+-- ><p><em>Note:</em> All fields marked with an asterisk (*) are required.</p>
 em :: [Attribute] -> [Html lng] -> Html lng
 em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
--- | Generates an HTML /\<embed\>/ element with the given attributes.
+-- | Generates an HTML @\<embed\>@ element with the given attributes.
 --
--- The /\<embed\>/ element embeds external content, typically multimedia like audio, video, or interactive applications, directly into a web
--- page. It is used to seamlessly integrate content from other sources.
+-- The @\<embed\>@ element, or embed external content element, embeds external content, typically multimedia like audio, video, or
+-- interactive applications, directly into a web page. It is used to seamlessly integrate content from other sources.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
 -- >Html.embed
--- >    [ Attr.src "video.mp4"
--- >    , Attr.type_ "video/mp4"
+-- >    [ Attr.src "https://example.com/audio/classical_opus.mp3"
+-- >    , Attr.type_ "audio/mpeg"
 -- >    , Attr.width "300"
--- >    , Attr.height "200"
+-- >    , Attr.height "40"
 -- >    ]
 --
 -- __Output:__
 --
--- ><embed src="video.mp4" type="video/mp4" width="300" height="200">
+-- ><embed src="https://example.com/audio/classical_opus.mp3" type="audio/mpeg" width="300" height="40">
 embed :: [Attribute] -> Html lng
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
