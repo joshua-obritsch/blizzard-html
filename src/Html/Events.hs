@@ -2,88 +2,171 @@
 
 module Html.Events
     ( -- * Event Handlers
+      -- ** onauxclick
       onauxclick
+      -- ** onafterprint
     , onafterprint
+      -- ** onbeforematch
     , onbeforematch
+      -- ** onbeforeprint
     , onbeforeprint
+      -- ** onbeforeunload
     , onbeforeunload
+      -- ** onblur
     , onblur
+      -- ** oncancel
     , oncancel
+      -- ** oncanplay
     , oncanplay
+      -- ** oncanplaythrough
     , oncanplaythrough
+      -- ** onchange
     , onchange
+      -- ** onclick
     , onclick
+      -- ** onclose
     , onclose
+      -- ** oncontextlost
     , oncontextlost
+      -- ** oncontextmenu
     , oncontextmenu
+      -- ** oncontextrestored
     , oncontextrestored
+      -- ** oncopy
     , oncopy
+      -- ** oncuechange
     , oncuechange
+      -- ** oncut
     , oncut
+      -- ** ondblclick
     , ondblclick
+      -- ** ondrag
     , ondrag
+      -- ** ondragend
     , ondragend
+      -- ** ondragenter
     , ondragenter
+      -- ** ondragleave
     , ondragleave
+      -- ** ondragover
     , ondragover
+      -- ** ondragstart
     , ondragstart
+      -- ** ondrop
     , ondrop
+      -- ** ondurationchange
     , ondurationchange
+      -- ** onemptied
     , onemptied
+      -- ** onended
     , onended
+      -- ** onerror
     , onerror
+      -- ** onfocus
     , onfocus
+      -- ** onformdata
     , onformdata
+      -- ** onhashchange
     , onhashchange
+      -- ** oninput
     , oninput
+      -- ** oninvalid
     , oninvalid
+      -- ** onkeydown
     , onkeydown
+      -- ** onkeypress
     , onkeypress
+      -- ** onkeyup
     , onkeyup
+      -- ** onlanguagechange
     , onlanguagechange
+      -- ** onload
     , onload
+      -- ** onloadeddata
     , onloadeddata
+      -- ** onloadedmetadata
     , onloadedmetadata
+      -- ** onloadstart
     , onloadstart
+      -- ** onmessage
     , onmessage
+      -- ** onmessageerror
     , onmessageerror
+      -- ** onmousedown
     , onmousedown
+      -- ** onmouseenter
     , onmouseenter
+      -- ** onmouseleave
     , onmouseleave
+      -- ** onmousemove
     , onmousemove
+      -- ** onmouseout
     , onmouseout
+      -- ** onmouseover
     , onmouseover
+      -- ** onmouseup
     , onmouseup
+      -- ** onoffline
     , onoffline
+      -- ** ononline
     , ononline
+      -- ** onpagehide
     , onpagehide
+      -- ** onpageshow
     , onpageshow
+      -- ** onpaste
     , onpaste
+      -- ** onpause
     , onpause
+      -- ** onplay
     , onplay
+      -- ** onplaying
     , onplaying
+      -- ** onpopstate
     , onpopstate
+      -- ** onprogress
     , onprogress
+      -- ** onratechange
     , onratechange
+      -- ** onreset
     , onreset
+      -- ** onresize
     , onresize
+      -- ** onrejectionhandled
     , onrejectionhandled
+      -- ** onscroll
     , onscroll
+      -- ** onsecuritypolicyviolation
     , onsecuritypolicyviolation
+      -- ** onseeked
     , onseeked
+      -- ** onseeking
     , onseeking
+      -- ** onselect
     , onselect
+      -- ** onslotchange
     , onslotchange
+      -- ** onstalled
     , onstalled
+      -- ** onstorage
     , onstorage
+      -- ** onsubmit
     , onsubmit
+      -- ** onsuspend
     , onsuspend
+      -- ** ontimeupdate
     , ontimeupdate
+      -- ** ontoggle
     , ontoggle
+      -- ** onunhandledrejection
     , onunhandledrejection
+      -- ** onunload
     , onunload
+      -- ** onvolumechange
     , onvolumechange
+      -- ** onwaiting
     , onwaiting
+      -- ** onwheel
     , onwheel
     ) where
 

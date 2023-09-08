@@ -1,5 +1,8 @@
 module Html.Intl
-    ( translate
+    ( -- * Internationalization
+      -- ** translate
+      translate
+      -- ** intl
     , intl
     ) where
 

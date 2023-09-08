@@ -112,129 +112,253 @@
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
 module Html.Attributes
     ( -- * Attributes
+      -- ** abbr
       abbr
+      -- ** accept
     , accept
+      -- ** acceptCharset
     , acceptCharset
+      -- ** accesskey
     , accesskey
+      -- ** action
     , action
+      -- ** allow
     , allow
+      -- ** allowfullscreen
     , allowfullscreen
+      -- ** alt
     , alt
+      -- ** as
     , as
+      -- ** async
     , async
+      -- ** autocapitalize
     , autocapitalize
+      -- ** autocomplete
     , autocomplete
+      -- ** autofocus
     , autofocus
+      -- ** autoplay
     , autoplay
+      -- ** blocking
     , blocking
+      -- ** charset
     , charset
+      -- ** checked
     , checked
+      -- ** cite
     , cite
+      -- ** class
     , class_
+      -- ** color
     , color
+      -- ** cols
     , cols
+      -- ** colspan
     , colspan
+      -- ** content
     , content
+      -- ** contenteditable
     , contenteditable
+      -- ** controls
     , controls
+      -- ** coords
     , coords
+      -- ** crossorigin
     , crossorigin
+      -- ** data
     , data_
+      -- ** datetime
     , datetime
+      -- ** decoding
     , decoding
+      -- ** default
     , default_
+      -- ** defer
     , defer
+      -- ** dir
     , dir
+      -- ** disabled
     , disabled
+      -- ** download
     , download
+      -- ** draggable
     , draggable
+      -- ** enctype
     , enctype
+      -- ** enterkeyhint
     , enterkeyhint
+      -- ** for
     , for
+      -- ** form
     , form
+      -- ** formaction
     , formaction
+      -- ** formenctype
     , formenctype
+      -- ** formmethod
     , formmethod
+      -- ** formnovalidate
     , formnovalidate
+      -- ** formtarget
     , formtarget
+      -- ** headers
     , headers
+      -- ** height
     , height
+      -- ** hidden
     , hidden
+      -- ** high
     , high
+      -- ** href
     , href
+      -- ** hreflang
     , hreflang
+      -- ** httpEquiv
     , httpEquiv
+      -- ** id
     , id
+      -- ** imagesizes
     , imagesizes
+      -- ** imagesrcset
     , imagesrcset
+      -- ** inert
     , inert
+      -- ** inputmode
     , inputmode
+      -- ** integrity
     , integrity
+      -- ** is
     , is
+      -- ** ismap
     , ismap
+      -- ** itemid
     , itemid
+      -- ** itemprop
     , itemprop
+      -- ** itemref
     , itemref
+      -- ** itemscope
     , itemscope
+      -- ** itemtype
     , itemtype
+      -- ** kind
     , kind
+      -- ** label
     , label
+      -- ** lang
     , lang
+      -- ** list
     , list
+      -- ** loading
     , loading
+      -- ** loop
     , loop
+      -- ** low
     , low
+      -- ** max
     , max
+      -- ** maxlength
     , maxlength
+      -- ** media
     , media
+      -- ** method
     , method
+      -- ** min
     , min
+      -- ** minlength
     , minlength
+      -- ** multiple
     , multiple
+      -- ** muted
     , muted
+      -- ** name
     , name
+      -- ** nomodule
     , nomodule
+      -- ** nonce
     , nonce
+      -- ** novalidate
     , novalidate
+      -- ** open
     , open
+      -- ** optimum
     , optimum
+      -- ** pattern
     , pattern
+      -- ** ping
     , ping
+      -- ** placeholder
     , placeholder
+      -- ** playsinline
     , playsinline
+      -- ** poster
     , poster
+      -- ** preload
     , preload
+      -- ** readonly
     , readonly
+      -- ** referrerpolicy
     , referrerpolicy
+      -- ** rel
     , rel
+      -- ** required
     , required
+      -- ** reversed
     , reversed
+      -- ** rows
     , rows
+      -- ** rowspan
     , rowspan
+      -- ** sandbox
     , sandbox
+      -- ** scope
     , scope
+      -- ** selected
     , selected
+      -- ** shape
     , shape
+      -- ** size
     , size
+      -- ** sizes
     , sizes
+      -- ** slot
     , slot
+      -- ** span
     , span
+      -- ** spellcheck
     , spellcheck
+      -- ** src
     , src
+      -- ** srcdoc
     , srcdoc
+      -- ** srclang
     , srclang
+      -- ** srcset
     , srcset
+      -- ** start
     , start
+      -- ** step
     , step
+      -- ** style
     , style
+      -- ** tabindex
     , tabindex
+      -- ** target
     , target
+      -- ** title
     , title
+      -- ** translate
     , translate
+      -- ** type
     , type_
+      -- ** usemap
     , usemap
+      -- ** value
     , value
+      -- ** width
     , width
+      -- ** wrap
     , wrap
     ) where
 
