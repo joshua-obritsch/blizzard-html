@@ -2298,10 +2298,10 @@ embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
--- | Generates an HTML /\<fieldset\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<fieldset\>@ element with the given attributes and contents.
 --
--- The /\<fieldset\>/ element is used to group related form elements together, providing a visual and logical grouping for better
--- organization and styling. It is often used in forms to structure related input elements.
+-- The @\<fieldset\>@ element, or field set element, is used to group related form elements together, providing a visual and logical
+-- grouping for better organization and styling. It is often used in forms to structure related input elements.
 --
 -- ==== __Example__
 --
@@ -2340,10 +2340,10 @@ fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
 
 
--- | Generates an HTML /\<figcaption\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<figcaption\>@ element with the given attributes and contents.
 --
--- The /\<figcaption\>/ element is used to provide a caption or description for a /\<figure\>/ element, typically used to describe images,
--- illustrations, or multimedia content.
+-- The @\<figcaption\>@ element, or figure caption element, is used to provide a caption or description for a @\<figure\>@ element,
+-- typically used to describe images, illustrations, or multimedia content.
 --
 -- ==== __Example__
 --
@@ -2369,9 +2369,9 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 {-# INLINE figcaption #-}
 
 
--- | Generates an HTML /\<figure\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<figure\>@ element with the given attributes and contents.
 --
--- The /\<figure\>/ element is used to encapsulate and group related content, often used with an associated /\<figcaption\>/ to provide
+-- The @\<figure\>@ element is used to encapsulate and group related content, often used with an associated @\<figcaption\>@ to provide
 -- context or explanation for the content within.
 --
 -- ==== __Example__
@@ -2398,9 +2398,9 @@ figure = ParentNode "<figure" "</figure>"
 {-# INLINE figure #-}
 
 
--- | Generates an HTML /\<footer\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<footer\>@ element with the given attributes and contents.
 --
--- The /\<footer\>/ element represents a footer section or container typically used to include information such as authorship, copyright
+-- The @\<footer\>@ element represents a footer section or container typically used to include information such as authorship, copyright
 -- details, or contact information at the bottom of a document or section.
 --
 -- ==== __Example__
@@ -2422,9 +2422,9 @@ footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
 
 
--- | Generates an HTML /\<form\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<form\>@ element with the given attributes and contents.
 --
--- The /\<form\>/ element is used to create a container for a set of form controls like input fields, checkboxes, radio buttons, and
+-- The @\<form\>@ element is used to create a container for a set of form controls like input fields, checkboxes, radio buttons, and
 -- buttons. It is used to collect user input that can be submitted to a server for processing.
 --
 -- ==== __Example__
@@ -2472,9 +2472,9 @@ form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
 
 
--- | Generates an HTML /\<h1\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h1\>@ element with the given attributes and contents.
 --
--- The /\<h1\>/ element represents the highest-level heading, typically used to indicate the main topic or section of a document.
+-- The @\<h1\>@ element represents the highest-level heading, typically used to indicate the main topic or section of a document.
 --
 -- ==== __Example__
 --
@@ -2491,9 +2491,9 @@ h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
 
 
--- | Generates an HTML /\<h2\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h2\>@ element with the given attributes and contents.
 --
--- The /\<h2\>/ element signifies a heading of a slightly lower level than /\<h1\>/, often used to subdivide content within sections of a
+-- The @\<h2\>@ element signifies a heading of a slightly lower level than @\<h1\>@, often used to subdivide content within sections of a
 -- document.
 --
 -- ==== __Example__
@@ -2515,9 +2515,9 @@ h2 = ParentNode "<h2" "</h2>"
 {-# INLINE h2 #-}
 
 
--- | Generates an HTML /\<h3\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h3\>@ element with the given attributes and contents.
 --
--- The /\<h3\>/ element denotes a heading that is of a lower level than /\<h2\>/, typically used to indicate sub-sections or finer details
+-- The @\<h3\>@ element denotes a heading that is of a lower level than @\<h2\>@, typically used to indicate sub-sections or finer details
 -- within the content.
 --
 -- ==== __Example__
@@ -2549,9 +2549,9 @@ h3 = ParentNode "<h3" "</h3>"
 {-# INLINE h3 #-}
 
 
--- | Generates an HTML /\<h4\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h4\>@ element with the given attributes and contents.
 --
--- The /\<h4\>/ element represents a heading with a lower hierarchical level than /\<h3\>/, usually utilized to introduce sub-subsections or
+-- The @\<h4\>@ element represents a heading with a lower hierarchical level than @\<h3\>@, usually utilized to introduce sub-subsections or
 -- finer points within the content.
 --
 -- ==== __Example__
@@ -2573,9 +2573,9 @@ h4 = ParentNode "<h4" "</h4>"
 {-# INLINE h4 #-}
 
 
--- | Generates an HTML /\<h5\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h5\>@ element with the given attributes and contents.
 --
--- The /\<h5\>/ element signifies a heading of a reduced level compared to /\<h4\>/, often used to introduce even more specific details or
+-- The @\<h5\>@ element signifies a heading of a reduced level compared to @\<h4\>@, often used to introduce even more specific details or
 -- subsections within the content.
 --
 -- ==== __Example__
@@ -2604,9 +2604,9 @@ h5 = ParentNode "<h5" "</h5>"
 {-# INLINE h5 #-}
 
 
--- | Generates an HTML /\<h6\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<h6\>@ element with the given attributes and contents.
 --
--- The /\<h6\>/ element defines the lowest-level heading among the heading elements, typically employed for the most specific details or
+-- The @\<h6\>@ element defines the lowest-level heading among the heading elements, typically employed for the most specific details or
 -- subsections within the content.
 --
 -- ==== __Example__
@@ -2628,9 +2628,9 @@ h6 = ParentNode "<h6" "</h6>"
 {-# INLINE h6 #-}
 
 
--- | Generates an HTML /\<head\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<head\>@ element with the given attributes and contents.
 --
--- The /\<head\>/ element serves as a container for metadata and other non-visible information about the document, such as title, character
+-- The @\<head\>@ element serves as a container for metadata and other non-visible information about the document, such as title, character
 -- encoding, and linked stylesheets.
 --
 -- ==== __Example__
@@ -2677,9 +2677,9 @@ head = ParentNode "<head" "</head>"
 {-# INLINE head #-}
 
 
--- | Generates an HTML /\<header\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<header\>@ element with the given attributes and contents.
 --
--- The /\<header\>/ element represents a container for introductory content or a group of navigation and branding elements typically found
+-- The @\<header\>@ element represents a container for introductory content or a group of navigation and branding elements typically found
 -- at the top of a section or page.
 --
 -- ==== __Example__
@@ -2717,9 +2717,9 @@ header = ParentNode "<header" "</header>"
 {-# INLINE header #-}
 
 
--- | Generates an HTML /\<hgroup\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<hgroup\>@ element with the given attributes and contents.
 --
--- The /\<hgroup\>/ element groups together multiple heading elements (/\<h1\>/ to /\<h6\>/) as a single entity, often used to create a
+-- The @\<hgroup\>@ element groups together multiple heading elements (@\<h1\>@ to @\<h6\>@) as a single entity, often used to create a
 -- heading with a subheading or a title with a subtitle.
 --
 -- ==== __Example__
@@ -2744,9 +2744,9 @@ hgroup = ParentNode "<hgroup" "</hgroup>"
 {-# INLINE hgroup #-}
 
 
--- | Generates an HTML /\<hr\>/ element with the given attributes.
+-- | Generates an HTML @\<hr\>@ element with the given attributes.
 --
--- The /\<hr\>/ element is a self-closing tag that represents a thematic break or separation between content, typically displayed as a
+-- The @\<hr\>@ element is a self-closing tag that represents a thematic break or separation between content, typically displayed as a
 -- horizontal line.
 --
 -- ==== __Example__
@@ -2770,10 +2770,10 @@ hr = LeafNode "<hr"
 {-# INLINE hr #-}
 
 
--- | Generates an HTML /\<html\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<html\>@ element with the given attributes and contents.
 --
--- The /\<html\>/ element encloses the entire HTML document and serves as the root element, containing all other HTML elements like
--- /\<head\>/ and /\<body\>/.
+-- The @\<html\>@ element encloses the entire HTML document and serves as the root element, containing all other HTML elements like
+-- @\<head\>@ and @\<body\>@.
 --
 -- ==== __Example__
 --
@@ -2814,9 +2814,9 @@ html = ParentNode "<html" "</html>"
 {-# INLINE html #-}
 
 
--- | Generates an HTML /\<i\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<i\>@ element with the given attributes and contents.
 --
--- The /\<i\>/ element is used to apply italics to text, indicating that the content within should be styled in an italic font.
+-- The @\<i\>@ element is used to apply italics to text, indicating that the content within should be styled in an italic font.
 --
 -- ==== __Example__
 --
@@ -2837,9 +2837,9 @@ i = ParentNode "<i" "</i>"
 {-# INLINE i #-}
 
 
--- | Generates an HTML /\<iframe\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<iframe\>@ element with the given attributes and contents.
 --
--- The /\<iframe\>/ element embeds another HTML document within the current document, allowing for the display of external content such as
+-- The @\<iframe\>@ element embeds another HTML document within the current document, allowing for the display of external content such as
 -- web pages or multimedia.
 --
 -- ==== __Example__
@@ -2858,9 +2858,9 @@ iframe = ParentNode "<iframe" "</iframe>"
 {-# INLINE iframe #-}
 
 
--- | Generates an HTML /\<img\>/ element with the given attributes.
+-- | Generates an HTML @\<img\>@ element with the given attributes.
 --
--- The /\<img\>/ element embeds an image in the document, displaying the visual content specified by the /src/ attribute.
+-- The @\<img\>@ element embeds an image in the document, displaying the visual content specified by the @src@ attribute.
 --
 -- ==== __Example__
 --
@@ -2879,9 +2879,9 @@ img = LeafNode "<img"
 {-# INLINE img #-}
 
 
--- | Generates an HTML /\<input\>/ element with the given attributes.
+-- | Generates an HTML @\<input\>@ element with the given attributes.
 --
--- The /\<input\>/ element creates a user-input field, such as a text box, radio button, checkbox, or submit button, allowing users to enter
+-- The @\<input\>@ element creates a user-input field, such as a text box, radio button, checkbox, or submit button, allowing users to enter
 -- or select data.
 --
 -- ==== __Example__
@@ -2903,9 +2903,9 @@ input = LeafNode "<input"
 {-# INLINE input #-}
 
 
--- | Generates an HTML /\<ins\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<ins\>@ element with the given attributes and contents.
 --
--- The /\<ins\>/ element represents text that has been inserted into the document after the original content, often displayed with an
+-- The @\<ins\>@ element represents text that has been inserted into the document after the original content, often displayed with an
 -- underline.
 --
 -- ==== __Example__
@@ -2927,9 +2927,9 @@ ins = ParentNode "<ins" "</ins>"
 {-# INLINE ins #-}
 
 
--- | Generates an HTML /\<kbd\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<kbd\>@ element with the given attributes and contents.
 --
--- The /\<kbd\>/ element is used to indicate user input, typically keyboard input, within the content, often rendering the enclosed text in
+-- The @\<kbd\>@ element is used to indicate user input, typically keyboard input, within the content, often rendering the enclosed text in
 -- a monospace font.
 --
 -- ==== __Example__
@@ -2954,9 +2954,9 @@ kbd = ParentNode "<kbd" "</kbd>"
 {-# INLINE kbd #-}
 
 
--- | Generates an HTML /\<label\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<label\>@ element with the given attributes and contents.
 --
--- The /\<label\>/ element associates a text label with a form control, enhancing usability and accessibility by providing a descriptive
+-- The @\<label\>@ element associates a text label with a form control, enhancing usability and accessibility by providing a descriptive
 -- label for user interaction.
 --
 -- ==== __Example__
@@ -2982,9 +2982,9 @@ label = ParentNode "<label" "</label>"
 {-# INLINE label #-}
 
 
--- | Generates an HTML /\<legend\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<legend\>@ element with the given attributes and contents.
 --
--- The /\<legend\>/ element provides a caption or title for a /\<fieldset\>/ element, offering a concise description or heading for the
+-- The @\<legend\>@ element provides a caption or title for a @\<fieldset\>@ element, offering a concise description or heading for the
 -- group of related form controls within the fieldset.
 --
 -- ==== __Example__
@@ -3016,9 +3016,9 @@ legend = ParentNode "<legend" "</legend>"
 {-# INLINE legend #-}
 
 
--- | Generates an HTML /\<li\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<li\>@ element with the given attributes and contents.
 --
--- The /\<li\>/ element defines a list item within an ordered (/\<ol\>/) or unordered (/\<ul\>/) list, representing an individual entry or
+-- The @\<li\>@ element defines a list item within an ordered (@\<ol\>@) or unordered (@\<ul\>@) list, representing an individual entry or
 -- point in the list.
 --
 -- ==== __Example__
@@ -3043,9 +3043,9 @@ li = ParentNode "<li" "</li>"
 {-# INLINE li #-}
 
 
--- | Generates an HTML /\<link\>/ element with the given attributes.
+-- | Generates an HTML @\<link\>@ element with the given attributes.
 --
--- The /\<link\>/ element associates external resources, typically stylesheets, with the document, enabling the application of additional
+-- The @\<link\>@ element associates external resources, typically stylesheets, with the document, enabling the application of additional
 -- styles and behaviors to the content.
 --
 -- ==== __Example__
@@ -3069,9 +3069,9 @@ link = LeafNode "<link"
 {-# INLINE link #-}
 
 
--- | Generates an HTML /\<main\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<main\>@ element with the given attributes and contents.
 --
--- The /\<main\>/ element indicates the main content of the document, providing a distinct region for the central subject matter of the
+-- The @\<main\>@ element indicates the main content of the document, providing a distinct region for the central subject matter of the
 -- webpage.
 --
 -- ==== __Example__
@@ -3096,9 +3096,9 @@ main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
 
 
--- | Generates an HTML /\<map\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<map\>@ element with the given attributes and contents.
 --
--- The /\<map\>/ element defines an image map, which is used to associate clickable areas within an image to specific links or actions.
+-- The @\<map\>@ element defines an image map, which is used to associate clickable areas within an image to specific links or actions.
 --
 -- ==== __Example__
 --
@@ -3138,9 +3138,9 @@ map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
 
 
--- | Generates an HTML /\<mark\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<mark\>@ element with the given attributes and contents.
 --
--- The /\<mark\>/ element highlights text as if it has been marked for reference or emphasis, often rendering the enclosed content with a
+-- The @\<mark\>@ element highlights text as if it has been marked for reference or emphasis, often rendering the enclosed content with a
 -- distinctive background color.
 --
 -- ==== __Example__
@@ -3162,9 +3162,9 @@ mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
 
 
--- | Generates an HTML /\<menu\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<menu\>@ element with the given attributes and contents.
 --
--- The /\<menu\>/ element represents a list of commands or options, typically used for contextual menus or navigation menus in web
+-- The @\<menu\>@ element represents a list of commands or options, typically used for contextual menus or navigation menus in web
 -- applications.
 --
 -- ==== __Example__
@@ -3201,9 +3201,9 @@ menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
 
 
--- | Generates an HTML /\<meta\>/ element with the given attributes.
+-- | Generates an HTML @\<meta\>@ element with the given attributes.
 --
--- The /\<meta\>/ element provides metadata about the document, such as character encoding, authorship, and viewport settings, which are
+-- The @\<meta\>@ element provides metadata about the document, such as character encoding, authorship, and viewport settings, which are
 -- used by browsers and search engines but not typically displayed to users.
 --
 -- ==== __Example__
@@ -3235,9 +3235,9 @@ meta = LeafNode "<meta"
 {-# INLINE meta #-}
 
 
--- | Generates an HTML /\<meter\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<meter\>@ element with the given attributes and contents.
 --
--- The /\<meter\>/ element represents a scalar measurement within a known range, often used to display gauges, progress bars, or other
+-- The @\<meter\>@ element represents a scalar measurement within a known range, often used to display gauges, progress bars, or other
 -- visual representations of data.
 --
 -- ==== __Example__
@@ -3262,9 +3262,9 @@ meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
 
 
--- | Generates an HTML /\<nav\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<nav\>@ element with the given attributes and contents.
 --
--- The /\<nav\>/ element defines a section of navigation links or menus, typically containing links to other pages, sections of the current
+-- The @\<nav\>@ element defines a section of navigation links or menus, typically containing links to other pages, sections of the current
 -- page, or related content.
 --
 -- ==== __Example__
@@ -3305,9 +3305,9 @@ nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
 
 
--- | Generates an HTML /\<noscript\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<noscript\>@ element with the given attributes and contents.
 --
--- The /\<noscript\>/ element is used to provide alternative content that should be displayed if a browser does not support scripting or if
+-- The @\<noscript\>@ element is used to provide alternative content that should be displayed if a browser does not support scripting or if
 -- scripting is disabled. It is often used to display a message or instructions for enabling JavaScript.
 --
 -- ==== __Example__
@@ -3329,9 +3329,9 @@ noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
 
 
--- | Generates an HTML /\<object\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<object\>@ element with the given attributes and contents.
 --
--- The /\<object\>/ element embeds external resources, such as multimedia or interactive content, into a web page. It is often used to embed
+-- The @\<object\>@ element embeds external resources, such as multimedia or interactive content, into a web page. It is often used to embed
 -- multimedia content like audio, video, or Flash animations.
 --
 -- ==== __Example__
@@ -3354,9 +3354,9 @@ object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
 
 
--- | Generates an HTML /\<ol\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<ol\>@ element with the given attributes and contents.
 --
--- The /\<ol\>/ element is used to create an ordered list, where each list item is numbered sequentially. It is commonly used to represent
+-- The @\<ol\>@ element is used to create an ordered list, where each list item is numbered sequentially. It is commonly used to represent
 -- items with a specific order or sequence.
 --
 -- ==== __Example__
@@ -3381,9 +3381,9 @@ ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
 
 
--- | Generates an HTML /\<optgroup\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<optgroup\>@ element with the given attributes and contents.
 --
--- The /\<optgroup\>/ element is used to group related options within a /\<select\>/ element, providing a way to create hierarchical or
+-- The @\<optgroup\>@ element is used to group related options within a @\<select\>@ element, providing a way to create hierarchical or
 -- categorized dropdown lists.
 --
 -- ==== __Example__
@@ -3424,9 +3424,9 @@ optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
 
 
--- | Generates an HTML /\<option\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<option\>@ element with the given attributes and contents.
 --
--- The /\<option\>/ element is used within a /\<select\>/ or /\<datalist\>/ element to define individual options that users can select from
+-- The @\<option\>@ element is used within a @\<select\>@ or @\<datalist\>@ element to define individual options that users can select from
 -- in a dropdown list or autocomplete input.
 --
 -- ==== __Example__
@@ -3457,9 +3457,9 @@ option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
 
 
--- | Generates an HTML /\<output\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<output\>@ element with the given attributes and contents.
 --
--- The /\<output\>/ element is employed to present the outcome of calculations, user interactions, or scripting actions, often utilized in
+-- The @\<output\>@ element is employed to present the outcome of calculations, user interactions, or scripting actions, often utilized in
 -- combination with form components and scripts.
 --
 -- ==== __Example__
@@ -3489,9 +3489,9 @@ output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
 
 
--- | Generates an HTML /\<p\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<p\>@ element with the given attributes and contents.
 --
--- The /\<p\>/ element designates a paragraph of text, providing a structured way to separate and present blocks of content in a readable
+-- The @\<p\>@ element designates a paragraph of text, providing a structured way to separate and present blocks of content in a readable
 -- format.
 --
 -- ==== __Example__
@@ -3509,9 +3509,9 @@ p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
 
 
--- | Generates an HTML /\<picture\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<picture\>@ element with the given attributes and contents.
 --
--- The /\<picture\>/ element provides multiple sources for an image, allowing the browser to select the most appropriate version based on
+-- The @\<picture\>@ element provides multiple sources for an image, allowing the browser to select the most appropriate version based on
 -- factors such as device size or resolution.
 --
 -- ==== __Example__
@@ -3545,9 +3545,9 @@ picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
 
 
--- | Generates an HTML /\<pre\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<pre\>@ element with the given attributes and contents.
 --
--- The /\<pre\>/ element defines preformatted text, preserving both whitespace and line breaks, often used for displaying code or other
+-- The @\<pre\>@ element defines preformatted text, preserving both whitespace and line breaks, often used for displaying code or other
 -- content with fixed formatting.
 --
 -- ==== __Example__
@@ -3567,9 +3567,9 @@ pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
 
 
--- | Generates an HTML /\<progress\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<progress\>@ element with the given attributes and contents.
 --
--- The /\<progress\>/ element represents the completion progress of a task or process, typically displayed as a bar or other visual
+-- The @\<progress\>@ element represents the completion progress of a task or process, typically displayed as a bar or other visual
 -- indicator.
 --
 -- ==== __Example__
@@ -3593,9 +3593,9 @@ progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
 
 
--- | Generates an HTML /\<q\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<q\>@ element with the given attributes and contents.
 --
--- The /\<q\>/ element represents a short inline quotation. It is used to indicate quoted content withing a paragraph or other block of
+-- The @\<q\>@ element represents a short inline quotation. It is used to indicate quoted content withing a paragraph or other block of
 -- text.
 --
 -- ==== __Example__
@@ -3616,10 +3616,10 @@ q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
 
 
--- | Generates an HTML /\<rp\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<rp\>@ element with the given attributes and contents.
 --
--- The /\<rp\>/ element is used to provide parentheses for browsers that do not support ruby annotations. It is used in conjunction with the
--- /\<ruby\>/ element to surround the text that provides the pronunciation or meaning of characters in East Asian typography.
+-- The @\<rp\>@ element is used to provide parentheses for browsers that do not support ruby annotations. It is used in conjunction with the
+-- @\<ruby\>@ element to surround the text that provides the pronunciation or meaning of characters in East Asian typography.
 --
 -- ==== __Example__
 --
@@ -3645,9 +3645,9 @@ rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
 
 
--- | Generates an HTML /\<rt\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<rt\>@ element with the given attributes and contents.
 --
--- The /\<rt\>/ element encloses the text that provides the pronunciation or meaning of characters in East Asian typography when using ruby
+-- The @\<rt\>@ element encloses the text that provides the pronunciation or meaning of characters in East Asian typography when using ruby
 -- annotations.
 --
 -- ==== __Example__
@@ -3674,9 +3674,9 @@ rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
 
 
--- | Generates an HTML /\<ruby\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<ruby\>@ element with the given attributes and contents.
 --
--- The /\<ruby\>/ element represents a ruby annotation, which consists of one or more text elements along with an optional pronunciation
+-- The @\<ruby\>@ element represents a ruby annotation, which consists of one or more text elements along with an optional pronunciation
 -- guide. It is typically used in East Asian typography to indicate the pronunciation or meaning of characters.
 --
 -- ==== __Example__
@@ -3703,9 +3703,9 @@ ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
 
 
--- | Generates an HTML /\<s\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<s\>@ element with the given attributes and contents.
 --
--- The /\<s\>/ element is used to represent text that is no longer accurate or relevant. It renders the enclosed text with a strikethrough
+-- The @\<s\>@ element is used to represent text that is no longer accurate or relevant. It renders the enclosed text with a strikethrough
 -- style to indicate that it has been deleted or deprecated.
 --
 -- ==== __Example__
@@ -3727,9 +3727,9 @@ s = ParentNode "<s" "</s>"
 {-# INLINE s #-}
 
 
--- | Generates an HTML /\<samp\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<samp\>@ element with the given attributes and contents.
 --
--- The /\<samp\>/ element encloses text that represents sample output from a computer program or script. It typically renders the text in a
+-- The @\<samp\>@ element encloses text that represents sample output from a computer program or script. It typically renders the text in a
 -- monospace font to distinguish it from regular content.
 --
 -- ==== __Example__
@@ -3750,10 +3750,10 @@ samp = ParentNode "<samp" "</samp>"
 {-# INLINE samp #-}
 
 
--- | Generates an HTML /\<script\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<script\>@ element with the given attributes and contents.
 --
--- The /\<script\>/ element is used to embed or reference external JavaScript code within an HTML document. It can be placed in the
--- document\'s /\<head\>/ or /\<body\>/ section.
+-- The @\<script\>@ element is used to embed or reference external JavaScript code within an HTML document. It can be placed in the
+-- document\'s @\<head\>@ or @\<body\>@ section.
 --
 -- ==== __Example__
 --
@@ -3772,9 +3772,9 @@ script = ParentNode "<script" "</script>"
 {-# INLINE script #-}
 
 
--- | Generates an HTML /\<section\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<section\>@ element with the given attributes and contents.
 --
--- The /\<section\>/ element represents a thematic grouping of content within a document. It is used to structure the content into
+-- The @\<section\>@ element represents a thematic grouping of content within a document. It is used to structure the content into
 -- semantically meaningful sections.
 --
 -- ==== __Example__
@@ -3799,9 +3799,9 @@ section = ParentNode "<section" "</section>"
 {-# INLINE section #-}
 
 
--- | Generates an HTML /\<select\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<select\>@ element with the given attributes and contents.
 --
--- The /\<select\>/ element creates a dropdown list from which users can select one or more options. It is used for creating form controls
+-- The @\<select\>@ element creates a dropdown list from which users can select one or more options. It is used for creating form controls
 -- to select choices from a predefined set.
 --
 -- ==== __Example__
@@ -3840,9 +3840,9 @@ select = ParentNode "<select" "</select>"
 {-# INLINE select #-}
 
 
--- | Generates an HTML /\<slot\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<slot\>@ element with the given attributes and contents.
 --
--- The /\<slot\>/ element is used within a shadow DOM to define placeholders for where specific content should be inserted from the light
+-- The @\<slot\>@ element is used within a shadow DOM to define placeholders for where specific content should be inserted from the light
 -- DOM. It enables custom elements to distribute content.
 --
 -- ==== __Example__
@@ -3877,9 +3877,9 @@ slot = ParentNode "<slot" "</slot>"
 {-# INLINE slot #-}
 
 
--- | Generates an HTML /\<small\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<small\>@ element with the given attributes and contents.
 --
--- The /\<small\>/ element is used to indicate that the enclosed text is smaller and has reduced importance, typically used for legal
+-- The @\<small\>@ element is used to indicate that the enclosed text is smaller and has reduced importance, typically used for legal
 -- disclaimers, copyright notices, or fine print.
 --
 -- ==== __Example__
@@ -3899,9 +3899,9 @@ small = ParentNode "<small" "</small>"
 {-# INLINE small #-}
 
 
--- | Generates an HTML /\<source\>/ element with the given attributes.
+-- | Generates an HTML @\<source\>@ element with the given attributes.
 --
--- The /\<source\>/ element is used within the /\<video\>/ and /\<audio\>/ elements to specify multiple media sources for the same media,
+-- The @\<source\>@ element is used within the @\<video\>@ and @\<audio\>@ elements to specify multiple media sources for the same media,
 -- allowing the browser to choose the most suitable source based on its capabilities.
 --
 -- ==== __Example__
@@ -3933,9 +3933,9 @@ source = LeafNode "<source"
 {-# INLINE source #-}
 
 
--- | Generates an HTML /\<span\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<span\>@ element with the given attributes and contents.
 --
--- The /\<span\>/ element is an inline container used to apply styles or scripting to a specific portion of text within a larger element,
+-- The @\<span\>@ element is an inline container used to apply styles or scripting to a specific portion of text within a larger element,
 -- without affecting the overall layout.
 --
 -- ==== __Example__
@@ -3958,9 +3958,9 @@ span = ParentNode "<span" "</span>"
 {-# INLINE span #-}
 
 
--- | Generates an HTML /\<strong\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<strong\>@ element with the given attributes and contents.
 --
--- The /\<strong\>/ element is used to indicate that the enclosed text has strong importance or emphasis. It is typically rendered as bold
+-- The @\<strong\>@ element is used to indicate that the enclosed text has strong importance or emphasis. It is typically rendered as bold
 -- text.
 --
 -- ==== __Example__
@@ -3981,9 +3981,9 @@ strong = ParentNode "<strong" "</strong>"
 {-# INLINE strong #-}
 
 
--- | Generates an HTML /\<style\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<style\>@ element with the given attributes and contents.
 --
--- The /\<style\>/ element defines inline CSS within an HTML document. It allows you to apply specific styles to the content within the same
+-- The @\<style\>@ element defines inline CSS within an HTML document. It allows you to apply specific styles to the content within the same
 -- document.
 --
 -- ==== __Example__
@@ -4010,9 +4010,9 @@ style = ParentNode "<style" "</style>"
 {-# INLINE style #-}
 
 
--- | Generates an HTML /\<sub\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<sub\>@ element with the given attributes and contents.
 --
--- The /\<sub\>/ element renders text as subscript, which is often used for chemical formulas, mathematical subscripts, or annotations.
+-- The @\<sub\>@ element renders text as subscript, which is often used for chemical formulas, mathematical subscripts, or annotations.
 --
 -- ==== __Example__
 --
@@ -4033,9 +4033,9 @@ sub = ParentNode "<sub" "</sub>"
 {-# INLINE sub #-}
 
 
--- | Generates an HTML /\<summary\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<summary\>@ element with the given attributes and contents.
 --
--- The /\<summary\>/ element is used as a clickable summary for the content of a /\<details\>/ element, which provides a way to create
+-- The @\<summary\>@ element is used as a clickable summary for the content of a @\<details\>@ element, which provides a way to create
 -- collapsible sections of content with a visible summary.
 --
 -- ==== __Example__
@@ -4060,9 +4060,9 @@ summary = ParentNode "<summary" "</summary>"
 {-# INLINE summary #-}
 
 
--- | Generates an HTML /\<sup\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<sup\>@ element with the given attributes and contents.
 --
--- The /\<sup\>/ element is used to render text as superscript, which is typically used for mathematical exponents or footnotes.
+-- The @\<sup\>@ element is used to render text as superscript, which is typically used for mathematical exponents or footnotes.
 --
 -- ==== __Example__
 --
@@ -4083,10 +4083,10 @@ sup = ParentNode "<sup" "</sup>"
 {-# INLINE sup #-}
 
 
--- | Generates an HTML /\<table\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<table\>@ element with the given attributes and contents.
 --
--- The /\<table\>/ element is used to create a table that organizes data into rows and columns. It contains various table-related elements
--- like /\<thead\>/, /\<tbody\>/, and /\<tfoot\>/ for structuring the table.
+-- The @\<table\>@ element is used to create a table that organizes data into rows and columns. It contains various table-related elements
+-- like @\<thead\>@, @\<tbody\>@, and @\<tfoot\>@ for structuring the table.
 --
 -- ==== __Example__
 --
@@ -4142,9 +4142,9 @@ table = ParentNode "<table" "</table>"
 {-# INLINE table #-}
 
 
--- | Generates an HTML /\<tbody\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<tbody\>@ element with the given attributes and contents.
 --
--- The /\<tbody\>/ element is used to group the body content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- The @\<tbody\>@ element is used to group the body content of a table. It is used in conjunction with the @\<table\>@ element to contain
 -- rows of data within the table.
 --
 -- ==== __Example__
@@ -4201,9 +4201,9 @@ tbody = ParentNode "<tbody" "</tbody>"
 {-# INLINE tbody #-}
 
 
--- | Generates an HTML /\<td\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<td\>@ element with the given attributes and contents.
 --
--- The /\<td\>/ element represents a single data cell within a table row (/\<tr\>/). It is used to display data within the columns of a
+-- The @\<td\>@ element represents a single data cell within a table row (@\<tr\>@). It is used to display data within the columns of a
 -- table.
 --
 -- ==== __Example__
@@ -4235,9 +4235,9 @@ td = ParentNode "<td" "</td>"
 {-# INLINE td #-}
 
 
--- | Generates an HTML /\<template\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<template\>@ element with the given attributes and contents.
 --
--- The /\<template\>/ element is used to declare content that is not rendered when the page loads but can be cloned and used later via
+-- The @\<template\>@ element is used to declare content that is not rendered when the page loads but can be cloned and used later via
 -- JavaScript. It is useful for creating reusable content that can be instantiated programmatically.
 --
 -- ==== __Example__
@@ -4260,9 +4260,9 @@ template = ParentNode "<template" "</template>"
 {-# INLINE template #-}
 
 
--- | Generates an HTML /\<textarea\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<textarea\>@ element with the given attributes and contents.
 --
--- The /\<textarea\>/ element creates a multiline text input field where users can enter longer pieces of text, such as comments or
+-- The @\<textarea\>@ element creates a multiline text input field where users can enter longer pieces of text, such as comments or
 -- messages.
 --
 -- ==== __Example__
@@ -4290,9 +4290,9 @@ textarea = ParentNode "<textarea" "</textarea>"
 {-# INLINE textarea #-}
 
 
--- | Generates an HTML /\<tfoot\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<tfoot\>@ element with the given attributes and contents.
 --
--- The /\<tfoot\>/ element is used to group the footer content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- The @\<tfoot\>@ element is used to group the footer content of a table. It is used in conjunction with the @\<table\>@ element to contain
 -- footer rows that provide additional information about the table data.
 --
 -- ==== __Example__
@@ -4361,10 +4361,10 @@ tfoot = ParentNode "<tfoot" "</tfoot>"
 {-# INLINE tfoot #-}
 
 
--- | Generates an HTML /\<th\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<th\>@ element with the given attributes and contents.
 --
--- The /\<th\>/ element represents a header cell within a table row (/\<tr\>/). It is used to define header information for a column or row
--- in a table. The content within a /\<th\>/ element is typically bold and centered by default.
+-- The @\<th\>@ element represents a header cell within a table row (@\<tr\>@). It is used to define header information for a column or row
+-- in a table. The content within a @\<th\>@ element is typically bold and centered by default.
 --
 -- ==== __Example__
 --
@@ -4420,9 +4420,9 @@ th = ParentNode "<th" "</th>"
 {-# INLINE th #-}
 
 
--- | Generates an HTML /\<thead\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<thead\>@ element with the given attributes and contents.
 --
--- The /\<thead\>/ element is used to group the header content of a table. It is used in conjunction with the /\<table\>/ element to contain
+-- The @\<thead\>@ element is used to group the header content of a table. It is used in conjunction with the @\<table\>@ element to contain
 -- header rows that label the columns or rows in the table.
 --
 -- ==== __Example__
@@ -4479,10 +4479,10 @@ thead = ParentNode "<thead" "</thead>"
 {-# INLINE thead #-}
 
 
--- | Generates an HTML /\<time\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<time\>@ element with the given attributes and contents.
 --
--- The /\<time\>/ element represents a specific time or date, either as machine-readable text or for user-friendly display. It can include a
--- /datetime/ attribute for semantic and accessible purposes.
+-- The @\<time\>@ element represents a specific time or date, either as machine-readable text or for user-friendly display. It can include a
+-- @datetime@ attribute for semantic and accessible purposes.
 --
 -- ==== __Example__
 --
@@ -4503,9 +4503,9 @@ time = ParentNode "<time" "</time>"
 {-# INLINE time #-}
 
 
--- | Generates an HTML /\<title\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<title\>@ element with the given attributes and contents.
 --
--- The /\<title\>/ element defines the title of the document, which is displayed in the browser\'s title bar or tab. It is also used by
+-- The @\<title\>@ element defines the title of the document, which is displayed in the browser\'s title bar or tab. It is also used by
 -- search engines and social media when sharing links.
 --
 -- ==== __Example__
@@ -4527,9 +4527,9 @@ title = ParentNode "<title" "</title>"
 {-# INLINE title #-}
 
 
--- | Generates an HTML /\<tr\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<tr\>@ element with the given attributes and contents.
 --
--- The /\<tr\>/ element defines a row within a table. It contains a collection of table cells (/\<td\>/ or /\<th\>/) that represent data for
+-- The @\<tr\>@ element defines a row within a table. It contains a collection of table cells (@\<td\>@ or @\<th\>@) that represent data for
 -- that particular row.
 --
 -- ==== __Example__
@@ -4586,9 +4586,9 @@ tr = ParentNode "<tr" "</tr>"
 {-# INLINE tr #-}
 
 
--- | Generates an HTML /\<track\>/ element with the given attributes.
+-- | Generates an HTML @\<track\>@ element with the given attributes.
 --
--- The /\<track\>/ element specifies text tracks for media elements like /\<video\>/ and /\<audio\>/, such as subtitles, captions, or
+-- The @\<track\>@ element specifies text tracks for media elements like @\<video\>@ and @\<audio\>@, such as subtitles, captions, or
 -- descriptions, to provide additional content for users.
 --
 -- ==== __Example__
@@ -4622,10 +4622,10 @@ track = LeafNode "<track"
 {-# INLINE track #-}
 
 
--- | Generates an HTML /\<u\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<u\>@ element with the given attributes and contents.
 --
--- The /\<u\>/ element renders enclosed text with an underline, traditionally indicating that the text is meant to be a hyperlink. However,
--- it is generally recommended to use CSS for styling, and /\<u\>/ is mostly avoided for indicating hyperlinks.
+-- The @\<u\>@ element renders enclosed text with an underline, traditionally indicating that the text is meant to be a hyperlink. However,
+-- it is generally recommended to use CSS for styling, and @\<u\>@ is mostly avoided for indicating hyperlinks.
 --
 -- ==== __Example__
 --
@@ -4644,9 +4644,9 @@ u = ParentNode "<u" "</u>"
 {-# INLINE u #-}
 
 
--- | Generates an HTML /\<ul\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<ul\>@ element with the given attributes and contents.
 --
--- The /\<ul\>/ element is used to create an unordered (bulleted) list. It contains one or more /\<li\>/ elements that represent individual
+-- The @\<ul\>@ element is used to create an unordered (bulleted) list. It contains one or more @\<li\>@ elements that represent individual
 -- list items.
 --
 -- ==== __Example__
@@ -4674,9 +4674,9 @@ ul = ParentNode "<ul" "</ul>"
 {-# INLINE ul #-}
 
 
--- | Generates an HTML /\<var\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<var\>@ element with the given attributes and contents.
 --
--- The /\<var\>/ element indicates that the enclosed text represents a variable or placeholder within a mathematical expression or
+-- The @\<var\>@ element indicates that the enclosed text represents a variable or placeholder within a mathematical expression or
 -- programming context.
 --
 -- ==== __Example__
@@ -4698,9 +4698,9 @@ var = ParentNode "<var" "</var>"
 {-# INLINE var #-}
 
 
--- | Generates an HTML /\<video\>/ element with the given attributes and contents.
+-- | Generates an HTML @\<video\>@ element with the given attributes and contents.
 --
--- The /\<video\>/ element is used to embed video content in a web page. It provides a container for playing videos and allows for controls,
+-- The @\<video\>@ element is used to embed video content in a web page. It provides a container for playing videos and allows for controls,
 -- source specifications, and various settings.
 --
 -- ==== __Example__
@@ -4727,9 +4727,9 @@ video = ParentNode "<video" "</video>"
 {-# INLINE video #-}
 
 
--- | Generates an HTML /\<wbr\>/ element with the given attributes.
+-- | Generates an HTML @\<wbr\>@ element with the given attributes.
 --
--- The /\<wbr\>/ element suggests a point in text where a line break may occur when necessary, such as in long URLs or strings without
+-- The @\<wbr\>@ element suggests a point in text where a line break may occur when necessary, such as in long URLs or strings without
 -- spaces, helping to improve text layout and readability.
 --
 -- ==== __Example__
