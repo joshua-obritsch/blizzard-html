@@ -1,10 +1,10 @@
 # Revision history for blizzard-html
 
-## 0.5.0.0 -- 2022-07-24
+## 0.5.0.0 -- 2023-09-10
 
-* Removed blaze-html and used blaze-markup.
-* Included additional attributes and elements.
-* Removed outdated attributes and elements.
+* Removed blaze-html and blaze-markup.
+* Rewrote everything from scratch.
+* Added Html.Intl for internationalization.
 
 ## 0.4.0.1 -- 2022-07-22
 
