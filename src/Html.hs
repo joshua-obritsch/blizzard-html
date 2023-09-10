@@ -3,7 +3,13 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The "Html" module provides a set of types, classes and functions for generating HTML elements.
+-- | Module    : Html
+-- Copyright   : (c) Joshua Obritsch, 2021
+-- License     : MIT
+-- Maintainer  : joshua@obritsch.com
+-- Stability   : Experimental
+--
+-- The "Html" module provides a set of types, classes and functions for generating HTML elements.
 --
 -- These elements along with their attributes and event handlers, found in the "Html.Attributes" and "Html.Events" modules respectively, can
 -- be used to dynamically compose HTML documents natively in Haskell, without relying on templating engines or other techniques that can be

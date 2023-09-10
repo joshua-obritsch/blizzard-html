@@ -1,6 +1,12 @@
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The "Html.Events" module provides a set of functions for generating HTML event handlers.
+-- | Module    : Html.Events
+-- Copyright   : (c) Joshua Obritsch, 2021
+-- License     : MIT
+-- Maintainer  : joshua@obritsch.com
+-- Stability   : Experimental
+--
+-- The "Html.Events" module provides a set of functions for generating HTML event handlers.
 module Html.Events
     ( -- * Event Handlers
       -- ** onauxclick

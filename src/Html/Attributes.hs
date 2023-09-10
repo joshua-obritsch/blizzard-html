@@ -1,7 +1,13 @@
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
--- | The "Html.Attributes" module provides a set of functions for generating HTML attributes.
+-- | Module    : Html.Attributes
+-- Copyright   : (c) Joshua Obritsch, 2021
+-- License     : MIT
+-- Maintainer  : joshua@obritsch.com
+-- Stability   : Experimental
+--
+-- The "Html.Attributes" module provides a set of functions for generating HTML attributes.
 module Html.Attributes
     ( -- * Attributes
       -- ** abbr

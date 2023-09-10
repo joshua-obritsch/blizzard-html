@@ -1,4 +1,10 @@
--- | The "Html.Intl" module provides a set of functions for internationalization in HTML.
+-- | Module    : Html.Intl
+-- Copyright   : (c) Joshua Obritsch, 2021
+-- License     : MIT
+-- Maintainer  : joshua@obritsch.com
+-- Stability   : Experimental
+--
+-- The "Html.Intl" module provides a set of functions for internationalization in HTML.
 module Html.Intl
     ( -- * Internationalization
       -- ** translate
