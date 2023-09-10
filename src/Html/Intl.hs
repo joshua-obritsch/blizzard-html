@@ -1,3 +1,4 @@
+-- | The "Html.Intl" module provides a set of functions for internationalization in HTML.
 module Html.Intl
     ( -- * Internationalization
       -- ** translate
@@ -14,31 +15,7 @@ import Html (Html(..), Translatable)
 -- INTERNATIONALIZATION
 
 
--- | Converts all instances of 'IntlNode' to 'TextNode' according to the target language. This function should always be called before the
--- 'build' function.
---
--- ==== __Example__
---
--- __Initialization:__
---
--- @
--- data Intl = Intl
---     { de :: Builder
---     , en :: Builder
---     }
---
--- instance Translatable Intl where
---     defaultLanguage = en
--- @
---
--- @
--- translate de $ Html.p []
---     [ Html.intl Intl
---         { de = ""
---         , en = ""
---         }
---     ]
--- @
+-- | Converts all multilingual HTML text nodes to simple HTML text nodes given a target language and HTML.
 translate :: Translatable a => (a -> Builder) -> Html a -> Html a
 translate lang html = case html of
     ParentNode startTag endTag attributes children -> ParentNode startTag endTag attributes (map (translate lang) children)
@@ -49,6 +26,7 @@ translate lang html = case html of
       where text = lang intl
 
 
+-- | Generates a multilingual HTML text node given a set of languages.
 intl :: Translatable a => a -> Html a
 intl = IntlNode
 {-# INLINE intl #-}
