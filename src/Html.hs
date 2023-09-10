@@ -94,7 +94,7 @@
 -- >                ]
 -- >            , Html.footer []
 -- >                [ Html.p []
--- >                    [ "&copy; 2023 Example Blog. All rights reserved." ]
+-- >                    [ "© 2023 Example Blog. All rights reserved." ]
 -- >                ]
 -- >            ]
 -- >        ]
@@ -139,20 +139,18 @@
 -- >            </article>
 -- >        </main>
 -- >        <footer>
--- >            <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >            <p>© 2023 Example Blog. All rights reserved.</p>
 -- >        </footer>
 -- >    </body>
 -- ></html>
 --
 -- /Note: All examples in this module assume the following imports:/
 --
--- @
--- import Html (Html(..))
---
--- import qualified Html
--- import qualified Html.Attributes as Attr
--- import qualified Html.Events as Evnt
--- @
+-- >import Html (Html(..))
+-- >
+-- >import qualified Html
+-- >import qualified Html.Attributes as Attr
+-- >import qualified Html.Events as Evnt
 --
 -- /Note: All example results in this module are formatted neatly for readability but are condensed in practice./
 module Html
@@ -532,9 +530,9 @@ class Translatable a where
 -- DECLARATIONS
 
 
--- | Generates an HTML /\<!DOCTYPE\>/ declaration with the given contents.
+-- | Generates an HTML @\<!DOCTYPE\>@ declaration with the given contents.
 --
--- The /\<!DOCTYPE\>/ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers and
+-- The @\<!DOCTYPE\>@ declaration defines the document type and version of the HTML being used. It ensures proper rendering by browsers and
 -- sets the standard for the document's structure.
 --
 -- ==== __Example__
@@ -633,7 +631,7 @@ class Translatable a where
 -- >                ]
 -- >            , Html.footer []
 -- >                [ Html.p []
--- >                    [ "&copy; 2023 Example Company. All rights reserved." ]
+-- >                    [ "© 2023 Example Company. All rights reserved." ]
 -- >                ]
 -- >            ]
 -- >        ]
@@ -683,7 +681,7 @@ class Translatable a where
 -- >            </section>
 -- >        </main>
 -- >        <footer>
--- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
+-- >            <p>© 2023 Example Company. All rights reserved.</p>
 -- >        </footer>
 -- >    </body>
 -- ></html>
@@ -781,7 +779,7 @@ abbr = ParentNode "<abbr" "</abbr>"
 -- >        , "."
 -- >        ]
 -- >    , Html.small []
--- >        [ "&copy; 2023 Example Company. All rights reserved." ]
+-- >        [ "© 2023 Example Company. All rights reserved." ]
 -- >    ]
 --
 -- __Output:__
@@ -790,7 +788,7 @@ abbr = ParentNode "<abbr" "</abbr>"
 -- >    <address>
 -- >        For inquiries, please contact <a href="mailto:contact@example.com">info@example.com</a>.
 -- >    </address>
--- >    <p><small>&copy; 2023 Example Company. All rights reserved.</small></p>
+-- >    <p><small>© 2023 Example Company. All rights reserved.</small></p>
 -- ></footer>
 address :: [Attribute] -> [Html lng] -> Html lng
 address = ParentNode "<address" "</address>"
@@ -894,12 +892,12 @@ area = LeafNode "<area"
 -- >            ]
 -- >        , Html.footer []
 -- >            [ Html.p []
--- >                [ "&copy; 2023 Example Company. All rights reserved." ]
+-- >                [ "© 2023 Example Company. All rights reserved." ]
 -- >            ]
 -- >        ]
 -- >    , Html.footer []
 -- >        [ Html.p []
--- >            [ "&copy; 2023 Example Blog. All rights reserved." ]
+-- >            [ "© 2023 Example Blog. All rights reserved." ]
 -- >        ]
 -- >    ]
 --
@@ -923,11 +921,11 @@ area = LeafNode "<area"
 -- >            <li>Watch your garden thrive!</li>
 -- >        </ol>
 -- >        <footer>
--- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
+-- >            <p>© 2023 Example Company. All rights reserved.</p>
 -- >        </footer>
 -- >    </article>
 -- >    <footer>
--- >        <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >        <p>© 2023 Example Blog. All rights reserved.</p>
 -- >    </footer>
 -- ></body>
 article :: [Attribute] -> [Html lng] -> Html lng
@@ -973,7 +971,7 @@ article = ParentNode "<article" "</article>"
 -- >            ]
 -- >        , Html.footer []
 -- >            [ Html.p []
--- >                [ "&copy; 2023 Example Company. All rights reserved." ]
+-- >                [ "© 2023 Example Company. All rights reserved." ]
 -- >            ]
 -- >        ]
 -- >    , Html.aside []
@@ -989,7 +987,7 @@ article = ParentNode "<article" "</article>"
 -- >        ]
 -- >    , Html.footer []
 -- >        [ Html.p []
--- >            [ "&copy; 2023 Example Blog. All rights reserved." ]
+-- >            [ "© 2023 Example Blog. All rights reserved." ]
 -- >        ]
 -- >    ]
 --
@@ -1011,7 +1009,7 @@ article = ParentNode "<article" "</article>"
 -- >            <li>Drink plenty of water throughout the day.</li>
 -- >        </ol>
 -- >        <footer>
--- >            <p>&copy; 2023 Example Company. All rights reserved.</p>
+-- >            <p>© 2023 Example Company. All rights reserved.</p>
 -- >        </footer>
 -- >    </article>
 -- >    <aside>
@@ -1019,7 +1017,7 @@ article = ParentNode "<article" "</article>"
 -- >        <p>Looking for healthy meal delivery options? Check out <a href="delivery@example.com">Example Delivery Service</a>.</p>
 -- >    </aside>
 -- >    <footer>
--- >        <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >        <p>© 2023 Example Blog. All rights reserved.</p>
 -- >    </footer>
 -- ></body>
 aside :: [Attribute] -> [Html lng] -> Html lng
@@ -1304,7 +1302,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- >                ]
 -- >            , Html.footer []
 -- >                [ Html.p []
--- >                    [ "&copy; 2023 Example Blog. All rights reserved." ]
+-- >                    [ "© 2023 Example Blog. All rights reserved." ]
 -- >                ]
 -- >            ]
 -- >        ]
@@ -1344,7 +1342,7 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 -- >            </article>
 -- >        </main>
 -- >        <footer>
--- >            <p>&copy; 2023 Example Blog. All rights reserved.</p>
+-- >            <p>© 2023 Example Blog. All rights reserved.</p>
 -- >        </footer>
 -- >    </body>
 -- ></html>
@@ -2351,7 +2349,7 @@ fieldset = ParentNode "<fieldset" "</fieldset>"
 --
 -- >Html.figure []
 -- >    [ Html.img
--- >        [ Attr.src "image.jpg"
+-- >        [ Attr.src "landscape.jpg"
 -- >        , Attr.alt "A beautiful landscape"
 -- >        ]
 -- >    , Html.figcaption []
@@ -2361,7 +2359,7 @@ fieldset = ParentNode "<fieldset" "</fieldset>"
 -- __Output:__
 --
 -- ><figure>
--- >    <img src="image.jpg" alt="A beautiful landscape">
+-- >    <img src="landscape.jpg" alt="A beautiful landscape">
 -- >    <figcaption>A breathtaking landscape.</figcaption>
 -- ></figure>
 figcaption :: [Attribute] -> [Html lng] -> Html lng
@@ -2380,7 +2378,7 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 --
 -- >Html.figure []
 -- >    [ Html.img
--- >        [ Attr.src "image.jpg"
+-- >        [ Attr.src "city.jpg"
 -- >        , Attr.alt "An illustration of a city"
 -- >        ]
 -- >    , Html.figcaption []
@@ -2390,7 +2388,7 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 -- __Output:__
 --
 -- ><figure>
--- >    <img src="image.jpg" alt="An illustration of a city">
+-- >    <img src="city.jpg" alt="An illustration of a city">
 -- >    <figcaption>An artistic representation of a city skyline.</figcaption>
 -- ></figure>
 figure :: [Attribute] -> [Html lng] -> Html lng
@@ -2407,16 +2405,77 @@ figure = ParentNode "<figure" "</figure>"
 --
 -- __Input:__
 --
--- >Html.footer []
--- >    [ Html.p []
--- >        [ "&copy; 2023 My Website. All rights reserved." ]
+-- >Html.doctype
+-- >    [ Html.html
+-- >        [ Attr.lang "en" ]
+-- >        [ Html.head []
+-- >            [ Html.meta
+-- >                [ Attr.charset "UTF-8" ]
+-- >            , Html.meta
+-- >                [ Attr.name "viewport"
+-- >                , Attr.content "width=device-width, initial-scale=1.0"
+-- >                ]
+-- >            , Html.title []
+-- >                [ "Example Company" ]
+-- >            ]
+-- >        , Html.body []
+-- >            [ Html.header []
+-- >                [ Html.h1 []
+-- >                    [ "Example Company" ]
+-- >                ]
+-- >            , Html.main []
+-- >                [ Html.h2 []
+-- >                    [ "About Us" ]
+-- >                , Html.p []
+-- >                    [ "We are a small, family-owned cafe nestled in the heart of a vibrant community." ]
+-- >                ]
+-- >            , Html.footer []
+-- >                [ Html.p []
+-- >                    [ "Contact Information:" ]
+-- >                , Html.address []
+-- >                    [ "Email: "
+-- >                    , Html.a
+-- >                        [ Attr.href "mailto:info@example.com" ]
+-- >                        [ "info@example.com" ]
+-- >                    , "Phone: +1 (123) 456-7890"
+-- >                    , Html.br []
+-- >                    , "Address: 123 Main Street, Charleston, USA"
+-- >                    ]
+-- >                , Html.p []
+-- >                    [ "© 2023 Example Company. All rights reserved." ]
+-- >                ]
+-- >            ]
+-- >        ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><footer>
--- >    <p>&copy; 2023 My Website. All rights reserved.</p>
--- ></footer>
+-- ><!DOCTYPE html>
+-- ><html lang="en">
+-- >    <head>
+-- >        <meta charset="UTF-8">
+-- >        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+-- >        <title>Example Company</title>
+-- >    </head>
+-- >    <body>
+-- >        <header>
+-- >            <h1>Example Company</h1>
+-- >        </header>
+-- >        <main>
+-- >            <h2>About Us</h2>
+-- >            <p>We are a small, family-owned cafe nestled in the heart of a vibrant community.</p>
+-- >        </main>
+-- >        <footer>
+-- >            <p>Contact Information:</p>
+-- >            <address>
+-- >                Email: <a href="mailto:info@example.com">info@example.com</a><br>
+-- >                Phone: +1 (123) 456-7890<br>
+-- >                Address: 123 Main Street, Charleston, USA
+-- >            </address>
+-- >            <p>© 2023 Example Company. All rights reserved.</p>
+-- >        </footer>
+-- >    </body>
+-- ></html>
 footer :: [Attribute] -> [Html lng] -> Html lng
 footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
@@ -2431,42 +2490,58 @@ footer = ParentNode "<footer" "</footer>"
 --
 -- __Input:__
 --
--- >Html.form
--- >    [ Attr.action "submit.php"
--- >    , Attr.method "post"
--- >    ]
--- >    [ Html.label
--- >        [ Attr.for "name" ]
--- >        [ "Name:" ]
--- >    , Html.input
--- >        [ Attr.type_ "text"
--- >        , Attr.id "name"
--- >        , Attr.name "name"
--- >        , Attr.required True
+-- >Html.main []
+-- >    [ Html.form
+-- >        [ Attr.action "submit.php"
+-- >        , Attr.method "post"
 -- >        ]
--- >    , Html.label
--- >        [ Attr.for "email" ]
--- >        [ "Email:" ]
--- >    , Html.input
--- >        [ Attr.type_ "email"
--- >        , Attr.id "email"
--- >        , Attr.name "email"
--- >        , Attr.required True
+-- >        [ Html.label
+-- >            [ Attr.for "name" ]
+-- >            [ "Name:" ]
+-- >        , Html.input
+-- >            [ Attr.type_ "text"
+-- >            , Attr.id "name"
+-- >            , Attr.name "name"
+-- >            , Attr.required True
+-- >            ]
+-- >        , Html.label
+-- >            [ Attr.for "email" ]
+-- >            [ "Email:" ]
+-- >        , Html.input
+-- >            [ Attr.type_ "email"
+-- >            , Attr.id "email"
+-- >            , Attr.name "email"
+-- >            , Attr.required True
+-- >            ]
+-- >        , Html.label
+-- >            [ Attr.for "message" ]
+-- >            [ "Message:" ]
+-- >        , Html.textarea
+-- >            [ Attr.id "message"
+-- >            , Attr.name "message"
+-- >            , Attr.rows "4"
+-- >            , Attr.cols "50"
+-- >            , Attr.required True
+-- >            ]
+-- >            []
+-- >        , Html.button
+-- >            [ Attr.type_ "submit" ]
+-- >            [ "Submit" ]
 -- >        ]
--- >    , Html.button
--- >        [ Attr.type_ "submit" ]
--- >        [ "Submit" ]
 -- >    ]
 --
 -- __Output:__
 --
--- ><form action="submit.php" method="post">
--- >    <label for="name">Name:</label>
--- >    <input type="text" id="name" name="name" required>
--- >    <label for="email">Email:</label>
--- >    <input type="email" id="email" name="email" required>
--- >    <button type="submit">Submit</button>
--- ></form>
+-- ><main>
+-- >    <form action="submit.php" method="post">
+-- >        <label for="name">Name:</label>
+-- >        <input type="text" id="name" name="name" required>
+-- >        <label for="email">Email:</label>
+-- >        <input type="email" id="email" name="email" required>
+-- >        <textarea id="message" name="message" rows="4" cols="50" required></textarea>
+-- >        <button type="submit">Submit</button>
+-- >    </form>
+-- ></main>
 form :: [Attribute] -> [Html lng] -> Html lng
 form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
@@ -2474,18 +2549,39 @@ form = ParentNode "<form" "</form>"
 
 -- | Generates an HTML @\<h1\>@ element with the given attributes and contents.
 --
--- The @\<h1\>@ element represents the highest-level heading, typically used to indicate the main topic or section of a document.
+-- The @\<h1\>@ element represents the top-level heading in a document, typically used to convey the primary topic or section of the
+-- content.
 --
 -- ==== __Example__
 --
 -- __Input:__
 --
--- >Html.h1 []
--- >    [ "Welcome to Our Website" ]
+-- >Html.article []
+-- >    [ Html.h1 []
+-- >        [ "Tech Reviews" ]
+-- >    , Html.p []
+-- >        [ "Discover the latest in tech trends, from smartphones to laptops." ]
+-- >    , Html.ul []
+-- >        [ Html.li []
+-- >            [ "Smartphone Reviews" ]
+-- >        , Html.li []
+-- >            [ "Laptop Buying Guides" ]
+-- >        , Html.li []
+-- >            [ "Tech Tips and Tutorials" ]
+-- >        ]
+-- >    ]
 --
 -- __Output:__
 --
--- ><h1>Welcome to Our Website</h1>
+-- ><article>
+-- >    <h1>Tech Reviews</h1>
+-- >    <p>Discover the latest in tech trends, from smartphones to laptops.</p>
+-- >    <ul>
+-- >        <li>Smartphone Reviews</li>
+-- >        <li>Laptop Buying Guides</li>
+-- >        <li>Tech Tips and Tutorials</li>
+-- >    </ul>
+-- ></article>
 h1 :: [Attribute] -> [Html lng] -> Html lng
 h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
