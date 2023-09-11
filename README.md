@@ -202,10 +202,10 @@ Output:
 *Note: This example assumes the following imports and declarations.*
 
 ```haskell
+import Data.Text.Lazy.Builder (Builder)
 import Html (Translatable)
 import Html.Intl (translate)
 
-import Data.Text.Lazy.Builder (Builder)
 import qualified Html
 import qualified Html.Intl as Html
 
