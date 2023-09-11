@@ -8,5 +8,5 @@ import Html.Intl (translate)
 
 import qualified Html as Html
 import qualified Html.Attributes as Attr
-import qualified Html.Events as Events
+import qualified Html.Events as Evnt
 import qualified Html.Intl as Html
