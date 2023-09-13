@@ -179,7 +179,7 @@ module Html.Events
 
 
 import Data.Text.Lazy.Builder (Builder)
-import Html (Attribute(..))
+import Html                   (Attribute(..))
 
 
 -- EVENT HANDLERS

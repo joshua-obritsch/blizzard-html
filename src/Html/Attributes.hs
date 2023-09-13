@@ -261,9 +261,9 @@ module Html.Attributes
     ) where
 
 
-import Data.Bool (Bool(..))
+import Data.Bool              (Bool(..))
 import Data.Text.Lazy.Builder (Builder)
-import Html (Attribute(..))
+import Html                   (Attribute(..))
 
 
 -- ATTRIBUTES
