@@ -26,7 +26,7 @@ import Html                   (Html(..), Buildable(..), Translatable)
 -- INTERNATIONALIZATION
 
 
--- | Converts all multilingual HTML text nodes to simple HTML text nodes given a target language and HTML.
+-- | Translates all multilingual HTML text nodes and converts 'Html.Html' to 'Data.Text.Lazy.Builder'.
 translate :: Translatable a => (a -> Builder) -> Html a -> Builder
 translate lang html = case html of
     ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                    endTag
