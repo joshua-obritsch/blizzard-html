@@ -1,5 +1,3 @@
-{-# LANGUAGE NoImplicitPrelude #-}
-
 -- | Module    : Html.Intl
 -- Copyright   : (c) Joshua Obritsch, 2021
 -- License     : MIT
@@ -16,9 +14,6 @@ module Html.Intl
     ) where
 
 
-import Data.Foldable          (foldr)
-import Data.Function          ((.))
-import Data.Monoid            ((<>), mempty)
 import Data.Text.Lazy.Builder (Builder, singleton)
 import Html                   (Html(..), Buildable(..), Translatable)
 
@@ -26,7 +21,7 @@ import Html                   (Html(..), Buildable(..), Translatable)
 -- INTERNATIONALIZATION
 
 
--- | Translates all multilingual HTML text nodes and converts 'Html.Html' to 'Data.Text.Lazy.Builder'.
+-- | Translates all multilingual HTML text nodes and converts 'Html.Html' to 'Data.Text.Lazy.Builder.Builder'.
 translate :: Translatable a => (a -> Builder) -> Html a -> Builder
 translate lang html = case html of
     ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                    endTag
@@ -44,7 +39,7 @@ translate lang html = case html of
     build' = foldr ((<>) . translate lang) mempty
 
 
--- | Generates a multilingual HTML text node given a set of languages.
+-- | Generates a multilingual HTML text node.
 intl :: Translatable a => a -> Html a
 intl = IntlNode
 {-# INLINE intl #-}

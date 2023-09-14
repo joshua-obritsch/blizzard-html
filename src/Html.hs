@@ -259,14 +259,11 @@ module Html
     ) where
 
 
-import Data.Bool              (Bool(..))
-import Data.Foldable          (foldr)
-import Data.Function          ((.))
-import Data.Monoid            ((<>), mempty)
+import Prelude hiding (div, head, map, span)
+
 import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
-import Text.Show              (Show(..))
 
 
 -- TYPES

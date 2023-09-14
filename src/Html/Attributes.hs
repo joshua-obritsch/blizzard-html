@@ -261,7 +261,8 @@ module Html.Attributes
     ) where
 
 
-import Data.Bool              (Bool(..))
+import Prelude hiding (id, max, min, span)
+
 import Data.Text.Lazy.Builder (Builder)
 import Html                   (Attribute(..))
 
