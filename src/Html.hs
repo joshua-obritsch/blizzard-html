@@ -2,6 +2,7 @@
 {-# LANGUAGE GADTs #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE TypeFamilies #-}
 
 
 -- | Module    : Html
@@ -257,6 +258,8 @@ module Html
     , video
       -- ** \<wbr\>
     , wbr
+    , tmp
+    , tmp2
     ) where
 
 
@@ -266,9 +269,48 @@ import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 
+import qualified Prelude
+
 
 -- TYPES
 
+
+data family XHtml cnt lng
+
+data Metadata = Metadata
+
+data instance XHtml Metadata lng = XHtml Metadata (Html lng)
+
+fromMetadata :: XHtml Metadata lng -> Html lng
+fromMetadata (XHtml Metadata lng) = lng
+
+
+tmp2 :: [Attribute] -> [XHtml Metadata lng] -> Html lng
+tmp2 attributes children = ParentNode "<head" "</head>" attributes (Prelude.map fromMetadata children)
+
+
+tmp :: [Attribute] -> XHtml Metadata lng
+tmp = XHtml Metadata . LeafNode "<base"
+
+{-
+newtype Metadata lng = Metadata (Html lng)
+
+
+class FromMetadata a where
+    fromMetadata :: a lng -> Html lng
+
+
+instance FromMetadata Metadata where
+    fromMetadata (Metadata html) = html
+
+
+head :: FromMetadata a => [Attribute] -> [a lng] -> Html lng
+head attributes children = ParentNode "<head" "</head>" attributes (Prelude.map fromMetadata children)
+
+
+base :: [Attribute] -> Metadata lng
+base = Metadata . LeafNode "<base"
+-}
 
 -- | Represents an HTML element.
 --
