@@ -266,15 +266,13 @@ import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 
-import qualified Prelude
-
 
 -- TYPES
 
 
 -- | Represents an HTML element.
 --
--- /Note: The type variable /lng/ stands for /language/ and is used to facilitate internationalization./
+-- /Note: The type variable __lng__ stands for __language__ and is used to facilitate internationalization./
 data Html lng where
 
     -- | Constructs an HTML parent node.
