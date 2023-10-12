@@ -383,17 +383,50 @@ The *blizzard* part of the name just comes from the fact that winter has always 
 
 Two reasons, well three actually: 1) I'm already married 2) Internationalization and 3) I'm not a fan of SPAs anymore. Don't get me wrong, I
 really do like Elm. However, I don't like the way that internationalization is encouraged in Elm. The only way to really do it is to
-propogate the language down a bunch of function calls to markup. It's one teeny tiny piece of state that you have to pass around everywhere.
+propagate the language down a bunch of function calls to markup. It's one teeny tiny piece of state that you have to pass around everywhere.
 And I mean f-ing everywhere. I understand why, but come on, there are better ways to do it, like in *blizzard-html*.
 
 I guess this brings me to the third point. Yeah, SPAs can certainly be useful. But for most of the stuff I make, it's just not necessary.
 Most people just want a mostly static site with some forms. That's it. Elm is overkill for that sort of thing. Haskell probably is too.
 *insert reason for using Haskell later*
 
-### I've looked at the source code. Why are your Haskell skills so bad?
+### Builder? I hardly know her!
 
-Because I learned from your mother, that's why.
+So, why am I using *Builder* everywhere? Probably because I'm an idiot. Almost certainly. In fact, if that's not the case then I'll be
+utterly shocked. Anyway, my reasoning is this...
 
-### What's next?
+I don't have much experience with lazy evaluation, but from what I've understood, *Builder* works by calculating the length of all the
+strings and doing a single *malloc* call (under the hood) when concatenating them. In my experience with C, *malloc* calls are expensive so
+ideally you want to reduce the number of them (batching) as much as possible to optimize performance. I don't know the internals of GHC but
+I heard strict *Text* doesn't batch the *malloc*s. If you're using *blizzard-html* for static site generation, I doubt performance would
+really matter unless your site has millions of lines of code. If you're using it dynamically with some backend like IHP or Scotty, then
+batching sounds more efficient to me, especially if you're fetching stuff and injecting it into the HTML/CSS in which case it would be
+impossible for the compiler to know the size ahead of time. If I'm wrong about that, please let me know and also slap me when you see me.
 
-`git add README.md`
+On a more serious note, if anyone wants to do some benchmarking, I'd be very interested in the results. My priority right now though is
+ergonomics, not performance.
+
+### *blizzard-html* only depends on *base* and *text*? Are you some kinda minimalist?
+
+Absolutely. In fact, I think one of the biggest reasons people have for avoiding Haskell is that they hear about how Haskell is constantly
+introducing breaking changes. I'm not saying this is good or bad, but by keeping the number of dependencies as small as possible, that
+decreases the likelihood that future breaking changes will impact *blizzard-html*.
+
+### What's next? *blizzard-markup*?
+
+I'm currently working on *blizzard-css*. I think I've finished most of the challenging stuff. I just need to finish the tedious stuff now.
+It's a lot of work and probably won't be done until next year though. After that, I'll make *blizzard-htmx*. That should go significantly
+faster. Then I plan on making *blizzard-static* which will be a kind of static site generator. Then I plan on rebuilding one of my client's
+sites with it. That should give me a good idea as to how everything fits together and if I should make any changes. After that, I'll look
+into some kind of JavaScript solution. I honestly have no idea what I'm gonna do there. I could use Haskell templates, Haskell to JavaScript
+or Hyperscript just to name a few options. I'm gonna have to do some research to find out what works best. Could take me a day or years.
+
+### I thought you like keeping related stuff together. Why did you put everything into separate packages, you hypocrite?
+
+I'd like people to be able to use the packages as they see fit. If you wanna use *Tailwind CSS*, then just import *blizzard-html*. There's
+no point in importing *blizzard-css* if you're not gonna use it.
+
+### Why so hard on yourself with these questions?
+
+I think there is so much hate and anger online (and in the world in general). By being highly critical of myself, I make myself immune to
+any hatred or anger coming from others.
