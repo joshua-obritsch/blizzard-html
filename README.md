@@ -411,22 +411,3 @@ ergonomics, not performance.
 Absolutely. In fact, I think one of the biggest reasons people have for avoiding Haskell is that they hear about how Haskell is constantly
 introducing breaking changes. I'm not saying this is good or bad, but by keeping the number of dependencies as small as possible, that
 decreases the likelihood that future breaking changes will impact *blizzard-html*.
-
-### What's next? *blizzard-markup*?
-
-I'm currently working on *blizzard-css*. I think I've finished most of the challenging stuff. I just need to finish the tedious stuff now.
-It's a lot of work and probably won't be done until next year though. After that, I'll make *blizzard-htmx*. That should go significantly
-faster. Then I plan on making *blizzard-static* which will be a kind of static site generator. Then I plan on rebuilding one of my client's
-sites with it. That should give me a good idea as to how everything fits together and if I should make any changes. After that, I'll look
-into some kind of JavaScript solution. I honestly have no idea what I'm gonna do there. I could use Haskell templates, Haskell to JavaScript
-or Hyperscript just to name a few options. I'm gonna have to do some research to find out what works best. Could take me a day or years.
-
-### I thought you like keeping related stuff together. Why did you put everything into separate packages, you hypocrite?
-
-I'd like people to be able to use the packages as they see fit. If you wanna use *Tailwind CSS*, then just import *blizzard-html*. There's
-no point in importing *blizzard-css* if you're not gonna use it.
-
-### Why so hard on yourself with these questions?
-
-I think there is so much hate and anger online (and in the world in general). By being highly critical of myself, I make myself immune to
-any hatred or anger coming from others.
