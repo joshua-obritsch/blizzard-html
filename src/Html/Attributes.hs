@@ -34,6 +34,8 @@ module Html.Attributes
     , autocapitalize
       -- ** autocomplete
     , autocomplete
+      -- ** autocorrect
+    , autocorrect
       -- ** autofocus
     , autofocus
       -- ** autoplay
@@ -50,6 +52,8 @@ module Html.Attributes
     , class_
       -- ** color
     , color
+      -- ** colorspace
+    , colorspace
       -- ** cols
     , cols
       -- ** colspan
@@ -76,6 +80,8 @@ module Html.Attributes
     , defer
       -- ** dir
     , dir
+      -- ** dirname
+    , dirname
       -- ** disabled
     , disabled
       -- ** download
@@ -86,6 +92,8 @@ module Html.Attributes
     , enctype
       -- ** enterkeyhint
     , enterkeyhint
+      -- ** fetchpriority
+    , fetchpriority
       -- ** for
     , for
       -- ** form
@@ -190,6 +198,12 @@ module Html.Attributes
     , placeholder
       -- ** playsinline
     , playsinline
+      -- ** popover
+    , popover
+      -- ** popovertarget
+    , popovertarget
+      -- ** popovertargetaction
+    , popovertargetaction
       -- ** poster
     , poster
       -- ** preload
@@ -214,6 +228,14 @@ module Html.Attributes
     , scope
       -- ** selected
     , selected
+      -- ** shadowrootclonable
+    , shadowrootclonable
+      -- ** shadowrootdelegatesfocus
+    , shadowrootdelegatesfocus
+      -- ** shadowrootmode
+    , shadowrootmode
+      -- ** shadowrootserializable
+    , shadowrootserializable
       -- ** shape
     , shape
       -- ** size
@@ -258,6 +280,8 @@ module Html.Attributes
     , width
       -- ** wrap
     , wrap
+      -- ** writingsuggestions
+    , writingsuggestions
     ) where
 
 
@@ -342,6 +366,12 @@ autocomplete = TextAttribute " autocomplete=\""
 {-# INLINE autocomplete #-}
 
 
+-- | Generates an HTML @autocorrect@ attribute with the given value.
+autocorrect :: Builder -> Attribute
+autocorrect = TextAttribute " autocorrect=\""
+{-# INLINE autocorrect #-}
+
+
 -- | Generates an HTML @autofocus@ attribute with the given value.
 autofocus :: Bool -> Attribute
 autofocus = BoolAttribute " autofocus"
@@ -388,6 +418,12 @@ class_ = TextAttribute " class=\""
 color :: Builder -> Attribute
 color = TextAttribute " color=\""
 {-# INLINE color #-}
+
+
+-- | Generates an HTML @colorspace@ attribute with the given value.
+colorspace :: Builder -> Attribute
+colorspace = TextAttribute " colorspace=\""
+{-# INLINE colorspace #-}
 
 
 -- | Generates an HTML @cols@ attribute with the given value.
@@ -468,6 +504,12 @@ dir = TextAttribute " dir=\""
 {-# INLINE dir #-}
 
 
+-- | Generates an HTML @dirname@ attribute with the given value.
+dirname :: Builder -> Attribute
+dirname = TextAttribute " dirname=\""
+{-# INLINE dirname #-}
+
+
 -- | Generates an HTML @disabled@ attribute with the given value.
 disabled :: Bool -> Attribute
 disabled = BoolAttribute " disabled"
@@ -496,6 +538,12 @@ enctype = TextAttribute " enctype=\""
 enterkeyhint :: Builder -> Attribute
 enterkeyhint = TextAttribute " enterkeyhint=\""
 {-# INLINE enterkeyhint #-}
+
+
+-- | Generates an HTML @fetchpriority@ attribute with the given value.
+fetchpriority :: Builder -> Attribute
+fetchpriority = TextAttribute " fetchpriority=\""
+{-# INLINE fetchpriority #-}
 
 
 -- | Generates an HTML @for@ attribute with the given value.
@@ -810,6 +858,24 @@ playsinline = BoolAttribute " playsinline"
 {-# INLINE playsinline #-}
 
 
+-- | Generates an HTML @popover@ attribute with the given value.
+popover :: Builder -> Attribute
+popover = TextAttribute " popover=\""
+{-# INLINE popover #-}
+
+
+-- | Generates an HTML @popovertarget@ attribute with the given value.
+popovertarget :: Builder -> Attribute
+popovertarget = TextAttribute " popovertarget=\""
+{-# INLINE popovertarget #-}
+
+
+-- | Generates an HTML @popovertargetaction@ attribute with the given value.
+popovertargetaction :: Builder -> Attribute
+popovertargetaction = TextAttribute " popovertargetaction=\""
+{-# INLINE popovertargetaction #-}
+
+
 -- | Generates an HTML @poster@ attribute with the given value.
 poster :: Builder -> Attribute
 poster = TextAttribute " poster=\""
@@ -880,6 +946,30 @@ scope = TextAttribute " scope=\""
 selected :: Bool -> Attribute
 selected = BoolAttribute " selected"
 {-# INLINE selected #-}
+
+
+-- | Generates an HTML @shadowrootclonable@ attribute with the given value.
+shadowrootclonable :: Bool -> Attribute
+shadowrootclonable = BoolAttribute " shadowrootclonable"
+{-# INLINE shadowrootclonable #-}
+
+
+-- | Generates an HTML @shadowrootdelegatesfocus@ attribute with the given value.
+shadowrootdelegatesfocus :: Bool -> Attribute
+shadowrootdelegatesfocus = BoolAttribute " shadowrootdelegatesfocus"
+{-# INLINE shadowrootdelegatesfocus #-}
+
+
+-- | Generates an HTML @shadowrootmode@ attribute with the given value.
+shadowrootmode :: Builder -> Attribute
+shadowrootmode = TextAttribute " shadowrootmode=\""
+{-# INLINE shadowrootmode #-}
+
+
+-- | Generates an HTML @shadowrootserializable@ attribute with the given value.
+shadowrootserializable :: Bool -> Attribute
+shadowrootserializable = BoolAttribute " shadowrootserializable"
+{-# INLINE shadowrootserializable #-}
 
 
 -- | Generates an HTML @shape@ attribute with the given value.
@@ -1012,3 +1102,9 @@ width = TextAttribute " width=\""
 wrap :: Builder -> Attribute
 wrap = TextAttribute " wrap=\""
 {-# INLINE wrap #-}
+
+
+-- | Generates an HTML @writingsuggestions@ attribute with the given value.
+writingsuggestions :: Builder -> Attribute
+writingsuggestions = TextAttribute " writingsuggestions=\""
+{-# INLINE writingsuggestions #-}

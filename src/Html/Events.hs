@@ -9,14 +9,18 @@
 -- The "Html.Events" module provides a set of functions for generating HTML event handlers.
 module Html.Events
     ( -- * Event Handlers
-      -- ** onauxclick
-      onauxclick
       -- ** onafterprint
-    , onafterprint
+      onafterprint
+      -- ** onauxclick
+    , onauxclick
+      -- ** onbeforeinput
+    , onbeforeinput
       -- ** onbeforematch
     , onbeforematch
       -- ** onbeforeprint
     , onbeforeprint
+      -- ** onbeforetoggle
+    , onbeforetoggle
       -- ** onbeforeunload
     , onbeforeunload
       -- ** onblur
@@ -119,8 +123,12 @@ module Html.Events
     , ononline
       -- ** onpagehide
     , onpagehide
+      -- ** onpagereveal
+    , onpagereveal
       -- ** onpageshow
     , onpageshow
+      -- ** onpageswap
+    , onpageswap
       -- ** onpaste
     , onpaste
       -- ** onpause
@@ -143,6 +151,8 @@ module Html.Events
     , onrejectionhandled
       -- ** onscroll
     , onscroll
+      -- ** onscrollend
+    , onscrollend
       -- ** onsecuritypolicyviolation
     , onsecuritypolicyviolation
       -- ** onseeked
@@ -185,16 +195,22 @@ import Html                   (Attribute(..))
 -- EVENT HANDLERS
 
 
+-- | Generates an HTML @onafterprint@ event handler with the given value.
+onafterprint :: Builder -> Attribute
+onafterprint = TextAttribute " onafterprint=\""
+{-# INLINE onafterprint #-}
+
+
 -- | Generates an HTML @onauxclick@ event handler with the given value.
 onauxclick :: Builder -> Attribute
 onauxclick = TextAttribute " onauxclick=\""
 {-# INLINE onauxclick #-}
 
 
--- | Generates an HTML @onafterprint@ event handler with the given value.
-onafterprint :: Builder -> Attribute
-onafterprint = TextAttribute " onafterprint=\""
-{-# INLINE onafterprint #-}
+-- | Generates an HTML @onbeforeinput@ event handler with the given value.
+onbeforeinput :: Builder -> Attribute
+onbeforeinput = TextAttribute " onbeforeinput=\""
+{-# INLINE onbeforeinput #-}
 
 
 -- | Generates an HTML @onbeforematch@ event handler with the given value.
@@ -207,6 +223,12 @@ onbeforematch = TextAttribute " onbeforematch=\""
 onbeforeprint :: Builder -> Attribute
 onbeforeprint = TextAttribute " onbeforeprint=\""
 {-# INLINE onbeforeprint #-}
+
+
+-- | Generates an HTML @onbeforetoggle@ event handler with the given value.
+onbeforetoggle :: Builder -> Attribute
+onbeforetoggle = TextAttribute " onbeforetoggle=\""
+{-# INLINE onbeforetoggle #-}
 
 
 -- | Generates an HTML @onbeforeunload@ event handler with the given value.
@@ -515,10 +537,22 @@ onpagehide = TextAttribute " onpagehide=\""
 {-# INLINE onpagehide #-}
 
 
+-- | Generates an HTML @onpagereveal@ event handler with the given value.
+onpagereveal :: Builder -> Attribute
+onpagereveal = TextAttribute " onpagereveal=\""
+{-# INLINE onpagereveal #-}
+
+
 -- | Generates an HTML @onpageshow@ event handler with the given value.
 onpageshow :: Builder -> Attribute
 onpageshow = TextAttribute " onpageshow=\""
 {-# INLINE onpageshow #-}
+
+
+-- | Generates an HTML @onpageswap@ event handler with the given value.
+onpageswap :: Builder -> Attribute
+onpageswap = TextAttribute " onpageswap=\""
+{-# INLINE onpageswap #-}
 
 
 -- | Generates an HTML @onpaste@ event handler with the given value.
@@ -585,6 +619,12 @@ onrejectionhandled = TextAttribute " onrejectionhandled=\""
 onscroll :: Builder -> Attribute
 onscroll = TextAttribute " onscroll=\""
 {-# INLINE onscroll #-}
+
+
+-- | Generates an HTML @onscrollend@ event handler with the given value.
+onscrollend :: Builder -> Attribute
+onscrollend = TextAttribute " onscrollend=\""
+{-# INLINE onscrollend #-}
 
 
 -- | Generates an HTML @onsecuritypolicyviolation@ event handler with the given value.

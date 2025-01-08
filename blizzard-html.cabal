@@ -25,5 +25,5 @@ library
     exposed-modules:    Html
                       , Html.Attributes
                       , Html.Events
-                      , Html.Intl
+                      , Html.Math
     hs-source-dirs:     src
