@@ -24,6 +24,8 @@ module Html.Attributes
     , allow
       -- ** allowfullscreen
     , allowfullscreen
+      -- ** alpha
+    , alpha
       -- ** alt
     , alt
       -- ** as
@@ -334,6 +336,12 @@ allow = TextAttribute " allow=\""
 allowfullscreen :: Bool -> Attribute
 allowfullscreen = BoolAttribute " allowfullscreen"
 {-# INLINE allowfullscreen #-}
+
+
+-- | Generates an HTML @alpha@ attribute with the given value.
+alpha :: Bool -> Attribute
+alpha = BoolAttribute " alpha"
+{-# INLINE alpha #-}
 
 
 -- | Generates an HTML @alt@ attribute with the given value.
