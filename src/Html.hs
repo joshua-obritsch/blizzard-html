@@ -17,9 +17,11 @@
 --
 -- = Element Content Categories
 --
--- [@Metadata content@]: /'Html.base'/; /'Html.link'/; /'Html.meta'/; /'Html.noscript'/; /'Html.script'/; /'Html.style'/; /'Html.template'/; /'Html.title'/
--- #flow-content#
--- [@Flow content@]: /'Html.a'/; /'Html.abbr'/; /'Html.address'/; /'Html.article'/; /'Html.aside'/; /'Html.audio'/; /'Html.b'/; /'Html.bdi'/; /'Html.bdo'/; /'Html.blockquote'/; /'Html.br'/; /'Html.button'/; /'Html.canvas'/; /'Html.cite'/; /'Html.code'/; /'Html.data_'/; /'Html.datalist'/; /'Html.del'/; /'Html.details'/; /'Html.dfn'/; /'Html.dialog'/; /'Html.div'/; /'Html.dl'/; /'Html.em'/; /'Html.embed'/; /'Html.fieldset'/; /'Html.figure'/; /'Html.footer'/; /'Html.form'/; /'Html.h1'/; /'Html.h2'/; /'Html.h3'/; /'Html.h4'/; /'Html.h5'/; /'Html.h6'/; /'Html.header'/; /'Html.hgroup'/; /'Html.hr'/; /'Html.i'/; /'Html.iframe'/; /'Html.img'/; /'Html.input'/; /'Html.ins'/; /'Html.kbd'/; /'Html.label'/; /'Html.map'/; /'Html.mark'/; /MathML/ /'Html.Math.math'/; /'Html.menu'/; /'Html.meter'/; /'Html.nav'/; /'Html.noscript'/; /'Html.object'/; /'Html.ol'/; /'Html.output'/; /'Html.p'/; /'Html.picture'/; /'Html.pre'/; /'Html.progress'/; /'Html.q'/; /'Html.ruby'/; /'Html.s'/; /'Html.samp'/; /'Html.script'/; /'Html.search'/; /'Html.section'/; /'Html.select'/; /'Html.slot'/; /'Html.small'/; /'Html.span'/; /'Html.strong'/; /'Html.sub'/; /'Html.sup'/; /SVG/ /'Html.Svg.svg'/; /'Html.table'/; /'Html.template'/; /'Html.textarea'/; /'Html.time'/; /'Html.u'/; /'Html.ul'/; /'Html.var'/; /'Html.video'/; /'Html.wbr'/
+-- == Metadata content#metadata#
+-- 'Html.base'; 'Html.link'; 'Html.meta'; 'Html.noscript'; 'Html.script'; 'Html.style'; 'Html.template'; 'Html.title'
+--
+-- == Flow content#flow#
+-- 'Html.a'; 'Html.abbr'; 'Html.address'; 'Html.article'; 'Html.aside'; 'Html.audio'; 'Html.b'; 'Html.bdi'; 'Html.bdo'; 'Html.blockquote'; 'Html.br'; 'Html.button'; 'Html.canvas'; 'Html.cite'; 'Html.code'; 'Html.data_'; 'Html.datalist'; 'Html.del'; 'Html.details'; 'Html.dfn'; 'Html.dialog'; 'Html.div'; 'Html.dl'; 'Html.em'; 'Html.embed'; 'Html.fieldset'; 'Html.figure'; 'Html.footer'; 'Html.form'; 'Html.h1'; 'Html.h2'; 'Html.h3'; 'Html.h4'; 'Html.h5'; 'Html.h6'; 'Html.header'; 'Html.hgroup'; 'Html.hr'; 'Html.i'; 'Html.iframe'; 'Html.img'; 'Html.input'; 'Html.ins'; 'Html.kbd'; 'Html.label'; 'Html.map'; 'Html.mark'; 'Html.Math.math'; 'Html.menu'; 'Html.meter'; 'Html.nav'; 'Html.noscript'; 'Html.object'; 'Html.ol'; 'Html.output'; 'Html.p'; 'Html.picture'; 'Html.pre'; 'Html.progress'; 'Html.q'; 'Html.ruby'; 'Html.s'; 'Html.samp'; 'Html.script'; 'Html.search'; 'Html.section'; 'Html.select'; 'Html.slot'; 'Html.small'; 'Html.span'; 'Html.strong'; 'Html.sub'; 'Html.sup'; 'Html.Svg.svg'; 'Html.table'; 'Html.template'; 'Html.textarea'; 'Html.time'; 'Html.u'; 'Html.ul'; 'Html.var'; 'Html.video'; 'Html.wbr'; autonomous custom elements; text
 module Html
     ( -- * Types
       -- ** Html
@@ -360,7 +362,7 @@ class Buildable a where
 -- DECLARATIONS
 
 
--- | Generates an HTML @\<!DOCTYPE\>@ declaration with the given contents.
+-- | Generates an HTML __@\<!DOCTYPE\>@__ declaration with the given contents.
 --
 -- [@Example@]:
 --
@@ -375,33 +377,29 @@ doctype = RootNode "<!DOCTYPE html>\n"
 -- ELEMENTS
 
 
--- | Generates an HTML @\<a\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<a\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Hyperlink
--- [@Categories@]: [flow](#flow); /phrasing/*; /interactive/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/*
--- [@Attributes@]: /globals/; /'Html.Attributes.href'/; /'Html.Attributes.target'/; /'Html.Attributes.download'/; /'Html.Attributes.ping'/; /'Html.Attributes.rel'/; /'Html.Attributes.hreflang'/; /'Html.Attributes.type_'/; /'Html.Attributes.referrerpolicy'/
--- [@Interface@]: /HTMLAnchorElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.target'; 'Html.Attributes.download'; 'Html.Attributes.ping'; 'Html.Attributes.rel'; 'Html.Attributes.hreflang'; 'Html.Attributes.type_'; 'Html.Attributes.referrerpolicy'
 -- [@Example@]:
 --
 -- >>> a [] []
 -- <a></a>
---
--- /* Indicates that the rules are more complicated./
 a :: [Attribute] -> [Html] -> Html
 a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
--- | Generates an HTML @\<abbr\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<abbr\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Abbreviation
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> abbr [] []
@@ -413,52 +411,45 @@ abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
 
--- | Generates an HTML @\<address\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<address\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Contract information for a page or 'Html.article' element
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> address [] []
 -- <address></address>
---
--- /* Indicates that the rules are more complicated./
 address :: [Attribute] -> [Html] -> Html
 address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
 
--- | Generates an HTML @\<area\>@ element with the given attributes.
+-- | Generates an HTML __@\<area\>@__ element with the given attributes.
 --
 -- [@Description@]: Hyperlink or dead area on an image map
--- [@Categories@]: /flow/; /phrasing/
--- [@Parents@]: /phrasing/*
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.alt'/; /'Html.Attributes.coords'/; /'Html.Attributes.shape'/; /'Html.Attributes.href'/; /'Html.Attributes.target'/; /'Html.Attributes.download'/; /'Html.Attributes.ping'/; /'Html.Attributes.rel'/; /'Html.Attributes.referrerpolicy'/
--- [@Interface@]: /HTMLElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.alt'; 'Html.Attributes.coords'; 'Html.Attributes.shape'; 'Html.Attributes.href'; 'Html.Attributes.target'; 'Html.Attributes.download'; 'Html.Attributes.ping'; 'Html.Attributes.rel'; 'Html.Attributes.referrerpolicy'
 -- [@Example@]:
 --
 -- >>> area []
 -- <area>
---
--- /* Indicates that the rules are more complicated./
 area :: [Attribute] -> Html
 area = LeafNode "<area"
 {-# INLINE area #-}
 
 
--- | Generates an HTML @\<article\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<article\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Self-contained syndicatable or reusable composition
--- [@Categories@]: /flow/; /sectioning/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> article [] []
@@ -468,14 +459,13 @@ article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
 
--- | Generates an HTML @\<aside\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<aside\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Sidebar for tangentially related content
--- [@Categories@]: /flow/; /sectioning/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> aside [] []
@@ -485,33 +475,29 @@ aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
 
--- | Generates an HTML @\<audio\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<audio\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Audio player
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/; /palpable/*
--- [@Parents@]: /phrasing/
--- [@Children@]: /'Html.source'/*; /'Html.track'/*; /transparent/*
--- [@Attributes@]: /globals/; /'Html.Attributes.src'/; /'Html.Attributes.crossorigin'/; /'Html.Attributes.preload'/; /'Html.Attributes.autoplay'/; /'Html.Attributes.loop'/; /'Html.Attributes.muted'/; /'Html.Attributes.controls'/
--- [@Interface@]: /HTMLAudioElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: 'Html.source'; 'Html.track'; transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.crossorigin'; 'Html.Attributes.preload'; 'Html.Attributes.autoplay'; 'Html.Attributes.loop'; 'Html.Attributes.muted'; 'Html.Attributes.controls'
 -- [@Example@]:
 --
 -- >>> audio [] []
 -- <audio></audio>
---
--- /* Indicates that the rules are more complicated./
 audio :: [Attribute] -> [Html] -> Html
 audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
 
--- | Generates an HTML @\<b\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<b\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Keywords
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> b [] []
@@ -521,14 +507,13 @@ b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
 
--- | Generates an HTML @\<base\>@ element with the given attributes.
+-- | Generates an HTML __@\<base\>@__ element with the given attributes.
 --
 -- [@Description@]: Base URL and default target navigable for hyperlinks and forms
--- [@Categories@]: /metadata/
--- [@Parents@]: /'Html.head'/
+-- [@Categories@]: /[metadata](#metadata)/
+-- [@Parents@]: 'Html.head'
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.href'/; /'Html.Attributes.target'/
--- [@Interface@]: /HTMLBaseElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.target'
 -- [@Example@]:
 --
 -- >>> base []
@@ -538,14 +523,13 @@ base = LeafNode "<base"
 {-# INLINE base #-}
 
 
--- | Generates an HTML @\<bdi\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<bdi\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Text directionality isolation
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> bdi [] []
@@ -555,14 +539,13 @@ bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
 
--- | Generates an HTML @\<bdo\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<bdo\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Text directionality formatting
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> bdo [] []
@@ -572,14 +555,13 @@ bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
 
--- | Generates an HTML @\<blockquote\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<blockquote\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: A section quoted from another source
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.cite'/
--- [@Interface@]: /HTMLQuoteElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'
 -- [@Example@]:
 --
 -- >>> blockquote [] []
@@ -589,14 +571,13 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
 
--- | Generates an HTML @\<body\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<body\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Document body
 -- [@Categories@]: none
--- [@Parents@]: /'Html.html'/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/; /'Html.Events.onafterprint'/; /'Html.Events.onbeforeprint'/; /'Html.Events.onbeforeunload'/; /'Html.Events.onhashchange'/; /'Html.Events.onlanguagechange'/; /'Html.Events.onmessage'/; /'Html.Events.onmessageerror'/; /'Html.Events.onoffline'/; /'Html.Events.ononline'/; /'Html.Events.onpageswap'/; /'Html.Events.onpagehide'/; /'Html.Events.onpagereveal'/; /'Html.Events.onpageshow'/; /'Html.Events.onpopstate'/; /'Html.Events.onrejectionhandled'/; /'Html.Events.onstorage'/; /'Html.Events.onunhandledrejection'/; /'Html.Events.onunload'/
--- [@Interface@]: /HTMLBodyElement/
+-- [@Parents@]: 'Html.html'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Events.onafterprint'; 'Html.Events.onbeforeprint'; 'Html.Events.onbeforeunload'; 'Html.Events.onhashchange'; 'Html.Events.onlanguagechange'; 'Html.Events.onmessage'; 'Html.Events.onmessageerror'; 'Html.Events.onoffline'; 'Html.Events.ononline'; 'Html.Events.onpageswap'; 'Html.Events.onpagehide'; 'Html.Events.onpagereveal'; 'Html.Events.onpageshow'; 'Html.Events.onpopstate'; 'Html.Events.onrejectionhandled'; 'Html.Events.onstorage'; 'Html.Events.onunhandledrejection'; 'Html.Events.onunload'
 -- [@Example@]:
 --
 -- >>> body [] []
@@ -606,14 +587,13 @@ body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
 
--- | Generates an HTML @\<br\>@ element with the given attributes.
+-- | Generates an HTML __@\<br\>@__ element with the given attributes.
 --
 -- [@Description@]: Line break, e.g. in poem or postal address
--- [@Categories@]: /flow/; /phrasing/
--- [@Parents@]: /phrasing/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLBRElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> br []
@@ -623,33 +603,29 @@ br = LeafNode "<br"
 {-# INLINE br #-}
 
 
--- | Generates an HTML @\<button\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<button\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Button control
--- [@Categories@]: /flow/; /phrasing/; /interactive/; /listed/; /labelable/; /submittable/; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*
--- [@Attributes@]: /globals/; /'Html.Attributes.disabled'/; /'Html.Attributes.form'/; /'Html.Attributes.formaction'/; /'Html.Attributes.formenctype'/; /'Html.Attributes.formmethod'/; /'Html.Attributes.formnovalidate'/; /'Html.Attributes.formtarget'/; /'Html.Attributes.name'/; /'Html.Attributes.popovertarget'/; /'Html.Attributes.popovertargetaction'/; /'Html.Attributes.type_'/; /'Html.Attributes.value'/
--- [@Interface@]: /HTMLButtonElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.formaction'; 'Html.Attributes.formenctype'; 'Html.Attributes.formmethod'; 'Html.Attributes.formnovalidate'; 'Html.Attributes.formtarget'; 'Html.Attributes.name'; 'Html.Attributes.popovertarget'; 'Html.Attributes.popovertargetaction'; 'Html.Attributes.type_'; 'Html.Attributes.value'
 -- [@Example@]:
 --
 -- >>> button [] []
 -- <button></button>
---
--- /* Indicates that the rules are more complicated./
 button :: [Attribute] -> [Html] -> Html
 button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
 
--- | Generates an HTML @\<canvas\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<canvas\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Scriptable bitmap canvas
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/
--- [@Attributes@]: /globals/; /'Html.Attributes.width'/; /'Html.Attributes.height'/
--- [@Interface@]: /HTMLCanvasElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
 --
 -- >>> canvas [] []
@@ -659,33 +635,29 @@ canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
 
--- | Generates an HTML @\<caption\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<caption\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Table caption
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableCaptionElement/
+-- [@Parents@]: 'Html.table'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> caption [] []
 -- <caption></caption>
---
--- /* Indicates that the rules are more complicated./
 caption :: [Attribute] -> [Html] -> Html
 caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
 
--- | Generates an HTML @\<cite\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<cite\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Title of a work
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> cite [] []
@@ -697,14 +669,13 @@ cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
 
--- | Generates an HTML @\<code\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<code\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Computer code
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> code [] []
@@ -714,14 +685,13 @@ code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
 
--- | Generates an HTML @\<col\>@ element with the given attributes.
+-- | Generates an HTML __@\<col\>@__ element with the given attributes.
 --
 -- [@Description@]: Table column
 -- [@Categories@]: none
--- [@Parents@]: /'Html.colgroup'/
+-- [@Parents@]: 'Html.colgroup'
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.span'/
--- [@Interface@]: /HTMLTableColElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.span'
 -- [@Example@]:
 --
 -- >>> col []
@@ -731,33 +701,29 @@ col = LeafNode "<col"
 {-# INLINE col #-}
 
 
--- | Generates an HTML @\<colgroup\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<colgroup\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of columns in a table
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/
--- [@Children@]: /'Html.col'/*; /'Html.template'/*
--- [@Attributes@]: /globals/; /'Html.Attributes.span'/
--- [@Interface@]: /HTMLTableColElement/
+-- [@Parents@]: 'Html.table'
+-- [@Children@]: 'Html.col'; 'Html.template'
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.span'
 -- [@Example@]:
 --
 -- >>> colgroup [] []
 -- <colgroup></colgroup>
---
--- /* Indicates that the rules are more complicated./
 colgroup :: [Attribute] -> [Html] -> Html
 colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
 
--- | Generates an HTML @\<data\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<data\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Machine-readable equivalent
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/; /'Html.Attributes.value'/
--- [@Interface@]: /HTMLDataElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'
 -- [@Example@]:
 --
 -- >>> data_ [] []
@@ -769,109 +735,93 @@ data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
 
--- | Generates an HTML @\<datalist\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<datalist\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Container for options for combo box control
--- [@Categories@]: /flow/; /phrasing/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*; /'Html.option'/*; /script-supporting/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLDataListElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/; 'Html.option'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> datalist [] []
 -- <datalist></datalist>
---
--- /* Indicates that the rules are more complicated./
 datalist :: [Attribute] -> [Html] -> Html
 datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
 
--- | Generates an HTML @\<dd\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<dd\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Content for corresponding /'Html.dt'/ element(s)
+-- [@Description@]: Content for corresponding 'Html.dt' element(s)
 -- [@Categories@]: none
--- [@Parents@]: /'Html.dl'/; /'Html.div'/*
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.dl'; 'Html.div'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> dd [] []
 -- <dd></dd>
---
--- /* Indicates that the rules are more complicated./
 dd :: [Attribute] -> [Html] -> Html
 dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
 
--- | Generates an HTML @\<del\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<del\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: A removal from the document
--- [@Categories@]: /flow/; /phrasing/*; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/
--- [@Attributes@]: /globals/; /'Html.Attributes.cite'/; /'Html.Attributes.datetime'/
--- [@Interface@]: /HTMLModElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'; 'Html.Attributes.datetime'
 -- [@Example@]:
 --
 -- >>> del [] []
 -- <del></del>
---
--- /* Indicates that the rules are more complicated./
 del :: [Attribute] -> [Html] -> Html
 del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
 
--- | Generates an HTML @\<details\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<details\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Disclosure control for hiding details
--- [@Categories@]: /flow/; /interactive/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.summary'/*; /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.name'/; /'Html.Attributes.open'/
--- [@Interface@]: /HTMLDetailsElement/
+-- [@Categories@]: /[flow](#flow)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.summary'; /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'; 'Html.Attributes.open'
 -- [@Example@]:
 --
 -- >>> details [] []
 -- <details></details>
---
--- /* Indicates that the rules are more complicated./
 details :: [Attribute] -> [Html] -> Html
 details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
 
--- | Generates an HTML @\<dfn\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<dfn\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Defining instance
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> dfn [] []
 -- <dfn></dfn>
---
--- /* Indicates that the rules are more complicated./
 dfn :: [Attribute] -> [Html] -> Html
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
 
--- | Generates an HTML @\<dialog\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<dialog\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Dialog box or window
--- [@Categories@]: /flow/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.open'/
--- [@Interface@]: /HTMLDialogElement/
+-- [@Categories@]: /[flow](#flow)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.open'
 -- [@Example@]:
 --
 -- >>> dialog [] []
@@ -881,14 +831,13 @@ dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
--- | Generates an HTML @\<div\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<div\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Generic flow container, or container for name-value groups in /'Html.dl'/ elements
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/; /'Html.dl'/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLDivElement/
+-- [@Description@]: Generic flow container, or container for name-value groups in 'Html.dl' elements
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/; 'Html.dl'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> div [] []
@@ -898,52 +847,45 @@ div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
--- | Generates an HTML @\<dl\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<dl\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Association list consisting of zero or more name-value groups
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.dt'/*; /'Html.dd'/*; /'Html.div'/*; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLDListElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.dt'; 'Html.dd'; 'Html.div'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> dl [] []
 -- <dl></dl>
---
--- /* Indicates that the rules are more complicated./
 dl :: [Attribute] -> [Html] -> Html
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
--- | Generates an HTML @\<dt\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<dt\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Legend for corresponding /'Html.dd'/ element(s)
+-- [@Description@]: Legend for corresponding 'Html.dd' element(s)
 -- [@Categories@]: none
--- [@Parents@]: /'Html.dl'/; /'Html.div'/*
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.dl'; 'Html.div'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> dt [] []
 -- <dt></dt>
---
--- /* Indicates that the rules are more complicated./
 dt :: [Attribute] -> [Html] -> Html
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
--- | Generates an HTML @\<em\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<em\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Stress emphasis
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> em [] []
@@ -953,52 +895,45 @@ em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
--- | Generates an HTML @\<embed\>@ element with the given attributes.
+-- | Generates an HTML __@\<embed\>@__ element with the given attributes.
 --
 -- [@Description@]: Plugin
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/; /palpable/
--- [@Parents@]: /phrasing/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: none
--- [@Attributes@]: /globals/; /'Html.Attributes.src'/; /'Html.Attributes.type_'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/; any*
--- [@Interface@]: /HTMLEmbedElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.type_'; 'Html.Attributes.width'; 'Html.Attributes.height'; any
 -- [@Example@]:
 --
 -- >>> embed []
 -- <embed>
---
--- /* Indicates that the rules are more complicated./
 embed :: [Attribute] -> Html
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
--- | Generates an HTML @\<fieldset\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<fieldset\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of form controls
--- [@Categories@]: /flow/; /listed/; /form-associated/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.legend'/*; /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.disabled'/; /'Html.Attributes.form'/; /'Html.Attributes.name'/
--- [@Interface@]: /HTMLFieldSetElement/
+-- [@Categories@]: /[flow](#flow)/; /[listed](#listed)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.legend'; /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.name'
 -- [@Example@]:
 --
 -- >>> fieldset [] []
 -- <fieldset></fieldset>
---
--- /* Indicates that the rules are more complicated./
 fieldset :: [Attribute] -> [Html] -> Html
 fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
 
 
--- | Generates an HTML @\<figcaption\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<figcaption\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Caption for /'Html.figure'/
+-- [@Description@]: Caption for 'Html.figure'
 -- [@Categories@]: none
--- [@Parents@]: /'Html.figure'/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.figure'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> figcaption [] []
@@ -1008,58 +943,49 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 {-# INLINE figcaption #-}
 
 
--- | Generates an HTML @\<figure\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<figure\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Figure with optional caption
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.figcaption'/*; /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.figcaption'; /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> figure [] []
 -- <figure></figure>
---
--- /* Indicates that the rules are more complicated./
 figure :: [Attribute] -> [Html] -> Html
 figure = ParentNode "<figure" "</figure>"
 {-# INLINE figure #-}
 
 
--- | Generates an HTML @\<footer\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<footer\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Footer for a page or section
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> footer [] []
 -- <footer></footer>
---
--- /* Indicates that the rules are more complicated./
 footer :: [Attribute] -> [Html] -> Html
 footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
 
 
--- | Generates an HTML @\<form\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<form\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: User-submittable form
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/; /'Html.Attributes.acceptCharset'/; /'Html.Attributes.action'/; /'Html.Attributes.autocomplete'/; /'Html.Attributes.enctype'/; /'Html.Attributes.method'/; /'Html.Attributes.name'/; /'Html.Attributes.novalidate'/; /'Html.Attributes.rel'/; /'Html.Attributes.target'/
--- [@Interface@]: /HTMLFormElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.acceptCharset'; 'Html.Attributes.action'; 'Html.Attributes.autocomplete'; 'Html.Attributes.enctype'; 'Html.Attributes.method'; 'Html.Attributes.name'; 'Html.Attributes.novalidate'; 'Html.Attributes.rel'; 'Html.Attributes.target'
 -- [@Example@]:
 --
 -- >>> form [] []
 -- <form></form>
---
--- /* Indicates that the rules are more complicated./
 --
 -- /Note: This element collides with the 'Html.Attributes.form' attribute./
 form :: [Attribute] -> [Html] -> Html
@@ -1067,14 +993,13 @@ form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
 
 
--- | Generates an HTML @\<h1\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h1\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h1 [] []
@@ -1084,14 +1009,13 @@ h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
 
 
--- | Generates an HTML @\<h2\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h2\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h2 [] []
@@ -1101,14 +1025,13 @@ h2 = ParentNode "<h2" "</h2>"
 {-# INLINE h2 #-}
 
 
--- | Generates an HTML @\<h3\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h3\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h3 [] []
@@ -1118,14 +1041,13 @@ h3 = ParentNode "<h3" "</h3>"
 {-# INLINE h3 #-}
 
 
--- | Generates an HTML @\<h4\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h4\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h4 [] []
@@ -1135,14 +1057,13 @@ h4 = ParentNode "<h4" "</h4>"
 {-# INLINE h4 #-}
 
 
--- | Generates an HTML @\<h5\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h5\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h5 [] []
@@ -1152,14 +1073,13 @@ h5 = ParentNode "<h5" "</h5>"
 {-# INLINE h5 #-}
 
 
--- | Generates an HTML @\<h6\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<h6\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading
--- [@Categories@]: /flow/; /heading/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadingElement/
+-- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> h6 [] []
@@ -1169,52 +1089,45 @@ h6 = ParentNode "<h6" "</h6>"
 {-# INLINE h6 #-}
 
 
--- | Generates an HTML @\<head\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<head\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Container for document metadata
 -- [@Categories@]: none
--- [@Parents@]: /'Html.html'/
--- [@Children@]: /metadata/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHeadElement/
+-- [@Parents@]: 'Html.html'
+-- [@Children@]: /[metadata](#metadata)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> head [] []
 -- <head></head>
---
--- /* Indicates that the rules are more complicated./
 head :: [Attribute] -> [Html] -> Html
 head = ParentNode "<head" "</head>"
 {-# INLINE head #-}
 
 
--- | Generates an HTML @\<header\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<header\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Introductory or navigational aids for a page or section
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> header [] []
 -- <header></header>
---
--- /* Indicates that the rules are more complicated./
 header :: [Attribute] -> [Html] -> Html
 header = ParentNode "<header" "</header>"
 {-# INLINE header #-}
 
 
--- | Generates an HTML @\<hgroup\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<hgroup\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Heading container
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /'Html.legend'/; /'Html.summary'/; /flow/
--- [@Children@]: /'Html.h1'/; /'Html.h2'/; /'Html.h3'/; /'Html.h4'/; /'Html.h5'/; /'Html.h6'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
+-- [@Children@]: 'Html.h1'; 'Html.h2'; 'Html.h3'; 'Html.h4'; 'Html.h5'; 'Html.h6'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> hgroup [] []
@@ -1224,14 +1137,13 @@ hgroup = ParentNode "<hgroup" "</hgroup>"
 {-# INLINE hgroup #-}
 
 
--- | Generates an HTML @\<hr\>@ element with the given attributes.
+-- | Generates an HTML __@\<hr\>@__ element with the given attributes.
 --
 -- [@Description@]: Thematic break
--- [@Categories@]: /flow/
--- [@Parents@]: /flow/
+-- [@Categories@]: /[flow](#flow)/
+-- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHRElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> hr []
@@ -1241,33 +1153,29 @@ hr = LeafNode "<hr"
 {-# INLINE hr #-}
 
 
--- | Generates an HTML @\<html\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<html\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Root element
 -- [@Categories@]: none
--- [@Parents@]: none*
--- [@Children@]: /'Html.head'/*; /'Html.body'/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLHtmlElement/
+-- [@Parents@]: none
+-- [@Children@]: 'Html.head'; 'Html.body'
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> html [] []
 -- <html></html>
---
--- /* Indicates that the rules are more complicated./
 html :: [Attribute] -> [Html] -> Html
 html = ParentNode "<html" "</html>"
 {-# INLINE html #-}
 
 
--- | Generates an HTML @\<i\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<i\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Alternate voice
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> i [] []
@@ -1277,14 +1185,13 @@ i = ParentNode "<i" "</i>"
 {-# INLINE i #-}
 
 
--- | Generates an HTML @\<iframe\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<iframe\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Child navigable
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/; /palpable/
--- [@Parents@]: /phrasing/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.src'/; /'Html.Attributes.srcdoc'/; /'Html.Attributes.name'/; /'Html.Attributes.sandbox'/; /'Html.Attributes.allow'/; /'Html.Attributes.allowfullscreen'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/; /'Html.Attributes.referrerpolicy'/; /'Html.Attributes.loading'/
--- [@Interface@]: /HTMLIFrameElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.srcdoc'; 'Html.Attributes.name'; 'Html.Attributes.sandbox'; 'Html.Attributes.allow'; 'Html.Attributes.allowfullscreen'; 'Html.Attributes.width'; 'Html.Attributes.height'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.loading'
 -- [@Example@]:
 --
 -- >>> iframe [] []
@@ -1294,71 +1201,61 @@ iframe = ParentNode "<iframe" "</iframe>"
 {-# INLINE iframe #-}
 
 
--- | Generates an HTML @\<img\>@ element with the given attributes.
+-- | Generates an HTML __@\<img\>@__ element with the given attributes.
 --
 -- [@Description@]: Image
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/*; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/; /'Html.picture'/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/; 'Html.picture'
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.alt'/; /'Html.Attributes.src'/; /'Html.Attributes.srcset'/; /'Html.Attributes.sizes'/; /'Html.Attributes.crossorigin'/; /'Html.Attributes.usemap'/; /'Html.Attributes.ismap'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/; /'Html.Attributes.referrerpolicy'/; /'Html.Attributes.decoding'/; /'Html.Attributes.loading'/; /'Html.Attributes.fetchpriority'/
--- [@Interface@]: /HTMLImageElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.alt'; 'Html.Attributes.src'; 'Html.Attributes.srcset'; 'Html.Attributes.sizes'; 'Html.Attributes.crossorigin'; 'Html.Attributes.usemap'; 'Html.Attributes.ismap'; 'Html.Attributes.width'; 'Html.Attributes.height'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.decoding'; 'Html.Attributes.loading'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
 --
 -- >>> img []
 -- <img>
---
--- /* Indicates that the rules are more complicated./
 img :: [Attribute] -> Html
 img = LeafNode "<img"
 {-# INLINE img #-}
 
 
--- | Generates an HTML @\<input\>@ element with the given attributes.
+-- | Generates an HTML __@\<input\>@__ element with the given attributes.
 --
 -- [@Description@]: Form control
--- [@Categories@]: /flow/; /phrasing/; /interactive/*; /listed/; /labelable/; /submittable/; /resettable/; /form-associated/; /palpable/*
--- [@Parents@]: /phrasing/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.accept'/; /'Html.Attributes.alpha'/; /'Html.Attributes.alt'/; /'Html.Attributes.autocomplete'/; /'Html.Attributes.checked'/; /'Html.Attributes.colorspace'/; /'Html.Attributes.dirname'/; /'Html.Attributes.disabled'/; /'Html.Attributes.form'/; /'Html.Attributes.formaction'/; /'Html.Attributes.formenctype'/; /'Html.Attributes.formmethod'/; /'Html.Attributes.formnovalidate'/; /'Html.Attributes.formtarget'/; /'Html.Attributes.height'/; /'Html.Attributes.list'/; /'Html.Attributes.max'/; /'Html.Attributes.maxlength'/; /'Html.Attributes.min'/; /'Html.Attributes.minlength'/; /'Html.Attributes.multiple'/; /'Html.Attributes.name'/; /'Html.Attributes.pattern'/; /'Html.Attributes.placeholder'/; /'Html.Attributes.popovertarget'/; /'Html.Attributes.popovertargetaction'/; /'Html.Attributes.readonly'/; /'Html.Attributes.required'/; /'Html.Attributes.size'/; /'Html.Attributes.src'/; /'Html.Attributes.step'/; /'Html.Attributes.type_'/; /'Html.Attributes.value'/; /'Html.Attributes.width'/
--- [@Interface@]: /HTMLInputElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.accept'; 'Html.Attributes.alpha'; 'Html.Attributes.alt'; 'Html.Attributes.autocomplete'; 'Html.Attributes.checked'; 'Html.Attributes.colorspace'; 'Html.Attributes.dirname'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.formaction'; 'Html.Attributes.formenctype'; 'Html.Attributes.formmethod'; 'Html.Attributes.formnovalidate'; 'Html.Attributes.formtarget'; 'Html.Attributes.height'; 'Html.Attributes.list'; 'Html.Attributes.max'; 'Html.Attributes.maxlength'; 'Html.Attributes.min'; 'Html.Attributes.minlength'; 'Html.Attributes.multiple'; 'Html.Attributes.name'; 'Html.Attributes.pattern'; 'Html.Attributes.placeholder'; 'Html.Attributes.popovertarget'; 'Html.Attributes.popovertargetaction'; 'Html.Attributes.readonly'; 'Html.Attributes.required'; 'Html.Attributes.size'; 'Html.Attributes.src'; 'Html.Attributes.step'; 'Html.Attributes.type_'; 'Html.Attributes.value'; 'Html.Attributes.width'
 -- [@Example@]:
 --
 -- >>> input []
 -- <input>
---
--- /* Indicates that the rules are more complicated./
 input :: [Attribute] -> Html
 input = LeafNode "<input"
 {-# INLINE input #-}
 
 
--- | Generates an HTML @\<ins\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<ins\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: An addition to the document
--- [@Categories@]: /flow/; /phrasing/*; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/
--- [@Attributes@]: /globals/; /'Html.Attributes.cite'/; /'Html.Attributes.datetime'/
--- [@Interface@]: /HTMLModElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'; 'Html.Attributes.datetime'
 -- [@Example@]:
 --
 -- >>> ins [] []
 -- <ins></ins>
---
--- /* Indicates that the rules are more complicated./
 ins :: [Attribute] -> [Html] -> Html
 ins = ParentNode "<ins" "</ins>"
 {-# INLINE ins #-}
 
 
--- | Generates an HTML @\<kbd\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<kbd\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: User input
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> kbd [] []
@@ -1368,20 +1265,17 @@ kbd = ParentNode "<kbd" "</kbd>"
 {-# INLINE kbd #-}
 
 
--- | Generates an HTML @\<label\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<label\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Caption for a form control
--- [@Categories@]: /flow/; /phrasing/; /interactive/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*
--- [@Attributes@]: /globals/; /'Html.Attributes.for'/
--- [@Interface@]: /HTMLLabelElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.for'
 -- [@Example@]:
 --
 -- >>> label [] []
 -- <label></label>
---
--- /* Indicates that the rules are more complicated./
 --
 -- /Note: This element collides with the 'Html.Attributes.label' attribute./
 label :: [Attribute] -> [Html] -> Html
@@ -1389,14 +1283,13 @@ label = ParentNode "<label" "</label>"
 {-# INLINE label #-}
 
 
--- | Generates an HTML @\<legend\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<legend\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Caption for /'Html.fieldset'/
+-- [@Description@]: Caption for 'Html.fieldset'
 -- [@Categories@]: none
--- [@Parents@]: /'Html.fieldset'/
--- [@Children@]: /phrasing/; /heading/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLLegendElement/
+-- [@Parents@]: 'Html.fieldset'
+-- [@Children@]: /[phrasing](#phrasing)/; /[heading](#heading)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> legend [] []
@@ -1406,90 +1299,77 @@ legend = ParentNode "<legend" "</legend>"
 {-# INLINE legend #-}
 
 
--- | Generates an HTML @\<li\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<li\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: List item
 -- [@Categories@]: none
--- [@Parents@]: /'Html.ol'/; /'Html.ul'/; /'Html.menu'/*
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.value'/*
--- [@Interface@]: /HTMLLIElement/
+-- [@Parents@]: 'Html.ol'; 'Html.ul'; 'Html.menu'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'
 -- [@Example@]:
 --
 -- >>> li [] []
 -- <li></li>
---
--- /* Indicates that the rules are more complicated./
 li :: [Attribute] -> [Html] -> Html
 li = ParentNode "<li" "</li>"
 {-# INLINE li #-}
 
 
--- | Generates an HTML @\<link\>@ element with the given attributes.
+-- | Generates an HTML __@\<link\>@__ element with the given attributes.
 --
 -- [@Description@]: Link metadata
--- [@Categories@]: /metadata/; /flow/*; /phrasing/*
--- [@Parents@]: /'Html.head'/; /'Html.noscript'/*; /phrasing/*
+-- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: 'Html.head'; 'Html.noscript'; /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.href'/; /'Html.Attributes.crossorigin'/; /'Html.Attributes.rel'/; /'Html.Attributes.as'/; /'Html.Attributes.media'/; /'Html.Attributes.hreflang'/; /'Html.Attributes.type_'/; /'Html.Attributes.sizes'/; /'Html.Attributes.imagesrcset'/; /'Html.Attributes.imagesizes'/; /'Html.Attributes.referrerpolicy'/; /'Html.Attributes.integrity'/; /'Html.Attributes.blocking'/; /'Html.Attributes.color'/; /'Html.Attributes.disabled'/; /'Html.Attributes.fetchpriority'/
--- [@Interface@]: /HTMLLinkElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.crossorigin'; 'Html.Attributes.rel'; 'Html.Attributes.as'; 'Html.Attributes.media'; 'Html.Attributes.hreflang'; 'Html.Attributes.type_'; 'Html.Attributes.sizes'; 'Html.Attributes.imagesrcset'; 'Html.Attributes.imagesizes'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.integrity'; 'Html.Attributes.blocking'; 'Html.Attributes.color'; 'Html.Attributes.disabled'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
 --
 -- >>> link []
 -- <link>
---
--- /* Indicates that the rules are more complicated./
 link :: [Attribute] -> Html
 link = LeafNode "<link"
 {-# INLINE link #-}
 
 
--- | Generates an HTML @\<main\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<main\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Container for the dominant contents of the document
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/*
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> main [] []
 -- <main></main>
---
--- /* Indicates that the rules are more complicated./
 main :: [Attribute] -> [Html] -> Html
 main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
 
 
--- | Generates an HTML @\<map\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<map\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Image map
--- [@Categories@]: /flow/; /phrasing/*; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/; /'Html.area'/*
--- [@Attributes@]: /globals/; /'Html.Attributes.name'/
--- [@Interface@]: /HTMLMapElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent; 'Html.area'
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'
 -- [@Example@]:
 --
 -- >>> map [] []
 -- <map></map>
---
--- /* Indicates that the rules are more complicated./
 map :: [Attribute] -> [Html] -> Html
 map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
 
 
--- | Generates an HTML @\<mark\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<mark\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Highlight
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> mark [] []
@@ -1499,71 +1379,61 @@ mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
 
 
--- | Generates an HTML @\<menu\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<menu\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Menu of commands
--- [@Categories@]: /flow/; /palpable/*
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.li'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLMenuElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> menu [] []
 -- <menu></menu>
---
--- /* Indicates that the rules are more complicated./
 menu :: [Attribute] -> [Html] -> Html
 menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
 
 
--- | Generates an HTML @\<meta\>@ element with the given attributes.
+-- | Generates an HTML __@\<meta\>@__ element with the given attributes.
 --
 -- [@Description@]: Text metadata
--- [@Categories@]: /metadata/; /flow/*; /phrasing/*
--- [@Parents@]: /'Html.head'/; /'Html.noscript'/*; /phrasing/*
+-- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: 'Html.head'; 'Html.noscript'; /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.name'/; /'Html.Attributes.httpEquiv'/; /'Html.Attributes.content'/; /'Html.Attributes.charset'/; /'Html.Attributes.media'/
--- [@Interface@]: /HTMLMetaElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'; 'Html.Attributes.httpEquiv'; 'Html.Attributes.content'; 'Html.Attributes.charset'; 'Html.Attributes.media'
 -- [@Example@]:
 --
 -- >>> meta []
 -- <meta>
---
--- /* Indicates that the rules are more complicated./
 meta :: [Attribute] -> Html
 meta = LeafNode "<meta"
 {-# INLINE meta #-}
 
 
--- | Generates an HTML @\<meter\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<meter\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Gauge
--- [@Categories@]: /flow/; /phrasing/; /labelable/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*
--- [@Attributes@]: /globals/; /'Html.Attributes.value'/; /'Html.Attributes.min'/; /'Html.Attributes.max'/; /'Html.Attributes.low'/; /'Html.Attributes.high'/; /'Html.Attributes.optimum'/
--- [@Interface@]: /HTMLMeterElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[labelable](#labelable)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'; 'Html.Attributes.min'; 'Html.Attributes.max'; 'Html.Attributes.low'; 'Html.Attributes.high'; 'Html.Attributes.optimum'
 -- [@Example@]:
 --
 -- >>> meter [] []
 -- <meter></meter>
---
--- /* Indicates that the rules are more complicated./
 meter :: [Attribute] -> [Html] -> Html
 meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
 
 
--- | Generates an HTML @\<nav\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<nav\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Section with navigational links
--- [@Categories@]: /flow/; /sectioning/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> nav [] []
@@ -1573,71 +1443,61 @@ nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
 
 
--- | Generates an HTML @\<noscript\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<noscript\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Fallback content for script
--- [@Categories@]: /metadata/; /flow/; /phrasing/
--- [@Parents@]: /'Html.head'/*; /phrasing/*
--- [@Children@]: varies*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: 'Html.head'; /[phrasing](#phrasing)/
+-- [@Children@]: varies
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> noscript [] []
 -- <noscript></noscript>
---
--- /* Indicates that the rules are more complicated./
 noscript :: [Attribute] -> [Html] -> Html
 noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
 
 
--- | Generates an HTML @\<object\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<object\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Image, child navigable, or plugin
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/*; /listed/; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/
--- [@Attributes@]: /globals/; /'Html.Attributes.data_'/; /'Html.Attributes.type_'/; /'Html.Attributes.name'/; /'Html.Attributes.form'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/
--- [@Interface@]: /HTMLObjectElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[listed](#listed)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.data_'; 'Html.Attributes.type_'; 'Html.Attributes.name'; 'Html.Attributes.form'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
 --
 -- >>> object [] []
 -- <object></object>
---
--- /* Indicates that the rules are more complicated./
 object :: [Attribute] -> [Html] -> Html
 object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
 
 
--- | Generates an HTML @\<ol\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<ol\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Ordered list
--- [@Categories@]: /flow/; /palpable/*
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.li'/; /script-supporting/
--- [@Attributes@]: /globals/; /'Html.Attributes.reversed'/; /'Html.Attributes.start'/; /'Html.Attributes.type_'/
--- [@Interface@]: /HTMLOListElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.reversed'; 'Html.Attributes.start'; 'Html.Attributes.type_'
 -- [@Example@]:
 --
 -- >>> ol [] []
 -- <ol></ol>
---
--- /* Indicates that the rules are more complicated./
 ol :: [Attribute] -> [Html] -> Html
 ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
 
 
--- | Generates an HTML @\<optgroup\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<optgroup\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of options in a list box
 -- [@Categories@]: none
--- [@Parents@]: /'Html.select'/
--- [@Children@]: /'Html.option'/; /script-supporting/
--- [@Attributes@]: /globals/; /'Html.Attributes.disabled'/; /'Html.Attributes.label'/
--- [@Interface@]: /HTMLOptGroupElement/
+-- [@Parents@]: 'Html.select'
+-- [@Children@]: 'Html.option'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.label'
 -- [@Example@]:
 --
 -- >>> optgroup [] []
@@ -1647,33 +1507,29 @@ optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
 
 
--- | Generates an HTML @\<option\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<option\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Option in a list box or combo box control
 -- [@Categories@]: none
--- [@Parents@]: /'Html.select'/; /'Html.datalist'/; /'Html.optgroup'/
--- [@Children@]: /text/*
--- [@Attributes@]: /globals/; /'Html.Attributes.disabled'/; /'Html.Attributes.label'/; /'Html.Attributes.selected'/; /'Html.Attributes.value'/
--- [@Interface@]: /HTMLOptionElement/
+-- [@Parents@]: 'Html.select'; 'Html.datalist'; 'Html.optgroup'
+-- [@Children@]: text
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.label'; 'Html.Attributes.selected'; 'Html.Attributes.value'
 -- [@Example@]:
 --
 -- >>> option [] []
 -- <option></option>
---
--- /* Indicates that the rules are more complicated./
 option :: [Attribute] -> [Html] -> Html
 option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
 
 
--- | Generates an HTML @\<output\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<output\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Calculated output value
--- [@Categories@]: /flow/; /phrasing/; /listed/; /labelable/; /resettable/; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/; /'Html.Attributes.for'/; /'Html.Attributes.form'/; /'Html.Attributes.name'/
--- [@Interface@]: /HTMLOutputElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[listed](#listed)/; /[labelable](#labelable)/; /[resettable](#resettable)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.for'; 'Html.Attributes.form'; 'Html.Attributes.name'
 -- [@Example@]:
 --
 -- >>> output [] []
@@ -1683,14 +1539,13 @@ output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
 
 
--- | Generates an HTML @\<p\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<p\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Paragraph
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLParagraphElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> p [] []
@@ -1700,33 +1555,29 @@ p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
 
 
--- | Generates an HTML @\<picture\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<picture\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Image
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /'Html.source'/*; one /'Html.img'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLPictureElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: 'Html.source'; one 'Html.img'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> picture [] []
 -- <picture></picture>
---
--- /* Indicates that the rules are more complicated./
 picture :: [Attribute] -> [Html] -> Html
 picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
 
 
--- | Generates an HTML @\<pre\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<pre\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Block of preformatted text
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLPreElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> pre [] []
@@ -1736,33 +1587,29 @@ pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
 
 
--- | Generates an HTML @\<progress\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<progress\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Progress bar
--- [@Categories@]: /flow/; /phrasing/; /labelable/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*
--- [@Attributes@]: /globals/; /'Html.Attributes.value'/; /'Html.Attributes.max'/
--- [@Interface@]: /HTMLProgressElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[labelable](#labelable)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'; 'Html.Attributes.max'
 -- [@Example@]:
 --
 -- >>> progress [] []
 -- <progress></progress>
---
--- /* Indicates that the rules are more complicated./
 progress :: [Attribute] -> [Html] -> Html
 progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
 
 
--- | Generates an HTML @\<q\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<q\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Quotation
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/; /'Html.Attributes.cite'/
--- [@Interface@]: /HTMLQuoteElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'
 -- [@Example@]:
 --
 -- >>> q [] []
@@ -1772,14 +1619,13 @@ q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
 
 
--- | Generates an HTML @\<rp\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<rp\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Parenthesis for ruby annotation text
 -- [@Categories@]: none
--- [@Parents@]: /'Html.ruby'/
--- [@Children@]: /text/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.ruby'
+-- [@Children@]: text
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> rp [] []
@@ -1789,14 +1635,13 @@ rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
 
 
--- | Generates an HTML @\<rt\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<rt\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Ruby annotation text
 -- [@Categories@]: none
--- [@Parents@]: /'Html.ruby'/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.ruby'
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> rt [] []
@@ -1806,33 +1651,29 @@ rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
 
 
--- | Generates an HTML @\<ruby\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<ruby\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Ruby annotation(s)
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/*; /'Html.rt'/; /'Html.rp'/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/; 'Html.rt'; 'Html.rp'
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> ruby [] []
 -- <ruby></ruby>
---
--- /* Indicates that the rules are more complicated./
 ruby :: [Attribute] -> [Html] -> Html
 ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
 
 
--- | Generates an HTML @\<s\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<s\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Inaccurate text
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> s [] []
@@ -1842,14 +1683,13 @@ s = ParentNode "<s" "</s>"
 {-# INLINE s #-}
 
 
--- | Generates an HTML @\<samp\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<samp\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Computer output
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> samp [] []
@@ -1859,33 +1699,29 @@ samp = ParentNode "<samp" "</samp>"
 {-# INLINE samp #-}
 
 
--- | Generates an HTML @\<script\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<script\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Embedded script
--- [@Categories@]: /metadata/; /flow/; /phrasing/; /script-supporting/
--- [@Parents@]: /'Html.head'/; /phrasing/; /script-supporting/
--- [@Children@]: script, data, or script documentation*
--- [@Attributes@]: /globals/; /'Html.Attributes.src'/; /'Html.Attributes.type_'/; /'Html.Attributes.nomodule'/; /'Html.Attributes.async'/; /'Html.Attributes.defer'/; /'Html.Attributes.crossorigin'/; /'Html.Attributes.integrity'/; /'Html.Attributes.referrerpolicy'/; /'Html.Attributes.blocking'/; /'Html.Attributes.fetchpriority'/
--- [@Interface@]: /HTMLScriptElement/
+-- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
+-- [@Parents@]: 'Html.head'; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
+-- [@Children@]: script, data, or script documentation
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.type_'; 'Html.Attributes.nomodule'; 'Html.Attributes.async'; 'Html.Attributes.defer'; 'Html.Attributes.crossorigin'; 'Html.Attributes.integrity'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.blocking'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
 --
 -- >>> script [] []
 -- <script></script>
---
--- /* Indicates that the rules are more complicated./
 script :: [Attribute] -> [Html] -> Html
 script = ParentNode "<script" "</script>"
 {-# INLINE script #-}
 
 
--- | Generates an HTML @\<search\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<search\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Container for search controls
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> search [] []
@@ -1895,14 +1731,13 @@ search = ParentNode "<search" "</search>"
 {-# INLINE search #-}
 
 
--- | Generates an HTML @\<section\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<section\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Generic document or application section
--- [@Categories@]: /flow/; /sectioning/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> section [] []
@@ -1912,14 +1747,13 @@ section = ParentNode "<section" "</section>"
 {-# INLINE section #-}
 
 
--- | Generates an HTML @\<select\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<select\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: List box control
--- [@Categories@]: /flow/; /phrasing/; /interactive/; /listed/; /labelable/; /submittable/; /resettable/; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /'Html.option'/; /'Html.optgroup'/; /script-supporting/
--- [@Attributes@]: /globals/; /'Html.Attributes.autocomplete'/; /'Html.Attributes.disabled'/; /'Html.Attributes.form'/; /'Html.Attributes.multiple'/; /'Html.Attributes.name'/; /'Html.Attributes.required'/; /'Html.Attributes.size'/
--- [@Interface@]: /HTMLSelectElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: 'Html.option'; 'Html.optgroup'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.autocomplete'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.multiple'; 'Html.Attributes.name'; 'Html.Attributes.required'; 'Html.Attributes.size'
 -- [@Example@]:
 --
 -- >>> select [] []
@@ -1929,14 +1763,13 @@ select = ParentNode "<select" "</select>"
 {-# INLINE select #-}
 
 
--- | Generates an HTML @\<slot\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<slot\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Shadow tree slot
--- [@Categories@]: /flow/; /phrasing/
--- [@Parents@]: /phrasing/
--- [@Children@]: /transparent/
--- [@Attributes@]: /globals/; /'Html.Attributes.name'/
--- [@Interface@]: /HTMLSlotElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'
 -- [@Example@]:
 --
 -- >>> slot [] []
@@ -1948,14 +1781,13 @@ slot = ParentNode "<slot" "</slot>"
 {-# INLINE slot #-}
 
 
--- | Generates an HTML @\<small\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<small\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Side comment
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> small [] []
@@ -1965,14 +1797,13 @@ small = ParentNode "<small" "</small>"
 {-# INLINE small #-}
 
 
--- | Generates an HTML @\<source\>@ element with the given attributes.
+-- | Generates an HTML __@\<source\>@__ element with the given attributes.
 --
--- [@Description@]: Image source for /'Html.img'/ or media source for /'Html.video'/ or /'Html.audio'/
+-- [@Description@]: Image source for 'Html.img' or media source for 'Html.video' or 'Html.audio'
 -- [@Categories@]: none
--- [@Parents@]: /'Html.picture'/; /'Html.video'/; /'Html.audio'/
+-- [@Parents@]: 'Html.picture'; 'Html.video'; 'Html.audio'
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.type_'/; /'Html.Attributes.media'/; /'Html.Attributes.src'/; /'Html.Attributes.srcset'/; /'Html.Attributes.sizes'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/
--- [@Interface@]: /HTMLSourceElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.type_'; 'Html.Attributes.media'; 'Html.Attributes.src'; 'Html.Attributes.srcset'; 'Html.Attributes.sizes'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
 --
 -- >>> source []
@@ -1982,14 +1813,13 @@ source = LeafNode "<source"
 {-# INLINE source #-}
 
 
--- | Generates an HTML @\<span\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<span\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Generic phrasing container
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLSpanElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> span [] []
@@ -2001,14 +1831,13 @@ span = ParentNode "<span" "</span>"
 {-# INLINE span #-}
 
 
--- | Generates an HTML @\<strong\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<strong\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Importance
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> strong [] []
@@ -2018,20 +1847,17 @@ strong = ParentNode "<strong" "</strong>"
 {-# INLINE strong #-}
 
 
--- | Generates an HTML @\<style\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<style\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Embedded styling information
--- [@Categories@]: /metadata/
--- [@Parents@]: /'Html.head'/; /'Html.noscript'/*
--- [@Children@]: /text/*
--- [@Attributes@]: /globals/; /'Html.Attributes.media'/; /'Html.Attributes.blocking'/
--- [@Interface@]: /HTMLStyleElement/
+-- [@Categories@]: /[metadata](#metadata)/
+-- [@Parents@]: 'Html.head'; 'Html.noscript'
+-- [@Children@]: text
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.media'; 'Html.Attributes.blocking'
 -- [@Example@]:
 --
 -- >>> style [] []
 -- <style></style>
---
--- /* Indicates that the rules are more complicated./
 --
 -- /Note: This element collides with the 'Html.Attributes.style' attribute./
 style :: [Attribute] -> [Html] -> Html
@@ -2039,14 +1865,13 @@ style = ParentNode "<style" "</style>"
 {-# INLINE style #-}
 
 
--- | Generates an HTML @\<sub\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<sub\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Subscript
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> sub [] []
@@ -2056,14 +1881,13 @@ sub = ParentNode "<sub" "</sub>"
 {-# INLINE sub #-}
 
 
--- | Generates an HTML @\<summary\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<summary\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Caption for /'Html.details'/
+-- [@Description@]: Caption for 'Html.details'
 -- [@Categories@]: none
--- [@Parents@]: /'Html.details'/
--- [@Children@]: /phrasing/; /heading/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Parents@]: 'Html.details'
+-- [@Children@]: /[phrasing](#phrasing)/; /[heading](#heading)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> summary [] []
@@ -2073,14 +1897,13 @@ summary = ParentNode "<summary" "</summary>"
 {-# INLINE summary #-}
 
 
--- | Generates an HTML @\<sup\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<sup\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Superscript
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> sup [] []
@@ -2090,33 +1913,29 @@ sup = ParentNode "<sup" "</sup>"
 {-# INLINE sup #-}
 
 
--- | Generates an HTML @\<table\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<table\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Table
--- [@Categories@]: /flow/; /palpable/
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.caption'/*; /'Html.colgroup'/*; /'Html.thead'/*; /'Html.tbody'/*; /'Html.tfoot'/*; /'Html.tr'/*; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.caption'; 'Html.colgroup'; 'Html.thead'; 'Html.tbody'; 'Html.tfoot'; 'Html.tr'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> table [] []
 -- <table></table>
---
--- /* Indicates that the rules are more complicated./
 table :: [Attribute] -> [Html] -> Html
 table = ParentNode "<table" "</table>"
 {-# INLINE table #-}
 
 
--- | Generates an HTML @\<tbody\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<tbody\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of rows in a table
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/
--- [@Children@]: /'Html.tr'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableSectionElement/
+-- [@Parents@]: 'Html.table'
+-- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> tbody [] []
@@ -2126,14 +1945,13 @@ tbody = ParentNode "<tbody" "</tbody>"
 {-# INLINE tbody #-}
 
 
--- | Generates an HTML @\<td\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<td\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Table cell
 -- [@Categories@]: none
--- [@Parents@]: /'Html.tr'/
--- [@Children@]: /flow/
--- [@Attributes@]: /globals/; /'Html.Attributes.colspan'/; /'Html.Attributes.rowspan'/; /'Html.Attributes.headers'/
--- [@Interface@]: /HTMLTableCellElement/
+-- [@Parents@]: 'Html.tr'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.colspan'; 'Html.Attributes.rowspan'; 'Html.Attributes.headers'
 -- [@Example@]:
 --
 -- >>> td [] []
@@ -2143,33 +1961,29 @@ td = ParentNode "<td" "</td>"
 {-# INLINE td #-}
 
 
--- | Generates an HTML @\<template\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<template\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Template
--- [@Categories@]: /metadata/; /flow/; /phrasing/; /script-supporting/
--- [@Parents@]: /metadata/; /phrasing/; /script-supporting/; /'Html.colgroup'/*
+-- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
+-- [@Parents@]: /[metadata](#metadata)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/; 'Html.colgroup'
 -- [@Children@]: none
--- [@Attributes@]: /globals/; /'Html.Attributes.shadowrootmode'/; /'Html.Attributes.shadowrootdelegatesfocus'/; /'Html.Attributes.shadowrootclonable'/; /'Html.Attributes.shadowrootserializable'/
--- [@Interface@]: /HTMLTemplateElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.shadowrootmode'; 'Html.Attributes.shadowrootdelegatesfocus'; 'Html.Attributes.shadowrootclonable'; 'Html.Attributes.shadowrootserializable'
 -- [@Example@]:
 --
 -- >>> template [] []
 -- <template></template>
---
--- /* Indicates that the rules are more complicated./
 template :: [Attribute] -> [Html] -> Html
 template = ParentNode "<template" "</template>"
 {-# INLINE template #-}
 
 
--- | Generates an HTML @\<textarea\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<textarea\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Multiline text controls
--- [@Categories@]: /flow/; /phrasing/; /interactive/; /listed/; /labelable/; /submittable/; /resettable/; /form-associated/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /text/
--- [@Attributes@]: /globals/; /'Html.Attributes.autocomplete'/; /'Html.Attributes.cols'/; /'Html.Attributes.dirname'/; /'Html.Attributes.disabled'/; /'Html.Attributes.form'/; /'Html.Attributes.maxlength'/; /'Html.Attributes.minlength'/; /'Html.Attributes.name'/; /'Html.Attributes.placeholder'/; /'Html.Attributes.readonly'/; /'Html.Attributes.required'/; /'Html.Attributes.rows'/; /'Html.Attributes.wrap'/
--- [@Interface@]: /HTMLTextAreaElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: text
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.autocomplete'; 'Html.Attributes.cols'; 'Html.Attributes.dirname'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.maxlength'; 'Html.Attributes.minlength'; 'Html.Attributes.name'; 'Html.Attributes.placeholder'; 'Html.Attributes.readonly'; 'Html.Attributes.required'; 'Html.Attributes.rows'; 'Html.Attributes.wrap'
 -- [@Example@]:
 --
 -- >>> textarea [] []
@@ -2179,14 +1993,13 @@ textarea = ParentNode "<textarea" "</textarea>"
 {-# INLINE textarea #-}
 
 
--- | Generates an HTML @\<tfoot\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<tfoot\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of footer rows in a table
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/
--- [@Children@]: /'Html.tr'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableSectionElement/
+-- [@Parents@]: 'Html.table'
+-- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> tfoot [] []
@@ -2196,33 +2009,29 @@ tfoot = ParentNode "<tfoot" "</tfoot>"
 {-# INLINE tfoot #-}
 
 
--- | Generates an HTML @\<th\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<th\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Table header cell
--- [@Categories@]: /interactive/*
--- [@Parents@]: /'Html.tr'/
--- [@Children@]: /flow/*
--- [@Attributes@]: /globals/; /'Html.Attributes.colspan'/; /'Html.Attributes.rowspan'/; /'Html.Attributes.headers'/; /'Html.Attributes.scope'/; /'Html.Attributes.abbr'/
--- [@Interface@]: /HTMLTableCellElement/
+-- [@Categories@]: /[interactive](#interactive)/
+-- [@Parents@]: 'Html.tr'
+-- [@Children@]: /[flow](#flow)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.colspan'; 'Html.Attributes.rowspan'; 'Html.Attributes.headers'; 'Html.Attributes.scope'; 'Html.Attributes.abbr'
 -- [@Example@]:
 --
 -- >>> th [] []
 -- <th></th>
---
--- /* Indicates that the rules are more complicated./
 th :: [Attribute] -> [Html] -> Html
 th = ParentNode "<th" "</th>"
 {-# INLINE th #-}
 
 
--- | Generates an HTML @\<thead\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<thead\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Group of heading rows in a table
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/
--- [@Children@]: /'Html.tr'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableSectionElement/
+-- [@Parents@]: 'Html.table'
+-- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> thead [] []
@@ -2232,14 +2041,13 @@ thead = ParentNode "<thead" "</thead>"
 {-# INLINE thead #-}
 
 
--- | Generates an HTML @\<time\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<time\>@__ element with the given attributes and contents.
 --
--- [@Description@]: Machine-readable equivalent of date- or time-related data
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/; /'Html.Attributes.datetime'/
--- [@Interface@]: /HTMLTimeElement/
+-- [@Description@]: Machine-r/eadable equivalent of/ date- or time-related data
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.datetime'
 -- [@Example@]:
 --
 -- >>> time [] []
@@ -2249,20 +2057,17 @@ time = ParentNode "<time" "</time>"
 {-# INLINE time #-}
 
 
--- | Generates an HTML @\<title\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<title\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Document title
--- [@Categories@]: /metadata/
--- [@Parents@]: /'Html.head'/
--- [@Children@]: /text/*
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTitleElement/
+-- [@Categories@]: /[metadata](#metadata)/
+-- [@Parents@]: 'Html.head'
+-- [@Children@]: text
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> title [] []
 -- <title></title>
---
--- /* Indicates that the rules are more complicated./
 --
 -- /Note: This element collides with the 'Html.Attributes.title' attribute./
 title :: [Attribute] -> [Html] -> Html
@@ -2270,33 +2075,29 @@ title = ParentNode "<title" "</title>"
 {-# INLINE title #-}
 
 
--- | Generates an HTML @\<tr\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<tr\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Table row
 -- [@Categories@]: none
--- [@Parents@]: /'Html.table'/; /'Html.thead'/; /'Html.tbody'/; /'Html.tfoot'/
--- [@Children@]: /'Html.th'/*; /'Html.td'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLTableRowElement/
+-- [@Parents@]: 'Html.table'; 'Html.thead'; 'Html.tbody'; 'Html.tfoot'
+-- [@Children@]: 'Html.th'; 'Html.td'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> tr [] []
 -- <tr></tr>
---
--- /* Indicates that the rules are more complicated./
 tr :: [Attribute] -> [Html] -> Html
 tr = ParentNode "<tr" "</tr>"
 {-# INLINE tr #-}
 
 
--- | Generates an HTML @\<track\>@ element with the given attributes.
+-- | Generates an HTML __@\<track\>@__ element with the given attributes.
 --
 -- [@Description@]: Timed text track
 -- [@Categories@]: none
--- [@Parents@]: /'Html.audio'/; /'Html.video'/
+-- [@Parents@]: 'Html.audio'; 'Html.video'
 -- [@Children@]: empty
--- [@Attributes@]: /globals/; /'Html.Attributes.default_'/; /'Html.Attributes.kind'/; /'Html.Attributes.label'/; /'Html.Attributes.src'/; /'Html.Attributes.srclang'/
--- [@Interface@]: /HTMLTrackElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.default_'; 'Html.Attributes.kind'; 'Html.Attributes.label'; 'Html.Attributes.src'; 'Html.Attributes.srclang'
 -- [@Example@]:
 --
 -- >>> track []
@@ -2306,14 +2107,13 @@ track = LeafNode "<track"
 {-# INLINE track #-}
 
 
--- | Generates an HTML @\<u\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<u\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Unarticulated annotation
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@] /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> u [] []
@@ -2323,33 +2123,29 @@ u = ParentNode "<u" "</u>"
 {-# INLINE u #-}
 
 
--- | Generates an HTML @\<ul\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<ul\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: List
--- [@Categories@]: /flow/; /palpable/*
--- [@Parents@]: /flow/
--- [@Children@]: /'Html.li'/; /script-supporting/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLUListElement/
+-- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
+-- [@Parents@]: /[flow](#flow)/
+-- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> ul [] []
 -- <ul></ul>
---
--- /* Indicates that the rules are more complicated./
 ul :: [Attribute] -> [Html] -> Html
 ul = ParentNode "<ul" "</ul>"
 {-# INLINE ul #-}
 
 
--- | Generates an HTML @\<var\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<var\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Variable
--- [@Categories@]: /flow/; /phrasing/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /phrasing/
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: /[phrasing](#phrasing)/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> var [] []
@@ -2359,37 +2155,33 @@ var = ParentNode "<var" "</var>"
 {-# INLINE var #-}
 
 
--- | Generates an HTML @\<video\>@ element with the given attributes and contents.
+-- | Generates an HTML __@\<video\>@__ element with the given attributes and contents.
 --
 -- [@Description@]: Video player
--- [@Categories@]: /flow/; /phrasing/; /embedded/; /interactive/; /palpable/
--- [@Parents@]: /phrasing/
--- [@Children@]: /'Html.source'/*; /'Html.track'/*; /transparent/*
--- [@Attributes@]: /globals/; /'Html.Attributes.src'/; /'Html.Attributes.crossorigin'/; /'Html.Attributes.poster'/; /'Html.Attributes.preload'/; /'Html.Attributes.autoplay'/; /'Html.Attributes.playsinline'/; /'Html.Attributes.loop'/; /'Html.Attributes.muted'/; /'Html.Attributes.controls'/; /'Html.Attributes.width'/; /'Html.Attributes.height'/
--- [@Interface@]: /HTMLVideoElement/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
+-- [@Parents@]: /[phrasing](#phrasing)/
+-- [@Children@]: 'Html.source'; 'Html.track'; transparent
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.crossorigin'; 'Html.Attributes.poster'; 'Html.Attributes.preload'; 'Html.Attributes.autoplay'; 'Html.Attributes.playsinline'; 'Html.Attributes.loop'; 'Html.Attributes.muted'; 'Html.Attributes.controls'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
 --
 -- >>> video [] []
 -- <video></video>
---
--- /* Indicates that the rules are more complicated./
 video :: [Attribute] -> [Html] -> Html
 video = ParentNode "<video" "</video>"
 {-# INLINE video #-}
 
 
--- | Generates an HTML @\<wbr\>@ element with the given attributes.
+-- | Generates an HTML __@\<wbr\>@__ element with the given attributes.
 --
 -- [@Description@]: Line breaking opportunity
--- [@Categories@]: /flow/; /phrasing/
--- [@Parents@]: /phrasing/
+-- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
+-- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
--- [@Attributes@]: /globals/
--- [@Interface@]: /HTMLElement/
+-- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
 --
 -- >>> wbr []
 -- <wbr>
 wbr :: [Attribute] -> Html
 wbr = LeafNode "<wbr"
-{-# INLINE wbr #-}
+{-#INLINE wbr #-}
