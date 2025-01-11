@@ -14,6 +14,9 @@
 -- These elements along with their attributes and event handlers, found in the "Html.Attributes" and "Html.Events" modules respectively, can
 -- be used to dynamically compose HTML documents natively in Haskell, without relying on templating engines or other techniques that can be
 -- error-prone and difficult to maintain.
+--
+-- The 'Html.Math.math' and 'Html.Svg.svg' elements and their related elements and attributes have been moved into the "Html.Math" and
+-- "Html.Svg" modules respectively.
 module Html
     ( -- * Types
       -- ** Html
@@ -421,7 +424,6 @@ doctype = RootNode "<!DOCTYPE html>\n"
 --
 -- [@Description@]: Hyperlink
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.target'; 'Html.Attributes.download'; 'Html.Attributes.ping'; 'Html.Attributes.rel'; 'Html.Attributes.hreflang'; 'Html.Attributes.type_'; 'Html.Attributes.referrerpolicy'
 -- [@Example@]:
@@ -437,7 +439,6 @@ a = ParentNode "<a" "</a>"
 --
 -- [@Description@]: Abbreviation
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -455,7 +456,6 @@ abbr = ParentNode "<abbr" "</abbr>"
 --
 -- [@Description@]: Contract information for a page or 'Html.article' element
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -471,7 +471,6 @@ address = ParentNode "<address" "</address>"
 --
 -- [@Description@]: Hyperlink or dead area on an image map
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.alt'; 'Html.Attributes.coords'; 'Html.Attributes.shape'; 'Html.Attributes.href'; 'Html.Attributes.target'; 'Html.Attributes.download'; 'Html.Attributes.ping'; 'Html.Attributes.rel'; 'Html.Attributes.referrerpolicy'
 -- [@Example@]:
@@ -487,7 +486,6 @@ area = LeafNode "<area"
 --
 -- [@Description@]: Self-contained syndicatable or reusable composition
 -- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -503,7 +501,6 @@ article = ParentNode "<article" "</article>"
 --
 -- [@Description@]: Sidebar for tangentially related content
 -- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -519,7 +516,6 @@ aside = ParentNode "<aside" "</aside>"
 --
 -- [@Description@]: Audio player
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: 'Html.source'; 'Html.track'; transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.crossorigin'; 'Html.Attributes.preload'; 'Html.Attributes.autoplay'; 'Html.Attributes.loop'; 'Html.Attributes.muted'; 'Html.Attributes.controls'
 -- [@Example@]:
@@ -535,7 +531,6 @@ audio = ParentNode "<audio" "</audio>"
 --
 -- [@Description@]: Keywords
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -551,7 +546,6 @@ b = ParentNode "<b" "</b>"
 --
 -- [@Description@]: Base URL and default target navigable for hyperlinks and forms
 -- [@Categories@]: /[metadata](#metadata)/
--- [@Parents@]: 'Html.head'
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.target'
 -- [@Example@]:
@@ -567,7 +561,6 @@ base = LeafNode "<base"
 --
 -- [@Description@]: Text directionality isolation
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -583,7 +576,6 @@ bdi = ParentNode "<bdi" "</bdi>"
 --
 -- [@Description@]: Text directionality formatting
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -599,7 +591,6 @@ bdo = ParentNode "<bdo" "</bdo>"
 --
 -- [@Description@]: A section quoted from another source
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'
 -- [@Example@]:
@@ -615,7 +606,6 @@ blockquote = ParentNode "<blockquote" "</blockquote>"
 --
 -- [@Description@]: Document body
 -- [@Categories@]: none
--- [@Parents@]: 'Html.html'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Events.onafterprint'; 'Html.Events.onbeforeprint'; 'Html.Events.onbeforeunload'; 'Html.Events.onhashchange'; 'Html.Events.onlanguagechange'; 'Html.Events.onmessage'; 'Html.Events.onmessageerror'; 'Html.Events.onoffline'; 'Html.Events.ononline'; 'Html.Events.onpageswap'; 'Html.Events.onpagehide'; 'Html.Events.onpagereveal'; 'Html.Events.onpageshow'; 'Html.Events.onpopstate'; 'Html.Events.onrejectionhandled'; 'Html.Events.onstorage'; 'Html.Events.onunhandledrejection'; 'Html.Events.onunload'
 -- [@Example@]:
@@ -631,7 +621,6 @@ body = ParentNode "<body" "</body>"
 --
 -- [@Description@]: Line break, e.g. in poem or postal address
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -647,7 +636,6 @@ br = LeafNode "<br"
 --
 -- [@Description@]: Button control
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.formaction'; 'Html.Attributes.formenctype'; 'Html.Attributes.formmethod'; 'Html.Attributes.formnovalidate'; 'Html.Attributes.formtarget'; 'Html.Attributes.name'; 'Html.Attributes.popovertarget'; 'Html.Attributes.popovertargetaction'; 'Html.Attributes.type_'; 'Html.Attributes.value'
 -- [@Example@]:
@@ -663,7 +651,6 @@ button = ParentNode "<button" "</button>"
 --
 -- [@Description@]: Scriptable bitmap canvas
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
@@ -679,7 +666,6 @@ canvas = ParentNode "<canvas" "</canvas>"
 --
 -- [@Description@]: Table caption
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -695,7 +681,6 @@ caption = ParentNode "<caption" "</caption>"
 --
 -- [@Description@]: Title of a work
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -713,7 +698,6 @@ cite = ParentNode "<cite" "</cite>"
 --
 -- [@Description@]: Computer code
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -729,7 +713,6 @@ code = ParentNode "<code" "</code>"
 --
 -- [@Description@]: Table column
 -- [@Categories@]: none
--- [@Parents@]: 'Html.colgroup'
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.span'
 -- [@Example@]:
@@ -745,7 +728,6 @@ col = LeafNode "<col"
 --
 -- [@Description@]: Group of columns in a table
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'
 -- [@Children@]: 'Html.col'; 'Html.template'
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.span'
 -- [@Example@]:
@@ -761,7 +743,6 @@ colgroup = ParentNode "<colgroup" "</colgroup>"
 --
 -- [@Description@]: Machine-readable equivalent
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'
 -- [@Example@]:
@@ -779,7 +760,6 @@ data_ = ParentNode "<data" "</data>"
 --
 -- [@Description@]: Container for options for combo box control
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/; 'Html.option'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -795,7 +775,6 @@ datalist = ParentNode "<datalist" "</datalist>"
 --
 -- [@Description@]: Content for corresponding 'Html.dt' element(s)
 -- [@Categories@]: none
--- [@Parents@]: 'Html.dl'; 'Html.div'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -811,7 +790,6 @@ dd = ParentNode "<dd" "</dd>"
 --
 -- [@Description@]: A removal from the document
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'; 'Html.Attributes.datetime'
 -- [@Example@]:
@@ -827,7 +805,6 @@ del = ParentNode "<del" "</del>"
 --
 -- [@Description@]: Disclosure control for hiding details
 -- [@Categories@]: /[flow](#flow)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.summary'; /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'; 'Html.Attributes.open'
 -- [@Example@]:
@@ -843,7 +820,6 @@ details = ParentNode "<details" "</details>"
 --
 -- [@Description@]: Defining instance
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -859,7 +835,6 @@ dfn = ParentNode "<dfn" "</dfn>"
 --
 -- [@Description@]: Dialog box or window
 -- [@Categories@]: /[flow](#flow)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.open'
 -- [@Example@]:
@@ -875,7 +850,6 @@ dialog = ParentNode "<dialog" "</dialog>"
 --
 -- [@Description@]: Generic flow container, or container for name-value groups in 'Html.dl' elements
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/; 'Html.dl'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -891,7 +865,6 @@ div = ParentNode "<div" "</div>"
 --
 -- [@Description@]: Association list consisting of zero or more name-value groups
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.dt'; 'Html.dd'; 'Html.div'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -907,7 +880,6 @@ dl = ParentNode "<dl" "</dl>"
 --
 -- [@Description@]: Legend for corresponding 'Html.dd' element(s)
 -- [@Categories@]: none
--- [@Parents@]: 'Html.dl'; 'Html.div'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -923,7 +895,6 @@ dt = ParentNode "<dt" "</dt>"
 --
 -- [@Description@]: Stress emphasis
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -939,7 +910,6 @@ em = ParentNode "<em" "</em>"
 --
 -- [@Description@]: Plugin
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: none
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.type_'; 'Html.Attributes.width'; 'Html.Attributes.height'; any
 -- [@Example@]:
@@ -955,7 +925,6 @@ embed = LeafNode "<embed"
 --
 -- [@Description@]: Group of form controls
 -- [@Categories@]: /[flow](#flow)/; /[listed](#listed)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.legend'; /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.name'
 -- [@Example@]:
@@ -971,7 +940,6 @@ fieldset = ParentNode "<fieldset" "</fieldset>"
 --
 -- [@Description@]: Caption for 'Html.figure'
 -- [@Categories@]: none
--- [@Parents@]: 'Html.figure'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -987,7 +955,6 @@ figcaption = ParentNode "<figcaption" "</figcaption>"
 --
 -- [@Description@]: Figure with optional caption
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.figcaption'; /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1003,7 +970,6 @@ figure = ParentNode "<figure" "</figure>"
 --
 -- [@Description@]: Footer for a page or section
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1019,7 +985,6 @@ footer = ParentNode "<footer" "</footer>"
 --
 -- [@Description@]: User-submittable form
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.acceptCharset'; 'Html.Attributes.action'; 'Html.Attributes.autocomplete'; 'Html.Attributes.enctype'; 'Html.Attributes.method'; 'Html.Attributes.name'; 'Html.Attributes.novalidate'; 'Html.Attributes.rel'; 'Html.Attributes.target'
 -- [@Example@]:
@@ -1037,7 +1002,6 @@ form = ParentNode "<form" "</form>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1053,7 +1017,6 @@ h1 = ParentNode "<h1" "</h1>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1069,7 +1032,6 @@ h2 = ParentNode "<h2" "</h2>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1085,7 +1047,6 @@ h3 = ParentNode "<h3" "</h3>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1101,7 +1062,6 @@ h4 = ParentNode "<h4" "</h4>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1117,7 +1077,6 @@ h5 = ParentNode "<h5" "</h5>"
 --
 -- [@Description@]: Heading
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1133,7 +1092,6 @@ h6 = ParentNode "<h6" "</h6>"
 --
 -- [@Description@]: Container for document metadata
 -- [@Categories@]: none
--- [@Parents@]: 'Html.html'
 -- [@Children@]: /[metadata](#metadata)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1149,7 +1107,6 @@ head = ParentNode "<head" "</head>"
 --
 -- [@Description@]: Introductory or navigational aids for a page or section
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1165,7 +1122,6 @@ header = ParentNode "<header" "</header>"
 --
 -- [@Description@]: Heading container
 -- [@Categories@]: /[flow](#flow)/; /[heading](#heading)/; /[palpable](#palpable)/
--- [@Parents@]: 'Html.legend'; 'Html.summary'; /[flow](#flow)/
 -- [@Children@]: 'Html.h1'; 'Html.h2'; 'Html.h3'; 'Html.h4'; 'Html.h5'; 'Html.h6'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1181,7 +1137,6 @@ hgroup = ParentNode "<hgroup" "</hgroup>"
 --
 -- [@Description@]: Thematic break
 -- [@Categories@]: /[flow](#flow)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1197,7 +1152,6 @@ hr = LeafNode "<hr"
 --
 -- [@Description@]: Root element
 -- [@Categories@]: none
--- [@Parents@]: none
 -- [@Children@]: 'Html.head'; 'Html.body'
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1213,7 +1167,6 @@ html = ParentNode "<html" "</html>"
 --
 -- [@Description@]: Alternate voice
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1229,7 +1182,6 @@ i = ParentNode "<i" "</i>"
 --
 -- [@Description@]: Child navigable
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.srcdoc'; 'Html.Attributes.name'; 'Html.Attributes.sandbox'; 'Html.Attributes.allow'; 'Html.Attributes.allowfullscreen'; 'Html.Attributes.width'; 'Html.Attributes.height'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.loading'
 -- [@Example@]:
@@ -1245,7 +1197,6 @@ iframe = ParentNode "<iframe" "</iframe>"
 --
 -- [@Description@]: Image
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/; 'Html.picture'
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.alt'; 'Html.Attributes.src'; 'Html.Attributes.srcset'; 'Html.Attributes.sizes'; 'Html.Attributes.crossorigin'; 'Html.Attributes.usemap'; 'Html.Attributes.ismap'; 'Html.Attributes.width'; 'Html.Attributes.height'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.decoding'; 'Html.Attributes.loading'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
@@ -1261,7 +1212,6 @@ img = LeafNode "<img"
 --
 -- [@Description@]: Form control
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.accept'; 'Html.Attributes.alpha'; 'Html.Attributes.alt'; 'Html.Attributes.autocomplete'; 'Html.Attributes.checked'; 'Html.Attributes.colorspace'; 'Html.Attributes.dirname'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.formaction'; 'Html.Attributes.formenctype'; 'Html.Attributes.formmethod'; 'Html.Attributes.formnovalidate'; 'Html.Attributes.formtarget'; 'Html.Attributes.height'; 'Html.Attributes.list'; 'Html.Attributes.max'; 'Html.Attributes.maxlength'; 'Html.Attributes.min'; 'Html.Attributes.minlength'; 'Html.Attributes.multiple'; 'Html.Attributes.name'; 'Html.Attributes.pattern'; 'Html.Attributes.placeholder'; 'Html.Attributes.popovertarget'; 'Html.Attributes.popovertargetaction'; 'Html.Attributes.readonly'; 'Html.Attributes.required'; 'Html.Attributes.size'; 'Html.Attributes.src'; 'Html.Attributes.step'; 'Html.Attributes.type_'; 'Html.Attributes.value'; 'Html.Attributes.width'
 -- [@Example@]:
@@ -1277,7 +1227,6 @@ input = LeafNode "<input"
 --
 -- [@Description@]: An addition to the document
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'; 'Html.Attributes.datetime'
 -- [@Example@]:
@@ -1293,7 +1242,6 @@ ins = ParentNode "<ins" "</ins>"
 --
 -- [@Description@]: User input
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1309,7 +1257,6 @@ kbd = ParentNode "<kbd" "</kbd>"
 --
 -- [@Description@]: Caption for a form control
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.for'
 -- [@Example@]:
@@ -1327,7 +1274,6 @@ label = ParentNode "<label" "</label>"
 --
 -- [@Description@]: Caption for 'Html.fieldset'
 -- [@Categories@]: none
--- [@Parents@]: 'Html.fieldset'
 -- [@Children@]: /[phrasing](#phrasing)/; /[heading](#heading)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1343,7 +1289,6 @@ legend = ParentNode "<legend" "</legend>"
 --
 -- [@Description@]: List item
 -- [@Categories@]: none
--- [@Parents@]: 'Html.ol'; 'Html.ul'; 'Html.menu'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'
 -- [@Example@]:
@@ -1359,7 +1304,6 @@ li = ParentNode "<li" "</li>"
 --
 -- [@Description@]: Link metadata
 -- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: 'Html.head'; 'Html.noscript'; /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.href'; 'Html.Attributes.crossorigin'; 'Html.Attributes.rel'; 'Html.Attributes.as'; 'Html.Attributes.media'; 'Html.Attributes.hreflang'; 'Html.Attributes.type_'; 'Html.Attributes.sizes'; 'Html.Attributes.imagesrcset'; 'Html.Attributes.imagesizes'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.integrity'; 'Html.Attributes.blocking'; 'Html.Attributes.color'; 'Html.Attributes.disabled'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
@@ -1375,7 +1319,6 @@ link = LeafNode "<link"
 --
 -- [@Description@]: Container for the dominant contents of the document
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1391,7 +1334,6 @@ main = ParentNode "<main" "</main>"
 --
 -- [@Description@]: Image map
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent; 'Html.area'
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'
 -- [@Example@]:
@@ -1407,7 +1349,6 @@ map = ParentNode "<map" "</map>"
 --
 -- [@Description@]: Highlight
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1423,7 +1364,6 @@ mark = ParentNode "<mark" "</mark>"
 --
 -- [@Description@]: Menu of commands
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1439,7 +1379,6 @@ menu = ParentNode "<menu" "</menu>"
 --
 -- [@Description@]: Text metadata
 -- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: 'Html.head'; 'Html.noscript'; /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'; 'Html.Attributes.httpEquiv'; 'Html.Attributes.content'; 'Html.Attributes.charset'; 'Html.Attributes.media'
 -- [@Example@]:
@@ -1455,7 +1394,6 @@ meta = LeafNode "<meta"
 --
 -- [@Description@]: Gauge
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[labelable](#labelable)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'; 'Html.Attributes.min'; 'Html.Attributes.max'; 'Html.Attributes.low'; 'Html.Attributes.high'; 'Html.Attributes.optimum'
 -- [@Example@]:
@@ -1471,7 +1409,6 @@ meter = ParentNode "<meter" "</meter>"
 --
 -- [@Description@]: Section with navigational links
 -- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1487,7 +1424,6 @@ nav = ParentNode "<nav" "</nav>"
 --
 -- [@Description@]: Fallback content for script
 -- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: 'Html.head'; /[phrasing](#phrasing)/
 -- [@Children@]: varies
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1503,7 +1439,6 @@ noscript = ParentNode "<noscript" "</noscript>"
 --
 -- [@Description@]: Image, child navigable, or plugin
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[listed](#listed)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.data_'; 'Html.Attributes.type_'; 'Html.Attributes.name'; 'Html.Attributes.form'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
@@ -1519,7 +1454,6 @@ object = ParentNode "<object" "</object>"
 --
 -- [@Description@]: Ordered list
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.reversed'; 'Html.Attributes.start'; 'Html.Attributes.type_'
 -- [@Example@]:
@@ -1535,7 +1469,6 @@ ol = ParentNode "<ol" "</ol>"
 --
 -- [@Description@]: Group of options in a list box
 -- [@Categories@]: none
--- [@Parents@]: 'Html.select'
 -- [@Children@]: 'Html.option'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.label'
 -- [@Example@]:
@@ -1551,7 +1484,6 @@ optgroup = ParentNode "<optgroup" "</optgroup>"
 --
 -- [@Description@]: Option in a list box or combo box control
 -- [@Categories@]: none
--- [@Parents@]: 'Html.select'; 'Html.datalist'; 'Html.optgroup'
 -- [@Children@]: text
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.disabled'; 'Html.Attributes.label'; 'Html.Attributes.selected'; 'Html.Attributes.value'
 -- [@Example@]:
@@ -1567,7 +1499,6 @@ option = ParentNode "<option" "</option>"
 --
 -- [@Description@]: Calculated output value
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[listed](#listed)/; /[labelable](#labelable)/; /[resettable](#resettable)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.for'; 'Html.Attributes.form'; 'Html.Attributes.name'
 -- [@Example@]:
@@ -1583,7 +1514,6 @@ output = ParentNode "<output" "</output>"
 --
 -- [@Description@]: Paragraph
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1599,7 +1529,6 @@ p = ParentNode "<p" "</p>"
 --
 -- [@Description@]: Image
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: 'Html.source'; one 'Html.img'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1615,7 +1544,6 @@ picture = ParentNode "<picture" "</picture>"
 --
 -- [@Description@]: Block of preformatted text
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1631,7 +1559,6 @@ pre = ParentNode "<pre" "</pre>"
 --
 -- [@Description@]: Progress bar
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[labelable](#labelable)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.value'; 'Html.Attributes.max'
 -- [@Example@]:
@@ -1647,7 +1574,6 @@ progress = ParentNode "<progress" "</progress>"
 --
 -- [@Description@]: Quotation
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.cite'
 -- [@Example@]:
@@ -1663,7 +1589,6 @@ q = ParentNode "<q" "</q>"
 --
 -- [@Description@]: Parenthesis for ruby annotation text
 -- [@Categories@]: none
--- [@Parents@]: 'Html.ruby'
 -- [@Children@]: text
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1679,7 +1604,6 @@ rp = ParentNode "<rp" "</rp>"
 --
 -- [@Description@]: Ruby annotation text
 -- [@Categories@]: none
--- [@Parents@]: 'Html.ruby'
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1695,7 +1619,6 @@ rt = ParentNode "<rt" "</rt>"
 --
 -- [@Description@]: Ruby annotation(s)
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/; 'Html.rt'; 'Html.rp'
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1711,7 +1634,6 @@ ruby = ParentNode "<ruby" "</ruby>"
 --
 -- [@Description@]: Inaccurate text
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1727,7 +1649,6 @@ s = ParentNode "<s" "</s>"
 --
 -- [@Description@]: Computer output
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1743,7 +1664,6 @@ samp = ParentNode "<samp" "</samp>"
 --
 -- [@Description@]: Embedded script
 -- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
--- [@Parents@]: 'Html.head'; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
 -- [@Children@]: script, data, or script documentation
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.type_'; 'Html.Attributes.nomodule'; 'Html.Attributes.async'; 'Html.Attributes.defer'; 'Html.Attributes.crossorigin'; 'Html.Attributes.integrity'; 'Html.Attributes.referrerpolicy'; 'Html.Attributes.blocking'; 'Html.Attributes.fetchpriority'
 -- [@Example@]:
@@ -1759,7 +1679,6 @@ script = ParentNode "<script" "</script>"
 --
 -- [@Description@]: Container for search controls
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1775,7 +1694,6 @@ search = ParentNode "<search" "</search>"
 --
 -- [@Description@]: Generic document or application section
 -- [@Categories@]: /[flow](#flow)/; /[sectioning](#sectioning)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1791,7 +1709,6 @@ section = ParentNode "<section" "</section>"
 --
 -- [@Description@]: List box control
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: 'Html.option'; 'Html.optgroup'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.autocomplete'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.multiple'; 'Html.Attributes.name'; 'Html.Attributes.required'; 'Html.Attributes.size'
 -- [@Example@]:
@@ -1807,7 +1724,6 @@ select = ParentNode "<select" "</select>"
 --
 -- [@Description@]: Shadow tree slot
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.name'
 -- [@Example@]:
@@ -1825,7 +1741,6 @@ slot = ParentNode "<slot" "</slot>"
 --
 -- [@Description@]: Side comment
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1841,7 +1756,6 @@ small = ParentNode "<small" "</small>"
 --
 -- [@Description@]: Image source for 'Html.img' or media source for 'Html.video' or 'Html.audio'
 -- [@Categories@]: none
--- [@Parents@]: 'Html.picture'; 'Html.video'; 'Html.audio'
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.type_'; 'Html.Attributes.media'; 'Html.Attributes.src'; 'Html.Attributes.srcset'; 'Html.Attributes.sizes'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
@@ -1857,7 +1771,6 @@ source = LeafNode "<source"
 --
 -- [@Description@]: Generic phrasing container
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1875,7 +1788,6 @@ span = ParentNode "<span" "</span>"
 --
 -- [@Description@]: Importance
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1891,7 +1803,6 @@ strong = ParentNode "<strong" "</strong>"
 --
 -- [@Description@]: Embedded styling information
 -- [@Categories@]: /[metadata](#metadata)/
--- [@Parents@]: 'Html.head'; 'Html.noscript'
 -- [@Children@]: text
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.media'; 'Html.Attributes.blocking'
 -- [@Example@]:
@@ -1909,7 +1820,6 @@ style = ParentNode "<style" "</style>"
 --
 -- [@Description@]: Subscript
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1925,7 +1835,6 @@ sub = ParentNode "<sub" "</sub>"
 --
 -- [@Description@]: Caption for 'Html.details'
 -- [@Categories@]: none
--- [@Parents@]: 'Html.details'
 -- [@Children@]: /[phrasing](#phrasing)/; /[heading](#heading)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1941,7 +1850,6 @@ summary = ParentNode "<summary" "</summary>"
 --
 -- [@Description@]: Superscript
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1957,7 +1865,6 @@ sup = ParentNode "<sup" "</sup>"
 --
 -- [@Description@]: Table
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.caption'; 'Html.colgroup'; 'Html.thead'; 'Html.tbody'; 'Html.tfoot'; 'Html.tr'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1973,7 +1880,6 @@ table = ParentNode "<table" "</table>"
 --
 -- [@Description@]: Group of rows in a table
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'
 -- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -1989,7 +1895,6 @@ tbody = ParentNode "<tbody" "</tbody>"
 --
 -- [@Description@]: Table cell
 -- [@Categories@]: none
--- [@Parents@]: 'Html.tr'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.colspan'; 'Html.Attributes.rowspan'; 'Html.Attributes.headers'
 -- [@Example@]:
@@ -2005,7 +1910,6 @@ td = ParentNode "<td" "</td>"
 --
 -- [@Description@]: Template
 -- [@Categories@]: /[metadata](#metadata)/; /[flow](#flow)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/
--- [@Parents@]: /[metadata](#metadata)/; /[phrasing](#phrasing)/; /[script-supporting](#script-supporting)/; 'Html.colgroup'
 -- [@Children@]: none
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.shadowrootmode'; 'Html.Attributes.shadowrootdelegatesfocus'; 'Html.Attributes.shadowrootclonable'; 'Html.Attributes.shadowrootserializable'
 -- [@Example@]:
@@ -2021,7 +1925,6 @@ template = ParentNode "<template" "</template>"
 --
 -- [@Description@]: Multiline text controls
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[interactive](#interactive)/; /[listed](#listed)/; /[labelable](#labelable)/; /[submittable](#submittable)/; /[resettable](#resettable)/; /[autocapitalize-and-autocorrect-inheriting](#autocapitalize-and-autocorrect-inheriting)/; /[form-associated](#form-associated)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: text
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.autocomplete'; 'Html.Attributes.cols'; 'Html.Attributes.dirname'; 'Html.Attributes.disabled'; 'Html.Attributes.form'; 'Html.Attributes.maxlength'; 'Html.Attributes.minlength'; 'Html.Attributes.name'; 'Html.Attributes.placeholder'; 'Html.Attributes.readonly'; 'Html.Attributes.required'; 'Html.Attributes.rows'; 'Html.Attributes.wrap'
 -- [@Example@]:
@@ -2037,7 +1940,6 @@ textarea = ParentNode "<textarea" "</textarea>"
 --
 -- [@Description@]: Group of footer rows in a table
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'
 -- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2053,7 +1955,6 @@ tfoot = ParentNode "<tfoot" "</tfoot>"
 --
 -- [@Description@]: Table header cell
 -- [@Categories@]: /[interactive](#interactive)/
--- [@Parents@]: 'Html.tr'
 -- [@Children@]: /[flow](#flow)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.colspan'; 'Html.Attributes.rowspan'; 'Html.Attributes.headers'; 'Html.Attributes.scope'; 'Html.Attributes.abbr'
 -- [@Example@]:
@@ -2069,7 +1970,6 @@ th = ParentNode "<th" "</th>"
 --
 -- [@Description@]: Group of heading rows in a table
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'
 -- [@Children@]: 'Html.tr'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2085,7 +1985,6 @@ thead = ParentNode "<thead" "</thead>"
 --
 -- [@Description@]: Machine-r/eadable equivalent of/ date- or time-related data
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.datetime'
 -- [@Example@]:
@@ -2101,7 +2000,6 @@ time = ParentNode "<time" "</time>"
 --
 -- [@Description@]: Document title
 -- [@Categories@]: /[metadata](#metadata)/
--- [@Parents@]: 'Html.head'
 -- [@Children@]: text
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2119,7 +2017,6 @@ title = ParentNode "<title" "</title>"
 --
 -- [@Description@]: Table row
 -- [@Categories@]: none
--- [@Parents@]: 'Html.table'; 'Html.thead'; 'Html.tbody'; 'Html.tfoot'
 -- [@Children@]: 'Html.th'; 'Html.td'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2135,7 +2032,6 @@ tr = ParentNode "<tr" "</tr>"
 --
 -- [@Description@]: Timed text track
 -- [@Categories@]: none
--- [@Parents@]: 'Html.audio'; 'Html.video'
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.default_'; 'Html.Attributes.kind'; 'Html.Attributes.label'; 'Html.Attributes.src'; 'Html.Attributes.srclang'
 -- [@Example@]:
@@ -2151,7 +2047,6 @@ track = LeafNode "<track"
 --
 -- [@Description@]: Unarticulated annotation
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@] /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2167,7 +2062,6 @@ u = ParentNode "<u" "</u>"
 --
 -- [@Description@]: List
 -- [@Categories@]: /[flow](#flow)/; /[palpable](#palpable)/
--- [@Parents@]: /[flow](#flow)/
 -- [@Children@]: 'Html.li'; /[script-supporting](#script-supporting)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2183,7 +2077,6 @@ ul = ParentNode "<ul" "</ul>"
 --
 -- [@Description@]: Variable
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
@@ -2199,7 +2092,6 @@ var = ParentNode "<var" "</var>"
 --
 -- [@Description@]: Video player
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[embedded](#embedded)/; /[interactive](#interactive)/; /[palpable](#palpable)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: 'Html.source'; 'Html.track'; transparent
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.src'; 'Html.Attributes.crossorigin'; 'Html.Attributes.poster'; 'Html.Attributes.preload'; 'Html.Attributes.autoplay'; 'Html.Attributes.playsinline'; 'Html.Attributes.loop'; 'Html.Attributes.muted'; 'Html.Attributes.controls'; 'Html.Attributes.width'; 'Html.Attributes.height'
 -- [@Example@]:
@@ -2215,7 +2107,6 @@ video = ParentNode "<video" "</video>"
 --
 -- [@Description@]: Line breaking opportunity
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/
--- [@Parents@]: /[phrasing](#phrasing)/
 -- [@Children@]: empty
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/
 -- [@Example@]:
