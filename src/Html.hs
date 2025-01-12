@@ -1983,7 +1983,7 @@ thead = ParentNode "<thead" "</thead>"
 
 -- | Generates an HTML @__\<time\>__@ element with the given attributes and contents.
 --
--- [@Description@]: Machine-r/eadable equivalent of/ date- or time-related data
+-- [@Description@]: Machine-readable equivalent of date- or time-related data
 -- [@Categories@]: /[flow](#flow)/; /[phrasing](#phrasing)/; /[palpable](#palpable)/
 -- [@Children@]: /[phrasing](#phrasing)/
 -- [@Attributes@]: /[globals]("Html.Attributes#globals")/; 'Html.Attributes.datetime'
