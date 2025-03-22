@@ -70,23 +70,52 @@ module Html.Math
     , munderover
       -- ** \<semantics\>
     , semantics
+
       -- * Attributes
+      -- ** accent
+    , accent
+      -- ** accentunder
+    , accentunder
       -- ** actiontype
     , actiontype
+      -- ** alttext
+    , alttext
+      -- ** columnspan
+    , columnspan
+      -- ** depth
+    , depth
+      -- ** display
+    , display
+      -- ** displaystyle
+    , displaystyle
+      -- ** encoding
+    , encoding
       -- ** fence
     , fence
       -- ** largeop
     , largeop
+      -- ** linethickness
+    , linethickness
       -- ** lspace
     , lspace
+      -- ** mathbackground
+    , mathbackground
+      -- ** mathcolor
+    , mathcolor
+      -- ** mathsize
+    , mathsize
       -- ** maxsize
     , maxsize
       -- ** minsize
     , minsize
       -- ** movablelimits
     , movablelimits
+      -- ** rowspan
+    , rowspan
       -- ** rspace
     , rspace
+      -- ** scriptlevel
+    , scriptlevel
       -- ** selection
     , selection
       -- ** separator
@@ -95,10 +124,10 @@ module Html.Math
     , stretchy
       -- ** symmetric
     , symmetric
+      -- ** voffset
+    , voffset
     ) where
 
-
-import Prelude
 
 import Data.Text.Lazy.Builder (Builder)
 import Html                   (Attribute(..), Html(..))
@@ -290,10 +319,58 @@ semantics = ParentNode "<semantics" "</semantics>"
 -- ATTRIBUTES
 
 
+-- | Generates an HTML @accent@ attribute with the given value.
+accent :: Builder -> Attribute
+accent = TextAttribute " accent=\""
+{-# INLINE accent #-}
+
+
+-- | Generates an HTML @accentunder@ attribute with the given value.
+accentunder :: Builder -> Attribute
+accentunder = TextAttribute " accentunder=\""
+{-# INLINE accentunder #-}
+
+
 -- | Generates an HTML @actiontype@ attribute with the given value.
 actiontype :: Builder -> Attribute
 actiontype = TextAttribute " actiontype=\""
 {-# INLINE actiontype #-}
+
+
+-- | Generates an HTML @alttext@ attribute with the given value.
+alttext :: Builder -> Attribute
+alttext = TextAttribute " alttext=\""
+{-# INLINE alttext #-}
+
+
+-- | Generates an HTML @columnspan@ attribute with the given value.
+columnspan :: Builder -> Attribute
+columnspan = TextAttribute " columnspan=\""
+{-# INLINE columnspan #-}
+
+
+-- | Generates an HTML @depth@ attribute with the given value.
+depth :: Builder -> Attribute
+depth = TextAttribute " depth=\""
+{-# INLINE depth #-}
+
+
+-- | Generates an HTML @display@ attribute with the given value.
+display :: Builder -> Attribute
+display = TextAttribute " display=\""
+{-# INLINE display #-}
+
+
+-- | Generates an HTML @displaystyle@ attribute with the given value.
+displaystyle :: Builder -> Attribute
+displaystyle = TextAttribute " displaystyle=\""
+{-# INLINE displaystyle #-}
+
+
+-- | Generates an HTML @encoding@ attribute with the given value.
+encoding :: Builder -> Attribute
+encoding = TextAttribute " encoding=\""
+{-# INLINE encoding #-}
 
 
 -- | Generates an HTML @fence@ attribute with the given value.
@@ -308,10 +385,34 @@ largeop = TextAttribute " largeop=\""
 {-# INLINE largeop #-}
 
 
+-- | Generates an HTML @linethickness@ attribute with the given value.
+linethickness :: Builder -> Attribute
+linethickness = TextAttribute " linethickness=\""
+{-# INLINE linethickness #-}
+
+
 -- | Generates an HTML @lspace@ attribute with the given value.
 lspace :: Builder -> Attribute
 lspace = TextAttribute " lspace=\""
 {-# INLINE lspace #-}
+
+
+-- | Generates an HTML @mathbackground@ attribute with the given value.
+mathbackground :: Builder -> Attribute
+mathbackground = TextAttribute " mathbackground=\""
+{-# INLINE mathbackground #-}
+
+
+-- | Generates an HTML @mathcolor@ attribute with the given value.
+mathcolor :: Builder -> Attribute
+mathcolor = TextAttribute " mathcolor=\""
+{-# INLINE mathcolor #-}
+
+
+-- | Generates an HTML @mathsize@ attribute with the given value.
+mathsize :: Builder -> Attribute
+mathsize = TextAttribute " mathsize=\""
+{-# INLINE mathsize #-}
 
 
 -- | Generates an HTML @maxsize@ attribute with the given value.
@@ -332,10 +433,22 @@ movablelimits = TextAttribute " movablelimits=\""
 {-# INLINE movablelimits #-}
 
 
+-- | Generates an HTML @rowspan@ attribute with the given value.
+rowspan :: Builder -> Attribute
+rowspan = TextAttribute " rowspan=\""
+{-# INLINE rowspan #-}
+
+
 -- | Generates an HTML @rspace@ attribute with the given value.
 rspace :: Builder -> Attribute
 rspace = TextAttribute " rspace=\""
 {-# INLINE rspace #-}
+
+
+-- | Generates an HTML @scriptlevel@ attribute with the given value.
+scriptlevel :: Builder -> Attribute
+scriptlevel = TextAttribute " scriptlevel=\""
+{-# INLINE scriptlevel #-}
 
 
 -- | Generates an HTML @selection@ attribute with the given value.
@@ -360,3 +473,9 @@ stretchy = TextAttribute " stretchy=\""
 symmetric :: Builder -> Attribute
 symmetric = TextAttribute " symmetric=\""
 {-# INLINE symmetric #-}
+
+
+-- | Generates an HTML @voffset@ attribute with the given value.
+voffset :: Builder -> Attribute
+voffset = TextAttribute " voffset=\""
+{-# INLINE voffset #-}
