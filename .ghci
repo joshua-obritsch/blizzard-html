@@ -2,13 +2,15 @@
 :set -isrc
 :set -XOverloadedStrings
 :set -XImplicitParams
-:load Html Html.Attributes Html.Events
+:load Html Html.Aria Html.Attributes Html.Events Html.Math
 
 import Prelude
 
 import Html
+import Html.Aria
 import Html.Attributes
 import Html.Events
+import Html.Math
 
 import qualified Html as Html
 import qualified Html.Attributes as Attr

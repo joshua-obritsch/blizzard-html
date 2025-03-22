@@ -23,6 +23,7 @@ library
                       , text >= 0.10 && < 3
     default-language:   Haskell2010
     exposed-modules:    Html
+                      , Html.Aria
                       , Html.Attributes
                       , Html.Events
                       , Html.Math
