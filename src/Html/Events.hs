@@ -37,6 +37,8 @@ module Html.Events
     , onclick
       -- ** onclose
     , onclose
+      -- ** oncommand
+    , oncommand
       -- ** oncontextlost
     , oncontextlost
       -- ** oncontextmenu
@@ -277,6 +279,12 @@ onclick = TextAttribute " onclick=\""
 onclose :: Builder -> Attribute
 onclose = TextAttribute " onclose=\""
 {-# INLINE onclose #-}
+
+
+-- | Generates an HTML @oncommand@ event handler with the given value.
+oncommand :: Builder -> Attribute
+oncommand = TextAttribute " oncommand=\""
+{-# INLINE oncommand #-}
 
 
 -- | Generates an HTML @oncontextlost@ event handler with the given value.
