@@ -52,6 +52,8 @@ module Html.Attributes
     , cite
       -- ** class
     , class_
+      -- ** closedby
+    , closedby
       -- ** color
     , color
       -- ** colorspace
@@ -60,6 +62,10 @@ module Html.Attributes
     , cols
       -- ** colspan
     , colspan
+      -- ** command
+    , command
+      -- ** commandfor
+    , commandfor
       -- ** content
     , content
       -- ** contenteditable
@@ -287,7 +293,7 @@ module Html.Attributes
     ) where
 
 
-import Prelude hiding (id, max, min, span)
+import Prelude (Bool)
 
 import Data.Text.Lazy.Builder (Builder)
 import Html                   (Attribute(..))
@@ -422,6 +428,12 @@ class_ = TextAttribute " class=\""
 {-# INLINE class_ #-}
 
 
+-- | Generates an HTML @closedby@ attribute with the given value.
+closedby :: Builder -> Attribute
+closedby = TextAttribute " closedby=\""
+{-# INLINE closedby #-}
+
+
 -- | Generates an HTML @color@ attribute with the given value.
 color :: Builder -> Attribute
 color = TextAttribute " color=\""
@@ -444,6 +456,18 @@ cols = TextAttribute " cols=\""
 colspan :: Builder -> Attribute
 colspan = TextAttribute " colspan=\""
 {-# INLINE colspan #-}
+
+
+-- | Generates an HTML @command@ attribute with the given value.
+command :: Builder -> Attribute
+command = TextAttribute " command=\""
+{-# INLINE command #-}
+
+
+-- | Generates an HTML @commandfor@ attribute with the given value.
+commandfor :: Builder -> Attribute
+commandfor = TextAttribute " commandfor=\""
+{-# INLINE commandfor #-}
 
 
 -- | Generates an HTML @content@ attribute with the given value.
