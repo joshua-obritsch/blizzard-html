@@ -137,181 +137,181 @@ import Html                   (Attribute(..), Html(..))
 
 
 -- | Generates an HTML @\<annotation\>@ element with the given attributes and contents.
-annotation :: [Attribute] -> [Html] -> Html
+annotation :: [Attribute ctx] -> [Html ctx] -> Html ctx
 annotation = ParentNode "<annotation" "</annotation>"
 {-# INLINE annotation #-}
 
 
 -- | Generates an HTML @\<annotation-xml\>@ element with the given attributes and contents.
-annotationXml :: [Attribute] -> [Html] -> Html
+annotationXml :: [Attribute ctx] -> [Html ctx] -> Html ctx
 annotationXml = ParentNode "<annotation-xml" "</annotation-xml>"
 {-# INLINE annotationXml #-}
 
 
 -- | Generates an HTML @\<maction\>@ element with the given attributes and contents.
-maction :: [Attribute] -> [Html] -> Html
+maction :: [Attribute ctx] -> [Html ctx] -> Html ctx
 maction = ParentNode "<maction" "</maction>"
 {-# INLINE maction #-}
 
 
 -- | Generates an HTML @\<math\>@ element with the given attributes and contents.
-math :: [Attribute] -> [Html] -> Html
+math :: [Attribute ctx] -> [Html ctx] -> Html ctx
 math = ParentNode "<math" "</math>"
 {-# INLINE math #-}
 
 
 -- | Generates an HTML @\<merror\>@ element with the given attributes and contents.
-merror :: [Attribute] -> [Html] -> Html
+merror :: [Attribute ctx] -> [Html ctx] -> Html ctx
 merror = ParentNode "<merror" "</merror>"
 {-# INLINE merror #-}
 
 
 -- | Generates an HTML @\<mfrac\>@ element with the given attributes and contents.
-mfrac :: [Attribute] -> [Html] -> Html
+mfrac :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mfrac = ParentNode "<mfrac" "</mfrac>"
 {-# INLINE mfrac #-}
 
 
 -- | Generates an HTML @\<mi\>@ element with the given attributes and contents.
-mi :: [Attribute] -> [Html] -> Html
+mi :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mi = ParentNode "<mi" "</mi>"
 {-# INLINE mi #-}
 
 
 -- | Generates an HTML @\<mmultiscripts\>@ element with the given attributes and contents.
-mmultiscripts :: [Attribute] -> [Html] -> Html
+mmultiscripts :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mmultiscripts = ParentNode "<mmultiscripts" "</mmultiscripts>"
 {-# INLINE mmultiscripts #-}
 
 
 -- | Generates an HTML @\<mn\>@ element with the given attributes and contents.
-mn :: [Attribute] -> [Html] -> Html
+mn :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mn = ParentNode "<mn" "</mn>"
 {-# INLINE mn #-}
 
 
 -- | Generates an HTML @\<mo\>@ element with the given attributes and contents.
-mo :: [Attribute] -> [Html] -> Html
+mo :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mo = ParentNode "<mo" "</mo>"
 {-# INLINE mo #-}
 
 
 -- | Generates an HTML @\<mover\>@ element with the given attributes and contents.
-mover :: [Attribute] -> [Html] -> Html
+mover :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mover = ParentNode "<mover" "</mover>"
 {-# INLINE mover #-}
 
 
 -- | Generates an HTML @\<mpadded\>@ element with the given attributes and contents.
-mpadded :: [Attribute] -> [Html] -> Html
+mpadded :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mpadded = ParentNode "<mpadded" "</mpadded>"
 {-# INLINE mpadded #-}
 
 
 -- | Generates an HTML @\<mphantom\>@ element with the given attributes and contents.
-mphantom :: [Attribute] -> [Html] -> Html
+mphantom :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mphantom = ParentNode "<mphantom" "</mphantom>"
 {-# INLINE mphantom #-}
 
 
 -- | Generates an HTML @\<mprescripts\>@ element with the given attributes.
-mprescripts :: [Attribute] -> Html
+mprescripts :: [Attribute ctx] -> Html ctx
 mprescripts = LeafNode "<mprescripts"
 {-# INLINE mprescripts #-}
 
 
 -- | Generates an HTML @\<mroot\>@ element with the given attributes and contents.
-mroot :: [Attribute] -> [Html] -> Html
+mroot :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mroot = ParentNode "<mroot" "</mroot>"
 {-# INLINE mroot #-}
 
 
 -- | Generates an HTML @\<mrow\>@ element with the given attributes and contents.
-mrow :: [Attribute] -> [Html] -> Html
+mrow :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mrow = ParentNode "<mrow" "</mrow>"
 {-# INLINE mrow #-}
 
 
 -- | Generates an HTML @\<ms\>@ element with the given attributes and contents.
-ms :: [Attribute] -> [Html] -> Html
+ms :: [Attribute ctx] -> [Html ctx] -> Html ctx
 ms = ParentNode "<ms" "</ms>"
 {-# INLINE ms #-}
 
 
 -- | Generates an HTML @\<mspace\>@ element with the given attributes.
-mspace :: [Attribute] -> Html
+mspace :: [Attribute ctx] -> Html ctx
 mspace = LeafNode "<mspace"
 {-# INLINE mspace #-}
 
 
 -- | Generates an HTML @\<msqrt\>@ element with the given attributes and contents.
-msqrt :: [Attribute] -> [Html] -> Html
+msqrt :: [Attribute ctx] -> [Html ctx] -> Html ctx
 msqrt = ParentNode "<msqrt" "</msqrt>"
 {-# INLINE msqrt #-}
 
 
 -- | Generates an HTML @\<mstyle\>@ element with the given attributes and contents.
-mstyle :: [Attribute] -> [Html] -> Html
+mstyle :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mstyle = ParentNode "<mstyle" "</mstyle>"
 {-# INLINE mstyle #-}
 
 
 -- | Generates an HTML @\<msub\>@ element with the given attributes and contents.
-msub :: [Attribute] -> [Html] -> Html
+msub :: [Attribute ctx] -> [Html ctx] -> Html ctx
 msub = ParentNode "<msub" "</msub>"
 {-# INLINE msub #-}
 
 
 -- | Generates an HTML @\<msubsup\>@ element with the given attributes and contents.
-msubsup :: [Attribute] -> [Html] -> Html
+msubsup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 msubsup = ParentNode "<msubsup" "</msubsup>"
 {-# INLINE msubsup #-}
 
 
 -- | Generates an HTML @\<msup\>@ element with the given attributes and contents.
-msup :: [Attribute] -> [Html] -> Html
+msup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 msup = ParentNode "<msup" "</msup>"
 {-# INLINE msup #-}
 
 
 -- | Generates an HTML @\<mtable\>@ element with the given attributes and contents.
-mtable :: [Attribute] -> [Html] -> Html
+mtable :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mtable = ParentNode "<mtable" "</mtable>"
 {-# INLINE mtable #-}
 
 
 -- | Generates an HTML @\<mtd\>@ element with the given attributes and contents.
-mtd :: [Attribute] -> [Html] -> Html
+mtd :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mtd = ParentNode "<mtd" "</mtd>"
 {-# INLINE mtd #-}
 
 
 -- | Generates an HTML @\<mtext\>@ element with the given attributes and contents.
-mtext :: [Attribute] -> [Html] -> Html
+mtext :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mtext = ParentNode "<mtext" "</mtext>"
 {-# INLINE mtext #-}
 
 
 -- | Generates an HTML @\<mtr\>@ element with the given attributes and contents.
-mtr :: [Attribute] -> [Html] -> Html
+mtr :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mtr = ParentNode "<mtr" "</mtr>"
 {-# INLINE mtr #-}
 
 
 -- | Generates an HTML @\<munder\>@ element with the given attributes and contents.
-munder :: [Attribute] -> [Html] -> Html
+munder :: [Attribute ctx] -> [Html ctx] -> Html ctx
 munder = ParentNode "<munder" "</munder>"
 {-# INLINE munder #-}
 
 
 -- | Generates an HTML @\<munderover\>@ element with the given attributes and contents.
-munderover :: [Attribute] -> [Html] -> Html
+munderover :: [Attribute ctx] -> [Html ctx] -> Html ctx
 munderover = ParentNode "<munderover" "</munderover>"
 {-# INLINE munderover #-}
 
 
 -- | Generates an HTML @\<semantics\>@ element with the given attributes and contents.
-semantics :: [Attribute] -> [Html] -> Html
+semantics :: [Attribute ctx] -> [Html ctx] -> Html ctx
 semantics = ParentNode "<semantics" "</semantics>"
 {-# INLINE semantics #-}
 
@@ -320,162 +320,162 @@ semantics = ParentNode "<semantics" "</semantics>"
 
 
 -- | Generates an HTML @accent@ attribute with the given value.
-accent :: Builder -> Attribute
+accent :: Builder -> Attribute ctx
 accent = TextAttribute " accent=\""
 {-# INLINE accent #-}
 
 
 -- | Generates an HTML @accentunder@ attribute with the given value.
-accentunder :: Builder -> Attribute
+accentunder :: Builder -> Attribute ctx
 accentunder = TextAttribute " accentunder=\""
 {-# INLINE accentunder #-}
 
 
 -- | Generates an HTML @actiontype@ attribute with the given value.
-actiontype :: Builder -> Attribute
+actiontype :: Builder -> Attribute ctx
 actiontype = TextAttribute " actiontype=\""
 {-# INLINE actiontype #-}
 
 
 -- | Generates an HTML @alttext@ attribute with the given value.
-alttext :: Builder -> Attribute
+alttext :: Builder -> Attribute ctx
 alttext = TextAttribute " alttext=\""
 {-# INLINE alttext #-}
 
 
 -- | Generates an HTML @columnspan@ attribute with the given value.
-columnspan :: Builder -> Attribute
+columnspan :: Builder -> Attribute ctx
 columnspan = TextAttribute " columnspan=\""
 {-# INLINE columnspan #-}
 
 
 -- | Generates an HTML @depth@ attribute with the given value.
-depth :: Builder -> Attribute
+depth :: Builder -> Attribute ctx
 depth = TextAttribute " depth=\""
 {-# INLINE depth #-}
 
 
 -- | Generates an HTML @display@ attribute with the given value.
-display :: Builder -> Attribute
+display :: Builder -> Attribute ctx
 display = TextAttribute " display=\""
 {-# INLINE display #-}
 
 
 -- | Generates an HTML @displaystyle@ attribute with the given value.
-displaystyle :: Builder -> Attribute
+displaystyle :: Builder -> Attribute ctx
 displaystyle = TextAttribute " displaystyle=\""
 {-# INLINE displaystyle #-}
 
 
 -- | Generates an HTML @encoding@ attribute with the given value.
-encoding :: Builder -> Attribute
+encoding :: Builder -> Attribute ctx
 encoding = TextAttribute " encoding=\""
 {-# INLINE encoding #-}
 
 
 -- | Generates an HTML @fence@ attribute with the given value.
-fence :: Builder -> Attribute
+fence :: Builder -> Attribute ctx
 fence = TextAttribute " fence=\""
 {-# INLINE fence #-}
 
 
 -- | Generates an HTML @largeop@ attribute with the given value.
-largeop :: Builder -> Attribute
+largeop :: Builder -> Attribute ctx
 largeop = TextAttribute " largeop=\""
 {-# INLINE largeop #-}
 
 
 -- | Generates an HTML @linethickness@ attribute with the given value.
-linethickness :: Builder -> Attribute
+linethickness :: Builder -> Attribute ctx
 linethickness = TextAttribute " linethickness=\""
 {-# INLINE linethickness #-}
 
 
 -- | Generates an HTML @lspace@ attribute with the given value.
-lspace :: Builder -> Attribute
+lspace :: Builder -> Attribute ctx
 lspace = TextAttribute " lspace=\""
 {-# INLINE lspace #-}
 
 
 -- | Generates an HTML @mathbackground@ attribute with the given value.
-mathbackground :: Builder -> Attribute
+mathbackground :: Builder -> Attribute ctx
 mathbackground = TextAttribute " mathbackground=\""
 {-# INLINE mathbackground #-}
 
 
 -- | Generates an HTML @mathcolor@ attribute with the given value.
-mathcolor :: Builder -> Attribute
+mathcolor :: Builder -> Attribute ctx
 mathcolor = TextAttribute " mathcolor=\""
 {-# INLINE mathcolor #-}
 
 
 -- | Generates an HTML @mathsize@ attribute with the given value.
-mathsize :: Builder -> Attribute
+mathsize :: Builder -> Attribute ctx
 mathsize = TextAttribute " mathsize=\""
 {-# INLINE mathsize #-}
 
 
 -- | Generates an HTML @maxsize@ attribute with the given value.
-maxsize :: Builder -> Attribute
+maxsize :: Builder -> Attribute ctx
 maxsize = TextAttribute " maxsize=\""
 {-# INLINE maxsize #-}
 
 
 -- | Generates an HTML @minsize@ attribute with the given value.
-minsize :: Builder -> Attribute
+minsize :: Builder -> Attribute ctx
 minsize = TextAttribute " minsize=\""
 {-# INLINE minsize #-}
 
 
 -- | Generates an HTML @movablelimits@ attribute with the given value.
-movablelimits :: Builder -> Attribute
+movablelimits :: Builder -> Attribute ctx
 movablelimits = TextAttribute " movablelimits=\""
 {-# INLINE movablelimits #-}
 
 
 -- | Generates an HTML @rowspan@ attribute with the given value.
-rowspan :: Builder -> Attribute
+rowspan :: Builder -> Attribute ctx
 rowspan = TextAttribute " rowspan=\""
 {-# INLINE rowspan #-}
 
 
 -- | Generates an HTML @rspace@ attribute with the given value.
-rspace :: Builder -> Attribute
+rspace :: Builder -> Attribute ctx
 rspace = TextAttribute " rspace=\""
 {-# INLINE rspace #-}
 
 
 -- | Generates an HTML @scriptlevel@ attribute with the given value.
-scriptlevel :: Builder -> Attribute
+scriptlevel :: Builder -> Attribute ctx
 scriptlevel = TextAttribute " scriptlevel=\""
 {-# INLINE scriptlevel #-}
 
 
 -- | Generates an HTML @selection@ attribute with the given value.
-selection :: Builder -> Attribute
+selection :: Builder -> Attribute ctx
 selection = TextAttribute " selection=\""
 {-# INLINE selection #-}
 
 
 -- | Generates an HTML @separator@ attribute with the given value.
-separator :: Builder -> Attribute
+separator :: Builder -> Attribute ctx
 separator = TextAttribute " separator=\""
 {-# INLINE separator #-}
 
 
 -- | Generates an HTML @stretchy@ attribute with the given value.
-stretchy :: Builder -> Attribute
+stretchy :: Builder -> Attribute ctx
 stretchy = TextAttribute " stretchy=\""
 {-# INLINE stretchy #-}
 
 
 -- | Generates an HTML @symmetric@ attribute with the given value.
-symmetric :: Builder -> Attribute
+symmetric :: Builder -> Attribute ctx
 symmetric = TextAttribute " symmetric=\""
 {-# INLINE symmetric #-}
 
 
 -- | Generates an HTML @voffset@ attribute with the given value.
-voffset :: Builder -> Attribute
+voffset :: Builder -> Attribute ctx
 voffset = TextAttribute " voffset=\""
 {-# INLINE voffset #-}

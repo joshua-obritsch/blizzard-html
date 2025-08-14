@@ -271,30 +271,30 @@ import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 
 
 -- | Represents an HTML element.
-data Html
+data Html ctx
 
     -- | Constructs an HTML parent node.
-    = ParentNode Builder Builder [Attribute] [Html]
+    = ParentNode Builder Builder [Attribute ctx] [Html ctx]
 
     -- | Constructs an HTML leaf node.
-    | LeafNode Builder [Attribute]
+    | LeafNode Builder [Attribute ctx]
 
     -- | Constructs an HTML root node.
-    | RootNode Builder [Html]
+    | RootNode Builder [Html ctx]
 
     -- | Constructs an HTML text node.
     | TextNode Builder
 
 
-instance IsString (Html) where
+instance IsString (Html ctx) where
     fromString = TextNode . fromString
 
 
-instance Show (Html) where
+instance Show (Html ctx) where
     show = unpack . toLazyText . build
 
 
-instance Buildable (Html) where
+instance Buildable (Html ctx) where
     build html = case html of
         ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                   endTag
         ParentNode startTag endTag attributes []       -> startTag <> build attributes <> singleton '>' <>                   endTag
@@ -307,16 +307,16 @@ instance Buildable (Html) where
         TextNode   text                                -> text
 
 
-instance {-# OVERLAPPING #-} Show [Html] where
+instance {-# OVERLAPPING #-} Show [Html ctx] where
     show = unpack . toLazyText . build
 
 
-instance Buildable [Html] where
+instance Buildable [Html ctx] where
     build = foldr ((<>) . build) mempty
 
 
 -- | Represents an HTML attribute.
-data Attribute
+data Attribute ctx
 
     -- | Constructs a boolean HTML attribute.
     = BoolAttribute Builder Bool
@@ -325,22 +325,22 @@ data Attribute
     | TextAttribute Builder Builder
 
 
-instance Show Attribute where
+instance Show (Attribute ctx) where
     show = unpack . toLazyText . build
 
 
-instance Buildable Attribute where
+instance Buildable (Attribute ctx) where
     build attribute = case attribute of
         BoolAttribute _   False -> mempty
         BoolAttribute key True  -> key
         TextAttribute key value -> key <> value <> singleton '"'
 
 
-instance {-# OVERLAPPING #-} Show [Attribute] where
+instance {-# OVERLAPPING #-} Show [Attribute ctx] where
     show = unpack . toLazyText . build
 
 
-instance Buildable [Attribute] where
+instance Buildable [Attribute ctx] where
     build = foldr ((<>) . build) mempty
 
 
@@ -358,7 +358,7 @@ class Buildable a where
 
 
 -- | Generates an HTML @__\<!DOCTYPE\>__@ declaration with the given contents.
-doctype :: [Html] -> Html
+doctype :: [Html ctx] -> Html ctx
 doctype = RootNode "<!DOCTYPE html>\n"
 {-# INLINE doctype #-}
 
@@ -367,672 +367,672 @@ doctype = RootNode "<!DOCTYPE html>\n"
 
 
 -- | Generates an HTML @__\<a\>__@ element with the given attributes and contents.
-a :: [Attribute] -> [Html] -> Html
+a :: [Attribute ctx] -> [Html ctx] -> Html ctx
 a = ParentNode "<a" "</a>"
 {-# INLINE a #-}
 
 
 -- | Generates an HTML @__\<abbr\>__@ element with the given attributes and contents.
-abbr :: [Attribute] -> [Html] -> Html
+abbr :: [Attribute ctx] -> [Html ctx] -> Html ctx
 abbr = ParentNode "<abbr" "</abbr>"
 {-# INLINE abbr #-}
 
 
 -- | Generates an HTML @__\<address\>__@ element with the given attributes and contents.
-address :: [Attribute] -> [Html] -> Html
+address :: [Attribute ctx] -> [Html ctx] -> Html ctx
 address = ParentNode "<address" "</address>"
 {-# INLINE address #-}
 
 
 -- | Generates an HTML @__\<area\>__@ element with the given attributes.
-area :: [Attribute] -> Html
+area :: [Attribute ctx] -> Html ctx
 area = LeafNode "<area"
 {-# INLINE area #-}
 
 
 -- | Generates an HTML @__\<article\>__@ element with the given attributes and contents.
-article :: [Attribute] -> [Html] -> Html
+article :: [Attribute ctx] -> [Html ctx] -> Html ctx
 article = ParentNode "<article" "</article>"
 {-# INLINE article #-}
 
 
 -- | Generates an HTML @__\<aside\>__@ element with the given attributes and contents.
-aside :: [Attribute] -> [Html] -> Html
+aside :: [Attribute ctx] -> [Html ctx] -> Html ctx
 aside = ParentNode "<aside" "</aside>"
 {-# INLINE aside #-}
 
 
 -- | Generates an HTML @__\<audio\>__@ element with the given attributes and contents.
-audio :: [Attribute] -> [Html] -> Html
+audio :: [Attribute ctx] -> [Html ctx] -> Html ctx
 audio = ParentNode "<audio" "</audio>"
 {-# INLINE audio #-}
 
 
 -- | Generates an HTML @__\<b\>__@ element with the given attributes and contents.
-b :: [Attribute] -> [Html] -> Html
+b :: [Attribute ctx] -> [Html ctx] -> Html ctx
 b = ParentNode "<b" "</b>"
 {-# INLINE b #-}
 
 
 -- | Generates an HTML @__\<base\>__@ element with the given attributes.
-base :: [Attribute] -> Html
+base :: [Attribute ctx] -> Html ctx
 base = LeafNode "<base"
 {-# INLINE base #-}
 
 
 -- | Generates an HTML @__\<bdi\>__@ element with the given attributes and contents.
-bdi :: [Attribute] -> [Html] -> Html
+bdi :: [Attribute ctx] -> [Html ctx] -> Html ctx
 bdi = ParentNode "<bdi" "</bdi>"
 {-# INLINE bdi #-}
 
 
 -- | Generates an HTML @__\<bdo\>__@ element with the given attributes and contents.
-bdo :: [Attribute] -> [Html] -> Html
+bdo :: [Attribute ctx] -> [Html ctx] -> Html ctx
 bdo = ParentNode "<bdo" "</bdo>"
 {-# INLINE bdo #-}
 
 
 -- | Generates an HTML @__\<blockquote\>__@ element with the given attributes and contents.
-blockquote :: [Attribute] -> [Html] -> Html
+blockquote :: [Attribute ctx] -> [Html ctx] -> Html ctx
 blockquote = ParentNode "<blockquote" "</blockquote>"
 {-# INLINE blockquote #-}
 
 
 -- | Generates an HTML @__\<body\>__@ element with the given attributes and contents.
-body :: [Attribute] -> [Html] -> Html
+body :: [Attribute ctx] -> [Html ctx] -> Html ctx
 body = ParentNode "<body" "</body>"
 {-# INLINE body #-}
 
 
 -- | Generates an HTML @__\<br\>__@ element with the given attributes.
-br :: [Attribute] -> Html
+br :: [Attribute ctx] -> Html ctx
 br = LeafNode "<br"
 {-# INLINE br #-}
 
 
 -- | Generates an HTML @__\<button\>__@ element with the given attributes and contents.
-button :: [Attribute] -> [Html] -> Html
+button :: [Attribute ctx] -> [Html ctx] -> Html ctx
 button = ParentNode "<button" "</button>"
 {-# INLINE button #-}
 
 
 -- | Generates an HTML @__\<canvas\>__@ element with the given attributes and contents.
-canvas :: [Attribute] -> [Html] -> Html
+canvas :: [Attribute ctx] -> [Html ctx] -> Html ctx
 canvas = ParentNode "<canvas" "</canvas>"
 {-# INLINE canvas #-}
 
 
 -- | Generates an HTML @__\<caption\>__@ element with the given attributes and contents.
-caption :: [Attribute] -> [Html] -> Html
+caption :: [Attribute ctx] -> [Html ctx] -> Html ctx
 caption = ParentNode "<caption" "</caption>"
 {-# INLINE caption #-}
 
 
 -- | Generates an HTML @__\<cite\>__@ element with the given attributes and contents.
-cite :: [Attribute] -> [Html] -> Html
+cite :: [Attribute ctx] -> [Html ctx] -> Html ctx
 cite = ParentNode "<cite" "</cite>"
 {-# INLINE cite #-}
 
 
 -- | Generates an HTML @__\<code\>__@ element with the given attributes and contents.
-code :: [Attribute] -> [Html] -> Html
+code :: [Attribute ctx] -> [Html ctx] -> Html ctx
 code = ParentNode "<code" "</code>"
 {-# INLINE code #-}
 
 
 -- | Generates an HTML @__\<col\>__@ element with the given attributes.
-col :: [Attribute] -> Html
+col :: [Attribute ctx] -> Html ctx
 col = LeafNode "<col"
 {-# INLINE col #-}
 
 
 -- | Generates an HTML @__\<colgroup\>__@ element with the given attributes and contents.
-colgroup :: [Attribute] -> [Html] -> Html
+colgroup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 colgroup = ParentNode "<colgroup" "</colgroup>"
 {-# INLINE colgroup #-}
 
 
 -- | Generates an HTML @__\<data\>__@ element with the given attributes and contents.
-data_ :: [Attribute] -> [Html] -> Html
+data_ :: [Attribute ctx] -> [Html ctx] -> Html ctx
 data_ = ParentNode "<data" "</data>"
 {-# INLINE data_ #-}
 
 
 -- | Generates an HTML @__\<datalist\>__@ element with the given attributes and contents.
-datalist :: [Attribute] -> [Html] -> Html
+datalist :: [Attribute ctx] -> [Html ctx] -> Html ctx
 datalist = ParentNode "<datalist" "</datalist>"
 {-# INLINE datalist #-}
 
 
 -- | Generates an HTML @__\<dd\>__@ element with the given attributes and contents.
-dd :: [Attribute] -> [Html] -> Html
+dd :: [Attribute ctx] -> [Html ctx] -> Html ctx
 dd = ParentNode "<dd" "</dd>"
 {-# INLINE dd #-}
 
 
 -- | Generates an HTML @__\<del\>__@ element with the given attributes and contents.
-del :: [Attribute] -> [Html] -> Html
+del :: [Attribute ctx] -> [Html ctx] -> Html ctx
 del = ParentNode "<del" "</del>"
 {-# INLINE del #-}
 
 
 -- | Generates an HTML @__\<details\>__@ element with the given attributes and contents.
-details :: [Attribute] -> [Html] -> Html
+details :: [Attribute ctx] -> [Html ctx] -> Html ctx
 details = ParentNode "<details" "</details>"
 {-# INLINE details #-}
 
 
 -- | Generates an HTML @__\<dfn\>__@ element with the given attributes and contents.
-dfn :: [Attribute] -> [Html] -> Html
+dfn :: [Attribute ctx] -> [Html ctx] -> Html ctx
 dfn = ParentNode "<dfn" "</dfn>"
 {-# INLINE dfn #-}
 
 
 -- | Generates an HTML @__\<dialog\>__@ element with the given attributes and contents.
-dialog :: [Attribute] -> [Html] -> Html
+dialog :: [Attribute ctx] -> [Html ctx] -> Html ctx
 dialog = ParentNode "<dialog" "</dialog>"
 {-# INLINE dialog #-}
 
 
 -- | Generates an HTML @__\<div\>__@ element with the given attributes and contents.
-div :: [Attribute] -> [Html] -> Html
+div :: [Attribute ctx] -> [Html ctx] -> Html ctx
 div = ParentNode "<div" "</div>"
 {-# INLINE div #-}
 
 
 -- | Generates an HTML @__\<dl\>__@ element with the given attributes and contents.
-dl :: [Attribute] -> [Html] -> Html
+dl :: [Attribute ctx] -> [Html ctx] -> Html ctx
 dl = ParentNode "<dl" "</dl>"
 {-# INLINE dl #-}
 
 
 -- | Generates an HTML @__\<dt\>__@ element with the given attributes and contents.
-dt :: [Attribute] -> [Html] -> Html
+dt :: [Attribute ctx] -> [Html ctx] -> Html ctx
 dt = ParentNode "<dt" "</dt>"
 {-# INLINE dt #-}
 
 
 -- | Generates an HTML @__\<em\>__@ element with the given attributes and contents.
-em :: [Attribute] -> [Html] -> Html
+em :: [Attribute ctx] -> [Html ctx] -> Html ctx
 em = ParentNode "<em" "</em>"
 {-# INLINE em #-}
 
 
 -- | Generates an HTML @__\<embed\>__@ element with the given attributes.
-embed :: [Attribute] -> Html
+embed :: [Attribute ctx] -> Html ctx
 embed = LeafNode "<embed"
 {-# INLINE embed #-}
 
 
 -- | Generates an HTML @__\<fieldset\>__@ element with the given attributes and contents.
-fieldset :: [Attribute] -> [Html] -> Html
+fieldset :: [Attribute ctx] -> [Html ctx] -> Html ctx
 fieldset = ParentNode "<fieldset" "</fieldset>"
 {-# INLINE fieldset #-}
 
 
 -- | Generates an HTML @__\<figcaption\>__@ element with the given attributes and contents.
-figcaption :: [Attribute] -> [Html] -> Html
+figcaption :: [Attribute ctx] -> [Html ctx] -> Html ctx
 figcaption = ParentNode "<figcaption" "</figcaption>"
 {-# INLINE figcaption #-}
 
 
 -- | Generates an HTML @__\<figure\>__@ element with the given attributes and contents.
-figure :: [Attribute] -> [Html] -> Html
+figure :: [Attribute ctx] -> [Html ctx] -> Html ctx
 figure = ParentNode "<figure" "</figure>"
 {-# INLINE figure #-}
 
 
 -- | Generates an HTML @__\<footer\>__@ element with the given attributes and contents.
-footer :: [Attribute] -> [Html] -> Html
+footer :: [Attribute ctx] -> [Html ctx] -> Html ctx
 footer = ParentNode "<footer" "</footer>"
 {-# INLINE footer #-}
 
 
 -- | Generates an HTML @__\<form\>__@ element with the given attributes and contents.
-form :: [Attribute] -> [Html] -> Html
+form :: [Attribute ctx] -> [Html ctx] -> Html ctx
 form = ParentNode "<form" "</form>"
 {-# INLINE form #-}
 
 
 -- | Generates an HTML @__\<h1\>__@ element with the given attributes and contents.
-h1 :: [Attribute] -> [Html] -> Html
+h1 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h1 = ParentNode "<h1" "</h1>"
 {-# INLINE h1 #-}
 
 
 -- | Generates an HTML @__\<h2\>__@ element with the given attributes and contents.
-h2 :: [Attribute] -> [Html] -> Html
+h2 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h2 = ParentNode "<h2" "</h2>"
 {-# INLINE h2 #-}
 
 
 -- | Generates an HTML @__\<h3\>__@ element with the given attributes and contents.
-h3 :: [Attribute] -> [Html] -> Html
+h3 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h3 = ParentNode "<h3" "</h3>"
 {-# INLINE h3 #-}
 
 
 -- | Generates an HTML @__\<h4\>__@ element with the given attributes and contents.
-h4 :: [Attribute] -> [Html] -> Html
+h4 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h4 = ParentNode "<h4" "</h4>"
 {-# INLINE h4 #-}
 
 
 -- | Generates an HTML @__\<h5\>__@ element with the given attributes and contents.
-h5 :: [Attribute] -> [Html] -> Html
+h5 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h5 = ParentNode "<h5" "</h5>"
 {-# INLINE h5 #-}
 
 
 -- | Generates an HTML @__\<h6\>__@ element with the given attributes and contents.
-h6 :: [Attribute] -> [Html] -> Html
+h6 :: [Attribute ctx] -> [Html ctx] -> Html ctx
 h6 = ParentNode "<h6" "</h6>"
 {-# INLINE h6 #-}
 
 
 -- | Generates an HTML @__\<head\>__@ element with the given attributes and contents.
-head :: [Attribute] -> [Html] -> Html
+head :: [Attribute ctx] -> [Html ctx] -> Html ctx
 head = ParentNode "<head" "</head>"
 {-# INLINE head #-}
 
 
 -- | Generates an HTML @__\<header\>__@ element with the given attributes and contents.
-header :: [Attribute] -> [Html] -> Html
+header :: [Attribute ctx] -> [Html ctx] -> Html ctx
 header = ParentNode "<header" "</header>"
 {-# INLINE header #-}
 
 
 -- | Generates an HTML @__\<hgroup\>__@ element with the given attributes and contents.
-hgroup :: [Attribute] -> [Html] -> Html
+hgroup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 hgroup = ParentNode "<hgroup" "</hgroup>"
 {-# INLINE hgroup #-}
 
 
 -- | Generates an HTML @__\<hr\>__@ element with the given attributes.
-hr :: [Attribute] -> Html
+hr :: [Attribute ctx] -> Html ctx
 hr = LeafNode "<hr"
 {-# INLINE hr #-}
 
 
 -- | Generates an HTML @__\<html\>__@ element with the given attributes and contents.
-html :: [Attribute] -> [Html] -> Html
+html :: [Attribute ctx] -> [Html ctx] -> Html ctx
 html = ParentNode "<html" "</html>"
 {-# INLINE html #-}
 
 
 -- | Generates an HTML @__\<i\>__@ element with the given attributes and contents.
-i :: [Attribute] -> [Html] -> Html
+i :: [Attribute ctx] -> [Html ctx] -> Html ctx
 i = ParentNode "<i" "</i>"
 {-# INLINE i #-}
 
 
 -- | Generates an HTML @__\<iframe\>__@ element with the given attributes and contents.
-iframe :: [Attribute] -> [Html] -> Html
+iframe :: [Attribute ctx] -> [Html ctx] -> Html ctx
 iframe = ParentNode "<iframe" "</iframe>"
 {-# INLINE iframe #-}
 
 
 -- | Generates an HTML @__\<img\>__@ element with the given attributes.
-img :: [Attribute] -> Html
+img :: [Attribute ctx] -> Html ctx
 img = LeafNode "<img"
 {-# INLINE img #-}
 
 
 -- | Generates an HTML @__\<input\>__@ element with the given attributes.
-input :: [Attribute] -> Html
+input :: [Attribute ctx] -> Html ctx
 input = LeafNode "<input"
 {-# INLINE input #-}
 
 
 -- | Generates an HTML @__\<ins\>__@ element with the given attributes and contents.
-ins :: [Attribute] -> [Html] -> Html
+ins :: [Attribute ctx] -> [Html ctx] -> Html ctx
 ins = ParentNode "<ins" "</ins>"
 {-# INLINE ins #-}
 
 
 -- | Generates an HTML @__\<kbd\>__@ element with the given attributes and contents.
-kbd :: [Attribute] -> [Html] -> Html
+kbd :: [Attribute ctx] -> [Html ctx] -> Html ctx
 kbd = ParentNode "<kbd" "</kbd>"
 {-# INLINE kbd #-}
 
 
 -- | Generates an HTML @__\<label\>__@ element with the given attributes and contents.
-label :: [Attribute] -> [Html] -> Html
+label :: [Attribute ctx] -> [Html ctx] -> Html ctx
 label = ParentNode "<label" "</label>"
 {-# INLINE label #-}
 
 
 -- | Generates an HTML @__\<legend\>__@ element with the given attributes and contents.
-legend :: [Attribute] -> [Html] -> Html
+legend :: [Attribute ctx] -> [Html ctx] -> Html ctx
 legend = ParentNode "<legend" "</legend>"
 {-# INLINE legend #-}
 
 
 -- | Generates an HTML @__\<li\>__@ element with the given attributes and contents.
-li :: [Attribute] -> [Html] -> Html
+li :: [Attribute ctx] -> [Html ctx] -> Html ctx
 li = ParentNode "<li" "</li>"
 {-# INLINE li #-}
 
 
 -- | Generates an HTML @__\<link\>__@ element with the given attributes.
-link :: [Attribute] -> Html
+link :: [Attribute ctx] -> Html ctx
 link = LeafNode "<link"
 {-# INLINE link #-}
 
 
 -- | Generates an HTML @__\<main\>__@ element with the given attributes and contents.
-main :: [Attribute] -> [Html] -> Html
+main :: [Attribute ctx] -> [Html ctx] -> Html ctx
 main = ParentNode "<main" "</main>"
 {-# INLINE main #-}
 
 
 -- | Generates an HTML @__\<map\>__@ element with the given attributes and contents.
-map :: [Attribute] -> [Html] -> Html
+map :: [Attribute ctx] -> [Html ctx] -> Html ctx
 map = ParentNode "<map" "</map>"
 {-# INLINE map #-}
 
 
 -- | Generates an HTML @__\<mark\>__@ element with the given attributes and contents.
-mark :: [Attribute] -> [Html] -> Html
+mark :: [Attribute ctx] -> [Html ctx] -> Html ctx
 mark = ParentNode "<mark" "</mark>"
 {-# INLINE mark #-}
 
 
 -- | Generates an HTML @__\<menu\>__@ element with the given attributes and contents.
-menu :: [Attribute] -> [Html] -> Html
+menu :: [Attribute ctx] -> [Html ctx] -> Html ctx
 menu = ParentNode "<menu" "</menu>"
 {-# INLINE menu #-}
 
 
 -- | Generates an HTML @__\<meta\>__@ element with the given attributes.
-meta :: [Attribute] -> Html
+meta :: [Attribute ctx] -> Html ctx
 meta = LeafNode "<meta"
 {-# INLINE meta #-}
 
 
 -- | Generates an HTML @__\<meter\>__@ element with the given attributes and contents.
-meter :: [Attribute] -> [Html] -> Html
+meter :: [Attribute ctx] -> [Html ctx] -> Html ctx
 meter = ParentNode "<meter" "</meter>"
 {-# INLINE meter #-}
 
 
 -- | Generates an HTML @__\<nav\>__@ element with the given attributes and contents.
-nav :: [Attribute] -> [Html] -> Html
+nav :: [Attribute ctx] -> [Html ctx] -> Html ctx
 nav = ParentNode "<nav" "</nav>"
 {-# INLINE nav #-}
 
 
 -- | Generates an HTML @__\<noscript\>__@ element with the given attributes and contents.
-noscript :: [Attribute] -> [Html] -> Html
+noscript :: [Attribute ctx] -> [Html ctx] -> Html ctx
 noscript = ParentNode "<noscript" "</noscript>"
 {-# INLINE noscript #-}
 
 
 -- | Generates an HTML @__\<object\>__@ element with the given attributes and contents.
-object :: [Attribute] -> [Html] -> Html
+object :: [Attribute ctx] -> [Html ctx] -> Html ctx
 object = ParentNode "<object" "</object>"
 {-# INLINE object #-}
 
 
 -- | Generates an HTML @__\<ol\>__@ element with the given attributes and contents.
-ol :: [Attribute] -> [Html] -> Html
+ol :: [Attribute ctx] -> [Html ctx] -> Html ctx
 ol = ParentNode "<ol" "</ol>"
 {-# INLINE ol #-}
 
 
 -- | Generates an HTML @__\<optgroup\>__@ element with the given attributes and contents.
-optgroup :: [Attribute] -> [Html] -> Html
+optgroup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 optgroup = ParentNode "<optgroup" "</optgroup>"
 {-# INLINE optgroup #-}
 
 
 -- | Generates an HTML @__\<option\>__@ element with the given attributes and contents.
-option :: [Attribute] -> [Html] -> Html
+option :: [Attribute ctx] -> [Html ctx] -> Html ctx
 option = ParentNode "<option" "</option>"
 {-# INLINE option #-}
 
 
 -- | Generates an HTML @__\<output\>__@ element with the given attributes and contents.
-output :: [Attribute] -> [Html] -> Html
+output :: [Attribute ctx] -> [Html ctx] -> Html ctx
 output = ParentNode "<output" "</output>"
 {-# INLINE output #-}
 
 
 -- | Generates an HTML @__\<p\>__@ element with the given attributes and contents.
-p :: [Attribute] -> [Html] -> Html
+p :: [Attribute ctx] -> [Html ctx] -> Html ctx
 p = ParentNode "<p" "</p>"
 {-# INLINE p #-}
 
 
 -- | Generates an HTML @__\<picture\>__@ element with the given attributes and contents.
-picture :: [Attribute] -> [Html] -> Html
+picture :: [Attribute ctx] -> [Html ctx] -> Html ctx
 picture = ParentNode "<picture" "</picture>"
 {-# INLINE picture #-}
 
 
 -- | Generates an HTML @__\<pre\>__@ element with the given attributes and contents.
-pre :: [Attribute] -> [Html] -> Html
+pre :: [Attribute ctx] -> [Html ctx] -> Html ctx
 pre = ParentNode "<pre" "</pre>"
 {-# INLINE pre #-}
 
 
 -- | Generates an HTML @__\<progress\>__@ element with the given attributes and contents.
-progress :: [Attribute] -> [Html] -> Html
+progress :: [Attribute ctx] -> [Html ctx] -> Html ctx
 progress = ParentNode "<progress" "</progress>"
 {-# INLINE progress #-}
 
 
 -- | Generates an HTML @__\<q\>__@ element with the given attributes and contents.
-q :: [Attribute] -> [Html] -> Html
+q :: [Attribute ctx] -> [Html ctx] -> Html ctx
 q = ParentNode "<q" "</q>"
 {-# INLINE q #-}
 
 
 -- | Generates an HTML @__\<rp\>__@ element with the given attributes and contents.
-rp :: [Attribute] -> [Html] -> Html
+rp :: [Attribute ctx] -> [Html ctx] -> Html ctx
 rp = ParentNode "<rp" "</rp>"
 {-# INLINE rp #-}
 
 
 -- | Generates an HTML @__\<rt\>__@ element with the given attributes and contents.
-rt :: [Attribute] -> [Html] -> Html
+rt :: [Attribute ctx] -> [Html ctx] -> Html ctx
 rt = ParentNode "<rt" "</rt>"
 {-# INLINE rt #-}
 
 
 -- | Generates an HTML @__\<ruby\>__@ element with the given attributes and contents.
-ruby :: [Attribute] -> [Html] -> Html
+ruby :: [Attribute ctx] -> [Html ctx] -> Html ctx
 ruby = ParentNode "<ruby" "</ruby>"
 {-# INLINE ruby #-}
 
 
 -- | Generates an HTML @__\<s\>__@ element with the given attributes and contents.
-s :: [Attribute] -> [Html] -> Html
+s :: [Attribute ctx] -> [Html ctx] -> Html ctx
 s = ParentNode "<s" "</s>"
 {-# INLINE s #-}
 
 
 -- | Generates an HTML @__\<samp\>__@ element with the given attributes and contents.
-samp :: [Attribute] -> [Html] -> Html
+samp :: [Attribute ctx] -> [Html ctx] -> Html ctx
 samp = ParentNode "<samp" "</samp>"
 {-# INLINE samp #-}
 
 
 -- | Generates an HTML @__\<script\>__@ element with the given attributes and contents.
-script :: [Attribute] -> [Html] -> Html
+script :: [Attribute ctx] -> [Html ctx] -> Html ctx
 script = ParentNode "<script" "</script>"
 {-# INLINE script #-}
 
 
 -- | Generates an HTML @__\<search\>__@ element with the given attributes and contents.
-search :: [Attribute] -> [Html] -> Html
+search :: [Attribute ctx] -> [Html ctx] -> Html ctx
 search = ParentNode "<search" "</search>"
 {-# INLINE search #-}
 
 
 -- | Generates an HTML @__\<section\>__@ element with the given attributes and contents.
-section :: [Attribute] -> [Html] -> Html
+section :: [Attribute ctx] -> [Html ctx] -> Html ctx
 section = ParentNode "<section" "</section>"
 {-# INLINE section #-}
 
 
 -- | Generates an HTML @__\<select\>__@ element with the given attributes and contents.
-select :: [Attribute] -> [Html] -> Html
+select :: [Attribute ctx] -> [Html ctx] -> Html ctx
 select = ParentNode "<select" "</select>"
 {-# INLINE select #-}
 
 
 -- | Generates an HTML @__\<slot\>__@ element with the given attributes and contents.
-slot :: [Attribute] -> [Html] -> Html
+slot :: [Attribute ctx] -> [Html ctx] -> Html ctx
 slot = ParentNode "<slot" "</slot>"
 {-# INLINE slot #-}
 
 
 -- | Generates an HTML @__\<small\>__@ element with the given attributes and contents.
-small :: [Attribute] -> [Html] -> Html
+small :: [Attribute ctx] -> [Html ctx] -> Html ctx
 small = ParentNode "<small" "</small>"
 {-# INLINE small #-}
 
 
 -- | Generates an HTML @__\<source\>__@ element with the given attributes.
-source :: [Attribute] -> Html
+source :: [Attribute ctx] -> Html ctx
 source = LeafNode "<source"
 {-# INLINE source #-}
 
 
 -- | Generates an HTML @__\<span\>__@ element with the given attributes and contents.
-span :: [Attribute] -> [Html] -> Html
+span :: [Attribute ctx] -> [Html ctx] -> Html ctx
 span = ParentNode "<span" "</span>"
 {-# INLINE span #-}
 
 
 -- | Generates an HTML @__\<strong\>__@ element with the given attributes and contents.
-strong :: [Attribute] -> [Html] -> Html
+strong :: [Attribute ctx] -> [Html ctx] -> Html ctx
 strong = ParentNode "<strong" "</strong>"
 {-# INLINE strong #-}
 
 
 -- | Generates an HTML @__\<style\>__@ element with the given attributes and contents.
-style :: [Attribute] -> [Html] -> Html
+style :: [Attribute ctx] -> [Html ctx] -> Html ctx
 style = ParentNode "<style" "</style>"
 {-# INLINE style #-}
 
 
 -- | Generates an HTML @__\<sub\>__@ element with the given attributes and contents.
-sub :: [Attribute] -> [Html] -> Html
+sub :: [Attribute ctx] -> [Html ctx] -> Html ctx
 sub = ParentNode "<sub" "</sub>"
 {-# INLINE sub #-}
 
 
 -- | Generates an HTML @__\<summary\>__@ element with the given attributes and contents.
-summary :: [Attribute] -> [Html] -> Html
+summary :: [Attribute ctx] -> [Html ctx] -> Html ctx
 summary = ParentNode "<summary" "</summary>"
 {-# INLINE summary #-}
 
 
 -- | Generates an HTML @__\<sup\>__@ element with the given attributes and contents.
-sup :: [Attribute] -> [Html] -> Html
+sup :: [Attribute ctx] -> [Html ctx] -> Html ctx
 sup = ParentNode "<sup" "</sup>"
 {-# INLINE sup #-}
 
 
 -- | Generates an HTML @__\<table\>__@ element with the given attributes and contents.
-table :: [Attribute] -> [Html] -> Html
+table :: [Attribute ctx] -> [Html ctx] -> Html ctx
 table = ParentNode "<table" "</table>"
 {-# INLINE table #-}
 
 
 -- | Generates an HTML @__\<tbody\>__@ element with the given attributes and contents.
-tbody :: [Attribute] -> [Html] -> Html
+tbody :: [Attribute ctx] -> [Html ctx] -> Html ctx
 tbody = ParentNode "<tbody" "</tbody>"
 {-# INLINE tbody #-}
 
 
 -- | Generates an HTML @__\<td\>__@ element with the given attributes and contents.
-td :: [Attribute] -> [Html] -> Html
+td :: [Attribute ctx] -> [Html ctx] -> Html ctx
 td = ParentNode "<td" "</td>"
 {-# INLINE td #-}
 
 
 -- | Generates an HTML @__\<template\>__@ element with the given attributes and contents.
-template :: [Attribute] -> [Html] -> Html
+template :: [Attribute ctx] -> [Html ctx] -> Html ctx
 template = ParentNode "<template" "</template>"
 {-# INLINE template #-}
 
 
 -- | Generates an HTML @__\<textarea\>__@ element with the given attributes and contents.
-textarea :: [Attribute] -> [Html] -> Html
+textarea :: [Attribute ctx] -> [Html ctx] -> Html ctx
 textarea = ParentNode "<textarea" "</textarea>"
 {-# INLINE textarea #-}
 
 
 -- | Generates an HTML @__\<tfoot\>__@ element with the given attributes and contents.
-tfoot :: [Attribute] -> [Html] -> Html
+tfoot :: [Attribute ctx] -> [Html ctx] -> Html ctx
 tfoot = ParentNode "<tfoot" "</tfoot>"
 {-# INLINE tfoot #-}
 
 
 -- | Generates an HTML @__\<th\>__@ element with the given attributes and contents.
-th :: [Attribute] -> [Html] -> Html
+th :: [Attribute ctx] -> [Html ctx] -> Html ctx
 th = ParentNode "<th" "</th>"
 {-# INLINE th #-}
 
 
 -- | Generates an HTML @__\<thead\>__@ element with the given attributes and contents.
-thead :: [Attribute] -> [Html] -> Html
+thead :: [Attribute ctx] -> [Html ctx] -> Html ctx
 thead = ParentNode "<thead" "</thead>"
 {-# INLINE thead #-}
 
 
 -- | Generates an HTML @__\<time\>__@ element with the given attributes and contents.
-time :: [Attribute] -> [Html] -> Html
+time :: [Attribute ctx] -> [Html ctx] -> Html ctx
 time = ParentNode "<time" "</time>"
 {-# INLINE time #-}
 
 
 -- | Generates an HTML @__\<title\>__@ element with the given attributes and contents.
-title :: [Attribute] -> [Html] -> Html
+title :: [Attribute ctx] -> [Html ctx] -> Html ctx
 title = ParentNode "<title" "</title>"
 {-# INLINE title #-}
 
 
 -- | Generates an HTML @__\<tr\>__@ element with the given attributes and contents.
-tr :: [Attribute] -> [Html] -> Html
+tr :: [Attribute ctx] -> [Html ctx] -> Html ctx
 tr = ParentNode "<tr" "</tr>"
 {-# INLINE tr #-}
 
 
 -- | Generates an HTML @__\<track\>__@ element with the given attributes.
-track :: [Attribute] -> Html
+track :: [Attribute ctx] -> Html ctx
 track = LeafNode "<track"
 {-# INLINE track #-}
 
 
 -- | Generates an HTML @__\<u\>__@ element with the given attributes and contents.
-u :: [Attribute] -> [Html] -> Html
+u :: [Attribute ctx] -> [Html ctx] -> Html ctx
 u = ParentNode "<u" "</u>"
 {-# INLINE u #-}
 
 
 -- | Generates an HTML @__\<ul\>__@ element with the given attributes and contents.
-ul :: [Attribute] -> [Html] -> Html
+ul :: [Attribute ctx] -> [Html ctx] -> Html ctx
 ul = ParentNode "<ul" "</ul>"
 {-# INLINE ul #-}
 
 
 -- | Generates an HTML @__\<var\>__@ element with the given attributes and contents.
-var :: [Attribute] -> [Html] -> Html
+var :: [Attribute ctx] -> [Html ctx] -> Html ctx
 var = ParentNode "<var" "</var>"
 {-# INLINE var #-}
 
 
 -- | Generates an HTML @__\<video\>__@ element with the given attributes and contents.
-video :: [Attribute] -> [Html] -> Html
+video :: [Attribute ctx] -> [Html ctx] -> Html ctx
 video = ParentNode "<video" "</video>"
 {-# INLINE video #-}
 
 
 -- | Generates an HTML @__\<wbr\>__@ element with the given attributes.
-wbr :: [Attribute] -> Html
+wbr :: [Attribute ctx] -> Html ctx
 wbr = LeafNode "<wbr"
 {-#INLINE wbr #-}
