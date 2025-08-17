@@ -9,7 +9,7 @@
 -- Maintainer  : joshua@obritsch.com
 -- Stability   : Experimental
 --
--- The "Html" module provides a set of types, classes and functions for generating HTML elements.
+-- The "Html" module provides a set of types and functions for generating HTML elements.
 --
 -- These elements along with their attributes and event handlers, found in the "Html.Attributes" and "Html.Events" modules respectively, can
 -- be used to dynamically compose HTML documents natively in Haskell, without relying on templating engines or other techniques that can be
@@ -269,46 +269,12 @@ import Prelude hiding (div, head, map, span)
 import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
-import Html.Lazy.Builder      (ToLazyBuilder(..))
-
-import qualified Prelude
 import Html.Attributes        (Attribute)
+import Html.Lazy.Builder      (ToLazyBuilder(..))
+import Html.Locale            (Locale)
 
 
 -- PRIMITIVES
-
-
-data Locale
-  = De
-  | En
-  deriving (Eq)
-
-
-{-
-translate :: Locale -> Html -> Builder
-translate locale html = case html of
-    ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                    endTag
-    ParentNode startTag endTag attributes []       -> startTag <> build attributes <> singleton '>' <>                    endTag
-    ParentNode startTag endTag []         children -> startTag <>                     singleton '>' <> build' children <> endTag
-    ParentNode startTag endTag attributes children -> startTag <> build attributes <> singleton '>' <> build' children <> endTag
-    LeafNode   startTag        []                  -> startTag <>                     singleton '>'
-    LeafNode   startTag        attributes          -> startTag <> build attributes <> singleton '>'
-    RootNode   startTag                   []       -> startTag
-    RootNode   startTag                   children -> startTag <>                                      build' children
-    TextNode   text                                -> text
-    IntlNode   text     alt                        -> translate' locale text alt
-      where
-        translate' locale defaultText translations = case listToMaybe (filter (\(locale', _) -> locale == locale') translations) of
-            Nothing -> defaultText
-            Just (_, translation) -> translation
-  where
-    build' = foldr ((<>) . translate locale) mempty
-    
-
-
-intl :: Builder -> [(Locale, Builder)] -> Html
-intl = IntlNode
--}
 
 
 -- | Represents an HTML element.

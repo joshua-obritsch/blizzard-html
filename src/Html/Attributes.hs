@@ -3,7 +3,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | Module    : Html.Attributes
--- Copyright   : (c) Joshua Obritsch, 2021
+-- Copyright   : (c) Joshua Obritsch, 2021-2025
 -- License     : MIT
 -- Maintainer  : joshua@obritsch.com
 -- Stability   : Experimental
@@ -305,7 +305,6 @@ module Html.Attributes
 
 import Prelude hiding (id, max, min, span)
 
-import Data.Maybe             (listToMaybe)
 import Data.List              (intersperse)
 import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)

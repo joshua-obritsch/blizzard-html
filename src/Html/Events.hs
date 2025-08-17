@@ -1,7 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 -- | Module    : Html.Events
--- Copyright   : (c) Joshua Obritsch, 2021
+-- Copyright   : (c) Joshua Obritsch, 2021-2025
 -- License     : MIT
 -- Maintainer  : joshua@obritsch.com
 -- Stability   : Experimental

@@ -26,6 +26,8 @@ library
                       , Html.Aria
                       , Html.Attributes
                       , Html.Events
+                      , Html.Intl
                       , Html.Lazy.Builder
                       , Html.Math
+    other-modules:      Html.Locale
     hs-source-dirs:     src
