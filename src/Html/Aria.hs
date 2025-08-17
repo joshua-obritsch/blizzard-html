@@ -118,7 +118,7 @@ module Html.Aria
 
 
 import Data.Text.Lazy.Builder (Builder)
-import Html                   (Attribute(..))
+import Html.Attributes        (Attribute(..))
 
 
 -- ATTRIBUTES

@@ -26,5 +26,6 @@ library
                       , Html.Aria
                       , Html.Attributes
                       , Html.Events
+                      , Html.Lazy.Builder
                       , Html.Math
     hs-source-dirs:     src

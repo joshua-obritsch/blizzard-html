@@ -18,15 +18,19 @@
 -- The 'Html.Math.math' and 'Html.Svg.svg' elements and their related elements and attributes have been moved into the "Html.Math" and
 -- "Html.Svg" modules respectively.
 module Html
-    ( -- * Types
+    ( -- * Primitives
       -- ** Html
       Html(..)
-      -- ** Attribute
-    , Attribute(..)
-
-      -- * Classes
-      -- ** Buildable
-    , Buildable(..)
+      -- ** batch
+    , batch
+      -- ** customLeafNode
+    , customLeafNode
+      -- ** customParentNode
+    , customParentNode
+      -- ** customRootNode
+    , customRootNode
+      -- ** none
+    , none
 
       -- * Declarations
       -- ** \<!DOCTYPE\>
@@ -257,19 +261,15 @@ module Html
     , video
       -- ** \<wbr\>
     , wbr
-    , translate
-    , intl
-    , Locale(..)
     ) where
 
 
 import Prelude hiding (div, head, map, span)
 
-import Data.Maybe             (listToMaybe)
-import Data.List              (intersperse)
 import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
+import Html.Lazy.Builder      (ToLazyBuilder(..))
 
 import qualified Prelude
 import Html.Attributes        (Attribute)
@@ -284,6 +284,7 @@ data Locale
   deriving (Eq)
 
 
+{-
 translate :: Locale -> Html -> Builder
 translate locale html = case html of
     ParentNode startTag endTag []         []       -> startTag <>                     singleton '>' <>                    endTag
@@ -307,6 +308,7 @@ translate locale html = case html of
 
 intl :: Builder -> [(Locale, Builder)] -> Html
 intl = IntlNode
+-}
 
 
 -- | Represents an HTML element.
@@ -334,24 +336,24 @@ data Html
     | TextNode Builder
 
 
-instance Buildable (Html) where
-    build (BatchNode                                []   ) = mempty
-    build (BatchNode                             children) =                                                  build children
-    build (EmptyNode                                     ) = mempty
-    build (IntlNode                                text _) = text
-    build (LeafNode   startTag            []             ) = startTag <>                     singleton '>'
-    build (LeafNode   startTag        attributes         ) = startTag <> build attributes <> singleton '>'
-    build (ParentNode startTag endTag     []        []   ) = startTag <>                     singleton '>' <>                   endTag
-    build (ParentNode startTag endTag attributes    []   ) = startTag <> build attributes <> singleton '>' <>                   endTag
-    build (ParentNode startTag endTag     []     children) = startTag <>                     singleton '>' <> build children <> endTag
-    build (ParentNode startTag endTag attributes children) = startTag <> build attributes <> singleton '>' <> build children <> endTag
-    build (RootNode   startTag                      []   ) = startTag
-    build (RootNode   startTag                   children) = startTag <>                                      build children
-    build (TextNode                                text  ) = text
+instance ToLazyBuilder (Html) where
+    toLazyBuilder (BatchNode                          []   ) = mempty
+    toLazyBuilder (BatchNode                       children) =                                                       toLazyBuilder children
+    toLazyBuilder (EmptyNode                               ) = mempty
+    toLazyBuilder (IntlNode                          text _) = text
+    toLazyBuilder (LeafNode   start         []             ) = start <>                             singleton '>'
+    toLazyBuilder (LeafNode   start     attributes         ) = start <> toLazyBuilder attributes <> singleton '>'
+    toLazyBuilder (ParentNode start end     []        []   ) = start <>                             singleton '>' <>                           end
+    toLazyBuilder (ParentNode start end attributes    []   ) = start <> toLazyBuilder attributes <> singleton '>' <>                           end
+    toLazyBuilder (ParentNode start end     []     children) = start <>                             singleton '>' <> toLazyBuilder children <> end
+    toLazyBuilder (ParentNode start end attributes children) = start <> toLazyBuilder attributes <> singleton '>' <> toLazyBuilder children <> end
+    toLazyBuilder (RootNode   start                   []   ) = start
+    toLazyBuilder (RootNode   start                children) = start <>                                              toLazyBuilder children
+    toLazyBuilder (TextNode                          text  ) = text
 
 
-instance Buildable [Html] where
-    build = foldr ((<>) . build) mempty
+instance ToLazyBuilder [Html] where
+    toLazyBuilder = foldr ((<>) . toLazyBuilder) mempty
 
 
 instance IsString (Html) where
@@ -359,18 +361,11 @@ instance IsString (Html) where
 
 
 instance Show (Html) where
-    show = unpack . toLazyText . build
+    show = unpack . toLazyText . toLazyBuilder
 
 
 instance {-# OVERLAPPING #-} Show [Html] where
-    show = unpack . toLazyText . build
-
-
--- | Enables conversion to 'Data.Text.Lazy.Builder.Builder'.
-class Buildable a where
-
-    -- | Converts to 'Data.Text.Lazy.Builder.Builder'.
-    build :: a -> Builder
+    show = unpack . toLazyText . toLazyBuilder
 
 
 {-| Bundles a list of HTML nodes together. -}
@@ -379,19 +374,19 @@ batch = BatchNode
 {-# INLINE batch #-}
 
 
-{-| Generates an HTML leaf node. -}
+{-| Generates a custom HTML leaf node. -}
 customLeafNode :: Builder -> [Attribute] -> Html
 customLeafNode = LeafNode
 {-# INLINE customLeafNode #-}
 
 
-{-| Generates an HTML parent node. -}
+{-| Generates a custom HTML parent node. -}
 customParentNode :: Builder -> Builder -> [Attribute] -> [Html] -> Html
 customParentNode = ParentNode
 {-# INLINE customParentNode #-}
 
 
-{-| Generates an HTML root node. -}
+{-| Generates a custom HTML root node. -}
 customRootNode :: Builder -> [Html] -> Html
 customRootNode = RootNode
 {-# INLINE customRootNode #-}

@@ -130,7 +130,8 @@ module Html.Math
 
 
 import Data.Text.Lazy.Builder (Builder)
-import Html                   (Attribute(..), Html(..))
+import Html                   (Html(..))
+import Html.Attributes        (Attribute(..))
 
 
 -- ELEMENTS

@@ -1,3 +1,4 @@
+{-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE NoImplicitPrelude #-}
 {-# LANGUAGE OverloadedStrings #-}
 
@@ -9,7 +10,16 @@
 --
 -- The "Html.Attributes" module provides a set of functions for generating HTML attributes.
 module Html.Attributes
-    ( -- * Attributes
+    ( -- * Primitives
+      Attribute(..)
+      -- ** batch
+    , batch
+      -- ** customAttribute
+    , customAttribute
+      -- ** none
+    , none
+
+    , -- * Attributes
       -- ** abbr
       abbr
       -- ** accept
@@ -293,9 +303,14 @@ module Html.Attributes
     ) where
 
 
-import Prelude
+import Prelude hiding (id, max, min, span)
 
-import Data.Text.Lazy.Builder (Builder)
+import Data.Maybe             (listToMaybe)
+import Data.List              (intersperse)
+import Data.String            (IsString(..))
+import Data.Text.Lazy         (unpack)
+import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
+import Html.Lazy.Builder      (ToLazyBuilder(..))
 
 
 -- PRIMITIVES
@@ -320,19 +335,19 @@ data Attribute
     | TextAttribute Builder Builder
 
 
-instance Buildable (Attribute) where
-    build (BatchAttribute []       ) = mempty
-    build (BatchAttribute children ) = build children
-    build (BoolAttribute  _   False) = mempty
-    build (BoolAttribute  key True ) = key
-    build (ClassAttribute     ""   ) = mempty
-    build (ClassAttribute     value) = " class=\"" <> value <> singleton '"'
-    build (EmptyAttribute          ) = mempty
-    build (TextAttribute  key value) = key <> value <> singleton '"'
+instance ToLazyBuilder (Attribute) where
+    toLazyBuilder (BatchAttribute []       ) = mempty
+    toLazyBuilder (BatchAttribute children ) = toLazyBuilder children
+    toLazyBuilder (BoolAttribute  _   False) = mempty
+    toLazyBuilder (BoolAttribute  key True ) = key
+    toLazyBuilder (ClassAttribute     ""   ) = mempty
+    toLazyBuilder (ClassAttribute     value) = " class=\"" <> value <> singleton '"'
+    toLazyBuilder (EmptyAttribute          ) = mempty
+    toLazyBuilder (TextAttribute  key value) = key <> value <> singleton '"'
 
 
-instance Buildable [Attribute] where
-    build = foldr ((<>) . build) mempty . sanitizeAttributes
+instance ToLazyBuilder [Attribute] where
+    toLazyBuilder = foldr ((<>) . toLazyBuilder) mempty . sanitizeAttributes
 
 
 instance IsString (Attribute) where
@@ -340,48 +355,29 @@ instance IsString (Attribute) where
 
 
 instance Show (Attribute) where
-    show = unpack . toLazyText . build
+    show = unpack . toLazyText . toLazyBuilder
 
 
 instance {-# OVERLAPPING #-} Show [Attribute] where
-    show = unpack . toLazyText . build
+    show = unpack . toLazyText . toLazyBuilder
 
 
+{-| Bundles a list of HTML attributes together. -}
+batch :: [Attribute] -> Attribute
+batch = BatchAttribute
+{-# INLINE batch #-}
 
 
-sanitizeAttributes :: [Attribute] -> [Attribute]
-sanitizeAttributes attributes
-    = (mergeClassAttributes . filter extractClassAttributes) attributes
-    : filter extractNonconcatenativeAttributes attributes
+{-| Generates a custom HTML attribute. -}
+customAttribute :: Builder -> Builder -> Attribute
+customAttribute = TextAttribute
+{-# INLINE customAttribute #-}
 
 
-extractNonconcatenativeAttributes :: Attribute -> Bool
-extractNonconcatenativeAttributes (BoolAttribute  _ _) = True
-extractNonconcatenativeAttributes (TextAttribute  _ _) = True
-extractNonconcatenativeAttributes (ClassAttribute  _ ) = False
-extractNonconcatenativeAttributes (EmptyAttribute    ) = False
-
-
-extractClassAttributes :: Attribute -> Bool
-extractClassAttributes (BoolAttribute  _ _) = False
-extractClassAttributes (TextAttribute  _ _) = False
-extractClassAttributes (ClassAttribute  _ ) = True
-extractClassAttributes (EmptyAttribute    ) = False
-
-
-extractClassValues :: Attribute -> Builder
-extractClassValues (BoolAttribute  _   _) = mempty
-extractClassValues (TextAttribute  _   _) = mempty
-extractClassValues (ClassAttribute value) = value
-extractClassValues (EmptyAttribute      ) = mempty
-
-
-mergeClassAttributes :: [Attribute] -> Attribute
-mergeClassAttributes
-    = ClassAttribute
-    . foldr (<>) mempty
-    . intersperse (singleton ' ')
-    . map extractClassValues
+{-| Generates an empty HTML attribute. -}
+none :: Attribute
+none = EmptyAttribute
+{-# INLINE none #-}
 
 
 -- ATTRIBUTES
@@ -1225,3 +1221,46 @@ wrap = TextAttribute " wrap=\""
 writingsuggestions :: Builder -> Attribute
 writingsuggestions = TextAttribute " writingsuggestions=\""
 {-# INLINE writingsuggestions #-}
+
+
+-- HELPER FUNCTIONS
+
+
+{-| Concatenates all class attributes within a list into a single one. -}
+sanitizeAttributes :: [Attribute] -> [Attribute]
+sanitizeAttributes attributes
+    = (mergeClassAttributes . filter extractClassAttributes) attributes
+    : filter extractNonconcatenativeAttributes attributes
+
+
+{-| Extracts nonconcatenative attributes. -}
+extractNonconcatenativeAttributes :: Attribute -> Bool
+extractNonconcatenativeAttributes (BoolAttribute  _ _) = True
+extractNonconcatenativeAttributes (TextAttribute  _ _) = True
+extractNonconcatenativeAttributes (ClassAttribute  _ ) = False
+extractNonconcatenativeAttributes (EmptyAttribute    ) = False
+
+
+{-| Extracts class attributes. -}
+extractClassAttributes :: Attribute -> Bool
+extractClassAttributes (BoolAttribute  _ _) = False
+extractClassAttributes (TextAttribute  _ _) = False
+extractClassAttributes (ClassAttribute  _ ) = True
+extractClassAttributes (EmptyAttribute    ) = False
+
+
+{-| Extracts class attribute values. -}
+extractClassValues :: Attribute -> Builder
+extractClassValues (BoolAttribute  _   _) = mempty
+extractClassValues (TextAttribute  _   _) = mempty
+extractClassValues (ClassAttribute value) = value
+extractClassValues (EmptyAttribute      ) = mempty
+
+
+{-| Merges all class attributes into a single one. -}
+mergeClassAttributes :: [Attribute] -> Attribute
+mergeClassAttributes
+    = ClassAttribute
+    . foldr (<>) mempty
+    . intersperse (singleton ' ')
+    . map extractClassValues

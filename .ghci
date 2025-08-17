@@ -2,7 +2,7 @@
 :set -isrc
 :set -XOverloadedStrings
 :set -XImplicitParams
-:load Html Html.Aria Html.Attributes Html.Events Html.Math
+:load Html Html.Aria Html.Attributes Html.Events Html.Lazy.Builder Html.Math
 
 import Prelude
 
@@ -10,6 +10,7 @@ import Html
 import Html.Aria
 import Html.Attributes
 import Html.Events
+import Html.Lazy.Builder
 import Html.Math
 
 import qualified Html as Html
