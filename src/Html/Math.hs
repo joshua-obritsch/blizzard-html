@@ -10,65 +10,65 @@
 -- The "Html.Math" module provides a set of functions for generating MathML elements and attributes.
 module Html.Math
     ( -- * Elements
-      -- ** \<annotation\>
+      -- ** annotation
       annotation
-      -- ** \<annotation-xml\>
+      -- ** annotation-xml
     , annotationXml
-      -- ** \<maction\>
+      -- ** maction
     , maction
-      -- ** \<math\>
+      -- ** math
     , math
-      -- ** \<merror\>
+      -- ** merror
     , merror
-      -- ** \<mfrac\>
+      -- ** mfrac
     , mfrac
-      -- ** \<mi\>
+      -- ** mi
     , mi
-      -- ** \<mmultiscripts\>
+      -- ** mmultiscripts
     , mmultiscripts
-      -- ** \<mn\>
+      -- ** mn
     , mn
-      -- ** \<mo\>
+      -- ** mo
     , mo
-      -- ** \<mover\>
+      -- ** mover
     , mover
-      -- ** \<mpadded\>
+      -- ** mpadded
     , mpadded
-      -- ** \<mphantom\>
+      -- ** mphantom
     , mphantom
-      -- ** \<mprescripts\>
+      -- ** mprescripts
     , mprescripts
-      -- ** \<mroot\>
+      -- ** mroot
     , mroot
-      -- ** \<mrow\>
+      -- ** mrow
     , mrow
-      -- ** \<ms\>
+      -- ** ms
     , ms
-      -- ** \<mspace\>
+      -- ** mspace
     , mspace
-      -- ** \<msqrt\>
+      -- ** msqrt
     , msqrt
-      -- ** \<mstyle\>
+      -- ** mstyle
     , mstyle
-      -- ** \<msub\>
+      -- ** msub
     , msub
-      -- ** \<msubsup\>
+      -- ** msubsup
     , msubsup
-      -- ** \<msup\>
+      -- ** msup
     , msup
-      -- ** \<mtable\>
+      -- ** mtable
     , mtable
-      -- ** \<mtd\>
+      -- ** mtd
     , mtd
-      -- ** \<mtext\>
+      -- ** mtext
     , mtext
-      -- ** \<mtr\>
+      -- ** mtr
     , mtr
-      -- ** \<munder\>
+      -- ** munder
     , munder
-      -- ** \<munderover\>
+      -- ** munderover
     , munderover
-      -- ** \<semantics\>
+      -- ** semantics
     , semantics
 
       -- * Attributes

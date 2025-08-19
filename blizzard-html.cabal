@@ -15,7 +15,7 @@ maintainer:         Joshua Obritsch <joshua@obritsch.com>
 name:               blizzard-html
 stability:          Experimental
 synopsis:           An HTML generator for Haskell
-version:            0.5.0.0
+version:            0.6.0.0
 
 
 library
@@ -26,8 +26,7 @@ library
                       , Html.Aria
                       , Html.Attributes
                       , Html.Events
-                      , Html.Intl
                       , Html.Lazy.Builder
                       , Html.Math
-    other-modules:      Html.Locale
+                      , MyHtml
     hs-source-dirs:     src

@@ -14,10 +14,12 @@ module Html.Attributes
       Attribute(..)
       -- ** batch
     , batch
-      -- ** customAttribute
-    , customAttribute
       -- ** none
     , none
+
+      -- * Constructors
+      -- ** customAttribute
+    , customAttribute
 
     , -- * Attributes
       -- ** abbr
@@ -367,16 +369,19 @@ batch = BatchAttribute
 {-# INLINE batch #-}
 
 
-{-| Generates a custom HTML attribute. -}
-customAttribute :: Builder -> Builder -> Attribute
-customAttribute = TextAttribute
-{-# INLINE customAttribute #-}
-
-
 {-| Generates an empty HTML attribute. -}
 none :: Attribute
 none = EmptyAttribute
 {-# INLINE none #-}
+
+
+-- CONSTRUCTORS
+
+
+{-| Generates a custom HTML attribute. -}
+customAttribute :: Builder -> Builder -> Attribute
+customAttribute = TextAttribute
+{-# INLINE customAttribute #-}
 
 
 -- ATTRIBUTES

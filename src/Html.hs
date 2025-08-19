@@ -23,255 +23,263 @@ module Html
       Html(..)
       -- ** batch
     , batch
+      -- ** none
+    , none
+
+      -- * Constructors
       -- ** customLeafNode
     , customLeafNode
       -- ** customParentNode
     , customParentNode
       -- ** customRootNode
     , customRootNode
-      -- ** none
-    , none
+
+      -- * Localization
+      -- ** localize
+    , localize
+      -- ** text
+    , text
 
       -- * Declarations
-      -- ** \<!DOCTYPE\>
+      -- ** doctype
     , doctype
 
       -- * Elements
-      -- ** \<a\>
+      -- ** a
     , a
-      -- ** \<abbr\>
+      -- ** abbr
     , abbr
-      -- ** \<address\>
+      -- ** address
     , address
-      -- ** \<area\>
+      -- ** area
     , area
-      -- ** \<article\>
+      -- ** article
     , article
-      -- ** \<aside\>
+      -- ** aside
     , aside
-      -- ** \<audio\>
+      -- ** audio
     , audio
-      -- ** \<b\>
+      -- ** b
     , b
-      -- ** \<base\>
+      -- ** base
     , base
-      -- ** \<bdi\>
+      -- ** bdi
     , bdi
-      -- ** \<bdo\>
+      -- ** bdo
     , bdo
-      -- ** \<blockquote\>
+      -- ** blockquote
     , blockquote
-      -- ** \<body\>
+      -- ** body
     , body
-      -- ** \<br\>
+      -- ** br
     , br
-      -- ** \<button\>
+      -- ** button
     , button
-      -- ** \<canvas\>
+      -- ** canvas
     , canvas
-      -- ** \<caption\>
+      -- ** caption
     , caption
-      -- ** \<cite\>
+      -- ** cite
     , cite
-      -- ** \<code\>
+      -- ** code
     , code
-      -- ** \<col\>
+      -- ** col
     , col
-      -- ** \<colgroup\>
+      -- ** colgroup
     , colgroup
-      -- ** \<data\>
+      -- ** data
     , data_
-      -- ** \<datalist\>
+      -- ** datalist
     , datalist
-      -- ** \<dd\>
+      -- ** dd
     , dd
-      -- ** \<del\>
+      -- ** del
     , del
-      -- ** \<details\>
+      -- ** details
     , details
-      -- ** \<dfn\>
+      -- ** dfn
     , dfn
-      -- ** \<dialog\>
+      -- ** dialog
     , dialog
-      -- ** \<div\>
+      -- ** div
     , div
-      -- ** \<dl\>
+      -- ** dl
     , dl
-      -- ** \<dt\>
+      -- ** dt
     , dt
-      -- ** \<em\>
+      -- ** em
     , em
-      -- ** \<embed\>
+      -- ** embed
     , embed
-      -- ** \<fieldset\>
+      -- ** fieldset
     , fieldset
-      -- ** \<figcaption\>
+      -- ** figcaption
     , figcaption
-      -- ** \<figure\>
+      -- ** figure
     , figure
-      -- ** \<footer\>
+      -- ** footer
     , footer
-      -- ** \<form\>
+      -- ** form
     , form
-      -- ** \<h1\>
+      -- ** h1
     , h1
-      -- ** \<h2\>
+      -- ** h2
     , h2
-      -- ** \<h3\>
+      -- ** h3
     , h3
-      -- ** \<h4\>
+      -- ** h4
     , h4
-      -- ** \<h5\>
+      -- ** h5
     , h5
-      -- ** \<h6\>
+      -- ** h6
     , h6
-      -- ** \<head\>
+      -- ** head
     , head
-      -- ** \<header\>
+      -- ** header
     , header
-      -- ** \<hgroup\>
+      -- ** hgroup
     , hgroup
-      -- ** \<hr\>
+      -- ** hr
     , hr
-      -- ** \<html\>
+      -- ** html
     , html
-      -- ** \<i\>
+      -- ** i
     , i
-      -- ** \<iframe\>
+      -- ** iframe
     , iframe
-      -- ** \<img\>
+      -- ** img
     , img
-      -- ** \<input\>
+      -- ** input
     , input
-      -- ** \<ins\>
+      -- ** ins
     , ins
-      -- ** \<kbd\>
+      -- ** kbd
     , kbd
-      -- ** \<label\>
+      -- ** label
     , label
-      -- ** \<legend\>
+      -- ** legend
     , legend
-      -- ** \<li\>
+      -- ** li
     , li
-      -- ** \<link\>
+      -- ** link
     , link
-      -- ** \<main\>
+      -- ** main
     , main
-      -- ** \<map\>
+      -- ** map
     , map
-      -- ** \<mark\>
+      -- ** mark
     , mark
-      -- ** \<menu\>
+      -- ** menu
     , menu
-      -- ** \<meta\>
+      -- ** meta
     , meta
-      -- ** \<meter\>
+      -- ** meter
     , meter
-      -- ** \<nav\>
+      -- ** nav
     , nav
-      -- ** \<noscript\>
+      -- ** noscript
     , noscript
-      -- ** \<object\>
+      -- ** object
     , object
-      -- ** \<ol\>
+      -- ** ol
     , ol
-      -- ** \<optgroup\>
+      -- ** optgroup
     , optgroup
-      -- ** \<option\>
+      -- ** option
     , option
-      -- ** \<output\>
+      -- ** output
     , output
-      -- ** \<p\>
+      -- ** p
     , p
-      -- ** \<picture\>
+      -- ** picture
     , picture
-      -- ** \<pre\>
+      -- ** pre
     , pre
-      -- ** \<progress\>
+      -- ** progress
     , progress
-      -- ** \<q\>
+      -- ** q
     , q
-      -- ** \<rp\>
+      -- ** rp
     , rp
-      -- ** \<rt\>
+      -- ** rt
     , rt
-      -- ** \<ruby\>
+      -- ** ruby
     , ruby
-      -- ** \<s\>
+      -- ** s
     , s
-      -- ** \<samp\>
+      -- ** samp
     , samp
-      -- ** \<script\>
+      -- ** script
     , script
-      -- ** \<search\>
+      -- ** search
     , search
-      -- ** \<section\>
+      -- ** section
     , section
-      -- ** \<select\>
+      -- ** select
     , select
-      -- ** \<slot\>
+      -- ** slot
     , slot
-      -- ** \<small\>
+      -- ** small
     , small
-      -- ** \<source\>
+      -- ** source
     , source
-      -- ** \<span\>
+      -- ** span
     , span
-      -- ** \<strong\>
+      -- ** strong
     , strong
-      -- ** \<style\>
+      -- ** style
     , style
-      -- ** \<sub\>
+      -- ** sub
     , sub
-      -- ** \<summary\>
+      -- ** summary
     , summary
-      -- ** \<sup\>
+      -- ** sup
     , sup
-      -- ** \<table\>
+      -- ** table
     , table
-      -- ** \<tbody\>
+      -- ** tbody
     , tbody
-      -- ** \<td\>
+      -- ** td
     , td
-      -- ** \<template\>
+      -- ** template
     , template
-      -- ** \<textarea\>
+      -- ** textarea
     , textarea
-      -- ** \<tfoot\>
+      -- ** tfoot
     , tfoot
-      -- ** \<th\>
+      -- ** th
     , th
-      -- ** \<thead\>
+      -- ** thead
     , thead
-      -- ** \<time\>
+      -- ** time
     , time
-      -- ** \<title\>
+      -- ** title
     , title
-      -- ** \<tr\>
+      -- ** tr
     , tr
-      -- ** \<track\>
+      -- ** track
     , track
-      -- ** \<u\>
+      -- ** u
     , u
-      -- ** \<ul\>
+      -- ** ul
     , ul
-      -- ** \<var\>
+      -- ** var
     , var
-      -- ** \<video\>
+      -- ** video
     , video
-      -- ** \<wbr\>
+      -- ** wbr
     , wbr
     ) where
 
 
 import Prelude hiding (div, head, map, span)
 
+import Data.Maybe             (listToMaybe)
 import Data.String            (IsString(..))
 import Data.Text.Lazy         (unpack)
 import Data.Text.Lazy.Builder (Builder, singleton, toLazyText)
 import Html.Attributes        (Attribute)
 import Html.Lazy.Builder      (ToLazyBuilder(..))
-import Html.Locale            (Locale)
 
 
 -- PRIMITIVES
@@ -287,7 +295,7 @@ data Html
     | EmptyNode
 
     -- | Constructs an HTML text node from multilingual text.
-    | IntlNode Builder [(Locale, Builder)]
+    | IntlNode Builder [(Builder, Builder)]
 
     -- | Constructs an HTML leaf node.
     | LeafNode Builder [Attribute]
@@ -340,6 +348,15 @@ batch = BatchNode
 {-# INLINE batch #-}
 
 
+{-| Generates an empty HTML node. -}
+none :: Html
+none = EmptyNode
+{-# INLINE none #-}
+
+
+-- CONSTRUCTORS
+
+
 {-| Generates a custom HTML leaf node. -}
 customLeafNode :: Builder -> [Attribute] -> Html
 customLeafNode = LeafNode
@@ -358,10 +375,39 @@ customRootNode = RootNode
 {-# INLINE customRootNode #-}
 
 
-{-| Generates an empty HTML node. -}
-none :: Html
-none = EmptyNode
-{-# INLINE none #-}
+-- LOCALIZATION
+
+
+{-| Localizes an HTML segment. -}
+localize :: Builder -> Html -> Builder
+localize locale html = case html of
+    BatchNode                          []    -> mempty
+    BatchNode                       children ->                                                       localize' children
+    EmptyNode                                -> mempty
+    IntlNode                        text alt -> translate locale text alt
+    LeafNode   start         []              -> start <>                             singleton '>'
+    LeafNode   start     attributes          -> start <> toLazyBuilder attributes <> singleton '>'
+    ParentNode start end     []        []    -> start <>                             singleton '>' <>                       end
+    ParentNode start end attributes    []    -> start <> toLazyBuilder attributes <> singleton '>' <>                       end
+    ParentNode start end     []     children -> start <>                             singleton '>' <> localize' children <> end
+    ParentNode start end attributes children -> start <> toLazyBuilder attributes <> singleton '>' <> localize' children <> end
+    RootNode   start                   []    -> start
+    RootNode   start                children -> start <>                                              localize' children
+    TextNode                          text   -> text
+  where
+    localize' :: [Html] -> Builder
+    localize' = foldr ((<>) . localize locale) mempty
+
+
+translate :: Builder -> Builder -> [(Builder, Builder)] -> Builder
+translate locale defaultText translations = case listToMaybe (filter (\(locale', _) -> locale == locale') translations) of
+    Nothing -> defaultText
+    Just (_, translation) -> translation
+
+
+{-| Generates an HTML text node from multilingual text. -}
+text :: Builder -> [(Builder, Builder)] -> Html
+text = IntlNode
 
 
 -- DECLARATIONS
